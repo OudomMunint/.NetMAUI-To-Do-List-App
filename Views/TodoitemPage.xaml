@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ToDoListApp.Views.TodoitemPage"
+    Title="{Binding Name}">
+    <ContentPage.Content>
+        <StackLayout Margin="20" Spacing="20" VerticalOptions="StartAndExpand">
+            <Label FontSize="Body" Text="Task" Margin="10,0,0,0" />
+            <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                <Entry Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" />
+            </Frame>
+
+            <Label FontSize="Body" Text="Description" Margin="10,0,0,0"/>
+            <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                <Entry Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}" />
+            </Frame>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Margin="10,0,0,0"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Center"
+                       FontSize="Body"
+                       Text="Mark as Done" />
+                <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Padding="0,0,0,-15">
+                <Button Clicked="OnSaveClicked" Text="Save" WidthRequest="180" Margin="0,0,10,10"/>
+
+                <Button BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" WidthRequest="180" Margin="0,0,0,10"/>
+
+                
+            </StackLayout>
+            <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Cancel" />
+            <!--<Button Clicked="OnSaveClicked" Text="Save" WidthRequest="150" />
+
+            <Button Clicked="OnDeleteClicked" Text="Delete" WidthRequest="150" />
+
+            <Button Clicked="OnCancelClicked" Text="Cancel" />-->
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
