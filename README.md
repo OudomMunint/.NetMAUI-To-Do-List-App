@@ -19,3 +19,4 @@
 - Open the solution file
 - ctr + Shift + B to build
 - Run the solution.
+- If build failed with Dependency errors, please unload the project and reload with dependencies.
