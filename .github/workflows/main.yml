@@ -1,0 +1,137 @@
+name: CI Build
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: true                     # Disable the .NET logo
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
+  DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
+
+jobs:
+# MAUI Android Build
+  build-android:
+    runs-on: windows-2022
+    name: Android Build
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
+        with:
+          dotnet-version: 6.0.x
+          
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore src/MauiBeach/MauiBeach.csproj
+
+      - name: Build MAUI Android
+        run: dotnet publish src/MauiBeach/MauiBeach.csproj -c Release -f net6.0-android --no-restore
+
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: mauibeach-android-ci-build
+          path: src/MauiBeach/bin/Release/net6.0-android/*Signed.a*
+
+# MAUI Windows Build
+  build-windows:
+    runs-on: windows-2022
+    name: Windows Build
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore src/MauiBeach/MauiBeach.csproj
+
+      - name: Build MAUI Windows
+        run: dotnet publish src/MauiBeach/MauiBeach.csproj -c Release -f net6.0-windows10.0.19041.0 --no-restore
+
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: mauibeach-windows-ci-build
+          path: src/MauiBeach/bin/Release/net6.0-windows10.0.19041.0/win10-x64/AppPackages/MauiBeach*/MauiBeach*.msix
+
+# MAUI iOS Build
+  build-ios:
+    runs-on: macos-12
+    name: iOS Build
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore src/MauiBeach/MauiBeach.csproj
+
+      - name: Build MAUI iOS
+        run: dotnet build src/MauiBeach/MauiBeach.csproj -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: mauibeach-ios-ci-build
+          path: src/MauiBeach/bin/Release/net6.0-ios/iossimulator-x64/**/*.app
+
+# MAUI MacCatalyst Build
+  build-mac:
+    runs-on: macos-12
+    name: MacCatalyst Build
+    steps:
+    
+      - name: Checkout
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore src/MauiBeach/MauiBeach.csproj
+
+      - name: Build MAUI MacCatalyst
+        run: dotnet publish src/MauiBeach/MauiBeach.csproj -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
+
+      - name: Upload MacCatalyst Artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: mauibeach-macos-ci-build
+          path: src/MauiBeach/bin/Release/net6.0-maccatalyst/maccatalyst-x64/publish/*.pkg
