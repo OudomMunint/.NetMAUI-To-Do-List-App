@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoListApp.Views.HeaderGrid">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="1" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Column Headers -->
+        <Label Grid.Row="0" Grid.Column="0" Text="" />
+        <Label Grid.Row="0" Grid.Column="1" Text="Name" HorizontalOptions="Start" Margin="-20,0,0,0" VerticalOptions="Center" />
+        <Label Grid.Row="0" Grid.Column="2" Text="Task" HorizontalOptions="Center" Margin="-30,0,0,0" VerticalOptions="Center" />
+        <Label Grid.Row="0" Grid.Column="3" Text="Date" HorizontalOptions="Center" Margin="-30,0,0,0" VerticalOptions="Center" />
+        <Label Grid.Row="0" Grid.Column="4" Text="Done" HorizontalOptions="Center" VerticalOptions="Center" />
+        <BoxView HeightRequest="1" Grid.Row="5" Grid.ColumnSpan="5" Color="Black" />
+
+    </Grid>
+</ContentView>
