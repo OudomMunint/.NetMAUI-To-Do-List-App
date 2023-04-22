@@ -4,38 +4,56 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ToDoListApp.Views.TodoitemPage"
     Title="{Binding Name}">
+    
     <ContentPage.Content>
         <StackLayout Margin="20" Spacing="20" VerticalOptions="StartAndExpand">
-            <Label FontSize="Body" Text="Task" Margin="10,0,0,0" />
-            <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                <StackLayout>
-                <Entry Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" />
-                <!--<Label Text="{Binding Date}"/>-->
-                </StackLayout>
-            </Frame>
+            
+            <StackLayout>
+                <HorizontalStackLayout Spacing="10">
+                    <Label FontSize="20" Text="Task" Margin="10,0,0,0" FontAttributes="Bold" />
+                    <Image Source="todo.png" Aspect="AspectFit" HeightRequest="20"/>
+                </HorizontalStackLayout>
 
-            <Label FontSize="Body" Text="Description" Margin="10,0,0,0"/>
-            <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                <Entry Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}" />
-            </Frame>
-
-            <StackLayout Orientation="Horizontal">
-                <Label Margin="10,0,0,0"
-                       HorizontalOptions="StartAndExpand"
-                       VerticalOptions="Center"
-                       FontSize="Body"
-                       Text="Mark as Done" />
-                <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" />
+                <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                    <StackLayout>
+                        <Entry Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" />
+                        <!--<Label Text="{Binding Date}"/>-->
+                    </StackLayout>
+                </Frame>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" Padding="0,0,0,-15">
-                <Button Clicked="OnSaveClicked" Text="Save" WidthRequest="180" Margin="0,0,10,10"/>
+            <StackLayout>
+                <HorizontalStackLayout Spacing="10">
+                    <Label FontSize="20" Text="Description" Margin="10,0,0,0" FontAttributes="Bold"/>
+                <Image Source="detail.png" Aspect="AspectFit" HeightRequest="20"/>
+                </HorizontalStackLayout>
 
-                <Button BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" WidthRequest="180" Margin="0,0,0,10"/>
+                <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                    <Entry Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}" HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" />
+                </Frame>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" WidthRequest="160">
+                <Label Margin="10,0,0,0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="Body"
+                       FontAttributes="Bold"
+                       Text="Mark as Done" />
+                <Switch HorizontalOptions="Center" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Black" />
+            </StackLayout>
+
+            <BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>
+
+            <StackLayout Orientation="Horizontal" Padding="0,0,0,-15">
+
+                <Button BackgroundColor="Blue" Clicked="OnSaveClicked" Text="Save" WidthRequest="180" Margin="0,0,10,10"/>
+
+                <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Canel" WidthRequest="180" Margin="0,0,0,10"/>
 
                 
             </StackLayout>
-            <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Cancel" />
+            <Button BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" />
             <!--<Button Clicked="OnSaveClicked" Text="Save" WidthRequest="150" />
 
             <Button Clicked="OnDeleteClicked" Text="Delete" WidthRequest="150" />
