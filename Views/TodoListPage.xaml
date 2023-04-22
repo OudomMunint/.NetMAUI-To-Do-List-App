@@ -6,10 +6,11 @@
     x:Class="ToDoListApp.Views.TodoListPage"
     Title="Your Tasks">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnItemAdded" IconImageSource="cross.png">
-        </ToolbarItem>
 
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png">
+        </ToolbarItem>
+        
+        <ToolbarItem Clicked="OnItemAdded" IconImageSource="trash.png">
         </ToolbarItem>
 
     </ContentPage.ToolbarItems>
@@ -20,24 +21,38 @@
     <ListView x:Name="listView" Margin="8" ItemSelected="OnListItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <ViewCell>
+                    <ViewCell>
 
-                    <StackLayout Margin="0,0,0,0"
-                                 Padding="0"
-                                 HorizontalOptions="FillAndExpand"
-                                 Orientation="Horizontal"
-                                 >
-                        <CheckBox IsChecked="{Binding Done}" Margin="-7,0,0,0"/>
-                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Text="{Binding Name }" />
+                        <StackLayout Margin="0,0,0,0"
+                                     Padding="0"
+                                     HorizontalOptions="FillAndExpand"
+                                     Orientation="Horizontal">
+                            
+                            <!--<CheckBox Margin="-7,0,0,0"/>-->
+                            
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                   Text="{Binding Name }" LineBreakMode="TailTruncation" WidthRequest="60" />
 
-                        <Label HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation" Margin="-65,0,0,0" WidthRequest="130" VerticalOptions="Center" Text="{Binding Notes }" />
-                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="-30,0,0,0" Text="{Binding Date, StringFormat='{0:g}'}" />
-                        <Image HorizontalOptions="End"
-                               WidthRequest="35"
-                               IsVisible="{Binding Done}" 
-                               Source="check.png" />
-                    </StackLayout>
-                </ViewCell>
+                            <Label HorizontalOptions="StartAndExpand" WidthRequest="130" LineBreakMode="TailTruncation"
+                                   Margin="-50,0,0,0" 
+                                   VerticalOptions="Center"
+                                   Text="{Binding Notes }" />
+
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                   Margin="-30,0,0,0"
+                                   Text="{Binding Date, StringFormat='{0:g}'}"/>
+
+                            <Image WidthRequest="35" HorizontalOptions="End" IsVisible="{Binding Done}"
+                                   Source="check.png"
+                                   Aspect="AspectFit" />
+
+                            <!--<Image WidthRequest="35" HorizontalOptions="End" Source="empty_check.png" Aspect="AspectFit"
+                                   IsVisible="{Binding Done, Converter={StaticResource InvertedBooleanConverter}}" />-->
+
+                        </StackLayout>
+
+
+                    </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
