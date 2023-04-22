@@ -31,6 +31,14 @@ namespace ToDoListApp.Views
             });
         }
 
+        async void OnDeleteClicked(object sender, EventArgs e)
+        {
+            var todoItem = (Todoitem)BindingContext;
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            await database.DeleteItemAsync(todoItem);
+            await Navigation.PopAsync();
+        }
+
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)

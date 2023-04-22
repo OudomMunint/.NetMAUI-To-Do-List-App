@@ -12,7 +12,9 @@ namespace ToDoListApp.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TodoitemPage : ContentPage
 	{
-		public TodoitemPage()
+        public DateTime Date { get; private set; }
+
+        public TodoitemPage()
 		{
 			InitializeComponent();
 		}
@@ -21,6 +23,7 @@ namespace ToDoListApp.Views
 		{
 			var todoItem = (Todoitem)BindingContext;
 			TodoitemDatabase database = await TodoitemDatabase.Instance;
+			Date = DateTime.Now;
 			await database.SaveItemAsync(todoItem);
 			await Navigation.PopAsync();
 		}

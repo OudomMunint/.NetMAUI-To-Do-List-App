@@ -15,6 +15,6 @@ namespace ToDoListApp.Models
         public string Notes { get; set; }
         public bool Done { get; set; }
 
-        public DateTime Date { get; }
+        public DateTime Date { get; set; }
     }
 }
