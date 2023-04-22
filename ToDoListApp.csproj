@@ -82,6 +82,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiXaml Update="Views\HeaderGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\TodoitemPage.xaml">
       <Generator></Generator>
     </MauiXaml>
