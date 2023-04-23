@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-ios;net6.0-maccatalyst;net6.0-android</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst;net7.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
 		<RootNamespace>ToDoListApp</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -31,19 +31,19 @@
     <TargetPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">33</TargetPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <EnableCodeSigning>False</EnableCodeSigning>
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-ios|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <EnableCodeSigning>false</EnableCodeSigning>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-android33.0|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android33.0|AnyCPU'">
 	  <DebugSymbols>False</DebugSymbols>
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	  <Debugger>Xamarin</Debugger>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android33.0|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
 	  <DebugSymbols>True</DebugSymbols>
 	  <Debugger>Xamarin</Debugger>
 	</PropertyGroup>
@@ -71,8 +71,8 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
-    <PackageReference Include="CommunityToolkit.Maui.Core" Version="2.0.0" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
+    <PackageReference Include="CommunityToolkit.Maui.Core" Version="5.1.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
     <PackageReference Include="SQLitePCLRaw.core" Version="2.1.4" />
@@ -81,8 +81,21 @@
     <PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.4" />
   </ItemGroup>
 
+  <!--<ItemGroup>
+    <Reference Include="Maui.Controls.BottomSheet">
+      <HintPath>..\..\Users\OudomMunintPannha\Desktop\BottomSheet2\src\Maui.Controls.BottomSheet\bin\Debug\net6.0-android\Maui.Controls.BottomSheet.dll</HintPath>
+    </Reference>
+  </ItemGroup>-->
+
+	<!--<ItemGroup>
+		<ProjectReference Include=".\.\Maui.Controls.BottomSheet\Maui.Controls.BottomSheet.csproj" />
+	</ItemGroup>-->
+
   <ItemGroup>
     <MauiXaml Update="Views\HeaderGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\testpage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\TodoitemPage.xaml">
