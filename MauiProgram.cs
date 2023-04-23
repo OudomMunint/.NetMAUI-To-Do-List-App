@@ -1,13 +1,6 @@
 ﻿using CommunityToolkit.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Hosting;
-using Microsoft.Maui.Hosting;
-using Microsoft.Maui.Media;
-using System;
-using System.Reflection;
 
-
-namespace ToDoListApp;  
+namespace ToDoListApp;
 
 public static class MauiProgram
 {
@@ -15,6 +8,7 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder
+
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
