@@ -2,13 +2,13 @@ name: CI Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths-ignore:
       - '**/*.md'
       - '**/*.gitignore'
       - '**/*.gitattributes'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -29,10 +29,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 6
+      - name: Setup .NET 7.0
         uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 7.0.x
           
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -41,13 +41,13 @@ jobs:
         run: dotnet restore ToDoListApp.csproj
 
       - name: Build MAUI Android
-        run: dotnet publish ToDoListApp.csproj -c Release -f net6.0-android --no-restore
+        run: dotnet publish ToDoListApp.csproj -c Release -f net7.0-android --no-restore
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
-          name: mauibeach-android-ci-build
-          path: .NetMAUI-To-Do-List-App/bin/Release/net6.0-android/*Signed.a*
+          name: ToDoList-android-ci-build
+          path: .NetMAUI-To-Do-List-App/bin/Release/net7.0-android/*Signed.a*
 
 
 # MAUI iOS Build
@@ -59,10 +59,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 6
+      - name: Setup .NET 7.0
         uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 7.0.x
 
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -71,10 +71,10 @@ jobs:
         run: dotnet restore ToDoListApp.csproj
 
       - name: Build MAUI iOS
-        run: dotnet build ToDoListApp.csproj -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+        run: dotnet build ToDoListApp.csproj -c Release -f net7.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
-          name: mauibeach-ios-ci-build
-          path: .NetMAUI-To-Do-List-App/bin/Release/net6.0-ios/iossimulator-x64/**/*.app
+          name: ToDoList-ios-ci-build
+          path: .NetMAUI-To-Do-List-App/bin/Release/net7.0-ios/iossimulator-x64/**/*.app
