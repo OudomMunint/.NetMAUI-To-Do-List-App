@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoListApp.Views.testpage"
+             xmlns:views="clr-namespace:ToDoListApp.Views"
+             xmlns:controls="clr-namespace:XGENO.Maui.Controls"
+             Title="testpage">
+    <VerticalStackLayout>
+        <controls:BottomSheet
+                    x:Name="simpleBottomSheet"
+                    HeaderText="Edit Task">
+
+            <controls:BottomSheet.BottomSheetContent>
+                <views:TodoitemPage x:Name="TodoItemPage"/>
+            </controls:BottomSheet.BottomSheetContent>
+
+        </controls:BottomSheet>
+    </VerticalStackLayout>
+</ContentPage>
