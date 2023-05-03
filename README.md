@@ -11,6 +11,10 @@
   <img src="/iphone142.png" style="height:700px; width:340" />
 </h1>
 
+## Upcoming
+- `Bottom Sheets` to pull up edit screen or create task screen
+- `MultiSelect` for bulk delete
+
 ## Getting Started
 - Install <a href="https://visualstudio.microsoft.com/downloads/" target="_blank">`Visual Studio`</a> on your machine and while choosing components you must check the <a href="https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/install" target="_blank">`.NetMaui`</a> box to install .NetMaui.
 - Install <a href="https://developer.android.com/studio?gclid=Cj0KCQiAnNacBhDvARIsABnDa6-EYNc5MIjFoAruujioi9l-gjeu8JVsJd_aqCGGhImxOZkFyoo_woYaAoOCEALw_wcB&gclsrc=aw.ds" target="_blank">`Android Studio`</a> on your machine.
