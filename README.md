@@ -14,6 +14,7 @@
 ## Upcoming
 - `Bottom Sheets` to pull up edit screen or create task screen
 - `MultiSelect` for bulk delete
+- Data visualization with `Charts` or `Graphs`
 
 ## Getting Started
 - Install <a href="https://visualstudio.microsoft.com/downloads/" target="_blank">`Visual Studio`</a> on your machine and while choosing components you must check the <a href="https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/install" target="_blank">`.NetMaui`</a> box to install .NetMaui.
