@@ -2,7 +2,7 @@
 ![example workflow](https://github.com/oudommunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg)
 <h3> A to do list app that performs CRUD operations. Made with .Net MAUI </h3>
 <h4>(Work in Progress)</h4>
-<h3 align="center">
+<h3 align="left">
     🔹
     <a href="https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues">Report Bug</a> &nbsp; &nbsp;
 </h3>
