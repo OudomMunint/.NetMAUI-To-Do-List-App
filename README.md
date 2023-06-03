@@ -1,5 +1,6 @@
 # .NetMAUI To Do List App [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-![example workflow](https://github.com/oudommunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg) [![CodeQL](https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/actions/workflows/codeql.yml/badge.svg)](https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/actions/workflows/codeql.yml)
+![example workflow](https://github.com/oudommunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg)
+![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
 <h3> A to do list app that performs CRUD operations. Made with .Net MAUI </h3>
 <h4>(Work in Progress)</h4>
 <h3 align="left">
