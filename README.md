@@ -1,7 +1,10 @@
-# .NetMAUI To Do List App [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-<h3> A to do list app that performs CRUD operations. Made with .Net MAUI </h3>
+# .Net MAUI To-Do List App [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLite`
 
+# CI/CD Status
 ![example workflow](https://github.com/oudommunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg)
+
+# Maintenance Status
 ![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
 
 # Supported Platforms
