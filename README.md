@@ -1,8 +1,33 @@
 # .NetMAUI To Do List App [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+<h3> A to do list app that performs CRUD operations. Made with .Net MAUI </h3>
+
 ![example workflow](https://github.com/oudommunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg)
 ![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
-<h3> A to do list app that performs CRUD operations. Made with .Net MAUI </h3>
-<h4>(Work in Progress)</h4>
+
+# Supported Platforms
+<table>
+  <tr>
+    <th>Platform</th>
+    <th>Version</th>
+    <th>Target</th>
+  </tr>
+  <tr>
+    <td>Android</td>
+    <td>API 31+</td>
+    <td>API 33</td>
+  </tr>
+  <tr>
+    <td>iOS</td>
+    <td>iOS 14.2+</td>
+    <td>iOS 16.3</td>
+  </tr>
+  <tr>
+    <td>macOS</td>
+    <td>macOS 12+ (Monterey)</td>
+    <td>macOS 13.4 (Ventura)</td>
+  </tr>
+</table>
+
 <h3 align="left">
     🔹
     <a href="https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues">Report Bug</a> &nbsp; &nbsp;
@@ -27,4 +52,4 @@
 - ctr + Shift + B to build
 - Run the solution.
 - If build failed with Dependency errors, please unload the project and reload with dependencies.
-- Has SQLite dependency.
+- Has `SQLite` dependency.
