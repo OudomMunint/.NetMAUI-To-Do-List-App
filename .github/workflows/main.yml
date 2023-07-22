@@ -19,7 +19,7 @@ env:
 jobs:
 # MAUI Android Build
   build-android:
-    runs-on: windows-2022
+    runs-on: macos-latest
     name: Android Build
     steps:
 
@@ -79,4 +79,4 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
         with:
-            tag: v1.2.3
+            tag: v1.2.4
