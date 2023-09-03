@@ -21,20 +21,20 @@
     </ContentPage.ToolbarItems>
     <StackLayout>
     <!-- Header Grid -->
-    <views:HeaderGrid x:Name="HeaderGrid"/>
-    
-    <ListView x:Name="listView" Margin="8" ItemSelected="OnListItemSelected">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                    <ViewCell>
+        <views:HeaderGrid x:Name="HeaderGrid"/>
 
+        <ListView x:Name="listView" Margin="8" ItemSelected="OnListItemSelected" RowHeight="50" SeparatorVisibility="Default"
+              CachingStrategy="RecycleElement" SeparatorColor="Black">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
                         <StackLayout Margin="0,0,0,0"
                                      Padding="0"
                                      HorizontalOptions="FillAndExpand"
                                      Orientation="Horizontal">
-                            
+
                             <!--<CheckBox Margin="-7,0,0,0"/>-->
-                            
+
                             <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
                                    Text="{Binding Name }" LineBreakMode="TailTruncation" WidthRequest="60" />
 
@@ -67,10 +67,9 @@
 
                         </StackLayout>
 
-
                     </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>

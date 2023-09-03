@@ -2,16 +2,23 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
-
-	public MainPage()
+    public MainPage()
 	{
 		InitializeComponent();
 	}
 
-    void DarkMode(object sender, EventArgs e)
+    // Dark Mode
+    private void DarkMode(object sender, EventArgs e)
     {
-        //TODO: Implement Dark Mode
+        if (DarkModeSwitch.IsToggled)
+        {
+            Application.Current.UserAppTheme = AppTheme.Dark;
+        }
+
+        else
+        {
+            Application.Current.UserAppTheme = AppTheme.Light;
+        }
     }
 
     //private void OnCounterClicked(object sender, EventArgs e)
@@ -26,4 +33,3 @@ public partial class MainPage : ContentPage
     //	SemanticScreenReader.Announce(CounterBtn.Text);
     //}
 }
-
