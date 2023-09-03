@@ -17,8 +17,8 @@
 
          <!--Column Headers--> 
         <Label Grid.Row="0" Grid.Column="0" Text="" />
-        <Label Grid.Row="0" Grid.Column="1" Text="Name" HorizontalOptions="Start" Margin="-20,0,0,0" VerticalOptions="Center" FontAttributes="Bold" />
-        <Label Grid.Row="0" Grid.Column="2" Text="Task" HorizontalOptions="Center" Margin="-30,0,0,0" VerticalOptions="Center" FontAttributes="Bold" />
+        <Label Grid.Row="0" Grid.Column="1" Text="Name" HorizontalOptions="Start" Margin="-40,0,0,0" VerticalOptions="Center" FontAttributes="Bold" />
+        <Label Grid.Row="0" Grid.Column="2" Text="Task" HorizontalOptions="Center" Margin="-40,0,0,0" VerticalOptions="Center" FontAttributes="Bold" />
         <Label Grid.Row="0" Grid.Column="3" Text="Date" HorizontalOptions="Center" Margin="-30,0,0,0" VerticalOptions="Center" FontAttributes="Bold" />
         <Label Grid.Row="0" Grid.Column="4" Text="Done" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" />
         <BoxView HeightRequest="1" Grid.Row="5" Grid.ColumnSpan="5" Color="Black" />
