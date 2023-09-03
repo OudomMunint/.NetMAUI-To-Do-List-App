@@ -82,6 +82,12 @@
 		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Views\Settings.xaml.cs">
+	    <DependentUpon>Settings.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
 	<!--<ItemGroup>
     <Reference Include="Maui.Controls.BottomSheet">
       <HintPath>..\..\Users\OudomMunintPannha\Desktop\BottomSheet2\src\Maui.Controls.BottomSheet\bin\Debug\net6.0-android\Maui.Controls.BottomSheet.dll</HintPath>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoListApp.MainPage"
+             Title="Settings">
+
+    <ScrollView>
+        <Grid Padding="10" ColumnDefinitions="{OnIdiom Phone='Auto,*,Auto', Default='.05*,.9*,.05*'}">
+            <StackLayout Grid.Column="1">
+                <!--Theme settings-->
+                <HorizontalStackLayout>
+                    <Label Text="Theme Settings" FontSize="Title" Margin="5,15,20,20" />
+                    <Image Source="sun.png" Aspect="AspectFit" HeightRequest="30"/>
+                </HorizontalStackLayout>
+
+                <Frame CornerRadius="20" HeightRequest="70">
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Dark Mode"/>
+                        <Switch Grid.Row="0"
+                                x:Name="DarkModeSwitch"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                ThumbColor="LightGray"
+                                OnColor="BlueViolet"
+                                Toggled="DarkMode">
+                        </Switch>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
