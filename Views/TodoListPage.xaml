@@ -4,13 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ToDoListApp.Views"
     x:Class="ToDoListApp.Views.TodoListPage"
-    Title="Your Tasks">
+    x:Name="todoListPage"
+    Title="Home"
+    Shell.PresentationMode="ModalAnimated">
     <ContentPage.ToolbarItems>
 
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png">
         </ToolbarItem>
-        
-        <ToolbarItem Clicked="OnItemAdded" IconImageSource="trash.png">
+
+        <ToolbarItem Clicked="DeleteAllItems" IconImageSource="trash.png">
+        </ToolbarItem>
+
+        <ToolbarItem Clicked="OpenSettings" IconImageSource="settings.png">
         </ToolbarItem>
 
     </ContentPage.ToolbarItems>
@@ -33,18 +38,29 @@
                             <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
                                    Text="{Binding Name }" LineBreakMode="TailTruncation" WidthRequest="60" />
 
-                            <Label HorizontalOptions="StartAndExpand" WidthRequest="130" LineBreakMode="TailTruncation"
+                            <Label HorizontalOptions="StartAndExpand" WidthRequest="150" LineBreakMode="TailTruncation"
                                    Margin="-50,0,0,0" 
                                    VerticalOptions="Center"
                                    Text="{Binding Notes }" />
 
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
-                                   Margin="-30,0,0,0"
-                                   Text="{Binding Date, StringFormat='{0:g}'}"/>
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="-5,0,0,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                            <Image WidthRequest="35" HorizontalOptions="End" IsVisible="{Binding Done}"
-                                   Source="check.png"
-                                   Aspect="AspectFit" />
+                            <Image WidthRequest="35" HorizontalOptions="End" Aspect="Center">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
+                                        <Setter Property="Source" Value="check.png" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="False">
+                                        <Setter Property="Source" Value="cross.png" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
 
                             <!--<Image WidthRequest="35" HorizontalOptions="End" Source="empty_check.png" Aspect="AspectFit"
                                    IsVisible="{Binding Done, Converter={StaticResource InvertedBooleanConverter}}" />-->
