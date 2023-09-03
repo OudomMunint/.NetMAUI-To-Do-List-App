@@ -11,7 +11,7 @@ public partial class MainPage : ContentPage
 
     void DarkMode(object sender, EventArgs e)
     {
-
+        //TODO: Implement Dark Mode
     }
 
     //private void OnCounterClicked(object sender, EventArgs e)
