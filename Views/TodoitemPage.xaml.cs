@@ -17,6 +17,8 @@ namespace ToDoListApp.Views
         public TodoitemPage()
 		{
 			InitializeComponent();
+
+			Date = DateTime.Now;
 		}
 
 		async void OnSaveClicked(object sender, EventArgs e)

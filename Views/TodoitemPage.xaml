@@ -3,7 +3,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ToDoListApp.Views.TodoitemPage"
-    Title="{Binding Name}">
+    Title="{Binding Name}"
+    Shell.PresentationMode="ModalAnimated">
     
     <ContentPage.Content>
         <StackLayout Margin="20" Spacing="20" VerticalOptions="StartAndExpand">
@@ -47,9 +48,9 @@
 
             <StackLayout Orientation="Horizontal" Padding="0,0,0,-15">
 
-                <Button BackgroundColor="Blue" Clicked="OnSaveClicked" Text="Save" WidthRequest="180" Margin="0,0,10,10"/>
+                <Button BackgroundColor="BlueViolet" Clicked="OnSaveClicked" Text="Save" WidthRequest="170" Margin="0,0,10,10"/>
 
-                <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Canel" WidthRequest="180" Margin="0,0,0,10"/>
+                <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Canel" WidthRequest="170" Margin="0,0,0,10"/>
 
                 
             </StackLayout>
