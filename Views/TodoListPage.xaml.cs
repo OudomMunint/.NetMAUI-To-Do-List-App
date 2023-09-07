@@ -1,3 +1,4 @@
+using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 
@@ -79,7 +80,53 @@ namespace ToDoListApp.Views
         private void UpdateTitle()
         {
             int totalItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-            Title = $"Home - {totalItems} Tasks Open";
+            string task = "Task";
+
+            // pluralize "task" if totalItems > 1
+            if (totalItems != 1)
+            {
+                task += "s";
+            }
+            Title = $"Home - {totalItems} {task} Open";
         }
+
+        private void OnCheckBoxChecked(object sender, EventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            var todoItem = checkBox.BindingContext as Todoitem;
+            if (todoItem != null)
+            {
+                todoItem.IsSelected = checkBox.IsChecked;
+            }
+        }
+
+        private void OnCheckBoxUnchecked(object sender, EventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            var todoItem = checkBox.BindingContext as Todoitem;
+            if (todoItem != null)
+            {
+                todoItem.IsSelected = checkBox.IsChecked;
+            }
+        }
+
+        async void DeleteSelectedItems(object sender, EventArgs e)
+        {
+            bool Confirmed = await DisplayAlert("Delete Selected Tasks", "Confirm you want to selected items?", "Yes", "No");
+            var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
+
+            if (selectedItems.Any() & Confirmed)
+            {
+                TodoitemDatabase database = await TodoitemDatabase.Instance;
+                foreach (var item in selectedItems)
+                {
+                    await database.DeleteItemAsync(item);
+                }
+
+                // Refresh ListView 
+                await UpdateListView();
+            }
+        }
+
     }
 }
