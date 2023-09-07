@@ -9,17 +9,13 @@
     Shell.PresentationMode="ModalAnimated">
     <ContentPage.ToolbarItems>
 
-        <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png">
-        </ToolbarItem>
+        <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png"/>
 
-        <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png">
-        </ToolbarItem>
+        <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png"/>
 
-        <ToolbarItem Clicked="DeleteAllItems" IconImageSource="trash.png" Order="Secondary" Text="Delete All">
-        </ToolbarItem>
+        <ToolbarItem Clicked="OpenSettings" IconImageSource="settings.png" Text="Settings" Order="Secondary"/>
 
-        <ToolbarItem Clicked="OpenSettings" IconImageSource="settings.png" Text="Settings" Order="Secondary">
-        </ToolbarItem>
+        <ToolbarItem Clicked="DeleteAllItems" IconImageSource="trash.png" Order="Secondary" Text="Delete All"/>
 
     </ContentPage.ToolbarItems>
     
@@ -27,8 +23,8 @@
     <!-- Header Grid -->
         <views:HeaderGrid x:Name="HeaderGrid"/>
 
-        <ListView x:Name="listView" Margin="8" ItemSelected="OnListItemSelected" RowHeight="50" SeparatorVisibility="Default"
-              CachingStrategy="RecycleElement" SeparatorColor="Black">
+        <ListView x:Name="listView" Margin="10" ItemSelected="OnListItemSelected" RowHeight="50" SeparatorVisibility="Default"
+              CachingStrategy="RecycleElement" SeparatorColor="{AppThemeBinding Dark=White, Light=Black}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -47,7 +43,7 @@
                                    VerticalOptions="Center"
                                    Text="{Binding Notes }" />
 
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="-5,0,0,0">
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="-5,0,0,0" TextColor="{DynamicResource Gray500}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
@@ -55,19 +51,21 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <Image WidthRequest="35" HorizontalOptions="End" Aspect="Center">
+                            <Image WidthRequest="35" HorizontalOptions="End" Aspect="AspectFit" x:Name="Doneimg">
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
-                                        <Setter Property="Source" Value="check.png" />
+                                        <Setter Property="Source" Value="done.png" />
                                     </DataTrigger>
                                     <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="False">
-                                        <Setter Property="Source" Value="cross.png" />
+                                        <Setter Property="Source" Value="notdone.png" />
                                     </DataTrigger>
                                 </Image.Triggers>
                             </Image>
 
                             <!--<Image WidthRequest="35" HorizontalOptions="End" Source="empty_check.png" Aspect="AspectFit"
                                    IsVisible="{Binding Done, Converter={StaticResource InvertedBooleanConverter}}" />-->
+                            
+                            <!--<BoxView HeightRequest="1" Color="{AppThemeBinding Dark=White, Light=Black}" VerticalOptions="End"/>-->
 
                         </StackLayout>
 
