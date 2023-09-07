@@ -12,25 +12,30 @@ namespace ToDoListApp.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TodoitemPage : ContentPage
 	{
-        public DateTime Date { get; private set; }
-
         public TodoitemPage()
 		{
 			InitializeComponent();
-
-			Date = DateTime.Now;
 		}
 
-		async void OnSaveClicked(object sender, EventArgs e)
-		{
-			var todoItem = (Todoitem)BindingContext;
-			TodoitemDatabase database = await TodoitemDatabase.Instance;
-			Date = DateTime.Now;
-			await database.SaveItemAsync(todoItem);
-			await Navigation.PopAsync();
-		}
+        async void OnSaveClicked(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(NameField.Text) || string.IsNullOrWhiteSpace(DescField.Text))
+            {
+                await DisplayAlert("Cannot Save Task", "Please enter Name and Notes", "OK");
+                return;
+            }
 
-		async void OnDeleteClicked(object sender, EventArgs e)
+            var todoItem = (Todoitem)BindingContext;
+            todoItem.Name = NameField.Text;
+            todoItem.Notes = DescField.Text;
+            todoItem.Date = DateTime.Now;
+
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            await database.SaveItemAsync(todoItem);
+            await Navigation.PopAsync();
+        }
+
+        async void OnDeleteClicked(object sender, EventArgs e)
 		{
 			var todoItem = (Todoitem)BindingContext;
 			TodoitemDatabase database = await TodoitemDatabase.Instance;
@@ -42,5 +47,11 @@ namespace ToDoListApp.Views
 		{
 			await Navigation.PopAsync();
 		}
-	}
+
+        private void OnClearClicked(object sender, EventArgs e)
+        {
+            NameField.Text = " ";
+            DescField.Text = " ";
+        }
+    }
 }
