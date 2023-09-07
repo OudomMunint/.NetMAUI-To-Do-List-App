@@ -9,16 +9,20 @@
     Shell.PresentationMode="ModalAnimated">
     <ContentPage.ToolbarItems>
 
+        <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png">
+        </ToolbarItem>
+
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png">
         </ToolbarItem>
 
-        <ToolbarItem Clicked="DeleteAllItems" IconImageSource="trash.png">
+        <ToolbarItem Clicked="DeleteAllItems" IconImageSource="trash.png" Order="Secondary" Text="Delete All">
         </ToolbarItem>
 
-        <ToolbarItem Clicked="OpenSettings" IconImageSource="settings.png">
+        <ToolbarItem Clicked="OpenSettings" IconImageSource="settings.png" Text="Settings" Order="Secondary">
         </ToolbarItem>
 
     </ContentPage.ToolbarItems>
+    
     <StackLayout>
     <!-- Header Grid -->
         <views:HeaderGrid x:Name="HeaderGrid"/>
@@ -33,7 +37,7 @@
                                      HorizontalOptions="FillAndExpand"
                                      Orientation="Horizontal">
 
-                            <!--<CheckBox Margin="-7,0,0,0"/>-->
+                            <CheckBox x:Name="SelectedBox" Margin="-7,0,0,0" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
 
                             <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
                                    Text="{Binding Name }" LineBreakMode="TailTruncation" WidthRequest="60" />
