@@ -36,8 +36,10 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
   <img src="Media/iphone14 (1).png" style="height:700px; width:340" />
 </h1>
 
+<div float="center">
 <img src="Media/iphone14 (4).png" style="height:700px; width:340" />
 <img src="Media/iphone14 (3).png" style="height:700px; width:340" />
+</div>
 
 ## Upcoming
 - `Bottom Sheets` to pull up edit screen or create task screen
