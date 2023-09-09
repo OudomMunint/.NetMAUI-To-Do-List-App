@@ -4,7 +4,7 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 # CI/CD Status
 ![example workflow](https://github.com/oudommunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg)
 
-# Maintenance Status
+# Maintenance Status 🔹<a href="https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues">Report Bug</a> &nbsp; &nbsp;
 ![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
 
 # Supported Platforms
@@ -31,14 +31,13 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
   </tr>
 </table>
 
-<h3 align="left">
-    🔹
-    <a href="https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues">Report Bug</a> &nbsp; &nbsp;
-</h3>
 <h1 float="center">
-  <img src="/iphone14.png" style="height:700px; width:340" />
-  <img src="/iphone142.png" style="height:700px; width:340" />
+  <img src="Media/iphone14.png" style="height:700px; width:340" />
+  <img src="Media/iphone14 (1).png" style="height:700px; width:340" />
 </h1>
+
+<img src="Media/iphone14 (4).png" style="height:700px; width:340" />
+<img src="Media/iphone14 (3).png" style="height:700px; width:340" />
 
 ## Upcoming
 - `Bottom Sheets` to pull up edit screen or create task screen
