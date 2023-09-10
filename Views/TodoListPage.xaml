@@ -9,20 +9,20 @@
     Shell.PresentationMode="ModalAnimated">
     <ContentPage.ToolbarItems>
 
+        <ToolbarItem Clicked="MarkSelectedItemsComplete" IconImageSource="donetoolbar.png"/>
         <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png"/>
-
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png"/>
         <ToolbarItem Clicked="OpenSettings" Text="Settings" Order="Secondary"/>
         <ToolbarItem Clicked="DeleteAllItems" Order="Secondary" Text="Delete All"/>
 
     </ContentPage.ToolbarItems>
-    
+
     <Grid BackgroundColor="{AppThemeBinding Dark={DynamicResource Black}, Light={DynamicResource OffWhite}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-    <!-- Header Grid -->
+        <!-- Header Grid -->
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
         <Frame HeightRequest="40" Grid.Row="0" CornerRadius="15" Margin="5" Padding="5">
@@ -69,24 +69,24 @@
 
                                 <Frame Grid.Row="1" Grid.Column="1" WidthRequest="100" Padding="7,0,0,0" Margin="-10,0,0,0" HeightRequest="25" BackgroundColor="{DynamicResource Gray100}" BorderColor="Transparent">
                                     <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="90" TextColor="Black" FontFamily="Inter-Regular">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                 </Frame>
 
                                 <Image Grid.Row="1" Grid.Column="4" HeightRequest="50" Margin="0,0,10,0" Aspect="AspectFit" x:Name="Doneimg">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
-                                        <Setter Property="Source" Value="done.png" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="False">
-                                        <Setter Property="Source" Value="notdone.png" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
+                                            <Setter Property="Source" Value="done.png" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="False">
+                                            <Setter Property="Source" Value="notdone.png" />
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
 
                             </Grid>
                         </Frame>

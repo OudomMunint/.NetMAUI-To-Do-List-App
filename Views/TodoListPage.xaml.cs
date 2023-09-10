@@ -172,5 +172,35 @@ namespace ToDoListApp.Views
                 listView.ItemsSource = filteredItems.ToList();
             }
         }
+
+        async void MarkSelectedItemsComplete(object sender, EventArgs e)
+        {
+            var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
+
+            if (!selectedItems.Any())
+            {
+                await DisplayAlert("No Items Selected", "Please select items to mark as complete", "OK");
+            }
+            else
+            {
+                foreach (var item in selectedItems)
+                {
+                    item.Done = true;
+                    item.IsSelected = false; // Uncheck
+                }
+
+                bool Confirmed = await DisplayAlert("Mark Selected Tasks Complete", "Confirm you want to mark selected items as complete?", "Yes", "No");
+
+                if (Confirmed)
+                {
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    foreach (var item in selectedItems)
+                    {
+                        await database.SaveItemAsync(item);
+                    }
+                    await UpdateListView();
+                }
+            }
+        }
     }
 }
