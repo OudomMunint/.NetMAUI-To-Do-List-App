@@ -1,7 +1,7 @@
 # .Net MAUI To-Do List App [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLite`
 
-# CI/CD Status
+# CI/CD Status & Release
 ![example workflow](https://github.com/oudommunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg)
 
 # Maintenance Status 🔹<a href="https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues">Report Bug</a> &nbsp; &nbsp;
@@ -32,18 +32,17 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 </table>
 
 <h1 float="center">
-  <img src="Media/iphone14.png" style="height:700px; width:340" />
-  <img src="Media/iphone14 (1).png" style="height:700px; width:340" />
+  <img src="Media/iphone14 (2).png" style="height:700px; width:340" />
+  <img src="Media/iphone14 (3).png" style="height:700px; width:340" />
 </h1>
 
 <div float="center">
 <img src="Media/iphone14 (4).png" style="height:700px; width:340" />
-<img src="Media/iphone14 (3).png" style="height:700px; width:340" />
+<img src="Media/iphone14 (1).png" style="height:700px; width:340" />
 </div>
 
 ## Upcoming
 - `Bottom Sheets` to pull up edit screen or create task screen
-- `MultiSelect` for bulk delete
 - Data visualization with `Charts` or `Graphs`
 - WIP: SwipeView Add, SwipeView Delete
 

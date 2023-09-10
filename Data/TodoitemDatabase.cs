@@ -20,7 +20,7 @@ namespace ToDoListApp.Data
                 {
                     CreateTableResult result = await Database.CreateTableAsync<Todoitem>();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }
