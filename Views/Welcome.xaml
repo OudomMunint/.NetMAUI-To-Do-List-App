@@ -39,7 +39,7 @@
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
         <Label Grid.Row="3" HorizontalTextAlignment="Center" Margin="0, 0, 0, 30"
-               FontSize="16" FontFamily="Inter-SemiBold" Text="Create, Edit, Delete tasks &amp; more!"
+               FontSize="16" FontFamily="Inter-Regular" Text="Create, Edit, Delete tasks &amp; more!"
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
         <Button BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="4" Margin="20, 0, 20, 30" CornerRadius="20"
