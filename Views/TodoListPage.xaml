@@ -12,46 +12,72 @@
         <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png"/>
 
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png"/>
-
-        <ToolbarItem Clicked="OpenSettings" IconImageSource="settings.png" Text="Settings" Order="Secondary"/>
-
-        <ToolbarItem Clicked="DeleteAllItems" IconImageSource="trash.png" Order="Secondary" Text="Delete All"/>
+        <ToolbarItem Clicked="OpenSettings" Text="Settings" Order="Secondary"/>
+        <ToolbarItem Clicked="DeleteAllItems" Order="Secondary" Text="Delete All"/>
 
     </ContentPage.ToolbarItems>
     
-    <StackLayout>
+    <Grid BackgroundColor="{AppThemeBinding Dark={DynamicResource Black}, Light={DynamicResource OffWhite}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
     <!-- Header Grid -->
-        <views:HeaderGrid x:Name="HeaderGrid"/>
+        <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <ListView x:Name="listView" Margin="10" ItemSelected="OnListItemSelected" RowHeight="50" SeparatorVisibility="Default"
-              CachingStrategy="RecycleElement" SeparatorColor="{AppThemeBinding Dark=White, Light=Black}">
+        <Frame HeightRequest="40" Grid.Row="0" CornerRadius="15" Margin="5" Padding="5">
+            <HorizontalStackLayout>
+                <!-- Search Bar -->
+                <SearchBar  Style="{DynamicResource SearchBarIdler}" HorizontalOptions="StartAndExpand"
+                            Placeholder="Search" x:Name="SearchBar" TextChanged="SearchBar_TextChangedAsync"/>
+
+                <!-- Sort Button -->
+                <AbsoluteLayout VerticalOptions="Center" Margin="0" HeightRequest="40">
+                    <ImageButton Clicked="SortByDateClicked" Source="sort.png" BackgroundColor="Transparent" BorderColor="Transparent" AbsoluteLayout.LayoutBounds="0.2, 0.5, 30, 25" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                </AbsoluteLayout>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <ListView x:Name="listView" Grid.Row="1" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None"
+                  CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Margin="0,0,0,0"
-                                     Padding="0"
-                                     HorizontalOptions="FillAndExpand"
-                                     Orientation="Horizontal">
+                        <Frame Padding="15,0,0,0" Margin="5" CornerRadius="15" BackgroundColor="{AppThemeBinding Dark={DynamicResource DarkGH}, Light={DynamicResource OffWhite}}">
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.RowDefinitions>
+                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="20" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                            <CheckBox x:Name="SelectedBox" Margin="-7,0,0,0" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
+                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
+                                       Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" />
 
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
-                                   Text="{Binding Name }" LineBreakMode="TailTruncation" WidthRequest="60" />
+                                <CheckBox Grid.Row="1" Grid.Column="0" Margin="-8,0,0,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
 
-                            <Label HorizontalOptions="StartAndExpand" WidthRequest="150" LineBreakMode="TailTruncation"
-                                   Margin="-50,0,0,0" 
-                                   VerticalOptions="Center"
-                                   Text="{Binding Notes }" />
+                                <Label Grid.ColumnSpan="5" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
+                                       Margin="20,2,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250"
+                                       Text="{Binding Notes}" FontFamily="Inter-Regular" />
 
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="-5,0,0,0" TextColor="{DynamicResource Gray500}">
+                                <Frame Grid.Row="1" Grid.Column="1" WidthRequest="100" Padding="7,0,0,0" Margin="-10,0,0,0" HeightRequest="25" BackgroundColor="{DynamicResource Gray100}" BorderColor="Transparent">
+                                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="90" TextColor="Black" FontFamily="Inter-Regular">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
+                                </Frame>
 
-                            <Image WidthRequest="35" HorizontalOptions="End" Aspect="AspectFit" x:Name="Doneimg">
+                                <Image Grid.Row="1" Grid.Column="4" HeightRequest="50" Margin="0,0,10,0" Aspect="AspectFit" x:Name="Doneimg">
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
                                         <Setter Property="Source" Value="done.png" />
@@ -62,16 +88,11 @@
                                 </Image.Triggers>
                             </Image>
 
-                            <!--<Image WidthRequest="35" HorizontalOptions="End" Source="empty_check.png" Aspect="AspectFit"
-                                   IsVisible="{Binding Done, Converter={StaticResource InvertedBooleanConverter}}" />-->
-                            
-                            <!--<BoxView HeightRequest="1" Color="{AppThemeBinding Dark=White, Light=Black}" VerticalOptions="End"/>-->
-
-                        </StackLayout>
-
+                            </Grid>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </StackLayout>
+    </Grid>
 </ContentPage>
