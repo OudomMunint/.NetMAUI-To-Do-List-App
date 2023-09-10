@@ -16,25 +16,25 @@
             
             <StackLayout>
                 <HorizontalStackLayout Spacing="10">
-                    <Label FontSize="20" Text="Task" Margin="10,0,0,0" FontAttributes="Bold" />
+                    <Label FontSize="20" Text="Task" Margin="10,0,0,0" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
                     <Image Source="todo.png" Aspect="AspectFit" HeightRequest="20"/>
                 </HorizontalStackLayout>
 
                 <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
                     <StackLayout>
-                        <Entry x:Name="NameField" Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" />
+                        <Entry x:Name="NameField" Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" FontFamily="Inter-Regular" />
                     </StackLayout>
                 </Frame>
             </StackLayout>
 
             <StackLayout>
                 <HorizontalStackLayout Spacing="10">
-                    <Label FontSize="20" Text="Description" Margin="10,0,0,0" FontAttributes="Bold"/>
+                    <Label FontSize="20" Text="Description" Margin="10,0,0,0" FontFamily="Inter-SemiBold"/>
                 <Image Source="description.png" Aspect="AspectFit" HeightRequest="25"/>
                 </HorizontalStackLayout>
 
                 <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                    <Entry x:Name="DescField" Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}" HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" />
+                    <Entry x:Name="DescField" FontFamily="Inter-Regular" Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}" HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" />
                 </Frame>
             </StackLayout>
 
@@ -42,28 +42,19 @@
                 <Label Margin="10,0,0,0"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
-                       FontSize="Body"
-                       FontAttributes="Bold"
+                       FontFamily="Inter-Bold"
                        Text="Mark as Done" />
                 <Switch HorizontalOptions="Center" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Black" />
             </StackLayout>
 
             <BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>
 
-            <StackLayout Orientation="Horizontal" Padding="0,0,0,-15">
-
-                <Button BackgroundColor="BlueViolet" Clicked="OnSaveClicked" Text="Save" WidthRequest="170" Margin="0,0,10,10"/>
-
-                <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Cancel" WidthRequest="170" Margin="0,0,0,10"/>
-
-                
+            <StackLayout Orientation="Horizontal" Padding="0,0,0,-15" VerticalOptions="EndAndExpand">
+                <Button BackgroundColor="BlueViolet" Clicked="OnSaveClicked" Text="Save" WidthRequest="170" Margin="0,0,10,10" FontFamily="Inter-Regular"/>
+                <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Cancel" WidthRequest="170" Margin="0,0,0,10" FontFamily="Inter-Regular"/>
             </StackLayout>
-            <Button BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" />
-            <!--<Button Clicked="OnSaveClicked" Text="Save" WidthRequest="150" />
-
-            <Button Clicked="OnDeleteClicked" Text="Delete" WidthRequest="150" />
-
-            <Button Clicked="OnCancelClicked" Text="Cancel" />-->
+            
+            <Button BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" FontFamily="Inter-Regular" VerticalOptions="EndAndExpand" />
 
         </StackLayout>
     </ContentPage.Content>

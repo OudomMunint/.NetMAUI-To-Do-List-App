@@ -1,10 +1,10 @@
 ﻿namespace ToDoListApp;
 
-public partial class MainPage : ContentPage
+public partial class Settings : ContentPage
 {
-    public MainPage()
+    public Settings()
 	{
-		InitializeComponent();
+        InitializeComponent();
 	}
 
     // Dark Mode
