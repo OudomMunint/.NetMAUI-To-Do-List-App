@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoListApp.Views.Welcome"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid BackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"
+          RowDefinitions="*, 50, Auto, Auto, Auto">
+
+
+            <CarouselView Grid.Row="0"
+              IsBounceEnabled="True"
+              IndicatorView="indicator1"
+              ItemsSource="{Binding UserCollection}"
+              x:Name="CarouselZoos">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image HeightRequest="550" Aspect="AspectFit" Source="{Binding UserImage}" HorizontalOptions="Center" VerticalOptions="End">
+                            <Image.Shadow>
+                                <Shadow Brush="Black"
+                                Offset="10,10"
+                                Radius="15"
+                                Opacity="0.4" />
+                            </Image.Shadow>
+                        </Image>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+        <IndicatorView x:Name="indicator1" IsEnabled="True" IsVisible="True" Grid.Row="1"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       IndicatorSize="10"
+                       IndicatorColor="Gray"
+                       SelectedIndicatorColor="Black"/>
+
+        <Label Grid.Row="2" HorizontalTextAlignment="Center" Margin="0, 20, 0, 10"
+               FontSize="20" FontFamily="Inter-Bold" Text="Managing your task made easy"
+               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+
+        <Label Grid.Row="3" HorizontalTextAlignment="Center" Margin="0, 0, 0, 30"
+               FontSize="16" FontFamily="Inter-SemiBold" Text="Create, Edit, Delete tasks &amp; more!"
+               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+
+        <Button BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="4" Margin="20, 0, 20, 30" CornerRadius="20"
+                Text="Continue" VerticalOptions="End" HeightRequest="40" WidthRequest="320" Clicked="Continue_Clicked"
+                Style="{StaticResource Base_Button}" TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
+
+    </Grid>
+</ContentPage>

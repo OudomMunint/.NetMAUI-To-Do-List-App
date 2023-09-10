@@ -122,6 +122,9 @@
 		<MauiXaml Update="Views\TodoListPage.xaml">
 			<Generator></Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\Welcome.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>

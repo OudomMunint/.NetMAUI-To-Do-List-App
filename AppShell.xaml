@@ -10,19 +10,9 @@
     Shell.BackgroundColor="DarkBlue"
     Shell.TabBarForegroundColor="DarkBlue">
 
-    <TabBar>
-        <Tab Title="Home"
-            Icon="todo.png">
-            <ShellContent Title="Settings"
-                         Icon="addnew.png"
-                         ContentTemplate="{DataTemplate views:TodoitemPage}" />
-            <ShellContent Title="Test"
-                         Icon="clear.png"
-                         ContentTemplate="{DataTemplate local:Settings}" />
-        </Tab>
-        <ShellContent Title="Details"
-                     Icon="theme.png"
-                     ContentTemplate="{DataTemplate views:testpage}" />
-    </TabBar>
-
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:Welcome}"
+        Route="Welcome"/>
+    
 </Shell>
