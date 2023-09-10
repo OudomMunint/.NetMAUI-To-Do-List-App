@@ -112,7 +112,6 @@ namespace ToDoListApp.Views
 
         async void DeleteSelectedItems(object sender, EventArgs e)
         {
-            bool Confirmed = await DisplayAlert("Delete Selected Tasks", "Confirm you want to selected items?", "Yes", "No");
             var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
 
             if (!selectedItems.Any())
@@ -125,16 +124,16 @@ namespace ToDoListApp.Views
 
                 if (Confirmed)
                 {
-                TodoitemDatabase database = await TodoitemDatabase.Instance;
-                foreach (var item in selectedItems)
-                {
-                    await database.DeleteItemAsync(item);
-                }
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    foreach (var item in selectedItems)
+                    {
+                        await database.DeleteItemAsync(item);
+                    }
 
-                // Refresh ListView 
-                await UpdateListView();
+                    // Refresh ListView 
+                    await UpdateListView();
+                }
             }
-        }
         }
 
         //Sorting
