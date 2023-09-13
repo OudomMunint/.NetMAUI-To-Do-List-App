@@ -1,4 +1,4 @@
-# .Net MAUI To-Do List App [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+# Check Mate ✅
 A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLite`
 
 # CI/CD Status & Release
@@ -6,6 +6,7 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 
 # Maintenance Status 🔹<a href="https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues">Report Bug</a> &nbsp; &nbsp;
 ![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 # Supported Platforms
 <table>
