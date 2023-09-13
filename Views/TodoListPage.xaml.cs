@@ -35,7 +35,7 @@ namespace ToDoListApp.Views
 
         async void OpenSettings(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new Settings());
         }
 
         async void DeleteAllItems(object sender, EventArgs e)
@@ -112,21 +112,95 @@ namespace ToDoListApp.Views
 
         async void DeleteSelectedItems(object sender, EventArgs e)
         {
-            bool Confirmed = await DisplayAlert("Delete Selected Tasks", "Confirm you want to selected items?", "Yes", "No");
             var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
 
-            if (selectedItems.Any() & Confirmed)
+            if (!selectedItems.Any())
             {
-                TodoitemDatabase database = await TodoitemDatabase.Instance;
-                foreach (var item in selectedItems)
-                {
-                    await database.DeleteItemAsync(item);
-                }
+                await DisplayAlert("No Items Selected", "Please select items to delete", "OK");
+            }
+            else
+            {
+                bool Confirmed = await DisplayAlert("Delete Selected Tasks", "Confirm you want to delete selected items?", "Yes", "No");
 
-                // Refresh ListView 
-                await UpdateListView();
+                if (Confirmed)
+                {
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    foreach (var item in selectedItems)
+                    {
+                        await database.DeleteItemAsync(item);
+                    }
+
+                    // Refresh ListView 
+                    await UpdateListView();
+                }
             }
         }
 
+        //Sorting
+        private bool sortByDateAscending = false;
+
+        private void SortByDateClicked(object sender, EventArgs e)
+        {
+            sortByDateAscending = !sortByDateAscending;
+
+            var sortedItems = sortByDateAscending
+                ? ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => item.Date)
+                : ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.Date);
+            listView.ItemsSource = sortedItems.ToList();
+            //await UpdateListView();
+        }
+
+        //Searching
+        async void SearchBar_TextChangedAsync(object sender, TextChangedEventArgs e)
+        {
+            var keyword = SearchBar.Text.ToLower();
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                // If the search bar is empty, reset the ListView to display all items
+                listView.ItemsSource = ((IEnumerable<Todoitem>)listView.ItemsSource).ToList();
+                await UpdateListView();
+            }
+            else
+            {
+                // Filter items based on the search bar keyword
+                var filteredItems = ((IEnumerable<Todoitem>)listView.ItemsSource)
+                
+                    .Where(item => item.Name.ToLower().Contains(keyword));
+
+                // Update the ListView with filtered items
+                listView.ItemsSource = filteredItems.ToList();
+            }
+        }
+
+        async void MarkSelectedItemsComplete(object sender, EventArgs e)
+        {
+            var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
+
+            if (!selectedItems.Any())
+            {
+                await DisplayAlert("No Items Selected", "Please select items to mark as complete", "OK");
+            }
+            else
+            {
+                foreach (var item in selectedItems)
+                {
+                    item.Done = true;
+                    item.IsSelected = false; // Uncheck
+                }
+
+                bool Confirmed = await DisplayAlert("Mark Selected Tasks Complete", "Confirm you want to mark selected items as complete?", "Yes", "No");
+
+                if (Confirmed)
+                {
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    foreach (var item in selectedItems)
+                    {
+                        await database.SaveItemAsync(item);
+                    }
+                    await UpdateListView();
+                }
+            }
+        }
     }
 }

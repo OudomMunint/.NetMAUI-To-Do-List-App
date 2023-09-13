@@ -4,14 +4,15 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ToDoListApp"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:views="clr-namespace:ToDoListApp.Views" 
+    Shell.FlyoutBehavior="Flyout"
     BackgroundColor="DarkBlue"
     Shell.BackgroundColor="DarkBlue"
     Shell.TabBarForegroundColor="DarkBlue">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"/>
-
+        ContentTemplate="{DataTemplate views:Welcome}"
+        Route="Welcome"/>
+    
 </Shell>
