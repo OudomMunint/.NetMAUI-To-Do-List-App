@@ -34,12 +34,14 @@
 		<Optimize>True</Optimize>
 		<EnableSGenConc>True</EnableSGenConc>
 		<MtouchProfiling>True</MtouchProfiling>
+		<ApplicationTitle>Check Mate</ApplicationTitle>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 		<EnableCodeSigning>false</EnableCodeSigning>
 		<MtouchLink>SdkOnly</MtouchLink>
 		<EnableSGenConc>True</EnableSGenConc>
 		<MtouchProfiling>True</MtouchProfiling>
+		<ApplicationTitle>Check Mate</ApplicationTitle>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android33.0|AnyCPU'">
 		<DebugSymbols>False</DebugSymbols>
@@ -55,16 +57,26 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
 	  <Optimize>True</Optimize>
+	  <ApplicationTitle>Check Mate</ApplicationTitle>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
 	  <Optimize>True</Optimize>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
+	  <ApplicationTitle>Check Mate</ApplicationTitle>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>Check Mate</ApplicationTitle>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
+	  <ApplicationTitle>Check Mate</ApplicationTitle>
+	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<!--Color="#161B22" TintColor="161B22"-->
+		<MauiSplashScreen Include="Resources\Splash\splash3.svg" BaseSize="100, 100" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -75,11 +87,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Resources\AppIcon\appicon.png" />
 		<None Remove="Resources\Images\addnew.png" />
 		<None Remove="Resources\Images\checkLight.png" />
 		<None Remove="Resources\Images\donetoolbar.png" />
 		<None Remove="Resources\Images\icon.png" />
 		<None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+		<None Remove="Resources\Splash\splash3.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiIcon Include="Resources\AppIcon\appicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
