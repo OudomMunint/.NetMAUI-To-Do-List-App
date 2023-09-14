@@ -43,8 +43,8 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame Padding="15,0,0,0" Margin="5" CornerRadius="15" BackgroundColor="{AppThemeBinding Dark={DynamicResource DarkGH}, Light={DynamicResource OffWhite}}">
-                        <Grid RowSpacing="0" ColumnSpacing="0">
+                        <Frame Padding="15,0,0,0" Margin="5" Style="{StaticResource CustomFrame}">
+                            <Grid RowSpacing="0" ColumnSpacing="0">
                             <Grid.RowDefinitions>
                                     <RowDefinition Height="35" />
                                     <RowDefinition Height="30" />
