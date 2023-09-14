@@ -10,7 +10,7 @@ public partial class App : Application
 
 		MainPage = new NavigationPage(new Welcome())
 		{
-			BarTextColor = Color.FromRgb(255, 2555, 255)
+			//BarTextColor = Color.FromRgb(255, 2555, 255)
 		};
 	}
 }
