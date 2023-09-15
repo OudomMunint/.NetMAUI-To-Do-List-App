@@ -19,6 +19,11 @@ public partial class Welcome : ContentPage
             };
 
         itemcount = UserCollection.Count;
+
+        if (CarouselZoos.Position == 0)
+        {
+            ChangingText.Text = "Managing your task made easy";
+        }
     }
 
     public class UserInformation
@@ -44,5 +49,28 @@ public partial class Welcome : ContentPage
 
         // Prevent the user from going back
         Navigation.RemovePage(this);
+    }
+
+    private void OnPositionChanged(object sender, PositionChangedEventArgs e)
+    {
+        if (e.CurrentPosition == 0)
+        {
+            ChangingText.Text = "Managing your task made easy";
+        }
+
+        if (e.CurrentPosition == 1)
+        {
+            ChangingText.Text = "Add new tasks or mark it as done ";
+        }
+
+        else if (e.CurrentPosition == 2)
+        {
+            ChangingText.Text = "Bulk marking or delete them";
+        }
+
+        else if (e.CurrentPosition == 3)
+        {
+            ChangingText.Text = "Change theme settings";
+        }
     }
 }

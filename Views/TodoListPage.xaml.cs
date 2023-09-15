@@ -1,4 +1,4 @@
-using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 
@@ -87,7 +87,8 @@ namespace ToDoListApp.Views
             {
                 task += "s";
             }
-            Title = $"Home - {totalItems} {task} Open";
+            Title = $"🏠🗒️ {totalItems} Opened";
+            // increase the font size of the title
         }
 
         private void OnCheckBoxChecked(object sender, EventArgs e)

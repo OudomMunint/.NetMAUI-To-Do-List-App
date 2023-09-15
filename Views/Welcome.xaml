@@ -12,7 +12,8 @@
               IsBounceEnabled="True"
               IndicatorView="indicator1"
               ItemsSource="{Binding UserCollection}"
-              x:Name="CarouselZoos">
+              x:Name="CarouselZoos"
+              PositionChanged="OnPositionChanged">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Image HeightRequest="550" Aspect="AspectFit" Source="{Binding UserImage}" HorizontalOptions="Center" VerticalOptions="End">
@@ -34,8 +35,8 @@
                        IndicatorColor="Gray"
                        SelectedIndicatorColor="Black"/>
 
-        <Label Grid.Row="2" HorizontalTextAlignment="Center" Margin="0, 20, 0, 10"
-               FontSize="20" FontFamily="Inter-Bold" Text="Managing your task made easy"
+        <Label Grid.Row="2" HorizontalTextAlignment="Center" Margin="0, 20, 0, 10" x:Name="ChangingText"
+               FontSize="20" FontFamily="Inter-Bold"
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
         <Label Grid.Row="3" HorizontalTextAlignment="Center" Margin="0, 0, 0, 30"
