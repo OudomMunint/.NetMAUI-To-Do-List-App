@@ -20,7 +20,8 @@
                     <Image Source="todo.png" Aspect="AspectFit" HeightRequest="20"/>
                 </HorizontalStackLayout>
 
-                <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                <Frame Style="{DynamicResource CustomFrame}" BorderColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                       Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
                     <StackLayout>
                         <Entry x:Name="NameField" Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" FontFamily="Inter-Regular" />
                     </StackLayout>
@@ -33,7 +34,8 @@
                 <Image Source="description.png" Aspect="AspectFit" HeightRequest="25"/>
                 </HorizontalStackLayout>
 
-                <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                <Frame Style="{DynamicResource CustomFrame}" BorderColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                       Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
                     <Entry x:Name="DescField" FontFamily="Inter-Regular" Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}" HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" />
                 </Frame>
             </StackLayout>
@@ -44,17 +46,20 @@
                        VerticalOptions="Center"
                        FontFamily="Inter-Bold"
                        Text="Mark as Done" />
-                <Switch HorizontalOptions="Center" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Black" />
+
+                <Switch HorizontalOptions="Center" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
+
             </StackLayout>
 
             <BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>
 
-            <StackLayout Orientation="Horizontal" Padding="0,0,0,-15" VerticalOptions="EndAndExpand">
-                <Button BackgroundColor="BlueViolet" Clicked="OnSaveClicked" Text="Save" WidthRequest="170" Margin="0,0,10,10" FontFamily="Inter-Regular"/>
-                <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Cancel" WidthRequest="170" Margin="0,0,0,10" FontFamily="Inter-Regular"/>
+            <StackLayout Orientation="Horizontal" Padding="0,0,0,-15" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand">
+                <Button BackgroundColor="BlueViolet" Clicked="OnSaveClicked" Text="Save" WidthRequest="180" Margin="0,0,10,10" FontFamily="Inter-Regular"/>
+                <Button BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Cancel" WidthRequest="180" Margin="0,0,0,10" FontFamily="Inter-Regular"/>
             </StackLayout>
             
-            <Button BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" FontFamily="Inter-Regular" VerticalOptions="EndAndExpand" />
+            <Button BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" FontFamily="Inter-Regular" VerticalOptions="EndAndExpand"
+                    HorizontalOptions="FillAndExpand"/>
 
         </StackLayout>
     </ContentPage.Content>
