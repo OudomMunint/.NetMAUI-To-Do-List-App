@@ -21,5 +21,7 @@ namespace ToDoListApp.Models
         public bool IsSelected { get; set; }
 
         public DateTime Date { get; set; }
+
+        public string Priority { get; set; }
     }
 }

@@ -24,34 +24,31 @@ internal class AndroidHandlers
             h.PlatformView.SetPadding(25, 5, 25, 5);
         });
 
-        //// Entry Handler
-        //Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("StyleEntryCustomization", (h, v) =>
-        //{
-        //    // Customize Entry objects of type StyleEntry
-        //    if (v is StyledEntry || v is NumericOnlyEntry || v is UpperCaseLetterOnlyEntry)
-        //    {
-        //        // Remove underline:
-        //        h.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.White.ToAndroid());
+        // Entry Handler
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("StyleEntryCustomization", (h, v) =>
+        {
+            // Customize Entry objects of type StyleEntry
+                // Remove underline:
+                h.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
 
-        //        // Add rounded corner border
-        //        var stroke = new SolidColorBrush(Colors.DarkGray);
-        //        var strokeShape = new RoundRectangle
-        //        {
-        //            CornerRadius = new CornerRadius(3, 3, 3, 3)
-        //        };
-        //        var border = new Border
-        //        {
-        //            Stroke = stroke,
-        //            StrokeThickness = 1,
-        //            StrokeShape = strokeShape
-        //        };
-        //        h.PlatformView.UpdateBorderStroke(border);
-        //        h.PlatformView.SetPadding(25, 5, 25, 5);
+                // Add rounded corner border
+                var stroke = new SolidColorBrush(Colors.DarkGray);
+                var strokeShape = new RoundRectangle
+                {
+                    CornerRadius = new CornerRadius(3, 3, 3, 3)
+                };
+                var border = new Border
+                {
+                    Stroke = stroke,
+                    StrokeThickness = 1,
+                    StrokeShape = strokeShape
+                };
+                h.PlatformView.UpdateBorderStroke(border);
+                h.PlatformView.SetPadding(25, 5, 25, 5);
 
-        //        // Set tint color
-        //        h.PlatformView.TextCursorDrawable.SetTint(Colors.DarkGray.ToPlatform());
-        //    }
-        //});
+                // Set tint color
+                h.PlatformView.TextCursorDrawable.SetTint(Colors.DarkGray.ToPlatform());
+        });
 
         // Date Handler
         Microsoft.Maui.Handlers.DatePickerHandler.Mapper.AppendToMapping("DatePickerCustomization", (h, v) =>
@@ -75,6 +72,15 @@ internal class AndroidHandlers
                 child.SetColorFilter(Colors.DarkGray.ToPlatform());
             }
 
+        });
+
+        // remove underline from Picker
+        Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping("PickerCustomization", (h, v) =>
+        {
+            // Remove underline:
+            h.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
+            h.PlatformView.SetBackgroundColor(Colors.WhiteSmoke.ToAndroid());
+            h.PlatformView.SetPadding(25, 5, 25, 5);
         });
 #endif
     }
