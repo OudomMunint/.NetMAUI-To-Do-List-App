@@ -20,6 +20,8 @@ public static class MauiProgram
                 fonts.AddFont("Inter-Bold.ttf", "InterBold");
             });
 
+        AndroidHandlers.Apply();
+
         return builder.Build();
     }
 }

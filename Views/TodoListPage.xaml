@@ -25,15 +25,17 @@
         <!-- Header Grid -->
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Frame HeightRequest="40" Grid.Row="0" CornerRadius="15" Margin="5" Padding="5">
+        <Frame HeightRequest="40" Grid.Row="0" CornerRadius="15" Margin="5" Padding="5" Style="{DynamicResource CustomFrame}">
             <HorizontalStackLayout>
                 <!-- Search Bar -->
-                <SearchBar  Style="{DynamicResource SearchBarIdler}" HorizontalOptions="StartAndExpand"
+                <SearchBar  Style="{DynamicResource SearchBarHome}" HorizontalOptions="StartAndExpand"
                             Placeholder="Search" x:Name="SearchBar" TextChanged="SearchBar_TextChangedAsync"/>
 
                 <!-- Sort Button -->
                 <AbsoluteLayout VerticalOptions="Center" Margin="0" HeightRequest="40">
-                    <ImageButton Clicked="SortByDateClicked" Source="sort.png" BackgroundColor="Transparent" BorderColor="Transparent" AbsoluteLayout.LayoutBounds="0.2, 0.5, 30, 25" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    <ImageButton Clicked="SortByDateClicked" Source="sort.png" BackgroundColor="Transparent"
+                                 BorderColor="Transparent" HorizontalOptions="EndAndExpand"
+                                 AbsoluteLayout.LayoutBounds="0.2, 0.5, 30, 35" AbsoluteLayout.LayoutFlags="PositionProportional"/>
                 </AbsoluteLayout>
             </HorizontalStackLayout>
         </Frame>
@@ -61,7 +63,7 @@
                                 <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
                                        Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" />
 
-                                <CheckBox Grid.Row="1" Grid.Column="0" Margin="-8,0,0,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
+                                <CheckBox Grid.Row="1" Grid.Column="0" Margin="-6,0,0,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
 
                                 <Label Grid.ColumnSpan="5" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
                                        Margin="20,2,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250"
