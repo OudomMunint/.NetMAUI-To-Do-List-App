@@ -76,9 +76,9 @@
 		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.2" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!--<ItemGroup>
 	  <Compile Remove="App.xaml.cs" />
-	</ItemGroup>
+	</ItemGroup>-->
 	<ItemGroup>
 	  <Compile Update="Views\Settings.xaml.cs">
 	    <DependentUpon>Settings.xaml</DependentUpon>
