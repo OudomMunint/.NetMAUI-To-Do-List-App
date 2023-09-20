@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListApp.Views.Welcome"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}">
 
-    <Grid BackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"
-          RowDefinitions="*, 40, Auto, Auto, Auto">
+    <Grid RowDefinitions="*, 40, Auto, Auto, Auto">
 
 
             <CarouselView Grid.Row="0"
@@ -16,9 +16,9 @@
               PositionChanged="OnPositionChanged">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Image HeightRequest="440" Aspect="AspectFit" Source="{Binding UserImage}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image HeightRequest="420" Aspect="AspectFit" Source="{Binding UserImage}" HorizontalOptions="Center" VerticalOptions="Center">
                             <Image.Shadow>
-                                <Shadow Brush="Black"
+                                <Shadow Brush="Transparent"
                                 Offset="10,10"
                                 Radius="15"
                                 Opacity="0.4" />
@@ -31,7 +31,7 @@
         <IndicatorView x:Name="indicator1" IsEnabled="True" IsVisible="True" Grid.Row="1"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
-                       IndicatorSize="10"
+                       IndicatorSize="5"
                        IndicatorColor="Gray"
                        SelectedIndicatorColor="{AppThemeBinding Dark=White, Light=Black}"/>
 

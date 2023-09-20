@@ -29,6 +29,24 @@ namespace ToDoListApp.Views
             todoItem.Name = NameField.Text;
             todoItem.Notes = DescField.Text;
             todoItem.Date = DateTime.Now;
+            todoItem.Priority = PriorityPicker.SelectedIndex.ToString();
+
+            if (todoItem.Priority == "0")
+            {
+                todoItem.Priority = "Low";
+            }
+            else if (todoItem.Priority == "1")
+            {
+                todoItem.Priority = "Medium";
+            }
+            else if (todoItem.Priority == "2")
+            {
+                todoItem.Priority = "High";
+            }
+            else
+            {
+                todoItem.Priority = "Low";
+            }
 
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             await database.SaveItemAsync(todoItem);

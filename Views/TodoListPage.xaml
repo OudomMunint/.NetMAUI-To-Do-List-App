@@ -79,6 +79,11 @@
                                     </Label>
                                 </Frame>
 
+                                <Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,0,0,0" HeightRequest="25" BackgroundColor="{DynamicResource OffWhite}" BorderColor="Transparent">
+                                    <Label HorizontalOptions="Center" VerticalOptions="Center"
+                                           TextColor="Black" FontFamily="Inter-Regular" Text="{Binding Priority}"/>
+                                </Frame>
+
                                 <Image Grid.Row="1" Grid.Column="4" HeightRequest="50" Margin="0,0,10,0" Aspect="AspectFit" x:Name="Doneimg">
                                     <Image.Triggers>
                                         <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
