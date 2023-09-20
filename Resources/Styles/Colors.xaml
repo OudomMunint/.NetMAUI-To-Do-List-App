@@ -19,6 +19,7 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
     <Color x:Key="OffWhite">#E2E2E2</Color>
+    <Color x:Key="OffWhite2">#F0F0F0</Color>
     <Color x:Key="DarkGH">#161B22</Color>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>

@@ -79,8 +79,8 @@
                                     </Label>
                                 </Frame>
 
-                                <Frame Grid.Row="1" Grid.Column="2" WidthRequest="100" Padding="7,0,0,0" Margin="-10,0,0,0" HeightRequest="25" BackgroundColor="{Binding PriorityBG}" BorderColor="Transparent">
-                                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="90"
+                                <Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,0,0,0" HeightRequest="25" BackgroundColor="{DynamicResource OffWhite}" BorderColor="Transparent">
+                                    <Label HorizontalOptions="Center" VerticalOptions="Center"
                                            TextColor="Black" FontFamily="Inter-Regular" Text="{Binding Priority}"/>
                                 </Frame>
 

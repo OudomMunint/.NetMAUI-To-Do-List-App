@@ -129,7 +129,7 @@
     <Style TargetType="Frame" x:Key="CustomFrame">
         <Setter Property="BorderColor" Value="Transparent" />
         <Setter Property="CornerRadius" Value="15" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite2}, Dark={StaticResource DarkGH}}"/>
     </Style>
 
     <Style TargetType="ImageButton">
