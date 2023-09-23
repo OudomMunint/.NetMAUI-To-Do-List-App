@@ -83,5 +83,11 @@ internal class AndroidHandlers
             h.PlatformView.SetPadding(25, 5, 25, 5);
         });
 #endif
+#if IOS
+        Microsoft.Maui.Handlers.SearchBarHandler.Mapper.AppendToMapping("Search", (h, v) =>
+        {
+
+        });
+#endif
     }
 }
