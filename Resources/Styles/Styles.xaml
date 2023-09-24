@@ -260,7 +260,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="CancelButtonColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
+        <!--<Setter Property="BackgroundColor" Value="{OnPlatform Android=Transparent, iOS={DynamicResource OffWhite2}}" />-->
         <Setter Property="FontFamily" Value="Inter-Regular" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VisualStateManager.VisualStateGroups">
