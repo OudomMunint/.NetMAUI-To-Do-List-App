@@ -17,33 +17,37 @@
             <StackLayout>
                 <HorizontalStackLayout Spacing="10">
                     <Label FontSize="20" Text="Task" Margin="10,0,0,0" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
-                    <Image Source="todo.png" Aspect="AspectFit" HeightRequest="20"/>
+                    <Image Source="todo.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
                 </HorizontalStackLayout>
 
                 <Frame Style="{DynamicResource CustomFrame}" BorderColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                        Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
                     <StackLayout>
-                        <Entry x:Name="NameField" Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" FontFamily="Inter-Regular" />
+                        <Entry x:Name="NameField" Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" FontFamily="Inter-Regular"
+                               PlaceholderColor="Grey"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>
 
             <StackLayout>
                 <HorizontalStackLayout Spacing="10">
-                    <Label FontSize="20" Text="Description" Margin="10,0,0,0" FontFamily="Inter-SemiBold"/>
-                    <Image Source="description.png" Aspect="AspectFit" HeightRequest="25"/>
+                    <Label FontSize="20" Text="Description" Margin="10,0,0,0" FontFamily="Inter-SemiBold" />
+                    <Image Source="description.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=20}"/>
                 </HorizontalStackLayout>
 
                 <Frame Style="{DynamicResource CustomFrame}" BorderColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                        Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                    <Entry x:Name="DescField" FontFamily="Inter-Regular" Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}" HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" />
+                    <!--<Entry x:Name="DescField" FontFamily="Inter-Regular" Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}"
+                           HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" PlaceholderColor="Grey" />-->
+                    <Editor x:Name="DescField" FontFamily="Inter-Regular" Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}"
+                           HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" PlaceholderColor="Grey" />
                 </Frame>
             </StackLayout>
 
             <StackLayout>
                 <HorizontalStackLayout Spacing="10">
                     <Label FontSize="20" Text="Task Priority" Margin="10,0,0,0" FontFamily="Inter-SemiBold"/>
-                    <Image Source="priority.png" Aspect="AspectFit" HeightRequest="25"/>
+                    <Image Source="priority.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=20}"/>
                 </HorizontalStackLayout>
                 
                 <Frame Style="{DynamicResource CustomFrame}" BorderColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
@@ -62,7 +66,7 @@
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" WidthRequest="160">
-                <Label Margin="10,0,0,0"
+                <Label Margin="10,0,10,0"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontFamily="Inter-Bold"
