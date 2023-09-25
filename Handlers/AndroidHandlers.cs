@@ -88,6 +88,25 @@ internal class AndroidHandlers
         {
 
         });
+
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("StyleEntryCustomization", (h, v) =>
+        {
+            h.PlatformView.Layer.BorderWidth = 0;
+            h.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+
+            //Get rid of entry text shadow when focused
+            h.PlatformView.Layer.ShadowColor = UIKit.UIColor.Clear.CGColor;
+            h.PlatformView.Layer.ShadowOffset = new CoreGraphics.CGSize(0, 0);
+            h.PlatformView.Layer.ShadowRadius = 0;
+            h.PlatformView.Subviews.OfType<UIKit.UILabel>().FirstOrDefault()?.RemoveFromSuperview();
+        });
+
+        Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping("StyledPicker", (h, v) =>
+        {
+            h.PlatformView.Layer.BorderWidth = 0;
+            h.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+            //h.PlatformView.Layer.BorderColor = #f1f1f1;
+        });
 #endif
     }
 }
