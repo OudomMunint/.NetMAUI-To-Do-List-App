@@ -13,9 +13,7 @@
         <ToolbarItem Clicked="MarkSelectedItemsComplete" IconImageSource="donetoolbar.png"/>
         <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png"/>
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png"/>
-        <!--<ToolbarItem Clicked="OpenSettings" Text="Settings" Order="Secondary"/>
-        <ToolbarItem Clicked="DeleteAllItems" Order="Secondary" Text="Delete All"/>-->
-        <ToolbarItem Order="Primary" Priority="2" Clicked="OpenMenu" IconImageSource="priority.png"/>
+        <ToolbarItem Clicked="OpenMenu" IconImageSource="menu.png"/>
 
     </ContentPage.ToolbarItems>
 
