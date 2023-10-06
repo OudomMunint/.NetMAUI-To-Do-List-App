@@ -17,7 +17,7 @@
 
     </ContentPage.ToolbarItems>
 
-    <Grid BackgroundColor="{AppThemeBinding Dark={DynamicResource Black}, Light={DynamicResource OffWhite}}">
+    <Grid BackgroundColor="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -45,7 +45,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Border Padding="15,0,0,0" Margin="5">
+                        <Border Padding="5,0,0,0" Margin="5">
                             <Grid RowSpacing="0" ColumnSpacing="0">
                             <Grid.RowDefinitions>
                                     <RowDefinition Height="35" />
