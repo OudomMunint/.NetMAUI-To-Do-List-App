@@ -13,8 +13,9 @@
         <ToolbarItem Clicked="MarkSelectedItemsComplete" IconImageSource="donetoolbar.png"/>
         <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png"/>
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png"/>
-        <ToolbarItem Clicked="OpenSettings" Text="Settings" Order="Secondary"/>
-        <ToolbarItem Clicked="DeleteAllItems" Order="Secondary" Text="Delete All"/>
+        <!--<ToolbarItem Clicked="OpenSettings" Text="Settings" Order="Secondary"/>
+        <ToolbarItem Clicked="DeleteAllItems" Order="Secondary" Text="Delete All"/>-->
+        <ToolbarItem Order="Primary" Priority="2" Clicked="OpenMenu" IconImageSource="priority.png"/>
 
     </ContentPage.ToolbarItems>
 
@@ -26,7 +27,7 @@
         <!-- Header Grid -->
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Frame HeightRequest="40" Grid.Row="0" CornerRadius="15" Margin="5" Padding="5" Style="{DynamicResource CustomFrame}">
+        <Frame HeightRequest="40" Grid.Row="0" Margin="5" Padding="5" Style="{StaticResource CustomFrame}">
             <HorizontalStackLayout>
                 <!-- Search Bar -->
                 <SearchBar  Style="{DynamicResource SearchBarHome}" HorizontalOptions="StartAndExpand" Grid.Row="0" BackgroundColor="{OnPlatform iOS={DynamicResource OffWhite2}}"
@@ -46,7 +47,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame Padding="15,0,0,0" Margin="5" Style="{StaticResource CustomFrame}">
+                        <Border Padding="15,0,0,0" Margin="5">
                             <Grid RowSpacing="0" ColumnSpacing="0">
                             <Grid.RowDefinitions>
                                     <RowDefinition Height="35" />
@@ -95,9 +96,8 @@
                                         </DataTrigger>
                                     </Image.Triggers>
                                 </Image>
-
                             </Grid>
-                        </Frame>
+                        </Border>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
