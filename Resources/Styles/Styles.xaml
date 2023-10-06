@@ -14,6 +14,13 @@
     </Style>
 
     <Style TargetType="Border">
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource OffWhite2}, Dark={StaticResource DarkGH}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite2}, Dark={StaticResource DarkGH}}"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 20,20,20,20"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="CustomBorder">
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray100}}" />
         <Setter Property="StrokeShape" Value="Rectangle"/>
         <Setter Property="StrokeThickness" Value="1"/>
