@@ -107,6 +107,17 @@ internal class AndroidHandlers
             h.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
             //h.PlatformView.Layer.BorderColor = #f1f1f1;
         });
+
+        Microsoft.Maui.Handlers.CheckBoxHandler.Mapper.AppendToMapping("StyledCheckBox", (h, v) =>
+        {
+            // make the checkbox clickable inside a listview on iOS
+            // h.PlatformView.UserInteractionEnabled = false;
+            // did not work
+            //h.PlatformView.TouchUpInside += (sender, e) =>
+            //{
+            //   h.PlatformView.IsChecked = !h.PlatformView.IsChecked;
+            //};
+        });
 #endif
     }
 }
