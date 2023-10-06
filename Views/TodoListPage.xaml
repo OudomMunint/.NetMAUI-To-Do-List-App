@@ -13,13 +13,11 @@
         <ToolbarItem Clicked="MarkSelectedItemsComplete" IconImageSource="donetoolbar.png"/>
         <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png"/>
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png"/>
-        <!--<ToolbarItem Clicked="OpenSettings" Text="Settings" Order="Secondary"/>
-        <ToolbarItem Clicked="DeleteAllItems" Order="Secondary" Text="Delete All"/>-->
-        <ToolbarItem Order="Primary" Priority="2" Clicked="OpenMenu" IconImageSource="priority.png"/>
+        <ToolbarItem Clicked="OpenMenu" IconImageSource="menu.png"/>
 
     </ContentPage.ToolbarItems>
 
-    <Grid BackgroundColor="{AppThemeBinding Dark={DynamicResource Black}, Light={DynamicResource OffWhite}}">
+    <Grid BackgroundColor="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -47,7 +45,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Border Padding="15,0,0,0" Margin="5">
+                        <Border Padding="5,0,0,0" Margin="5">
                             <Grid RowSpacing="0" ColumnSpacing="0">
                             <Grid.RowDefinitions>
                                     <RowDefinition Height="35" />

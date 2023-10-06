@@ -33,13 +33,13 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 </table>
 
 <h1 float="center">
-  <img src="Media/iphone14 (4).png" style="height:700px; width:370" />
-  <img src="Media/iphone14 (1).png" style="height:700px; width:360" />
+  <img src="Media/iphone14 (6).png" style="height:700px; width:360" />
+  <img src="Media/iphone14 (5).png" style="height:700px; width:360" />
 </h1>
 
 <div float="center">
-<img src="Media/iphone14 (2).png" style="height:700px; width:370" />
-<img src="Media/iphone14 (3).png" style="height:700px; width:370" />
+<img src="Media/iphone14 (1).png" style="height:700px; width:370" />
+<img src="Media/iphone14 (4).png" style="height:700px; width:370" />
 </div>
 
 <div float="center">
