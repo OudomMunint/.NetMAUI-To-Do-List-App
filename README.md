@@ -23,12 +23,12 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
   <tr>
     <td>iOS</td>
     <td>iOS 14.2+</td>
-    <td>iOS 16.3</td>
+    <td>iOS 16.3 & iOS 17.0</td>
   </tr>
   <tr>
     <td>macOS</td>
     <td>macOS 12+ (Monterey)</td>
-    <td>macOS 13.4 (Ventura)</td>
+    <td>macOS 13.6 (Ventura)</td>
   </tr>
 </table>
 
