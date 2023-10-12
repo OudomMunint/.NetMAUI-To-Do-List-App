@@ -63,3 +63,10 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 - Run the solution.
 - If build failed with Dependency errors, please unload the project and reload with dependencies.
 - Has `SQLite` dependency.
+
+## Clean scripts
+- Place the `build.sh` in the root directory of your project.
+- cd to the root directory of your project.
+- Open the terminal and run `chmod +x build.sh` to make the script executable.
+- Run `./build.sh` to clean the project.
+- on macos, you can run `sh build.sh` to clean the project.
