@@ -25,7 +25,7 @@
         <!-- Header Grid -->
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Frame HeightRequest="40" Grid.Row="0" Margin="5" Padding="5" Style="{StaticResource CustomFrame}">
+        <Frame HeightRequest="40" Grid.Row="0" Margin="5" Padding="5" Style="{StaticResource CustomFrame}" BackgroundColor="{OnPlatform iOS=Transparent}">
             <HorizontalStackLayout>
                 <!-- Search Bar -->
                 <SearchBar  Style="{DynamicResource SearchBarHome}" HorizontalOptions="StartAndExpand" Grid.Row="0" BackgroundColor="{OnPlatform iOS={DynamicResource OffWhite2}}"
@@ -34,7 +34,7 @@
                 <!-- Sort Button -->
                 <AbsoluteLayout VerticalOptions="Center" Margin="0" HeightRequest="40">
                     <ImageButton Clicked="SortByDateClicked" Source="sort.png" BackgroundColor="Transparent"
-                                 BorderColor="Transparent" HorizontalOptions="End"
+                                 BorderColor="Transparent" HorizontalOptions="End" Margin="0,0,10,0"
                                  AbsoluteLayout.LayoutBounds="0.2, 0.5, 30, 35" AbsoluteLayout.LayoutFlags="PositionProportional"/>
                 </AbsoluteLayout>
             </HorizontalStackLayout>
