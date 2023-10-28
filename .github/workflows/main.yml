@@ -1,9 +1,7 @@
 name: CI Build
 
 on:
-  push:
-    branches: [ main ]
-
+  
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -79,4 +77,4 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
         with:
-            tag: v1.5.0.5
+            tag: v1.5.0.6

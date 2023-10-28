@@ -25,11 +25,11 @@
         <!-- Header Grid -->
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Frame HeightRequest="40" Grid.Row="0" Margin="5" Padding="5" Style="{StaticResource CustomFrame}" BackgroundColor="{OnPlatform iOS=Transparent}">
+        <Frame HeightRequest="40" Grid.Row="0" Margin="5" Padding="5" Style="{StaticResource CustomFrame}" BackgroundColor="{OnPlatform iOS=Transparent, Android={StaticResource OffWhite}}">
             <HorizontalStackLayout>
                 <!-- Search Bar -->
-                <SearchBar  Style="{DynamicResource SearchBarHome}" HorizontalOptions="StartAndExpand" Grid.Row="0" BackgroundColor="{OnPlatform iOS={DynamicResource OffWhite2}}"
-                            Placeholder="Search" x:Name="SearchBar" TextChanged="SearchBar_TextChangedAsync" ios:SearchBar.SearchBarStyle="Minimal"/>
+                <SearchBar Style="{DynamicResource SearchBarHome}" HorizontalOptions="StartAndExpand" Grid.Row="0" BackgroundColor="{OnPlatform iOS={DynamicResource OffWhite2}}"
+                           Placeholder="Search" x:Name="SearchBar" TextChanged="SearchBar_TextChangedAsync" ios:SearchBar.SearchBarStyle="Minimal"/>
 
                 <!-- Sort Button -->
                 <AbsoluteLayout VerticalOptions="Center" Margin="0" HeightRequest="40">
