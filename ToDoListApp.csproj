@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst;net7.0-android</TargetFrameworks>
+		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst;net7.0-android;net7.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
-		<OutputType>Exe</OutputType>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<OutputType Condition="'$(TargetFramework)' != 'net7.0'">Exe</OutputType>
 		<RootNamespace>ToDoListApp</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -58,6 +60,8 @@
 		<None Remove="Resources\Images\icon.png" />
 		<None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
 		<None Remove="Resources\Splash\splash3.svg" />
+		<None Remove="TestProject1\obj\project.assets.json" />
+		<None Remove="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,6 +78,7 @@
 		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.6" />
 		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.6" />
 		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.3" />
+		<PackageReference Include="xunit.extensibility.core" Version="2.4.2" />
 	</ItemGroup>
 
 	<!--<ItemGroup>
@@ -117,4 +122,8 @@
 	  <Folder Include="Handlers\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <BundleResource Include="TestProject1\obj\project.assets.json" />
+	  <BundleResource Include="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
+	</ItemGroup>
 </Project>
