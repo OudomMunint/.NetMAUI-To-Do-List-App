@@ -1,7 +1,8 @@
 name: CI Build
 
 on:
-  
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -32,11 +33,14 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
+      - name: Restore Dependencies (Main Project)
         run: dotnet restore ToDoListApp.csproj
 
+      - name: Restore Dependencies (Test Project)
+        run: dotnet restore TestProject1.csproj
+
       - name: Build MAUI Android
-        run: dotnet publish ToDoListApp.csproj -c Release -f net7.0-android --no-restore
+        run: dotnet publish ToDoListApp.sln -c Release -f net7.0-android --no-restore
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
@@ -62,8 +66,11 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
-        run: dotnet restore ToDoListApp.sln
+      - name: Restore Dependencies (Main Project)
+        run: dotnet restore ToDoListApp.csproj
+
+      - name: Restore Dependencies (Test Project)
+        run: dotnet restore TestProject1.csproj
 
       - name: Build MAUI iOS
         run: dotnet build ToDoListApp.sln -c Release -f net7.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
