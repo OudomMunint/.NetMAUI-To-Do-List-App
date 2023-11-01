@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net7.0;net7.0-android;net7.0-ios</TargetFramework>
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	  <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 	  <ImplicitUsings>enable</ImplicitUsings>
