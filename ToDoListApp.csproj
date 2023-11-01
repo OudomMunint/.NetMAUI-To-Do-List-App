@@ -60,6 +60,8 @@
 		<None Remove="Resources\Images\icon.png" />
 		<None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
 		<None Remove="Resources\Splash\splash3.svg" />
+		<None Remove="TestProject1\obj\project.assets.json" />
+		<None Remove="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -120,4 +122,8 @@
 	  <Folder Include="Handlers\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <BundleResource Include="TestProject1\obj\project.assets.json" />
+	  <BundleResource Include="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
+	</ItemGroup>
 </Project>
