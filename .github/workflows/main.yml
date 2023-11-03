@@ -1,8 +1,13 @@
 name: CI Build
 
 on:
+
+  push:
+    branches: [ main ]
+
   pull_request:
     branches: [ main ]
+    
   workflow_dispatch:
 
 permissions:
@@ -35,7 +40,8 @@ jobs:
         run: dotnet restore ToDoListApp.csproj
 
       - name: Restore Dependencies (Test Project)
-        run: dotnet restore TestProject1.csproj
+        run: dotnet restore TestProject1/TestProject1.csproj
+
 
       - name: Build MAUI Android
         run: dotnet publish ToDoListApp.sln -c Release -f net7.0-android --no-restore
@@ -68,7 +74,7 @@ jobs:
         run: dotnet restore ToDoListApp.csproj
 
       - name: Restore Dependencies (Test Project)
-        run: dotnet restore TestProject1.csproj
+        run: dotnet restore TestProject1/TestProject1.csproj
 
       - name: Build MAUI iOS
         run: dotnet build ToDoListApp.sln -c Release -f net7.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
