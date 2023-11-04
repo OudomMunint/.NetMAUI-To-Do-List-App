@@ -76,6 +76,7 @@
 		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.6" />
 		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.6" />
 		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.3" />
+		<PackageReference Include="xunit.extensibility.core" Version="2.4.2" />
 	</ItemGroup>
 
 	<!--<ItemGroup>
