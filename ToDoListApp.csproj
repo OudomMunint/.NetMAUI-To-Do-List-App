@@ -122,8 +122,8 @@
 	  <Folder Include="Handlers\" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!-- <ItemGroup>
 	  <BundleResource Include="TestProject1\obj\project.assets.json" />
 	  <BundleResource Include="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
-	</ItemGroup>
+	</ItemGroup> -->
 </Project>
