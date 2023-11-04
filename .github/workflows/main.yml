@@ -36,6 +36,9 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
 
+      - name: Restore nuget
+        run: nuget restore ToDoListApp.sln
+
       - name: Restore Dependencies
         run: dotnet restore ToDoListApp.csproj
 
@@ -65,6 +68,9 @@ jobs:
 
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore nuget
+        run: nuget restore ToDoListApp.sln
 
       - name: Restore Dependencies
         run: dotnet restore ToDoListApp.csproj
