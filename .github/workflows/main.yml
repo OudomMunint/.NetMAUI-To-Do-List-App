@@ -39,7 +39,7 @@ jobs:
       - name: Restore nuget
         run: nuget restore ToDoListApp.sln
 
-      - name: Restore Dependencies (Main Project)
+      - name: Restore Dependencies
         run: dotnet restore ToDoListApp.csproj
 
       - name: Build MAUI Android
@@ -72,7 +72,7 @@ jobs:
       - name: Restore nuget
         run: nuget restore ToDoListApp.sln
 
-      - name: Restore Dependencies (Main Project)
+      - name: Restore Dependencies
         run: dotnet restore ToDoListApp.csproj
 
       - name: Build MAUI iOS
