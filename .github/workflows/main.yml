@@ -39,6 +39,9 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore ToDoListApp.csproj
 
+      - name: Restore nuget
+        run: nuget restore TestProject1/TestProject1.csproj
+
       - name: Build MAUI Android
         run: dotnet publish ToDoListApp.sln -c Debug -f net7.0-android --no-restore
 
@@ -68,6 +71,9 @@ jobs:
 
       - name: Restore Dependencies
         run: dotnet restore ToDoListApp.csproj
+
+      - name: Restore nuget
+        run: nuget restore TestProject1/TestProject1.csproj
 
       - name: Build MAUI iOS
         run: dotnet build ToDoListApp.sln -c Release -f net7.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
