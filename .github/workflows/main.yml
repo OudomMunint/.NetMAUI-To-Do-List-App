@@ -36,9 +36,6 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore nuget
-        run: nuget restore ToDoListApp.sln
-
       - name: Restore Dependencies
         run: dotnet restore ToDoListApp.csproj
 
@@ -69,14 +66,11 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore nuget
-        run: nuget restore ToDoListApp.sln
-
       - name: Restore Dependencies
         run: dotnet restore ToDoListApp.csproj
 
       - name: Build MAUI iOS
-        run: dotnet build ToDoListApp.sln -c Release -f net7.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+        run: dotnet build ToDoListApp.sln -c Release -f net7.0-ios /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
