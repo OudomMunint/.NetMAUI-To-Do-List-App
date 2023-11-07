@@ -15,6 +15,11 @@ templatesTest/
 *.sln.docstates
 *.csproj.user
 
+# macOS specific files
+.DS_Store
+.AppleDouble
+._*
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
