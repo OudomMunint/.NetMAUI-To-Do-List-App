@@ -3,11 +3,14 @@
 # Execute like this:
 #  ./build.sh
 
-
-#dotnet build -t:Run -c:Debug -f net7.0-ios -p:_DeviceName=S01120
-# iPhone 14: 0D52415F-8501-4DCF-81F1-84894971D9EB
-
+# Find and delete .DS_Store files
 find . -name ".DS_Store" -type f -delete
+
+# Find and delete .AppleDouble files
+find . -name ".AppleDouble" -type d -exec rm -rf {} +
+
+# Find and delete files starting with ._ (e.g., ._example.txt)
+find . -name "._*" -type f -delete
 
 rm -rf bin
 rm -rf obj

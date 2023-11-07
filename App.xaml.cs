@@ -1,16 +1,22 @@
 ﻿using ToDoListApp.Views;
+using Microsoft.Maui.Controls;
 
 namespace ToDoListApp;
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
+    public App()
+    {
+        InitializeComponent();
 
-		MainPage = new NavigationPage(new Welcome())
-		{
-			//BarTextColor = Color.FromRgb(255, 2555, 255)
-		};
-	}
+        if (Preferences.ContainsKey("IsFirstRun"))
+        {
+            MainPage = new NavigationPage(new TodoListPage());
+        }
+        else
+        {
+            MainPage = new NavigationPage(new Welcome());
+            Preferences.Set("IsFirstRun", true);
+        }
+    }
 }
