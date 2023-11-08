@@ -10,6 +10,11 @@ namespace ToDoListApp.Views
         public TodoListPage()
         {
             InitializeComponent();
+
+            //Application.Current.RequestedThemeChanged += (s, a) =>
+            //{
+            //    listView.BackgroundColor = Colors.Black;
+            //};
         }
 
         protected override async void OnAppearing()
@@ -72,7 +77,7 @@ namespace ToDoListApp.Views
                 listView.ItemsSource = null;
                 await UpdateListView();
             }
-        }
+      }
 
         async void OnDeleteClicked(object sender, EventArgs e)
         {

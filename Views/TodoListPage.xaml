@@ -41,7 +41,7 @@
         </Frame>
 
         <ListView x:Name="listView" Grid.Row="1" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None"
-                  CachingStrategy="RecycleElement">
+                  CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

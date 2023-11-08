@@ -2,9 +2,21 @@
 
 public partial class Settings : ContentPage
 {
+    public bool IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
+
     public Settings()
 	{
         InitializeComponent();
+
+        if (IsDarkMode)
+        {
+            DarkModeSwitch.IsToggled = true;
+        }
+
+        else
+        {
+            DarkModeSwitch.IsToggled = false;
+        }
 	}
 
     // Dark Mode
