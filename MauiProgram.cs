@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using Maui.FreakyControls.Extensions;
 
 namespace ToDoListApp;
 
@@ -20,6 +21,7 @@ public static class MauiProgram
                 fonts.AddFont("Inter-Bold.ttf", "InterBold");
             });
 
+        builder.InitializeFreakyControls();
         AndroidHandlers.Apply();
 
         return builder.Build();
