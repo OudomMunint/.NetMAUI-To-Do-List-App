@@ -1,8 +1,8 @@
 ﻿using Microsoft.Maui;
-using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Controls.Shapes;
-using Microsoft.Maui.Platform;
+//using Microsoft.Maui.Controls.Shapes;
+//using Microsoft.Maui.Platform;
+//using Microsoft.Maui.Controls;
 
 #if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
@@ -14,6 +14,13 @@ internal class AndroidHandlers
 {
     internal static void Apply()
     {
+        // disable auto font scaling for all labels
+        //Microsoft.Maui.Handlers.LabelHandler.Mapper.AppendToMapping("Label", (h, v) =>
+        //{
+        //    h.UseLegacyFontAutoScaling = false;
+        //    h.FontAutoScalingEnabled = false;
+        //});
+
 #if ANDROID
         // Editor Handler
         Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("StyledEditorCustomization", (h, v) =>
