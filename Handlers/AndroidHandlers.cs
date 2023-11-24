@@ -21,11 +21,6 @@ internal class AndroidHandlers
         //    h.FontAutoScalingEnabled = false;
         //});
 
-        Microsoft.Maui.Handlers.LabelHandler.Mapper.AppendToMapping(nameof(Label), (handler, view) =>
-        {
-            handler.PlatformView.AdjustsFontForContentSizeCategory = false;
-        });
-
 #if ANDROID
         // Editor Handler
         Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("StyledEditorCustomization", (h, v) =>
@@ -129,6 +124,11 @@ internal class AndroidHandlers
             //{
             //   h.PlatformView.IsChecked = !h.PlatformView.IsChecked;
             //};
+        });
+
+        Microsoft.Maui.Handlers.LabelHandler.Mapper.AppendToMapping(nameof(Label), (handler, view) =>
+        {
+            handler.PlatformView.AdjustsFontForContentSizeCategory = false;
         });
 #endif
     }
