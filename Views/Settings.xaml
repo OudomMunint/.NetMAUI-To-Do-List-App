@@ -15,7 +15,7 @@
 
                 <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Dark Mode"/>
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Dark Mode" FontAutoScalingEnabled="False"/>
                         <Switch Grid.Row="0"
                                 x:Name="DarkModeSwitch"
                                 HorizontalOptions="EndAndExpand"

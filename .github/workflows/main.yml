@@ -36,7 +36,7 @@ jobs:
         run: dotnet restore ToDoListApp.csproj
 
       - name: Build MAUI Android
-        run: dotnet publish ToDoListApp.sln -c Debug -f net7.0-android --no-restore
+        run: dotnet publish ToDoListApp.sln -c Debug -f net7.0-android
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
@@ -77,4 +77,4 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
         with:
-            tag: v1.5.2.2
+            tag: v1.5.2.3
