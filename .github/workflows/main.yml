@@ -64,11 +64,10 @@ jobs:
           dotnet workload install ios --ignore-failed-sources
           dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
-        run: dotnet restore ToDoListApp.csproj
-
       - name: Build MAUI iOS
-        run: dotnet build ToDoListApp.csproj -c Release -f net7.0-ios
+        run: |
+          dotnet restore ToDoListApp.csproj
+          dotnet build ToDoListApp.csproj -c Release -f net7.0-ios
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v2.3.1
