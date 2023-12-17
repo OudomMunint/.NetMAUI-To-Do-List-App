@@ -170,6 +170,8 @@ namespace ToDoListApp.Views
                 ? ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => item.Date)
                 : ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.Date);
             listView.ItemsSource = sortedItems.ToList();
+
+            Console.WriteLine("clicked");
             //await UpdateListView();
         }
 
