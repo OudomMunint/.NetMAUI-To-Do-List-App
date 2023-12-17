@@ -39,7 +39,7 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
       <PublishTrimmed>true</PublishTrimmed>
-	  <PublishSingleFile>true</PublishSingleFile>
+	  <PublishSingleFile>false</PublishSingleFile>
 	  <PublishReadyToRun>true</PublishReadyToRun>
 	</PropertyGroup>
 
