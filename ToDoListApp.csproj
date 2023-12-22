@@ -73,16 +73,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
-		<PackageReference Include="CommunityToolkit.Maui.Core" Version="5.3.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="6.1.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
 		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
 		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.6" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
 		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.6" />
 		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.6" />
-		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.3" />
-		<PackageReference Include="xunit.extensibility.core" Version="2.4.2" />
+		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.4" />
+		<PackageReference Include="xunit.extensibility.core" Version="2.6.3" />
 	</ItemGroup>
 
 	<!--<ItemGroup>
