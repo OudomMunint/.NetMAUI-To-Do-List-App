@@ -38,9 +38,9 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <PublishTrimmed>true</PublishTrimmed>
+      <Trimmed>true</PublishTrimmed>
 	  <PublishSingleFile>false</PublishSingleFile>
-	  <PublishReadyToRun>true</PublishReadyToRun>
+	  <PublishReadyToRun>false</PublishReadyToRun>
 	</PropertyGroup>
 
 	<ItemGroup>
