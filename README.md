@@ -2,7 +2,7 @@
 A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLite`
 
 # CI/CD Status & Release
-![example workflow](https://github.com/oudommunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg)
+[![CI Build](https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml/badge.svg?branch=dev)](https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/actions/workflows/main.yml)
 
 # Maintenance Status 🔹<a href="https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues">Report Bug</a> &nbsp; &nbsp;
 ![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
