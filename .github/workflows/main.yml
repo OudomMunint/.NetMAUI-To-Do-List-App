@@ -65,7 +65,6 @@ jobs:
 
       - name: Build MAUI iOS
         run: |
-          dotnet restore ToDoListApp.csproj
           dotnet build ToDoListApp.csproj -c Release -f net7.0-ios
 
       - name: Upload iOS Artifact
@@ -77,4 +76,4 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
         with:
-          tag: v1.5.2.5
+          tag: v1.5.2.5.1
