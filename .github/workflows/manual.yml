@@ -1,0 +1,74 @@
+name: CI Build
+
+on:
+  pull_request:
+    branches: [ main ]
+    
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+# MAUI Android Build
+  build-android:
+    runs-on: macos-latest
+    name: Android Build
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .NET 7.0
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.14
+          
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore ToDoListApp.csproj
+
+      - name: Build MAUI Android
+        run: dotnet publish ToDoListApp.sln -c Debug -f net7.0-android
+
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: ToDoList-android-ci-build
+          path: .NetMAUI-To-Do-List-App/bin/Release/net7.0-android/*Signed.a*
+
+
+# MAUI iOS Build
+  build-ios:
+    runs-on: macos-13
+    name: iOS Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .NET 7
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.14
+
+      - name: Install MAUI Workloads
+        run: |
+          dotnet workload install ios --ignore-failed-sources
+          dotnet workload install maui --ignore-failed-sources
+
+      - name: Build MAUI iOS
+        run: |
+          dotnet build ToDoListApp.csproj -c Release -f net7.0-ios
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: ios-ci-build
+          path: src/MauiBeach/bin/Release/net6.0-ios/**/*.app/
+  
+      - name: Create Release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          tag: v1.5.2.6
