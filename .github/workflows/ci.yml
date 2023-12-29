@@ -9,11 +9,6 @@ on:
 permissions:
   contents: write
 
-env:
-  DOTNET_NOLOGO: true                     # Disable the .NET logo
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
-  DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
-
 jobs:
 # MAUI Android Build
   build-android:
@@ -27,7 +22,7 @@ jobs:
       - name: Setup .NET 7.0
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 7.x
           
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -56,7 +51,7 @@ jobs:
       - name: Setup .NET 7
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 7.x
 
       - name: Install MAUI Workloads
         run: |
@@ -65,7 +60,6 @@ jobs:
 
       - name: Build MAUI iOS
         run: |
-          dotnet restore ToDoListApp.csproj
           dotnet build ToDoListApp.csproj -c Release -f net7.0-ios
 
       - name: Upload iOS Artifact
