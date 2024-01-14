@@ -30,8 +30,7 @@
                 </Frame>-->
                 <StackLayout>
                               <freakyControls:FreakyTextInputLayout x:Name="NameField" Title="Task 📝" BorderCornerRadius="10" BorderStrokeThickness="2" Text="{Binding Name}"
-                                                                    BorderType="Outlined" FontSize="Large" ImageCommand="{Binding ImageWasTappedCommand}" ImageHeight="{OnPlatform 25, iOS=25, Android=40}"
-                                                                    ImagePadding="10" ImageSource="todo.png" ImageWidth="{OnPlatform 25, iOS=25, Android=40}" />
+                                                                    BorderType="Outlined" FontSize="Large" FontAutoScalingEnabled="False"/>
                     </StackLayout>
             </StackLayout>
 
