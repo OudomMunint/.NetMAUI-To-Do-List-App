@@ -16,22 +16,20 @@
         <StackLayout Margin="20" Spacing="20" VerticalOptions="StartAndExpand">
             
             <StackLayout>
-                <!--<HorizontalStackLayout Spacing="10">
-                    <Label FontSize="20" Text="Task" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
-                    <Image Source="todo.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
-                </HorizontalStackLayout>-->
-
-                <!--<Frame Style="{DynamicResource CustomFrame}" BorderColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                       Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                    <StackLayout>
-                        <Entry x:Name="NameField" IsVisible="false" Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" FontFamily="Inter-Regular"
-                               PlaceholderColor="Grey"/>
-                    </StackLayout>
-                </Frame>-->
                 <StackLayout>
-                              <freakyControls:FreakyTextInputLayout x:Name="NameField" Title="Task 📝" BorderCornerRadius="10" BorderStrokeThickness="2" Text="{Binding Name}"
-                                                                    BorderType="Outlined" FontSize="Large" FontAutoScalingEnabled="False"/>
-                    </StackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label FontSize="20" Text="Task" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
+                        <Image Source="todo.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
+                    </HorizontalStackLayout>
+
+                    <Frame Style="{DynamicResource CustomFrame}" BorderColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                           Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                        <StackLayout>
+                            <Entry x:Name="NameField" Margin="10,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" FontFamily="Inter-Regular"
+                                    PlaceholderColor="Grey"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
             </StackLayout>
 
             <StackLayout>
