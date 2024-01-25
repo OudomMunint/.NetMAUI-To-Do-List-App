@@ -131,9 +131,6 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
 	  <PackageReference Include="FreakyControls" Version="0.4.8" />
 	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
-	  <PackageReference Include="FreakyControls" Version="0.4.8" />
-	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
 	  <PackageReference Include="FreakyControls" Version="0.4.8" />
 	</ItemGroup>
