@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using Maui.FreakyControls.Extensions;
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Hosting;
 
@@ -30,7 +29,6 @@ public static class MauiProgram
             //            handler.FontAutoScalingEnabled = false;
             //        });
             //    });
-        builder.InitializeFreakyControls();
         AndroidHandlers.Apply();
 
         return builder.Build();
