@@ -18,17 +18,12 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
   <tr>
     <td>Android</td>
     <td>API 31+</td>
-    <td>API 33</td>
+    <td>API 34</td>
   </tr>
   <tr>
     <td>iOS</td>
-    <td>iOS 14.2+</td>
-    <td>iOS 16.3 & iOS 17.0</td>
-  </tr>
-  <tr>
-    <td>macOS</td>
-    <td>macOS 12+ (Monterey)</td>
-    <td>macOS 13.6 (Ventura)</td>
+    <td>iOS 15+</td>
+    <td>iOS 16.3 & iOS 17.0 & 17.2</td>
   </tr>
 </table>
 
@@ -48,22 +43,26 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 </div>
 
 ## Upcoming
-- `Bottom Sheets` to pull up edit screen or create task screen
-- Data visualization with `Charts` or `Graphs`
-- WIP: SwipeView Add, SwipeView Delete
+- WIP, Swipe gestures such as SwipeView Add, SwipeView Delete
 
 ## Getting Started
 - Install <a href="https://visualstudio.microsoft.com/downloads/" target="_blank">`Visual Studio`</a> on your machine and while choosing components you must check the <a href="https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/install" target="_blank">`.NetMaui`</a> box to install .NetMaui.
 - Install <a href="https://developer.android.com/studio?gclid=Cj0KCQiAnNacBhDvARIsABnDa6-EYNc5MIjFoAruujioi9l-gjeu8JVsJd_aqCGGhImxOZkFyoo_woYaAoOCEALw_wcB&gclsrc=aw.ds" target="_blank">`Android Studio`</a> on your machine.
-- Create a virtual device with andoid API 31, 32 or 33.
+- Create a virtual device with andoid API 31 || 32 || 33 ||34.
 - Clone, download or fork this repository.
-- Delete the `bin` and `obj` folder if present.
-- Open the solution file
-- ctr + Shift + B to build
-- Run the solution.
+- Open the solution file, build then run with selected device.
 - If build failed with Dependency errors, please unload the project and reload with dependencies.
 - Or `cd` to the project directory and run `dotnet restore {name}.sln` to restore dependencies.
 - Has `SQLite` & `XUnit` dependency.
+
+## Getting Started iOS
+- Install <a href="https://visualstudio.microsoft.com/vs/mac/" target="_blank">`Visual Studio for mac`</a> on your machine and while choosing components you must check the `.NetMaui` box.
+- Install <a href="https://developer.apple.com/xcode/" target="_blank">`XCode`</a> on your machine.
+- Clone, download or fork this repository.
+- Open the solution file, build then run with selected device iOS 15+.
+- If build failed with Dependency errors, please unload the project and reload with dependencies.
+- Or `cd` to the project directory and run `dotnet restore {name}.sln` to restore dependencies.
+- Has `SQLite` & `XUnit` dependency same with android.
 
 ## Clean scripts
 ### This script finds and deletes `bin` / `obj` folders as well as `.DS_Store` files.
