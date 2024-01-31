@@ -1,4 +1,6 @@
-﻿namespace ToDoListApp;
+﻿using ToDoListApp.Views;
+
+namespace ToDoListApp;
 
 public partial class Settings : ContentPage
 {
@@ -33,6 +35,10 @@ public partial class Settings : ContentPage
         }
     }
 
+    async void Reset_Button_Pressed(System.Object sender, System.EventArgs e)
+    {
+        await Navigation.PushAsync(new Welcome());
+    }
     //private void OnCounterClicked(object sender, EventArgs e)
     //{
     //	count++;
