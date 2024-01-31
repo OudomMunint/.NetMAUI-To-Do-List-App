@@ -26,6 +26,13 @@
                         </Switch>
                     </Grid>
                 </Frame>
+
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}" Margin="0,15,0,0">
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Reset Application" FontAutoScalingEnabled="False"/>
+                        <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White" Pressed="Reset_Button_Pressed"/>
+                     </Grid>
+                </Frame>
             </StackLayout>
         </Grid>
     </ScrollView>
