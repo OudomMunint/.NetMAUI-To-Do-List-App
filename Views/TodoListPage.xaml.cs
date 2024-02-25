@@ -38,22 +38,22 @@ namespace ToDoListApp.Views
             });
         }
 
-        public async void OpenMenu(object sender, EventArgs e)
-        {
-            string deleteall = "Delete all";
-            string settings = "Settings";
+        //public async void OpenMenu(object sender, EventArgs e)
+        //{
+        //    string deleteall = "Delete all";
+        //    string settings = "Settings";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { deleteall, settings });
+        //    var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { deleteall, settings });
 
-            if (action != null && action.Equals(deleteall))
-            {
-                DeleteAllItems(sender, e);
-            }
-            else if (action != null && action.Equals(settings))
-            {
-                OpenSettings(sender, e);
-            }
-        }
+        //    if (action != null && action.Equals(deleteall))
+        //    {
+        //        DeleteAllItems(sender, e);
+        //    }
+        //    else if (action != null && action.Equals(settings))
+        //    {
+        //        OpenSettings(sender, e);
+        //    }
+        //}
 
         async void OpenSettings(object sender, EventArgs e)
         {
@@ -159,6 +159,23 @@ namespace ToDoListApp.Views
             }
         }
 
+        public async void OpenMenu(object sender, EventArgs e)
+        {
+            string deleteall = "Delete all";
+            string settings = "Settings";
+
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { deleteall, settings });
+
+            if (action != null && action.Equals(deleteall))
+            {
+                DeleteAllItems(sender, e);
+            }
+            else if (action != null && action.Equals(settings))
+            {
+                OpenSettings(sender, e);
+            }
+        }
+
         //Sorting
         private bool sortByDateAscending = false;
 
@@ -173,6 +190,32 @@ namespace ToDoListApp.Views
 
             Console.WriteLine("clicked");
             //await UpdateListView();
+        }
+
+        public async void OpenSortMenu(object sender, EventArgs e)
+        {
+            string sortbydate = "Most Recent";
+            string sortbypriority = "Highest Priority";
+            string clearsorting = "Clear Sorting"; // Add clear sorting option
+
+            var action = await Application.Current.MainPage.DisplayActionSheet("Sorting", "Cancel", null, new[] { sortbydate, sortbypriority, clearsorting });
+
+            if (action != null && action.Equals(sortbydate))
+            {
+                var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.Date);
+                listView.ItemsSource = sortedItems.ToList();
+            }
+            else if (action != null && action.Equals(sortbypriority))
+            {
+                var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => item.Priority);
+                listView.ItemsSource = sortedItems.ToList();
+            }
+            else if (action != null && action.Equals(clearsorting)) // Handle clear sorting option
+            {
+                // Reset the ListView to display items without sorting
+                listView.ItemsSource = ((IEnumerable<Todoitem>)listView.ItemsSource).ToList();
+                await UpdateListView();
+            }
         }
 
         //Searching
