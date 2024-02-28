@@ -1,4 +1,6 @@
-﻿using ToDoListApp.Views;
+﻿using Microsoft.VisualBasic.FileIO;
+using ToDoListApp.Data;
+using ToDoListApp.Views;
 
 namespace ToDoListApp;
 
@@ -37,17 +39,21 @@ public partial class Settings : ContentPage
 
     async void Reset_Button_Pressed(System.Object sender, System.EventArgs e)
     {
-        await Navigation.PushAsync(new Welcome());
+        var userConfirmed = await DisplayAlert("Reset Application", "This action will delete existing tasks and reset this app. Are you sure you want to continue", "Yes", "No");
+
+        if (userConfirmed)
+        {
+            var database = await TodoitemDatabase.Instance;
+            var allitems = await database.GetItemsAysnc();
+            foreach (var item in allitems)
+            {
+                await database.DeleteItemAsync(item);
+            }
+            // Navigate with main thread!!!
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Navigation.PushAsync(new Welcome());
+            });
+        }
     }
-    //private void OnCounterClicked(object sender, EventArgs e)
-    //{
-    //	count++;
-
-    //	if (count == 1)
-    //		CounterBtn.Text = $"Clicked {count} time";
-    //	else
-    //		CounterBtn.Text = $"Clicked {count} times";
-
-    //	SemanticScreenReader.Announce(CounterBtn.Text);
-    //}
 }
