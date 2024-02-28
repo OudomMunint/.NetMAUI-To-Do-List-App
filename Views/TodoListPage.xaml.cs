@@ -10,11 +10,6 @@ namespace ToDoListApp.Views
         public TodoListPage()
         {
             InitializeComponent();
-
-            //Application.Current.RequestedThemeChanged += (s, a) =>
-            //{
-            //    listView.BackgroundColor = Colors.Black;
-            //};
         }
 
         protected override async void OnAppearing()
@@ -38,23 +33,6 @@ namespace ToDoListApp.Views
             });
         }
 
-        //public async void OpenMenu(object sender, EventArgs e)
-        //{
-        //    string deleteall = "Delete all";
-        //    string settings = "Settings";
-
-        //    var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { deleteall, settings });
-
-        //    if (action != null && action.Equals(deleteall))
-        //    {
-        //        DeleteAllItems(sender, e);
-        //    }
-        //    else if (action != null && action.Equals(settings))
-        //    {
-        //        OpenSettings(sender, e);
-        //    }
-        //}
-
         async void OpenSettings(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Settings());
@@ -77,14 +55,14 @@ namespace ToDoListApp.Views
                 listView.ItemsSource = null;
                 await UpdateListView();
             }
-      }
+        }
 
         async void OnDeleteClicked(object sender, EventArgs e)
         {
             var todoItem = (Todoitem)BindingContext;
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             await database.DeleteItemAsync(todoItem);
-            await UpdateListView(); // Update the ListView after deleting an item.
+            await UpdateListView(); // Update ListView after deleting item.
             await Navigation.PopAsync();
         }
 
@@ -110,7 +88,6 @@ namespace ToDoListApp.Views
                 task += "s";
             }
             Title = $"🏠🗒️ {totalItems} Opened";
-            // increase the font size of the title
         }
 
         private void OnCheckBoxChecked(object sender, EventArgs e)
@@ -143,7 +120,7 @@ namespace ToDoListApp.Views
             }
             else
             {
-                bool Confirmed = await DisplayAlert("Delete Selected Tasks", "Confirm you want to delete selected items?", "Yes", "No");
+                bool Confirmed = await DisplayAlert("Delete Selected Tasks", "Do you want to delete all selected items?", "Yes", "No");
 
                 if (Confirmed)
                 {
@@ -212,7 +189,7 @@ namespace ToDoListApp.Views
             }
             else if (action != null && action.Equals(clearsorting)) // Handle clear sorting option
             {
-                // Reset the ListView to display items without sorting
+                // Reset ListView
                 listView.ItemsSource = ((IEnumerable<Todoitem>)listView.ItemsSource).ToList();
                 await UpdateListView();
             }
@@ -225,18 +202,18 @@ namespace ToDoListApp.Views
 
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                // If the search bar is empty, reset the ListView to display all items
+                // Empty searchbar > show all
                 listView.ItemsSource = ((IEnumerable<Todoitem>)listView.ItemsSource).ToList();
                 await UpdateListView();
             }
             else
             {
-                // Filter items based on the search bar keyword
+                // Filter items based on the keyword
                 var filteredItems = ((IEnumerable<Todoitem>)listView.ItemsSource)
-                
+
                     .Where(item => item.Name.ToLower().Contains(keyword));
 
-                // Update the ListView with filtered items
+                // Update ListView with filtered items
                 listView.ItemsSource = filteredItems.ToList();
             }
         }
@@ -257,7 +234,7 @@ namespace ToDoListApp.Views
                     item.IsSelected = false; // Uncheck
                 }
 
-                bool Confirmed = await DisplayAlert("Mark Selected Tasks Complete", "Confirm you want to mark selected items as complete?", "Yes", "No");
+                bool Confirmed = await DisplayAlert("Mark selected tasks as complete", "Do you want to mark all selected items as complete?", "Yes", "No");
 
                 if (Confirmed)
                 {
