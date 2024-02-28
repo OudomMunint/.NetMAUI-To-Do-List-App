@@ -35,26 +35,29 @@ internal class AndroidHandlers
         Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("StyleEntryCustomization", (h, v) =>
         {
             // Customize Entry objects of type StyleEntry
-                // Remove underline:
-                h.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
+            // Remove underline:
+            h.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
 
-                // Add rounded corner border
-                var stroke = new SolidColorBrush(Colors.DarkGray);
-                var strokeShape = new RoundRectangle
-                {
-                    CornerRadius = new CornerRadius(3, 3, 3, 3)
-                };
-                var border = new Border
-                {
-                    Stroke = stroke,
-                    StrokeThickness = 1,
-                    StrokeShape = strokeShape
-                };
-                h.PlatformView.UpdateBorderStroke(border);
-                h.PlatformView.SetPadding(25, 5, 25, 5);
+            // Add rounded corner border
+            var stroke = new SolidColorBrush(Colors.DarkGray);
+            var strokeShape = new RoundRectangle
+            {
+                CornerRadius = new CornerRadius(3, 3, 3, 3)
+            };
+            var border = new Border
+            {
+                Stroke = stroke,
+                StrokeThickness = 1,
+                StrokeShape = strokeShape
+            };
+            h.PlatformView.UpdateBorderStroke(border);
+            h.PlatformView.SetPadding(25, 5, 25, 5);
 
-                // Set tint color
-                h.PlatformView.TextCursorDrawable.SetTint(Colors.DarkGray.ToPlatform());
+            // Set tint color
+            h.PlatformView.TextCursorDrawable.SetTint(Colors.DarkGray.ToPlatform());
+
+            // Removed entry border
+            h.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
         });
 
         // Date Handler
