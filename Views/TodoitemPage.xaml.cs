@@ -8,14 +8,13 @@ using ToDoListApp.Models;
 
 namespace ToDoListApp.Views
 {
-
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TodoitemPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class TodoitemPage : ContentPage
+    {
         public TodoitemPage()
-		{
-			InitializeComponent();
-		}
+        {
+            InitializeComponent();
+        }
 
         async void OnSaveClicked(object sender, EventArgs e)
         {
@@ -54,17 +53,17 @@ namespace ToDoListApp.Views
         }
 
         async void OnDeleteClicked(object sender, EventArgs e)
-		{
-			var todoItem = (Todoitem)BindingContext;
-			TodoitemDatabase database = await TodoitemDatabase.Instance;
-			await database.DeleteItemAsync(todoItem);
-			await Navigation.PopAsync();
-		}
+        {
+            var todoItem = (Todoitem)BindingContext;
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            await database.DeleteItemAsync(todoItem);
+            await Navigation.PopAsync();
+        }
 
-		async void OnCancelClicked(object sender, EventArgs e)
-		{
-			await Navigation.PopAsync();
-		}
+        async void OnCancelClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
 
         private void OnClearClicked(object sender, EventArgs e)
         {
