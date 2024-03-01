@@ -33,11 +33,9 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <RunAOTCompilation>False</RunAOTCompilation>
 	  <MtouchLink>None</MtouchLink>
-          <PublishTrimmed>true</PublishTrimmed>
+      <PublishTrimmed>true</PublishTrimmed>
 	  <PublishSingleFile>false</PublishSingleFile>
 	  <PublishReadyToRun>false</PublishReadyToRun>
 	</PropertyGroup>
