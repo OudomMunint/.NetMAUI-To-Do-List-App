@@ -37,7 +37,7 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	  <MtouchLink>None</MtouchLink>
-          <PublishTrimmed>true</PublishTrimmed>
+          <PublishTrimmed>false</PublishTrimmed>
 	  <PublishSingleFile>false</PublishSingleFile>
 	  <PublishReadyToRun>false</PublishReadyToRun>
 	</PropertyGroup>
