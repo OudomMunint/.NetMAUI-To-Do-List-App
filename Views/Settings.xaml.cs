@@ -56,4 +56,12 @@ public partial class Settings : ContentPage
             });
         }
     }
+
+    async void Go_To_Welcome_Button_Pressed(System.Object sender, System.EventArgs e)
+    {
+        await MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            await Navigation.PushAsync(new Welcome());
+        });
+    }
 }
