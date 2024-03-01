@@ -27,6 +27,9 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
   </tr>
 </table>
 
+# Required SDKs
+- .Net 8.0 +
+
 <h1 float="center">
   <img src="Media/iphone14 (6).png" style="height:700px; width:360" />
   <img src="Media/iphone14 (5).png" style="height:700px; width:360" />
