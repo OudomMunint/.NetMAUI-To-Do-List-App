@@ -64,6 +64,8 @@
 		<None Remove="Resources\Images\donetoolbar.png" />
 		<None Remove="Resources\Images\icon.png" />
 		<None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+		<None Remove="Resources\Images\settingsWhite.png" />
+		<None Remove="Resources\Images\themewhite.png" />
 		<None Remove="Resources\Splash\splash3.svg" />
 	</ItemGroup>
 
