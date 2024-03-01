@@ -9,8 +9,8 @@
             <StackLayout Grid.Column="1">
                 <!--Theme settings-->
                 <HorizontalStackLayout>
-                    <Label Text="Theme Settings" FontSize="Title" Margin="5,15,20,20" />
-                    <Image Source="theme.png" Aspect="AspectFit" HeightRequest="30"/>
+                    <Label Text="Appearance" FontSize="Title" Margin="5,15,20,20" />
+                    <Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>
                 </HorizontalStackLayout>
 
                 <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}">
@@ -20,12 +20,18 @@
                                 x:Name="DarkModeSwitch"
                                 HorizontalOptions="EndAndExpand"
                                 VerticalOptions="CenterAndExpand"
-                                ThumbColor="LightGray"
+                                ThumbColor="Gray"
                                 OnColor="BlueViolet"
                                 Toggled="DarkMode">
                         </Switch>
                     </Grid>
                 </Frame>
+
+                <!--Reset App-->
+                <HorizontalStackLayout>
+                    <Label Text="Application" FontSize="Title" Margin="5,15,20,20" />
+                    <Image Source="{AppThemeBinding Light=settings.png, Dark=settingswhite.png}" Aspect="AspectFit" HeightRequest="30"/>
+                </HorizontalStackLayout>
 
                 <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
@@ -33,6 +39,14 @@
                         <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White" Pressed="Reset_Button_Pressed"/>
                      </Grid>
                 </Frame>
+
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}" Margin="0,15,0,0">
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Tutorial" FontAutoScalingEnabled="False"/>
+                        <Button Grid.Column="1" Text="Show Tutorial" BackgroundColor="Gray" TextColor="White" Pressed="Go_To_Welcome_Button_Pressed"/>
+                    </Grid>
+                </Frame>
+                
             </StackLayout>
         </Grid>
     </ScrollView>
