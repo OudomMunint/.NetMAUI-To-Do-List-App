@@ -36,6 +36,10 @@ namespace ToDoListApp.Views
         async void OpenSettings(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Settings());
+
+            // Open BottomSheet
+            //var page = new MyBottomSheet();
+            //await page.ShowAsync();
         }
 
         async void DeleteAllItems(object sender, EventArgs e)
