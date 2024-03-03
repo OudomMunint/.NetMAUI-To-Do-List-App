@@ -140,6 +140,13 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
     </Style>
 
+    <Style TargetType="Frame" x:Key="SettingsFrame">
+        <Setter Property="BorderColor" Value="Transparent" />
+        <!--<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />-->
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource Black}}"/>
+    </Style>
+
     <Style TargetType="ImageButton">
         <Setter Property="Opacity" Value="1" />
         <Setter Property="BorderColor" Value="Transparent"/>
@@ -175,6 +182,11 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SettingsHeader">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="FontFamily" Value="Inter-Regular"/>
     </Style>
 
     <Style TargetType="ListView">
