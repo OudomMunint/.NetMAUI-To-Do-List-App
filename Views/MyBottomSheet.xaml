@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<the49:BottomSheet xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoListApp.Views.MyBottomSheet"
+             xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+             BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource DarkGH}}"
+             HasBackdrop="True"
+             HasHandle="True"
+             HeightRequest="400"
+             CornerRadius="20">
+
+    <ScrollView>
+        <Grid Padding="10" ColumnDefinitions="{OnIdiom Phone='Auto,*,Auto', Default='.05*,.9*,.05*'}">
+            <StackLayout Grid.Column="1">
+                <!--Theme settings-->
+                <HorizontalStackLayout>
+                    <Label Text="Appearance" FontSize="Title" Margin="5,15,20,20" Style="{DynamicResource SettingsHeader}" />
+                    <Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>
+                </HorizontalStackLayout>
+
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Dark Mode"
+                               Style="{DynamicResource SettingsHeader}" FontAutoScalingEnabled="False"/>
+                        <Switch Grid.Row="0"
+                            x:Name="DarkModeSwitch"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            ThumbColor="Gray"
+                            OnColor="BlueViolet"
+                            Toggled="DarkMode">
+                        </Switch>
+                    </Grid>
+                </Frame>
+
+                <!--Reset App-->
+                <HorizontalStackLayout>
+                    <Label Text="Application" FontSize="Title" Margin="5,15,20,20" Style="{DynamicResource SettingsHeader}" />
+                    <Image Source="{AppThemeBinding Light=settings.png, Dark=settingswhite.png}" Aspect="AspectFit" HeightRequest="30"/>
+                </HorizontalStackLayout>
+
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                               Style="{DynamicResource SettingsHeader}" Text="Reset Application" FontAutoScalingEnabled="False"/>
+                        <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White" Pressed="Reset_Button_Pressed"/>
+                    </Grid>
+                </Frame>
+
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                               Style="{DynamicResource SettingsHeader}" Text="Tutorial" FontAutoScalingEnabled="False"/>
+                        <Button Grid.Column="1" Text="Show Tutorial" BackgroundColor="Gray" TextColor="White" Pressed="Go_To_Welcome_Button_Pressed"/>
+                    </Grid>
+                </Frame>
+
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+</the49:BottomSheet>
