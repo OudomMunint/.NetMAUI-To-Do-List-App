@@ -62,6 +62,7 @@ public partial class Settings : ContentPage
         await MainThread.InvokeOnMainThreadAsync(async () =>
         {
             await Navigation.PushAsync(new Welcome());
+            Navigation.RemovePage(this);
         });
     }
 }
