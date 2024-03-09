@@ -47,6 +47,11 @@ namespace ToDoListApp.Data
             return Database.Table<Todoitem>().Where(i => i.ID == id).FirstOrDefaultAsync();
         }
 
+        public Task<List<Todoitem>> RefreshDataAsync()
+        {
+            return Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem]");
+        }
+
         public Task<int> SaveItemAsync(Todoitem item)
         {
             if (item.ID != 0)
