@@ -22,8 +22,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!-- Header Grid -->
-        <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
         <Frame HeightRequest="40" Grid.Row="0" Margin="5" Padding="5" Style="{StaticResource CustomFrame}" BackgroundColor="{OnPlatform iOS=Transparent, Android={StaticResource OffWhite}}">
             <Grid>
@@ -39,11 +37,8 @@
                            Placeholder="Search" x:Name="SearchBar" TextChanged="SearchBar_TextChangedAsync" ios:SearchBar.SearchBarStyle="Minimal"/>
 
                 <!-- Sort Button -->
-                
-                    <ImageButton Clicked="OpenSortMenu" Source="sort.png" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="1"
-                                 BorderColor="Transparent" HorizontalOptions="End" Margin="0,0,0,0"
-                                 AbsoluteLayout.LayoutBounds="0.2, 0.5, 30, 35" AbsoluteLayout.LayoutFlags="PositionProportional"/>
-                
+                <ImageButton Clicked="OpenSortMenu" Source="sort.png" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="1" BorderColor="Transparent" HorizontalOptions="End"
+                             Margin="0,0,0,0" AbsoluteLayout.LayoutBounds="0.2, 0.5, 30, 35" AbsoluteLayout.LayoutFlags="PositionProportional"/>
             </Grid>
         </Frame>
 
