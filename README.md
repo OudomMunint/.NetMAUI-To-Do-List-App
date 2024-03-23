@@ -47,7 +47,10 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 </div>
 
 ## Upcoming
-- WIP, Swipe gestures such as SwipeView Add, SwipeView Delete
+- [ ] Swipe gestures
+- [x] Foldable device support
+- [x] .Net 8 Support
+
 
 ## Getting Started
 - Install `.NET 8` SDK from <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">`here`</a> on your machine.

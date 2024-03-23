@@ -74,6 +74,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="7.0.1" />
+		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="8.0.14" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
 		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
 		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.8" />
@@ -82,8 +83,8 @@
 		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.8" />
 		<PackageReference Include="The49.Maui.BottomSheet" Version="8.0.3" />
 		<PackageReference Include="xunit.extensibility.core" Version="2.7.0" />
-		<PackageReference Update="Microsoft.Maui.Controls" Version="8.0.7" />
-		<PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
+		<PackageReference Update="Microsoft.Maui.Controls" Version="8.0.14" />
+		<PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.14" />
 	</ItemGroup>
 
 	<!--<ItemGroup>
