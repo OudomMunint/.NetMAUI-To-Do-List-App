@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic.FileIO;
 using ToDoListApp.Data;
+using ToDoListApp.Models;
 using ToDoListApp.Views;
 
 namespace ToDoListApp;
@@ -54,6 +55,43 @@ public partial class Settings : ContentPage
             {
                 Navigation.PushAsync(new Welcome());
             });
+        }
+    }
+    private static async Task MakeDummyData()
+        {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+
+            string[] priorities = ["Low", "Medium", "High", "Critical"];
+
+            Random random = new();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var item = new Todoitem
+                {
+                    Name = $"Task {i + 1}",
+                    Notes = $"Description {i + 1}",
+                    Priority = priorities[random.Next(priorities.Length)],
+                    Date = DateTime.Now.AddDays(i),
+                    Done = i % 2 == 0
+                };
+
+                await database.SaveItemAsync(item);
+            }
+
+            // await UpdateListView();
+        }
+
+    private async void GenerateData_Button_Pressed(System.Object sender, System.EventArgs e)
+    {
+        // Alert
+        var userConfirmed = await DisplayAlert("Generate Dummy Data", "This action will generate dummy data and will affect existing To-Do items. Are you sure you want to continue", "Yes", "No");
+
+        await Settings.MakeDummyData();
+
+        if (userConfirmed)
+        {
+            await DisplayAlert("Success", "Dummy data has been generated", "OK");
         }
     }
 
