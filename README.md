@@ -32,13 +32,13 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 - XCode 15 from <a href="https://developer.apple.com/xcode/" target="_blank">`here`</a>
 
 <h1 float="center">
-  <img src="Media/iphone14 (6).png" style="height:700px; width:360" />
-  <img src="Media/iphone14 (5).png" style="height:700px; width:360" />
+  <img src="Media/homescreendark.png" style="height:700px; width:360" />
+  <img src="Media/homescreenlight.png" style="height:700px; width:360" />
 </h1>
 
 <div float="center">
-<img src="Media/iphone14 (1).png" style="height:700px; width:370" />
-<img src="Media/iphone14 (4).png" style="height:700px; width:370" />
+<img src="Media/settingsdark.png" style="height:700px; width:370" />
+<img src="Media/detailspage.png" style="height:700px; width:370" />
 </div>
 
 <div float="center">
@@ -48,6 +48,8 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 
 ## Upcoming
 - [ ] Swipe gestures
+- [x] Dark mode
+- [ ] Bottom Sheets
 - [x] Foldable device support
 - [x] .Net 8 Support
 
