@@ -40,6 +40,12 @@
     <Color x:Key="CriticalPriorityColor">#000000</Color>
     <Color x:Key="HighPriorityColor">#FF2c2c</Color>
 
+    <!-- Transparent Colors
+    <Color x:Key="MediumPriorityColor">#80FFFF00</Color>
+    <Color x:Key="LowPriorityColor">#8000FF00</Color>
+    <Color x:Key="CriticalPriorityColor">#80000000</Color>
+    <Color x:Key="HighPriorityColor">#80FF2c2c</Color>-->
+
     <Color x:Key="Yellow100Accent">#F7B548</Color>
     <Color x:Key="Yellow200Accent">#FFD590</Color>
     <Color x:Key="Yellow300Accent">#FFE5B9</Color>
