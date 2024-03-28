@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-ios;net8.0-android;net8.0</TargetFrameworks>
@@ -60,6 +60,7 @@
 		<None Remove="Resources\Images\addnew.png" />
 		<None Remove="Resources\Images\checkLight.png" />
 		<None Remove="Resources\Images\donetoolbar.png" />
+		<None Remove="Resources\Images\doneselected.png" />
 		<None Remove="Resources\Images\icon.png" />
 		<None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
 		<None Remove="Resources\Images\settingsWhite.png" />
