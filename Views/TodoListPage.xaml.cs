@@ -91,7 +91,7 @@ namespace ToDoListApp.Views
             {
                 task += "s";
             }
-            Title = $"🏠🗒️ {totalItems} Opened";
+            Title = $"🏠 {totalItems} Opened";
         }
 
         private void OnCheckBoxChecked(object sender, EventArgs e)
