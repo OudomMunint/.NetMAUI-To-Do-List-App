@@ -1,15 +1,29 @@
-﻿using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 
 namespace ToDoListApp.Views
 {
+#if ANDROID
     [XamlCompilation(XamlCompilationOptions.Compile)]
+#endif
     public partial class TodoListPage : ContentPage
     {
+        // dark mode property
+        private AppTheme darkmode = AppTheme.Dark;
         public TodoListPage()
         {
             InitializeComponent();
+            
+            Application.Current.RequestedThemeChanged += (s, a) =>
+            {
+                if (Application.Current.RequestedTheme == darkmode) {
+                    // set searchbar background color to DarkGH from Colors.xaml
+                    SearchContainer.BackgroundColor = (Color)Application.Current.Resources["DarkGH"];
+                }
+                
+            };
         }
 
         protected override async void OnAppearing()
