@@ -24,7 +24,7 @@
 
         <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>
 
-        <Frame HeightRequest="40" Grid.Row="1" Margin="5" Padding="5" Style="{StaticResource CustomFrame}" BackgroundColor="{OnPlatform iOS=Transparent, Android={StaticResource OffWhite}}">
+        <Frame x:Name="SearchContainer" HeightRequest="40" Grid.Row="1" Margin="5" Padding="5" Style="{StaticResource CustomFrame}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!-- Search Bar -->
-                <SearchBar Style="{DynamicResource SearchBarHome}" HorizontalOptions="StartAndExpand" Grid.Row="0" Grid.Column="0" BackgroundColor="{OnPlatform iOS={DynamicResource OffWhite2}}"
+                <SearchBar HorizontalOptions="StartAndExpand" Grid.Row="0" Grid.Column="0"
                            Placeholder="Search" x:Name="SearchBar" TextChanged="SearchBar_TextChangedAsync" ios:SearchBar.SearchBarStyle="Minimal"/>
 
                 <!-- Sort Button -->
@@ -53,12 +53,12 @@
                             <Grid.RowDefinitions>
                                     <RowDefinition Height="35" />
                                     <RowDefinition Height="30" />
-                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="{OnPlatform iOS=20, Android=30}" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="{OnPlatform iOS=Auto, Android=70}" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
@@ -82,7 +82,7 @@
                                     </Label>
                                 </Frame>
  
-                                <Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,0,0,0" HeightRequest="25" BorderColor="Transparent">
+                                <Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,0,40,0" HeightRequest="25" BorderColor="Transparent">
                                     <Frame.Triggers>
 
                                         <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="High">
