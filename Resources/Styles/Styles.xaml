@@ -135,9 +135,17 @@
 
     <Style TargetType="Frame" x:Key="CustomFrame">
         <Setter Property="BorderColor" Value="Transparent" />
-        <!--<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />-->
         <Setter Property="CornerRadius" Value="15" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
+        <Setter Property="BackgroundColor" Value="{OnPlatform Android={AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}, iOS=Transparent}"/>
+        <!--<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />-->
+        <!--<Setter Property="BackgroundColor">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="Android" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}" />
+                    <On Platform="iOS" Value="Transparent" />
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>-->
     </Style>
 
     <Style TargetType="Frame" x:Key="SettingsFrame">
