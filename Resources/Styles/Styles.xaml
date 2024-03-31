@@ -155,6 +155,12 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource Black}}"/>
     </Style>
 
+    <Style TargetType="Frame" x:Key="ToDoItemFrame">
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
+    </Style>
+
     <Style TargetType="ImageButton">
         <Setter Property="Opacity" Value="1" />
         <Setter Property="BorderColor" Value="Transparent"/>

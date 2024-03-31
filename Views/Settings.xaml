@@ -13,7 +13,7 @@
                     <Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>
                 </HorizontalStackLayout>
 
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}">
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Dark Mode" FontAutoScalingEnabled="False"/>
                         <Switch Grid.Row="0"
@@ -33,23 +33,23 @@
                     <Image Source="{AppThemeBinding Light=settings.png, Dark=settingswhite.png}" Aspect="AspectFit" HeightRequest="30"/>
                 </HorizontalStackLayout>
 
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}" Margin="0,15,0,0">
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Reset Application" FontAutoScalingEnabled="False"/>
                         <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White" Pressed="Reset_Button_Pressed"/>
                      </Grid>
                 </Frame>
 
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}" Margin="0,15,0,0">
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Tutorial" FontAutoScalingEnabled="False"/>
                         <Button Grid.Column="1" Text="Show Tutorial" BackgroundColor="Gray" TextColor="White" Pressed="Go_To_Welcome_Button_Pressed"/>
                     </Grid>
                 </Frame>
 
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource CustomFrame}" Margin="0,15,0,0">
+                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Generate dummy data" FontAutoScalingEnabled="False"/>
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Dummy data" FontAutoScalingEnabled="False"/>
                         <Button Grid.Column="1" Text="Generate data" BackgroundColor="Gray" TextColor="White" Pressed="GenerateData_Button_Pressed"/>
                     </Grid>
                 </Frame>
