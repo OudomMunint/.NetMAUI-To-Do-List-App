@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.FileIO;
-using ToDoListApp.Data;
+﻿using ToDoListApp.Data;
 using ToDoListApp.Models;
 using ToDoListApp.Views;
 
@@ -27,14 +26,25 @@ public partial class Settings : ContentPage
     // Dark Mode
     private void DarkMode(object sender, EventArgs e)
     {
-        if (DarkModeSwitch.IsToggled)
+        try
         {
-            Application.Current.UserAppTheme = AppTheme.Dark;
+            if (DarkModeSwitch.IsToggled)
+            {
+                Application.Current.UserAppTheme = AppTheme.Dark;
+            }
+            else
+            {
+                Application.Current.UserAppTheme = AppTheme.Light;
+            }
         }
-
-        else
+        catch (Exception ex)
         {
-            Application.Current.UserAppTheme = AppTheme.Light;
+            // Handle ex
+            Console.WriteLine($"An error occurred while toggling dark mode: {ex.Message}");
+            // Revert Switch
+            DarkModeSwitch.IsToggled = !DarkModeSwitch.IsToggled;
+            // Error message
+            DisplayAlert("Error", "An error occurred while toggling dark mode.", "Cancel");
         }
     }
 
