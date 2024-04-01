@@ -44,8 +44,14 @@ public partial class Welcome : ContentPage
     }
 
     private void Continue_Clicked(object sender, EventArgs e)
-    {     
+    {
+#if IOS
+        Navigation.PushAsync(new Dashboard());
+#endif
+
+#if ANDROID
         Navigation.PushAsync(new TodoListPage());
+#endif
 
         // Prevent the user from going back
         Navigation.RemovePage(this);
@@ -60,17 +66,17 @@ public partial class Welcome : ContentPage
 
         if (e.CurrentPosition == 1)
         {
-            ChangingText.Text = "Add new tasks or mark it as done ";
+            ChangingText.Text = "Add new tasks or mark it as done";
         }
 
         else if (e.CurrentPosition == 2)
         {
-            ChangingText.Text = "Bulk marking or delete them";
+            ChangingText.Text = "Bulk actions supported";
         }
 
         else if (e.CurrentPosition == 3)
         {
-            ChangingText.Text = "Change theme settings";
+            ChangingText.Text = "Generate some dummy data";
         }
     }
 }
