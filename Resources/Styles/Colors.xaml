@@ -35,10 +35,10 @@
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
 
-    <Color x:Key="MediumPriorityColor">#FFFF00</Color>
     <Color x:Key="LowPriorityColor">#00FF00</Color>
-    <Color x:Key="CriticalPriorityColor">#000000</Color>
+    <Color x:Key="MediumPriorityColor">#FFFF00</Color>
     <Color x:Key="HighPriorityColor">#FF2c2c</Color>
+    <Color x:Key="CriticalPriorityColor">#000000</Color>
 
     <!-- Transparent Colors
     <Color x:Key="MediumPriorityColor">#80FFFF00</Color>
