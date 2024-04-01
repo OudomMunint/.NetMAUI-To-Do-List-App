@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             xmlns:views="clr-namespace:ToDoListApp.Views"
+             x:Class="ToDoListApp.Views.Dashboard"
+             Title="Dashboard">
+
+        <Grid ColumnSpacing="10" RowSpacing="10" Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+           <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="*"/>
+               <ColumnDefinition Width="*"/>
+           </Grid.ColumnDefinitions>
+
+            <!-- Title -->
+             <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="3"/>
+
+            <!-- First Chart -->
+            <Frame Grid.Row="1" Grid.Column="0" Style="{DynamicResource ChartFrame}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                </Frame.GestureRecognizers>
+
+                <StackLayout>
+                    <Label Text="👋🏻 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>
+                    <Label x:Name="todoitems" FontSize="Large" Style="{StaticResource PriorityLabel}" />
+                    <Label x:Name="lowpriority" Style="{StaticResource PriorityLabel}" />
+                    <Label x:Name="mediumpriority" Style="{StaticResource PriorityLabel}" />
+                    <Label x:Name="highpriority" Style="{StaticResource PriorityLabel}" />
+                    <Label x:Name="criticalpriority" Style="{StaticResource PriorityLabel}" />
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="1" Grid.Column="1" Style="{DynamicResource ChartFrame}" >
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                </Frame.GestureRecognizers>
+            <!-- Priority Chart -->
+                <charts:ChartView x:Name="chartView" WidthRequest="185"/>
+            </Frame>
+
+            <Frame Grid.Row="2" Grid.ColumnSpan="3" Style="{DynamicResource ChartFrame}" >
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                </Frame.GestureRecognizers>
+            <!-- Tasks Chart -->
+                <charts:ChartView x:Name="chartView2" WidthRequest="365" />
+            </Frame>
+
+            <ListView x:Name="listView" IsVisible="False" CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}"/>
+
+                        </VerticalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </Grid>
+</ContentPage>
