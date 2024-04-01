@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="ToDoListApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ToDoListApp"
     xmlns:views="clr-namespace:ToDoListApp.Views" 
-    Shell.FlyoutBehavior="Flyout"
-    BackgroundColor="DarkBlue"
+    Shell.FlyoutBehavior="Flyout">
+
+    <!--BackgroundColor="DarkBlue"
     Shell.BackgroundColor="DarkBlue"
-    Shell.TabBarForegroundColor="DarkBlue">
+    Shell.TabBarForegroundColor="DarkBlue"-->
 
     <ShellContent
         Title="Home"

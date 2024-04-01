@@ -148,11 +148,26 @@
         </Setter>-->
     </Style>
 
+    <Style TargetType="Frame" x:Key="ChartFrame">
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
+        <!--<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />-->
+        <!--<Setter Property="BackgroundColor">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="Android" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}" />
+                    <On Platform="iOS" Value="Transparent" />
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>-->
+    </Style>
+
     <Style TargetType="Frame" x:Key="SettingsFrame">
         <Setter Property="BorderColor" Value="Transparent" />
         <!--<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />-->
         <Setter Property="CornerRadius" Value="15" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource Black}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
     </Style>
 
     <Style TargetType="Frame" x:Key="ToDoItemFrame">
@@ -201,6 +216,13 @@
     <Style TargetType="Label" x:Key="SettingsHeader">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="FontFamily" Value="Inter-Regular"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="PriorityLabel">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="FontFamily" Value="Inter-Regular"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="Margin" Value="0,20,0,0"/>
     </Style>
 
     <Style TargetType="ListView">

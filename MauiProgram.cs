@@ -2,6 +2,7 @@
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Hosting;
 using The49.Maui.BottomSheet;
+using Microcharts.Maui;
 
 namespace ToDoListApp;
 
@@ -15,6 +16,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .UseBottomSheet()
+            .UseMicrocharts()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

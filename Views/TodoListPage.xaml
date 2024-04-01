@@ -22,7 +22,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>
+        <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
         <Frame x:Name="SearchContainer" HeightRequest="40" Grid.Row="1" Margin="5" Padding="5" Style="{StaticResource CustomFrame}" >
             <Grid>
@@ -34,8 +34,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!-- Search Bar -->
-                <SearchBar HorizontalOptions="StartAndExpand" Grid.Row="0" Grid.Column="0"
-                           Placeholder="Search" x:Name="SearchBar" TextChanged="SearchBar_TextChangedAsync" ios:SearchBar.SearchBarStyle="Minimal"/>
+                <SearchBar HorizontalOptions="StartAndExpand" Grid.Row="0" Grid.Column="0" Placeholder="Search" x:Name="SearchBar"
+                           ios:SearchBar.SearchBarStyle="Minimal" TextChanged="SearchBar_TextChangedAsync"/>
 
                 <!-- Sort Button -->
                 <ImageButton Clicked="OpenSortMenu" Source="sort.png" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="1" BorderColor="Transparent" HorizontalOptions="End"

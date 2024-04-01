@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
+using CommunityToolkit.Maui.Core.Platform;
 
 namespace ToDoListApp.Views
 {
@@ -15,14 +16,15 @@ namespace ToDoListApp.Views
         public TodoListPage()
         {
             InitializeComponent();
-            
+
             Application.Current.RequestedThemeChanged += (s, a) =>
             {
-                if (Application.Current.RequestedTheme == darkmode) {
+                if (Application.Current.RequestedTheme == darkmode)
+                {
                     // set searchbar background color to DarkGH from Colors.xaml
                     SearchContainer.BackgroundColor = (Color)Application.Current.Resources["DarkGH"];
                 }
-                
+
             };
         }
 
@@ -30,6 +32,7 @@ namespace ToDoListApp.Views
         {
             base.OnAppearing();
             await UpdateListView();
+            GetDoneItems();
         }
 
         private async Task UpdateListView()
@@ -106,6 +109,17 @@ namespace ToDoListApp.Views
                 task += "s";
             }
             Title = $"🏠 {totalItems} Opened";
+        }
+
+        private void GetDoneItems()
+        {
+            var doneItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Done);
+            var total = listView.ItemsSource?.Cast<object>().Count() ?? 0;
+            var notDone = total - doneItems;
+            // print how many items are done
+            Console.WriteLine(doneItems);
+            Console.WriteLine(notDone);
+            Console.WriteLine(total);
         }
 
         private void OnCheckBoxChecked(object sender, EventArgs e)
@@ -228,7 +242,6 @@ namespace ToDoListApp.Views
             {
                 // Filter items based on the keyword
                 var filteredItems = ((IEnumerable<Todoitem>)listView.ItemsSource)
-
                     .Where(item => item.Name.ToLower().Contains(keyword));
 
                 // Update ListView with filtered items
