@@ -29,7 +29,6 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-		<RuntimeIdentifiers>ios-arm64;iossimulator-arm64</RuntimeIdentifiers>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
@@ -39,6 +38,7 @@
       <PublishTrimmed>true</PublishTrimmed>
 	  <PublishSingleFile>false</PublishSingleFile>
 	  <PublishReadyToRun>false</PublishReadyToRun>
+	  <RuntimeIdentifiers>ios-arm64;iossimulator-arm64</RuntimeIdentifiers>
 	</PropertyGroup>
 
 	<ItemGroup>
