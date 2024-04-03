@@ -38,7 +38,7 @@
       <PublishTrimmed>true</PublishTrimmed>
 	  <PublishSingleFile>false</PublishSingleFile>
 	  <PublishReadyToRun>false</PublishReadyToRun>
-	  <RuntimeIdentifiers>ios-arm64</RuntimeIdentifiers>
+	  <RuntimeIdentifiers>iossimulator-arm64</RuntimeIdentifiers>
 		<!--iossimulator-arm64-->
 	</PropertyGroup>
 
