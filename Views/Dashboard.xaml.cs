@@ -42,6 +42,15 @@ namespace ToDoListApp.Views
             UpdateLabel();
         }
 
+        // Dispose both charts, fixes #155
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            chartView.Chart = null;
+            chartView2.Chart = null;
+            chartView3.Chart = null;
+        }
+
         private void UpdateLabel()
         {
             int totalTodoItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
@@ -54,10 +63,10 @@ namespace ToDoListApp.Views
             mediumpriority.Text = $"🟡 {mediumPriorityItems} Medium";
 
             int highPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "High");
-            highpriority.Text = $"🔴 {highPriorityItems} High";
+            highpriority.Text = $"🟠 {highPriorityItems} High";
 
             int criticalPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Critical");
-            criticalpriority.Text = $"⚫️ {criticalPriorityItems} Critical";
+            criticalpriority.Text = $"🔴 {criticalPriorityItems} Critical";
         }
 
         private void GetTotalItems()
@@ -86,30 +95,30 @@ namespace ToDoListApp.Views
             {
         new ChartEntry(lowPriorityItems)
         {
-            Label = "Low Priority",
+            Label = "Low",
             ValueLabel = lowPriorityItems.ToString(),
             Color = SKColor.Parse("#00ff00")
         },
 
         new ChartEntry(mediumPriorityItems)
         {
-            Label = "Medium Priority",
+            Label = "Medium",
             ValueLabel = mediumPriorityItems.ToString(),
             Color = SKColor.Parse("#FFFF00")
         },
 
         new ChartEntry(highPriorityItems)
         {
-            Label = "High Priority",
+            Label = "High",
             ValueLabel = highPriorityItems.ToString(),
-            Color = SKColor.Parse("#FF2c2c")
+            Color = SKColor.Parse("#FFA500")
         },
 
         new ChartEntry(criticalPriorityItems)
         {
-            Label = "Critical Priority",
+            Label = "Critical",
             ValueLabel = criticalPriorityItems.ToString(),
-            Color = SKColor.Parse("#000000")
+            Color = SKColor.Parse("#FF2c2c")
         }
     };
 
@@ -122,6 +131,16 @@ namespace ToDoListApp.Views
                     IsAnimated = true,
                     BackgroundColor = SKColor.Parse("#00FFFFFF"),
                     LabelMode = LabelMode.None
+                };
+
+                chartView3.Chart = new RadarChart
+                {
+                    Entries = entries,
+                    IsAnimated = false,
+                    BackgroundColor = SKColor.Parse("#00FFFFFF"),
+                    LabelTextSize = 0,
+                    BorderLineColor = SKColors.Gray
+                    
                 };
             }
             else
@@ -142,8 +161,19 @@ namespace ToDoListApp.Views
                     Entries = entries,
                     IsAnimated = true,
                     BackgroundColor = SKColor.Parse("#00FFFFFF"),
-                    LabelMode = LabelMode.None
+                    LabelMode = LabelMode.None,
+                    Margin = 0
                 };
+
+                chartView3.Chart = new RadarChart
+                {
+                    Entries = entries,
+                    IsAnimated = true,
+                    BackgroundColor = SKColor.Parse("#00FFFFFF"),
+                    //LabelMode = LabelMode.None,
+                    Margin = 0
+                };
+
             }
         }
 
@@ -173,7 +203,7 @@ namespace ToDoListApp.Views
                 {
             new ChartEntry(doneItems)
             {
-                Label = "Completed Tasks",
+                Label = "Completed",
                 ValueLabel = doneItems.ToString(),
                 Color = SKColor.Parse("#2c3e50"),
                 ValueLabelColor = labelColor
@@ -181,7 +211,7 @@ namespace ToDoListApp.Views
 
             new ChartEntry(notDone)
             {
-                Label = "Opened Tasks",
+                Label = "Opened",
                 ValueLabel = notDone.ToString(),
                 Color = SKColor.Parse("#ADD8E6"),
                 ValueLabelColor = labelColor
