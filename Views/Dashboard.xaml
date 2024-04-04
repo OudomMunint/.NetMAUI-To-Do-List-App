@@ -4,9 +4,10 @@
              xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              xmlns:views="clr-namespace:ToDoListApp.Views"
              x:Class="ToDoListApp.Views.Dashboard"
-             Title="Dashboard">
+             Title="Dashboard"
+             NavigationPage.HasNavigationBar="False">
 
-        <Grid ColumnSpacing="10" RowSpacing="10" Padding="5">
+        <Grid ColumnSpacing="10" RowSpacing="10" Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -21,7 +22,7 @@
             <!-- Title -->
              <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="3"/>
 
-            <!-- First Chart -->
+            <!-- Labels -->
             <Frame Grid.Row="1" Grid.Column="0" Style="{DynamicResource ChartFrame}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
@@ -37,20 +38,30 @@
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="1" Grid.Column="1" Style="{DynamicResource ChartFrame}" >
+             <!-- Priority Chart -->
+            <Frame Grid.Row="1" Grid.Column="1" Style="{DynamicResource ChartFrame}" HeightRequest="{OnPlatform iOS=162, Android=172}" VerticalOptions="Start">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
-            <!-- Priority Chart -->
-                <charts:ChartView x:Name="chartView" WidthRequest="185"/>
+           
+                    <charts:ChartView Grid.ColumnSpan="2" Grid.Row="0" x:Name="chartView" WidthRequest="{OnPlatform iOS=185, Android=160}"/>
             </Frame>
 
+            <Frame Grid.Row="1" Grid.Column="1" Style="{DynamicResource ChartFrame}" HeightRequest="{OnPlatform iOS=162, Android=172}" VerticalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                </Frame.GestureRecognizers>
+           
+                    <charts:ChartView Grid.ColumnSpan="2" Grid.Row="0" x:Name="chartView3" WidthRequest="{OnPlatform iOS=185, Android=160}"/>
+            </Frame>
+
+            <!-- Tasks Chart -->
             <Frame Grid.Row="2" Grid.ColumnSpan="3" Style="{DynamicResource ChartFrame}" >
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
-            <!-- Tasks Chart -->
-                <charts:ChartView x:Name="chartView2" WidthRequest="365" />
+            
+                <charts:ChartView x:Name="chartView2" WidthRequest="{OnPlatform iOS=365, Android=330}" />
             </Frame>
 
             <ListView x:Name="listView" IsVisible="False" CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}">

@@ -11,10 +11,7 @@ public partial class App : Application
 
         if (Preferences.ContainsKey("IsFirstRun"))
         {
-            MainPage = new NavigationPage(new TodoListPage());
-#if IOS
             MainPage = new NavigationPage(new Dashboard());
-#endif
         }
         else
         {

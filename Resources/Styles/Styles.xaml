@@ -151,7 +151,7 @@
     <Style TargetType="Frame" x:Key="ChartFrame">
         <Setter Property="BorderColor" Value="Transparent" />
         <Setter Property="CornerRadius" Value="15" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite2}, Dark={StaticResource DarkGH}}"/>
         <!--<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />-->
         <!--<Setter Property="BackgroundColor">
             <Setter.Value>
