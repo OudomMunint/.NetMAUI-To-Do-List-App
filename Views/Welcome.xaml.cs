@@ -45,13 +45,7 @@ public partial class Welcome : ContentPage
 
     private void Continue_Clicked(object sender, EventArgs e)
     {
-#if IOS
         Navigation.PushAsync(new Dashboard());
-#endif
-
-#if ANDROID
-        Navigation.PushAsync(new TodoListPage());
-#endif
 
         // Prevent the user from going back
         Navigation.RemovePage(this);
