@@ -40,6 +40,7 @@ namespace ToDoListApp.Views
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             listView.ItemsSource = await database.GetItemsAysnc();
             UpdateTitle();
+            Console.WriteLine("Listview Refreshed");
         }
 
         async void OnItemAdded(object sender, EventArgs e)
@@ -109,6 +110,7 @@ namespace ToDoListApp.Views
                 task += "s";
             }
             Title = $"🏠 {totalItems} Opened";
+            labeltitle.Text = $"🏠 {totalItems} Opened";
         }
 
         private void GetDoneItems()
@@ -277,6 +279,14 @@ namespace ToDoListApp.Views
                     await UpdateListView();
                 }
             }
+        }
+
+        private async void RefreshView_Refreshing(object sender, EventArgs e)
+        {
+            listView.IsRefreshing = true;
+            await UpdateListView();
+            await Task.Delay(1000); // Temporary fix, sometimes the refresh spinner doesn't disappear.
+            listView.IsRefreshing = false;
         }
     }
 }
