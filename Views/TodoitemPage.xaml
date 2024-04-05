@@ -6,9 +6,24 @@
     Title="{Binding Name}"
     Shell.PresentationMode="ModalAnimated">
 
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Clicked="OnClearClicked" IconImageSource="clear.png"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
+
+    <NavigationPage.TitleView>
+        <!--<StackLayout>
+            <Label Text="{Binding Name}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            <ImageButton Clicked="OnClearClicked" Source="clear.png" HorizontalOptions="End" VerticalOptions="Center"/>
+        </StackLayout>-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="155" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="itemTitle" Grid.Column="0" TextColor="White" VerticalTextAlignment="Center" FontSize="18" FontFamily="Inter-Regular"/>
+            <ImageButton Grid.Column="1" Clicked="OnClearClicked" Source="clear.png" HorizontalOptions="End" HeightRequest="35"/>
+        </Grid>
+    </NavigationPage.TitleView>
 
 
     <ContentPage.Content>

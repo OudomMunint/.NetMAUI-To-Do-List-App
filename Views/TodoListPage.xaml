@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label x:Name="labeltitle" Grid.Column="0" TextColor="White" VerticalOptions="Center"
+            <Label x:Name="labeltitle" Grid.Column="0" TextColor="White" VerticalOptions="Center" FontFamily="Inter-Regular"
                    VerticalTextAlignment="Center" FontSize="16" HorizontalOptions="Start"/>
             <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="30" Clicked="MarkSelectedItemsComplete"/>
             <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="30" HeightRequest="25" Clicked="DeleteSelectedItems"/>
