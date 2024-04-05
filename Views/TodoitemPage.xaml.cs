@@ -16,6 +16,27 @@ namespace ToDoListApp.Views
             InitializeComponent();
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateToolbarTitle();
+        }
+
+        private void UpdateToolbarTitle()
+        {
+            if (string.IsNullOrWhiteSpace(NameField.Text))
+            {
+                itemTitle.FormattedText = new FormattedString();
+                itemTitle.FormattedText.Spans.Add(new Span { Text = "Creating new task", FontAttributes = FontAttributes.Bold });
+            }
+            else
+            {
+                itemTitle.FormattedText = new FormattedString();
+                itemTitle.FormattedText.Spans.Add(new Span { Text = "Editing: ", FontAttributes = FontAttributes.Bold });
+                itemTitle.FormattedText.Spans.Add(new Span { Text = NameField.Text });
+            }
+        }
+
         async void OnSaveClicked(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(NameField.Text) || string.IsNullOrWhiteSpace(DescField.Text))

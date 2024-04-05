@@ -58,7 +58,7 @@ jobs:
           dotnet workload install ios --ignore-failed-sources
           dotnet workload install maui --ignore-failed-sources
           
-      - name: Select Xcode 15.1
+      - name: Select Xcode 15.2
         run: sudo xcode-select -s /Applications/Xcode_15.1.app
 
       - name: Build MAUI iOS
@@ -74,4 +74,4 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1.14.0
         with:
-          tag: v1.7.0
+          tag: v1.7.1

@@ -7,6 +7,7 @@ namespace ToDoListApp.Views
     {
         private readonly TimeSpan updateInterval = TimeSpan.FromMinutes(1);
         private readonly System.Threading.Timer timer;
+        public string greeting = "Hello 👋";
 
         public HeaderGrid()
         {
@@ -18,6 +19,8 @@ namespace ToDoListApp.Views
             
             // Set initial value
             UpdateCurrentDate(null);
+
+            titleLabel.Text = CurrentDate + ", " + greeting;
         }
 
         private string _currentDate;
@@ -36,7 +39,7 @@ namespace ToDoListApp.Views
 
         private void UpdateCurrentDate(object state)
         {
-            CurrentDate = DateTime.Now.ToString("🗓️ MMMM dd, yyyy, hh:mm tt");
+            CurrentDate = DateTime.Now.ToString($"🗓️ MMMM dd, yyyy");
         }
     }
 }

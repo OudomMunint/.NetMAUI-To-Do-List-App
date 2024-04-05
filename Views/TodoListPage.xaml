@@ -8,12 +8,30 @@
     x:Name="todoListPage"
     Title="Home"
     Shell.PresentationMode="ModalAnimated">
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Clicked="MarkSelectedItemsComplete" IconImageSource="donetoolbar.png"/>
         <ToolbarItem Clicked="DeleteSelectedItems" IconImageSource="trash.png"/>
         <ToolbarItem Clicked="OnItemAdded" IconImageSource="icon.png"/>
         <ToolbarItem Clicked="OpenMenu" IconImageSource="menu.png"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
+
+    <NavigationPage.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="labeltitle" Grid.Column="0" TextColor="White" VerticalOptions="Center" FontFamily="Inter-Regular"
+                   VerticalTextAlignment="Center" FontSize="16" HorizontalOptions="Start"/>
+            <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="30" Clicked="MarkSelectedItemsComplete"/>
+            <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="30" HeightRequest="25" Clicked="DeleteSelectedItems"/>
+            <ImageButton Grid.Column="3" Source="icon.png" WidthRequest="30" HeightRequest="25" Clicked="OnItemAdded"/>
+            <ImageButton Grid.Column="4" Source="menu.png" WidthRequest="30" Clicked="OpenMenu"/>
+        </Grid>
+    </NavigationPage.TitleView>
 
     <Grid BackgroundColor="Transparent">
         <Grid.RowDefinitions>
@@ -44,13 +62,13 @@
         </Frame>
 
         <ListView x:Name="listView" Grid.Row="2" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None"
-                  CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}">
+                  CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}" IsPullToRefreshEnabled="True" Refreshing="RefreshView_Refreshing">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Border Padding="5,0,0,0" Margin="5">
                             <Grid RowSpacing="0" ColumnSpacing="0">
-                            <Grid.RowDefinitions>
+                                <Grid.RowDefinitions>
                                     <RowDefinition Height="35" />
                                     <RowDefinition Height="30" />
                                     <RowDefinition Height="{OnPlatform iOS=20, Android=30}" />
@@ -81,7 +99,7 @@
                                         </Label.FormattedText>
                                     </Label>
                                 </Frame>
- 
+
                                 <Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,0,40,0" HeightRequest="25" BorderColor="Transparent">
                                     <Frame.Triggers>
 

@@ -29,13 +29,13 @@
                 </Frame.GestureRecognizers>
 
                 <StackLayout>
-                    <Label Text="👋🏻 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>
-                    <Label x:Name="todoitems" FontSize="Large" Style="{StaticResource PriorityLabel}" />
+                    <!--<Label Text="👋 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>-->
                     <Label x:Name="lowpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="mediumpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="highpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="criticalpriority" Style="{StaticResource PriorityLabel}" />
-                </StackLayout>
+                    <Label x:Name="todoitems" FontSize="Large" Style="{StaticResource PriorityLabel}" />
+            </StackLayout>
             </Frame>
 
              <!-- Priority Chart -->

@@ -150,7 +150,7 @@ namespace ToDoListApp.Views
                 {
             new ChartEntry(1)
             {
-                Label = "No Data Available",
+                Label = "",
                 ValueLabel = "0",
                 Color = SKColor.Parse("#CCCCCC")
             }
@@ -235,15 +235,17 @@ namespace ToDoListApp.Views
             new ChartEntry(1)
             {
                 Label = "Completed Tasks",
-                ValueLabel = " ",
-                Color = SKColor.Parse("#CCCCCC")
+                ValueLabel = "0",
+                Color = SKColor.Parse("#CCCCCC"),
+                ValueLabelColor = labelColor
             },
 
             new ChartEntry(1)
             {
                 Label = "Opened Tasks",
-                ValueLabel = " ",
-                Color = SKColor.Parse("#CCCCCC")
+                ValueLabel = "0",
+                Color = SKColor.Parse("#CCCCCC"),
+                ValueLabelColor = labelColor
             }
         };
 
