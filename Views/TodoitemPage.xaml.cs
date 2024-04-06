@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoListApp.Data;
@@ -20,6 +21,31 @@ namespace ToDoListApp.Views
         {
             base.OnAppearing();
             UpdateToolbarTitle();
+            GetAttachmentCount();
+        }
+
+        private async void GetAttachmentCount()
+        {
+            var todoItem = (Todoitem)BindingContext;
+
+            // Null Check
+            if (todoItem.Attachment != null)
+            {
+                var attachmentCount = todoItem.Attachment.Count();
+
+                if (attachmentCount > 0)
+                {
+                    attlabel.IsVisible = false;
+                }
+                else
+                {
+                    attlabel.IsVisible = true;
+                }
+            }
+            else
+            {
+                attlabel.IsVisible = true;
+            }
         }
 
         private void UpdateToolbarTitle()
@@ -34,6 +60,32 @@ namespace ToDoListApp.Views
                 itemTitle.FormattedText = new FormattedString();
                 itemTitle.FormattedText.Spans.Add(new Span { Text = "Editing: ", FontAttributes = FontAttributes.Bold });
                 itemTitle.FormattedText.Spans.Add(new Span { Text = NameField.Text });
+            }
+        }
+
+        private async void DeleteAttachmentClicked(object sender, EventArgs e)
+        {
+            var todoItem = (Todoitem)BindingContext;
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+
+            // if null
+            if (todoItem.Attachment == null)
+            {
+                await DisplayAlert("No Attachment", "There is no attachment to delete", "OK");
+                return;
+            }
+            
+            // Alert
+            bool Confirmed = await DisplayAlert("Delete Attachment", "Are you sure you want to delete the attachment?", "Yes", "No");
+
+            if (Confirmed)
+            {
+                todoItem.Attachment = null;
+                attlabel.IsVisible = true;
+                attachmentImage.Source = null;
+
+                // Save the updated todoItem to the database
+                await database.SaveItemAsync(todoItem);
             }
         }
 
@@ -81,15 +133,68 @@ namespace ToDoListApp.Views
             await Navigation.PopAsync();
         }
 
-        async void OnCancelClicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
-
         private void OnClearClicked(object sender, EventArgs e)
         {
             NameField.Text = " ";
             DescField.Text = " ";
+            attachmentImage.Source = null;
+        }
+
+        public async void TakePhoto(object sender, EventArgs e)
+        {
+            if (MediaPicker.Default.IsCaptureSupported)
+            {
+                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+
+                if (photo != null)
+                {
+                    // save the file into local storage
+                    string localFilePath = Path.Combine(Microsoft.Maui.Storage.FileSystem.CacheDirectory, photo.FileName);
+
+                    using (Stream sourceStream = await photo.OpenReadAsync())
+                    {
+                        using (FileStream localFileStream = File.OpenWrite(localFilePath))
+                        {
+                            await sourceStream.CopyToAsync(localFileStream);
+                        }
+                    }
+
+                    // show the photo in the UI
+                    var todoItem = (Todoitem)BindingContext;
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    todoItem.Attachment = File.ReadAllBytes(localFilePath);
+
+                    Task.Delay(1000);
+
+                    attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
+
+#if ANDROID
+                    attlabel.IsVisible = false;
+#endif
+                }
+            }
+        }
+
+        public async void OpenMenu2(object sender, EventArgs e)
+        {
+            string addatachment = "Add Attachment";
+            string delete = "Delete Item";
+            string clear = "Clear Form";
+
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { addatachment, delete, clear });
+
+            if (action != null && action.Equals(delete))
+            {
+                OnDeleteClicked(sender, e);
+            }
+            else if (action != null && action.Equals(addatachment))
+            {
+                TakePhoto(sender, e);
+            }
+            else if (action != null && action.Equals(clear))
+            {
+                OnClearClicked(sender, e);
+            }
         }
     }
 }

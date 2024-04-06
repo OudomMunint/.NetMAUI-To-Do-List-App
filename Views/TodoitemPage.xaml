@@ -2,31 +2,36 @@
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="ToDoListApp.Views.TodoitemPage"
     Title="{Binding Name}"
     Shell.PresentationMode="ModalAnimated">
 
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnClearClicked" IconImageSource="clear.png"/>
-    </ContentPage.ToolbarItems>-->
-
     <NavigationPage.TitleView>
-        <!--<StackLayout>
-            <Label Text="{Binding Name}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-            <ImageButton Clicked="OnClearClicked" Source="clear.png" HorizontalOptions="End" VerticalOptions="Center"/>
-        </StackLayout>-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="155" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
             <Label x:Name="itemTitle" Grid.Column="0" TextColor="White" VerticalTextAlignment="Center" FontSize="18" FontFamily="Inter-Regular"/>
-            <ImageButton Grid.Column="1" Clicked="OnClearClicked" Source="clear.png" HorizontalOptions="End" HeightRequest="35"/>
+
+            <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="10">
+                <ImageButton HorizontalOptions="Start" Source="saveitem.png" Clicked="OnSaveClicked" HeightRequest="25"/>
+                <ImageButton HorizontalOptions="End" Source="menu.png" Clicked="OpenMenu2" HeightRequest="35"/>
+            </HorizontalStackLayout>
+
         </Grid>
     </NavigationPage.TitleView>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Always">
         <StackLayout Margin="20" Spacing="20" VerticalOptions="StartAndExpand">
 
             <StackLayout>
@@ -52,12 +57,6 @@
                 </HorizontalStackLayout>
 
                 <Frame Style="{DynamicResource ToDoItemFrame}" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-
-                    <!--Entry-->
-                    <!--<Entry x:Name="DescField" FontFamily="Inter-Regular" Margin="10,0,0,0"  Placeholder="Task Description" Text="{Binding Notes}"
-                           HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" PlaceholderColor="Grey" />-->
-
-                    <!--Editor-->
                     <Editor x:Name="DescField" FontFamily="Inter-Regular" Placeholder="Task Description" Text="{Binding Notes}"
                            HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" PlaceholderColor="Grey" />
                 </Frame>
@@ -83,20 +82,46 @@
                 </Frame>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" WidthRequest="160">
-                <Label Margin="10,0,10,0"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       FontFamily="Inter-Bold"
-                       Text="Mark as Done" />
+            <StackLayout>
+                <StackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <Label FontSize="20" Text="Attachment" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
+                        <Image Source="attachment.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
+                    </HorizontalStackLayout>
 
-                <Switch HorizontalOptions="Center" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
+                    <Frame Style="{DynamicResource ToDoItemFrame}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
 
+                        <StackLayout>
+                            <!--Attachment Image-->
+                            <Image x:Name="attachmentImage" Source="{Binding Attachment, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+
+                            <Label x:Name="attlabel" Text="No Attachment found. If attachment is already added, click save." FontFamily="Inter-Regular"
+                                   FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}" HorizontalTextAlignment="Center" Margin="15,0,15,0"/>
+
+                            <Button Text="Delete Attachment" Clicked="DeleteAttachmentClicked" FontFamily="Inter-Regular" BackgroundColor="Red" TextColor="White"
+                                MaximumWidthRequest="{OnPlatform iOS=150, Android=200}" HorizontalOptions="Center" Margin="0,15,0,10" />
+                        </StackLayout>
+
+                    </Frame>
+                </StackLayout>
             </StackLayout>
 
-            <BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>
+            <!--<BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>-->
 
-            <Grid ColumnSpacing="20" RowSpacing="10">
+            <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Margin="10,0,10,0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           FontFamily="Inter-Bold"
+                           Text="Mark as Done" />
+
+                    <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
+
+                </StackLayout>
+            </Frame>
+
+            <!--<Grid ColumnSpacing="20" RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -111,7 +136,8 @@
                 <Button Grid.Row="0" Grid.Column="1" BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Cancel" FontFamily="Inter-Regular"/>
                 <Button Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" FontFamily="Inter-Regular"/>
 
-            </Grid>
+            </Grid>-->
         </StackLayout>
+      </ScrollView>
     </ContentPage.Content>
 </ContentPage>
