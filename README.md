@@ -54,6 +54,12 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
   <img src="Media/ad2.png" style="height:700px; width:340" />
 </h1>
 
+### Android & iOS, Galaxy Z Flip 4 / iPhone 15
+<h1 float="center">
+  <img src="Media/adatt.jpeg" style="height:700px; width:340" />
+  <img src="Media/iosatt.jpeg" style="height:700px; width:340" />
+</h1>
+
 ## Upcoming
 
 - [ ] Swipe gestures
@@ -85,6 +91,10 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 - If build failed with Dependency errors, please unload the project and reload with dependencies.
 - Or `cd` to the project directory and run `dotnet restore {name}.sln` to restore dependencies.
 - Has `SQLite` & `XUnit` dependency same with android.
+
+## Permissions
+- Android: `Read & Write External Storage`, `Read & Write Internal Storage`, `Camera access`.
+- iOS: `Camera access`, `Photo Library access`, `Read & Write External Storage`, `Read & Write Internal Storage`.
 
 ## Clean scripts
 
