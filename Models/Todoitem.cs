@@ -23,5 +23,9 @@ namespace ToDoListApp.Models
         public DateTime Date { get; set; }
 
         public string Priority { get; set; }
+
+        public Byte[] Attachment { get; set; }
+
+        public bool HasAttachment { get; set; }
     }
 }
