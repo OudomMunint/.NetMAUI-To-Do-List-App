@@ -168,20 +168,52 @@ namespace ToDoListApp.Views
 
                     attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
 
-#if ANDROID
                     attlabel.IsVisible = false;
-#endif
+                }
+            }
+        }
+
+        public async void UploadPhoto(object sender, EventArgs e)
+        {
+            if (MediaPicker.Default.IsCaptureSupported)
+            {
+                FileResult uploadedFile = await MediaPicker.Default.PickPhotoAsync();
+
+                if (uploadedFile != null)
+                {
+                    // save the file into local storage
+                    string localFilePath = Path.Combine(Microsoft.Maui.Storage.FileSystem.CacheDirectory, uploadedFile.FileName);
+
+                    using (Stream sourceStream = await uploadedFile.OpenReadAsync())
+                    {
+                        using (FileStream localFileStream = File.OpenWrite(localFilePath))
+                        {
+                            await sourceStream.CopyToAsync(localFileStream);
+                        }
+                    }
+
+                    // show the photo in the UI
+                    var todoItem = (Todoitem)BindingContext;
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    todoItem.Attachment = File.ReadAllBytes(localFilePath);
+
+                    Task.Delay(1000);
+
+                    attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
+
+                    attlabel.IsVisible = false;
                 }
             }
         }
 
         public async void OpenMenu2(object sender, EventArgs e)
         {
-            string addatachment = "Add Attachment";
+            string addatachment = "Take Photo";
+            string uploadatachment = "Upload Attachment";
             string delete = "Delete Item";
             string clear = "Clear Form";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { addatachment, delete, clear });
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { addatachment, uploadatachment, delete, clear });
 
             if (action != null && action.Equals(delete))
             {
@@ -194,6 +226,10 @@ namespace ToDoListApp.Views
             else if (action != null && action.Equals(clear))
             {
                 OnClearClicked(sender, e);
+            }
+            else if (action != null && action.Equals(uploadatachment))
+            {
+                UploadPhoto(sender, e);
             }
         }
     }
