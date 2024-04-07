@@ -81,13 +81,21 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
+                                <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Spacing="5">
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="15,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
                                        Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" />
+
+                                <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
+                                       BackgroundColor="{AppThemeBinding Dark=DarkGray, Light={StaticResource DarkGH}}" IsVisible="{Binding HasAttachment}">
+                                    <Image Source="attachment.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="15"/>
+                                </Frame>
+
+                                </HorizontalStackLayout>
 
                                 <CheckBox Grid.Row="1" Grid.Column="0" Margin="-6,0,0,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
 
                                 <Label Grid.ColumnSpan="5" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
-                                       Margin="20,2,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250"
+                                       Margin="15,2,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250"
                                        Text="{Binding Notes}" FontFamily="Inter-Regular" />
 
                                 <Frame Grid.Row="1" Grid.Column="1" WidthRequest="100" Padding="7,0,0,0" Margin="-10,0,10,0" HeightRequest="25" BackgroundColor="{DynamicResource Gray100}" BorderColor="Transparent">
