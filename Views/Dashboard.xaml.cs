@@ -16,12 +16,21 @@ namespace ToDoListApp.Views
         private int doneItems;
         private int notDone;
         private ChartEntry[] entries;
+        public string ItemHasAttachment { get; set; }
 
         public Dashboard()
         {
             InitializeComponent();
             GetTotalItems();
-            
+        }
+
+        private async Task CountItemsHasAttachment()
+        {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            var todoItem = (Todoitem)BindingContext;
+            ItemHasAttachment = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.HasAttachment == true).ToString();
+            hasattcount.Text = $"📎 {ItemHasAttachment} Has Attachments";
+            Console.WriteLine(ItemHasAttachment);
         }
 
         private async Task UpdateListView()
@@ -36,6 +45,7 @@ namespace ToDoListApp.Views
             await UpdateListView();
             GetTotalItems();
             GetDoneItems();
+            await CountItemsHasAttachment();
             await Task.Delay(100);
             CreateChart1();
             CreateChart2();
@@ -72,7 +82,7 @@ namespace ToDoListApp.Views
         private void GetTotalItems()
         {
             totalItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-            Console.WriteLine(totalItems);
+            //Console.WriteLine(totalItems);
         }
 
         private void GetDoneItems()
@@ -80,8 +90,8 @@ namespace ToDoListApp.Views
             doneItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Done);
             notDone = totalItems - doneItems;
 
-            Console.WriteLine(doneItems);
-            Console.WriteLine(notDone);
+            //Console.WriteLine(doneItems);
+            //Console.WriteLine(notDone);
         }
 
         private void CreateChart1()

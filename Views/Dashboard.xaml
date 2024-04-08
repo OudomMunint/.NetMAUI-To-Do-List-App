@@ -30,12 +30,13 @@
 
                 <StackLayout>
                     <!--<Label Text="👋 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>-->
-                    <Label x:Name="lowpriority" Style="{StaticResource PriorityLabel}" />
+                    <Label x:Name="lowpriority" Style="{StaticResource PriorityLabel}"/>
                     <Label x:Name="mediumpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="highpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="criticalpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="todoitems" FontSize="Large" Style="{StaticResource PriorityLabel}" />
-            </StackLayout>
+                    <Label x:Name="hasattcount" FontSize="Medium" Style="{StaticResource PriorityLabel}" Text="{Binding ItemHasAttachment}" LineBreakMode="TailTruncation"/>
+                </StackLayout>
             </Frame>
 
              <!-- Priority Chart -->
