@@ -126,6 +126,10 @@
                                         <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Critical">
                                             <Setter Property="BackgroundColor" Value="{DynamicResource CriticalPriorityColor}" />
                                         </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="">
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </DataTrigger>
                                     </Frame.Triggers>
                                     <Label HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black" FontFamily="Inter-Regular" Text="{Binding Priority}">
                                         <Label.Triggers>
