@@ -3,7 +3,6 @@ using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 using CommunityToolkit.Maui.Core.Platform;
-//using AddressBook;
 
 namespace ToDoListApp.Views
 {
@@ -48,6 +47,12 @@ namespace ToDoListApp.Views
                 if (item.Attachment != null)
                 {
                     item.HasAttachment = true;
+                    await database.SaveItemAsync(item);
+                }
+
+                else
+                {
+                    item.HasAttachment = false;
                     await database.SaveItemAsync(item);
                 }
             }

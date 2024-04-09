@@ -117,7 +117,7 @@ namespace ToDoListApp.Views
             }
             else
             {
-                todoItem.Priority = "Critical";
+                todoItem.Priority = "";
             }
 
             TodoitemDatabase database = await TodoitemDatabase.Instance;
