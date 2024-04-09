@@ -65,6 +65,7 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 - [ ] Swipe gestures
 - [x] Dark mode
 - [ ] Bottom Sheets
+- [x] Attachments
 - [x] Charts, Data Visualization
 - [x] Foldable device support
 - [x] .Net 8 Support
