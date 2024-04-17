@@ -94,8 +94,8 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 - Has `SQLite` & `XUnit` dependency same with android.
 
 ## Permissions
-- Android: `Read & Write External Storage`, `Read & Write Internal Storage`, `Camera access`.
-- iOS: `Camera access`, `Photo Library access`, `Read & Write External Storage`, `Read & Write Internal Storage`.
+- Android: `Read & Write External Storage`, `Read & Write Internal Storage`, `Camera access`, `Haptic feedback`.
+- iOS: `Camera access`, `Photo Library access`, `Read & Write External Storage`, `Read & Write Internal Storage`, `Haptic feedback`.
 
 ## Clean scripts
 

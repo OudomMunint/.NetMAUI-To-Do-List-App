@@ -67,16 +67,16 @@ namespace ToDoListApp.Views
         {
             var todoItem = (Todoitem)BindingContext;
             TodoitemDatabase database = await TodoitemDatabase.Instance;
-
             // if null
             if (todoItem.Attachment == null)
             {
                 await DisplayAlert("No Attachment", "There is no attachment to delete", "OK");
                 return;
             }
-            
+
             // Alert
-            bool Confirmed = await DisplayAlert("Delete Attachment", "Are you sure you want to delete the attachment?", "Yes", "No");
+
+            bool Confirmed = await DisplayAlert("Delete Attachment.", "Are you sure you want to delete this Attachment?", "Yes", "No");
 
             if (Confirmed)
             {
@@ -93,6 +93,7 @@ namespace ToDoListApp.Views
         {
             if (string.IsNullOrWhiteSpace(NameField.Text) || string.IsNullOrWhiteSpace(DescField.Text))
             {
+                HapticFeedback.Perform(HapticFeedbackType.LongPress);
                 await DisplayAlert("Cannot Save Task", "Please enter Name and Notes", "OK");
                 return;
             }
@@ -120,6 +121,7 @@ namespace ToDoListApp.Views
                 todoItem.Priority = "";
             }
 
+            HapticFeedback.Perform(HapticFeedbackType.Click);
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             await database.SaveItemAsync(todoItem);
             await Navigation.PopAsync();
@@ -127,14 +129,22 @@ namespace ToDoListApp.Views
 
         async void OnDeleteClicked(object sender, EventArgs e)
         {
-            var todoItem = (Todoitem)BindingContext;
-            TodoitemDatabase database = await TodoitemDatabase.Instance;
-            await database.DeleteItemAsync(todoItem);
-            await Navigation.PopAsync();
+            HapticFeedback.Perform(HapticFeedbackType.LongPress);
+            bool Confirmed = await DisplayAlert("Delete To-Do Item.", "Are you sure you want to delete this item? all attachments bound to this item will be lost", "Yes", "No");
+
+            if (Confirmed)
+            {
+                HapticFeedback.Perform(HapticFeedbackType.Click);
+                var todoItem = (Todoitem)BindingContext;
+                TodoitemDatabase database = await TodoitemDatabase.Instance;
+                await database.DeleteItemAsync(todoItem);
+                await Navigation.PopAsync();
+            }
         }
 
         private void OnClearClicked(object sender, EventArgs e)
         {
+            HapticFeedback.Perform(HapticFeedbackType.Click);
             NameField.Text = " ";
             DescField.Text = " ";
             attachmentImage.Source = null;
@@ -164,7 +174,7 @@ namespace ToDoListApp.Views
                     TodoitemDatabase database = await TodoitemDatabase.Instance;
                     todoItem.Attachment = File.ReadAllBytes(localFilePath);
 
-                    Task.Delay(1000);
+                    await Task.Delay(1000);
 
                     attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
 
