@@ -61,6 +61,12 @@
             </Grid>
         </Frame>
 
+        <VerticalStackLayout x:Name="VStack" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+            <Image Source="checklist_icon.png" Aspect="AspectFit" WidthRequest="200" HeightRequest="200" Margin="0,0,0,30"/>
+            <Label Text="Nothing to show yet, Create an item by tapping on +" HorizontalTextAlignment="Center" FontFamily="Inter-Regular" FontSize="14"/>
+            <Label Text="Or go into settings and generate some dummy data!" HorizontalTextAlignment="Center" FontSize="14" FontFamily="Inter-Regular"/>
+        </VerticalStackLayout>
+
         <ListView x:Name="listView" Grid.Row="2" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None"
                   CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}" IsPullToRefreshEnabled="True" Refreshing="RefreshView_Refreshing">
             <ListView.ItemTemplate>
