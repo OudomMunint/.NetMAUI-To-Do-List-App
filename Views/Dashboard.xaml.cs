@@ -111,6 +111,13 @@ namespace ToDoListApp.Views
 
             entries = new[]
             {
+                new ChartEntry(criticalPriorityItems)
+                {
+                    Label = "Critical",
+                    //ValueLabel = criticalPriorityItems.ToString(),
+                    Color = SKColor.Parse("#FF2c2c")
+                },
+
                 new ChartEntry(lowPriorityItems)
                 {
                     Label = "Low",
@@ -122,7 +129,7 @@ namespace ToDoListApp.Views
                 {
                     Label = "Medium",
                     //ValueLabel = mediumPriorityItems.ToString(),
-                    Color = SKColor.Parse("#FFFF00")
+                    Color = SKColor.Parse("#D5B60A")
                 },
 
                 new ChartEntry(highPriorityItems)
@@ -131,13 +138,6 @@ namespace ToDoListApp.Views
                     //ValueLabel = highPriorityItems.ToString(),
                     Color = SKColor.Parse("#FFA500")
                 },
-
-                new ChartEntry(criticalPriorityItems)
-                {
-                    Label = "Critical",
-                    //ValueLabel = criticalPriorityItems.ToString(),
-                    Color = SKColor.Parse("#FF2c2c")
-                }
             };
 
             // Check if there are any items in the list
