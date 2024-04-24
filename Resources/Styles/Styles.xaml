@@ -223,7 +223,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="FontFamily" Value="Inter-Regular"/>
         <Setter Property="FontSize" Value="Medium"/>
-        <Setter Property="Margin" Value="0,20,0,0"/>
+        <Setter Property="Margin" Value="0,14,0,0"/>
     </Style>
 
     <Style TargetType="ListView">
