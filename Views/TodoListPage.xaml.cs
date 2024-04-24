@@ -17,8 +17,9 @@ namespace ToDoListApp.Views
         public TodoListPage()
         {
             InitializeComponent();
+            todolistlist = listView;
 
-            Application.Current.RequestedThemeChanged += (s, a) =>
+        Application.Current.RequestedThemeChanged += (s, a) =>
             {
                 if (Application.Current.RequestedTheme == darkmode)
                 {
@@ -28,6 +29,8 @@ namespace ToDoListApp.Views
 
             };
         }
+
+        public ListView todolistlist;
 
         protected override async void OnAppearing()
         {
