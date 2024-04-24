@@ -42,7 +42,7 @@
             </Frame>
 
              <!-- Priority Chart -->
-            <Frame Grid.Row="1" Grid.Column="1" Style="{DynamicResource ChartFrame}" Padding="30">
+            <Frame Grid.Row="1" Grid.Column="1" Style="{DynamicResource ChartFrame}" Padding="{OnPlatform iOS=30, Android=40}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
