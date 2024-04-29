@@ -116,6 +116,10 @@ namespace ToDoListApp.Views
             {
                 todoItem.Priority = "High";
             }
+            else if (todoItem.Priority == "3")
+            {
+                todoItem.Priority = "Critical";
+            }
             else
             {
                 todoItem.Priority = "";
