@@ -21,7 +21,7 @@
            </Grid.ColumnDefinitions>
 
             <!-- Title -->
-             <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="3"/>
+            <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="3"/>
 
             <!-- Labels -->
             <Frame Grid.Row="1" Grid.Column="0" Style="{DynamicResource ChartFrame}">
