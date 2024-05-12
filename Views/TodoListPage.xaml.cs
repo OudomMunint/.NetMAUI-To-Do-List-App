@@ -3,7 +3,7 @@ using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 using CommunityToolkit.Maui.Core.Platform;
-//using AddressBook;
+using System;
 
 namespace ToDoListApp.Views
 {
@@ -17,8 +17,9 @@ namespace ToDoListApp.Views
         public TodoListPage()
         {
             InitializeComponent();
+            todolistlist = listView;
 
-            Application.Current.RequestedThemeChanged += (s, a) =>
+        Application.Current.RequestedThemeChanged += (s, a) =>
             {
                 if (Application.Current.RequestedTheme == darkmode)
                 {
@@ -29,6 +30,8 @@ namespace ToDoListApp.Views
             };
         }
 
+        public ListView todolistlist;
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -36,6 +39,26 @@ namespace ToDoListApp.Views
             GetDoneItems();
             await GetItemsWithAttachment();
             await UpdateListView();
+            await IsEmptyList();
+        }
+
+        public bool EmptyList { get; set; }
+        private async Task IsEmptyList()
+        {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            var items = await database.GetItemsAysnc();
+            if (items.Count == 0)
+            {
+                VStack.IsVisible = true;
+                listView.IsVisible = false;
+                Console.WriteLine("List is empty");
+            }
+            else
+            {
+                listView.IsVisible = true;
+                VStack.IsVisible = false;
+                Console.WriteLine("List is not empty");
+            }
         }
 
         private async Task GetItemsWithAttachment()
@@ -48,6 +71,12 @@ namespace ToDoListApp.Views
                 if (item.Attachment != null)
                 {
                     item.HasAttachment = true;
+                    await database.SaveItemAsync(item);
+                }
+
+                else
+                {
+                    item.HasAttachment = false;
                     await database.SaveItemAsync(item);
                 }
             }
@@ -63,6 +92,8 @@ namespace ToDoListApp.Views
 
         async void OnItemAdded(object sender, EventArgs e)
         {
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+
             await Navigation.PushAsync(new TodoitemPage
             {
                 BindingContext = new Todoitem()
@@ -93,6 +124,7 @@ namespace ToDoListApp.Views
                 }
 
                 listView.ItemsSource = null;
+                await IsEmptyList();
                 await UpdateListView();
             }
         }
@@ -182,7 +214,8 @@ namespace ToDoListApp.Views
                         await database.DeleteItemAsync(item);
                     }
 
-                    // Refresh ListView 
+                    // Refresh ListView
+                    await IsEmptyList();
                     await UpdateListView();
                 }
             }

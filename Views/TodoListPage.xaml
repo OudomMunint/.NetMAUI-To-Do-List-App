@@ -61,13 +61,19 @@
             </Grid>
         </Frame>
 
+        <VerticalStackLayout x:Name="VStack" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+            <Image Source="checklist_icon.png" Aspect="AspectFit" WidthRequest="200" HeightRequest="200" Margin="0,0,0,30"/>
+            <Label Text="Nothing to show yet, Create an item by tapping on +" HorizontalTextAlignment="Center" FontFamily="Inter-Regular" FontSize="14"/>
+            <Label Text="Or go into settings and generate some dummy data!" HorizontalTextAlignment="Center" FontSize="14" FontFamily="Inter-Regular"/>
+        </VerticalStackLayout>
+
         <ListView x:Name="listView" Grid.Row="2" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None"
                   CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}" IsPullToRefreshEnabled="True" Refreshing="RefreshView_Refreshing">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Border Padding="5,0,0,0" Margin="5">
-                            <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid RowSpacing="0" ColumnSpacing="0" Margin="-5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="35" />
                                     <RowDefinition Height="30" />
@@ -82,7 +88,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Spacing="5">
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="15,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="15,10,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
                                        Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" />
 
                                 <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
@@ -92,23 +98,8 @@
 
                                 </HorizontalStackLayout>
 
-                                <CheckBox Grid.Row="1" Grid.Column="0" Margin="-6,0,0,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
-
-                                <Label Grid.ColumnSpan="5" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
-                                       Margin="15,2,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250"
-                                       Text="{Binding Notes}" FontFamily="Inter-Regular" />
-
-                                <Frame Grid.Row="1" Grid.Column="1" WidthRequest="100" Padding="7,0,0,0" Margin="-10,0,10,0" HeightRequest="25" BackgroundColor="{DynamicResource Gray100}" BorderColor="Transparent">
-                                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="90" TextColor="Black" FontFamily="Inter-Regular">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </Frame>
-
-                                <Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,0,40,0" HeightRequest="25" BorderColor="Transparent">
+                                <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,10,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
+                                <Frame BorderColor="Transparent" Grid.Column="0" HasShadow="False" Grid.RowSpan="5" Margin="-10,-10,0,-20" WidthRequest="25" HorizontalOptions="Start" BackgroundColor="LightGreen">
                                     <Frame.Triggers>
 
                                         <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="High">
@@ -126,6 +117,49 @@
                                         <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Critical">
                                             <Setter Property="BackgroundColor" Value="{DynamicResource CriticalPriorityColor}" />
                                         </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="">
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                </Frame>
+
+                                <Label Grid.ColumnSpan="5" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
+                                       Margin="15,10,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250"
+                                       Text="{Binding Notes}" FontFamily="Inter-Regular" />
+
+                                <Frame Grid.Row="1" Grid.Column="1" WidthRequest="100" Padding="6,0,0,0" Margin="-10,10,15,0" HeightRequest="25" BackgroundColor="{DynamicResource Gray100}" BorderColor="Transparent">
+                                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="90" TextColor="Black" FontFamily="Inter-Regular">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Frame>
+
+                                <!--<Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,10,40,0" HeightRequest="25" BorderColor="Transparent">
+                                    <Frame.Triggers>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="High">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource HighPriorityColor}" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Medium">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource MediumPriorityColor}" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Low">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource LowPriorityColor}" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Critical">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource CriticalPriorityColor}" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="">
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </DataTrigger>
                                     </Frame.Triggers>
                                     <Label HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black" FontFamily="Inter-Regular" Text="{Binding Priority}">
                                         <Label.Triggers>
@@ -134,9 +168,9 @@
                                             </DataTrigger>
                                         </Label.Triggers>
                                     </Label>
-                                </Frame>
+                                </Frame>-->
 
-                                <Image Grid.Row="1" Grid.Column="4" HeightRequest="50" Margin="0,0,10,0" Aspect="AspectFit" x:Name="Doneimg">
+                                <!--<Image Grid.Row="1" Grid.Column="4" HeightRequest="50" Margin="0,0,10,0" Aspect="AspectFit" x:Name="Doneimg">
                                     <Image.Triggers>
                                         <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
                                             <Setter Property="Source" Value="done.png" />
@@ -145,7 +179,7 @@
                                             <Setter Property="Source" Value="notdone.png" />
                                         </DataTrigger>
                                     </Image.Triggers>
-                                </Image>
+                                </Image>-->
                             </Grid>
                         </Border>
                     </ViewCell>

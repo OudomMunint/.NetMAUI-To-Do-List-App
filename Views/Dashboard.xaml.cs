@@ -10,18 +10,33 @@ using System.Threading.Tasks;
 
 namespace ToDoListApp.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Skip)]
     public partial class Dashboard : ContentPage
     {
         private int totalItems;
         private int doneItems;
         private int notDone;
         private ChartEntry[] entries;
+        private int itemsWithAttachment;
+        private int itemsWoAttachment;
+
+        public string ItemHasAttachment { get; set; }
 
         public Dashboard()
         {
             InitializeComponent();
             GetTotalItems();
-            
+        }
+
+        private async Task CountItemsHasAttachment()
+        {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            var todoItem = (Todoitem)BindingContext;
+            ItemHasAttachment = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.HasAttachment == true).ToString();
+            itemsWithAttachment = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.HasAttachment == true);
+            itemsWoAttachment = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.HasAttachment == false);
+
+            //hasattcount.Text = $"📎 {ItemHasAttachment} Has Attachments";
         }
 
         private async Task UpdateListView()
@@ -36,9 +51,11 @@ namespace ToDoListApp.Views
             await UpdateListView();
             GetTotalItems();
             GetDoneItems();
+            await CountItemsHasAttachment();
             await Task.Delay(100);
             CreateChart1();
             CreateChart2();
+            CreateChart3();
             UpdateLabel();
         }
 
@@ -72,16 +89,17 @@ namespace ToDoListApp.Views
         private void GetTotalItems()
         {
             totalItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-            Console.WriteLine(totalItems);
         }
 
         private void GetDoneItems()
         {
             doneItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Done);
             notDone = totalItems - doneItems;
+        }
 
-            Console.WriteLine(doneItems);
-            Console.WriteLine(notDone);
+        void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+        {
+            Navigation.PushAsync(new TodoListPage());
         }
 
         private void CreateChart1()
@@ -93,54 +111,44 @@ namespace ToDoListApp.Views
 
             entries = new[]
             {
-        new ChartEntry(lowPriorityItems)
-        {
-            Label = "Low",
-            ValueLabel = lowPriorityItems.ToString(),
-            Color = SKColor.Parse("#00ff00")
-        },
+                new ChartEntry(criticalPriorityItems)
+                {
+                    Label = "Critical",
+                    //ValueLabel = criticalPriorityItems.ToString(),
+                    Color = SKColor.Parse("#FF2c2c")
+                },
 
-        new ChartEntry(mediumPriorityItems)
-        {
-            Label = "Medium",
-            ValueLabel = mediumPriorityItems.ToString(),
-            Color = SKColor.Parse("#FFFF00")
-        },
+                new ChartEntry(lowPriorityItems)
+                {
+                    Label = "Low",
+                    //ValueLabel = lowPriorityItems.ToString(),
+                    Color = SKColor.Parse("#00ff00")
+                },
 
-        new ChartEntry(highPriorityItems)
-        {
-            Label = "High",
-            ValueLabel = highPriorityItems.ToString(),
-            Color = SKColor.Parse("#FFA500")
-        },
+                new ChartEntry(mediumPriorityItems)
+                {
+                    Label = "Medium",
+                    //ValueLabel = mediumPriorityItems.ToString(),
+                    Color = SKColor.Parse("#D5B60A")
+                },
 
-        new ChartEntry(criticalPriorityItems)
-        {
-            Label = "Critical",
-            ValueLabel = criticalPriorityItems.ToString(),
-            Color = SKColor.Parse("#FF2c2c")
-        }
-    };
+                new ChartEntry(highPriorityItems)
+                {
+                    Label = "High",
+                    //ValueLabel = highPriorityItems.ToString(),
+                    Color = SKColor.Parse("#FFA500")
+                },
+            };
 
             // Check if there are any items in the list
             if (entries.Any(entry => entry.Value > 0))
             {
-                chartView.Chart = new PieChart
-                {
-                    Entries = entries,
-                    IsAnimated = true,
-                    BackgroundColor = SKColor.Parse("#00FFFFFF"),
-                    LabelMode = LabelMode.None
-                };
-
-                chartView3.Chart = new RadarChart
+                chartView.Chart = new RadarChart
                 {
                     Entries = entries,
                     IsAnimated = false,
                     BackgroundColor = SKColor.Parse("#00FFFFFF"),
-                    LabelTextSize = 0,
-                    BorderLineColor = SKColors.Gray
-                    
+                    //LabelMode = LabelMode.None
                 };
             }
             else
@@ -148,13 +156,13 @@ namespace ToDoListApp.Views
                 // Create an empty chart with a placeholder entry
                 entries = new[]
                 {
-            new ChartEntry(1)
-            {
-                Label = "",
-                ValueLabel = "0",
-                Color = SKColor.Parse("#CCCCCC")
-            }
-        };
+                    new ChartEntry(1)
+                    {
+                        Label = "",
+                        ValueLabel = "0",
+                        Color = SKColor.Parse("#CCCCCC")
+                    }
+                };
 
                 chartView.Chart = new PieChart
                 {
@@ -164,16 +172,6 @@ namespace ToDoListApp.Views
                     LabelMode = LabelMode.None,
                     Margin = 0
                 };
-
-                chartView3.Chart = new RadarChart
-                {
-                    Entries = entries,
-                    IsAnimated = true,
-                    BackgroundColor = SKColor.Parse("#00FFFFFF"),
-                    //LabelMode = LabelMode.None,
-                    Margin = 0
-                };
-
             }
         }
 
@@ -196,27 +194,28 @@ namespace ToDoListApp.Views
             {
                 labelColor = lightModeColor;
             }
+
             // Check if there are any items in the list
             if (doneItems + notDone > 0)
             {
                 entries = new[]
                 {
-            new ChartEntry(doneItems)
-            {
-                Label = "Completed",
-                ValueLabel = doneItems.ToString(),
-                Color = SKColor.Parse("#2c3e50"),
-                ValueLabelColor = labelColor
-            },
+                    new ChartEntry(doneItems)
+                    {
+                        Label = "Completed",
+                        ValueLabel = doneItems.ToString(),
+                        Color = SKColor.Parse("#2c3e50"),
+                        ValueLabelColor = labelColor
+                    },
 
-            new ChartEntry(notDone)
-            {
-                Label = "Opened",
-                ValueLabel = notDone.ToString(),
-                Color = SKColor.Parse("#ADD8E6"),
-                ValueLabelColor = labelColor
-            }
-        };
+                    new ChartEntry(notDone)
+                    {
+                        Label = "Opened",
+                        ValueLabel = notDone.ToString(),
+                        Color = SKColor.Parse("#ADD8E6"),
+                        ValueLabelColor = labelColor
+                    }
+                };
 
                 chartView2.Chart = new DonutChart
                 {
@@ -224,7 +223,8 @@ namespace ToDoListApp.Views
                     IsAnimated = true,
                     BackgroundColor = SKColor.Parse("#00FFFFFF"),
                     LabelTextSize = 30,
-                    LabelColor = labelColor
+                    LabelColor = labelColor,
+                    GraphPosition = GraphPosition.Center
                 };
             }
             else
@@ -232,22 +232,22 @@ namespace ToDoListApp.Views
                 // Create an empty chart with a placeholder entry
                 entries = new[]
                 {
-            new ChartEntry(1)
-            {
-                Label = "Completed Tasks",
-                ValueLabel = "0",
-                Color = SKColor.Parse("#CCCCCC"),
-                ValueLabelColor = labelColor
-            },
+                    new ChartEntry(1)
+                    {
+                        Label = "Completed Tasks",
+                        ValueLabel = "0",
+                        Color = SKColor.Parse("#CCCCCC"),
+                        ValueLabelColor = labelColor
+                    },
 
-            new ChartEntry(1)
-            {
-                Label = "Opened Tasks",
-                ValueLabel = "0",
-                Color = SKColor.Parse("#CCCCCC"),
-                ValueLabelColor = labelColor
-            }
-        };
+                    new ChartEntry(1)
+                    {
+                        Label = "Opened Tasks",
+                        ValueLabel = "0",
+                        Color = SKColor.Parse("#CCCCCC"),
+                        ValueLabelColor = labelColor
+                    }
+                };
 
                 chartView2.Chart = new DonutChart
                 {
@@ -255,14 +255,99 @@ namespace ToDoListApp.Views
                     IsAnimated = true,
                     BackgroundColor = SKColor.Parse("#00FFFFFF"),
                     LabelTextSize = 30,
-                    LabelColor = labelColor
+                    LabelColor = labelColor,
+                    GraphPosition = GraphPosition.Center
                 };
             }
         }
 
-        void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+        private void CreateChart3()
         {
-            Navigation.PushAsync(new TodoListPage());
+            AppTheme darkmode = AppTheme.Dark;
+
+            // Define colors for dark mode and light mode
+            SKColor darkModeColor = SKColor.Parse("#f7f9fa");
+            SKColor lightModeColor = SKColor.Parse("#070808");
+
+            // Determine which color to use based on the current theme
+            SKColor labelColor = SKColor.Parse("#FFFFFF");
+
+            if (Application.Current.RequestedTheme == darkmode)
+            {
+                labelColor = darkModeColor;
+            }
+            else
+            {
+                labelColor = lightModeColor;
+            }
+
+            // Check if there are any items in the list
+            if (itemsWithAttachment + itemsWoAttachment > 0)
+            {
+                entries = new[]
+                {
+                    new ChartEntry(itemsWithAttachment)
+                    {
+                        Label = "Has Attachment",
+                        ValueLabel = itemsWithAttachment.ToString(),
+                        Color = SKColor.Parse("#ADD8E6"),
+                        ValueLabelColor = labelColor,
+                    },
+
+                    new ChartEntry(itemsWoAttachment)
+                    {
+                        Label = "No Attachment",
+                        ValueLabel = itemsWoAttachment.ToString(),
+                        Color = SKColor.Parse("#2c3e50"),
+                        ValueLabelColor = labelColor,
+                    }
+                };
+
+                chartView3.Chart = new PieChart
+                {
+                    Entries = entries,
+                    IsAnimated = true,
+                    BackgroundColor = SKColor.Parse("#00FFFFFF"),
+                    LabelTextSize = 30,
+                    LabelColor = labelColor,
+                    LabelMode = LabelMode.LeftAndRight,
+                    GraphPosition = GraphPosition.Center
+                };
+            }
+            else
+            {
+                // Create an empty chart with a placeholder entry
+                entries = new[]
+                {
+                    new ChartEntry(1)
+                    {
+                        Label = "Has Attachment",
+                        ValueLabel = "0",
+                        Color = SKColor.Parse("#CCCCCC"),
+                        ValueLabelColor = labelColor,
+                    },
+
+                    new ChartEntry(1)
+                    {
+                        Label = "No Attachment",
+                        ValueLabel = "0",
+                        Color = SKColor.Parse("#CCCCCC"),
+                        ValueLabelColor = labelColor,
+
+                    }
+                };
+
+                chartView3.Chart = new PieChart 
+                {
+                    Entries = entries,
+                    IsAnimated = true,
+                    BackgroundColor = SKColor.Parse("#00FFFFFF"),
+                    LabelTextSize = 30,
+                    LabelColor = labelColor,
+                    LabelMode = LabelMode.LeftAndRight,
+                    GraphPosition = GraphPosition.Center
+                };
+            }
         }
     }
 }

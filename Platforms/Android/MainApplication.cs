@@ -15,6 +15,9 @@ using Android.Runtime;
 [assembly: UsesFeature("android.hardware.camera", Required = true)]
 [assembly: UsesFeature("android.hardware.camera.autofocus", Required = true)]
 
+// Haptic feedback permission
+[assembly: UsesPermission(Android.Manifest.Permission.Vibrate)]
+
 namespace ToDoListApp;
 
 [Application]
