@@ -197,7 +197,7 @@
                                                 </DataTrigger>
                                             </Image.Triggers>
                                         </Image>
-                                        <Label VerticalTextAlignment="Center" FontAutoScalingEnabled="False" FontFamily="Inter-Bold" TextColor="White">
+                                        <Label VerticalTextAlignment="Center" FontAutoScalingEnabled="False" FontFamily="Inter-Bold" TextColor="{AppThemeBinding Dark=White, Light=Black}">
                                             <Label.Triggers>
                                                 <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="True">
                                                     <Setter Property="Text" Value="Done" />
