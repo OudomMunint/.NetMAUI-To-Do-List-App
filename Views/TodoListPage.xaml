@@ -73,7 +73,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <Border Padding="5,0,0,0" Margin="5">
-                            <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid RowSpacing="0" ColumnSpacing="0" Margin="-5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="35" />
                                     <RowDefinition Height="30" />
@@ -88,7 +88,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Spacing="5">
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="15,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="15,10,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
                                        Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" />
 
                                 <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
@@ -98,23 +98,52 @@
 
                                 </HorizontalStackLayout>
 
-                                <CheckBox Grid.Row="1" Grid.Column="0" Margin="-6,0,0,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
+                                <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,0,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
 
-                                <Label Grid.ColumnSpan="5" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
-                                       Margin="15,2,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250"
-                                       Text="{Binding Notes}" FontFamily="Inter-Regular" />
+                                <Frame BorderColor="Transparent" Grid.Column="0" HasShadow="False" Grid.RowSpan="5" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}" WidthRequest="25" HorizontalOptions="Start">
+                                    <Frame.Triggers>
 
-                                <Frame Grid.Row="1" Grid.Column="1" WidthRequest="100" Padding="7,0,0,0" Margin="-10,0,10,0" HeightRequest="25" BackgroundColor="{DynamicResource Gray100}" BorderColor="Transparent">
-                                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="90" TextColor="Black" FontFamily="Inter-Regular">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="High">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource HighPriorityColor}" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Medium">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource MediumPriorityColor}" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Low">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource LowPriorityColor}" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Critical">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource CriticalPriorityColor}" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="">
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
                                 </Frame>
 
-                                <Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,0,40,0" HeightRequest="25" BorderColor="Transparent">
+                                <Label Grid.ColumnSpan="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
+                                       Margin="15,5,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250" HeightRequest="{OnPlatform iOS=20}"
+                                       Text="{Binding Notes}" FontFamily="Inter-Regular" />
+
+                                <Frame Grid.Row="2" Grid.Column="1" WidthRequest="130" Padding="6,0,0,0" Margin="20,10,15,0" HeightRequest="25" BackgroundColor="Transparent" BorderColor="Gray">
+                                    <HorizontalStackLayout>
+                                    <Image Source="calendar.png" Aspect="AspectFit" MaximumWidthRequest="15" Margin="0,0,4,0"/>
+                                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}" FontFamily="Inter-Regular">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <!--<Span Text="📅 " FontSize="Medium"/>  Emoji--> 
+                                                    <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                </Frame>
+
+                                <!--<Frame Grid.Row="1" Grid.Column="2" WidthRequest="70" Padding="0,0,0,0" Margin="0,10,40,0" HeightRequest="25" BorderColor="Transparent">
                                     <Frame.Triggers>
 
                                         <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="High">
@@ -144,18 +173,42 @@
                                             </DataTrigger>
                                         </Label.Triggers>
                                     </Label>
-                                </Frame>
+                                </Frame>-->
 
-                                <Image Grid.Row="1" Grid.Column="4" HeightRequest="50" Margin="0,0,10,0" Aspect="AspectFit" x:Name="Doneimg">
-                                    <Image.Triggers>
-                                        <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
-                                            <Setter Property="Source" Value="done.png" />
+                                <Frame Grid.Row="2" Grid.Column="3" HeightRequest="25" Margin="0,10,0,0" Padding="5" BorderColor="Gray">
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Done}" Value="True">
+                                            <Setter Property="WidthRequest" Value="80" />
+                                            <Setter Property="Margin" Value="0,10,15,0"/>
                                         </DataTrigger>
-                                        <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="False">
-                                            <Setter Property="Source" Value="notdone.png" />
+
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Done}" Value="False">
+                                            <Setter Property="WidthRequest" Value="100" />
                                         </DataTrigger>
-                                    </Image.Triggers>
-                                </Image>
+                                    </Frame.Triggers>
+                                    <HorizontalStackLayout>
+                                        <Image HeightRequest="20" Aspect="AspectFit" x:Name="Doneimg" Margin="0,0,2,0">
+                                            <Image.Triggers>
+                                                <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="True">
+                                                    <Setter Property="Source" Value="done.png" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Image" Binding="{Binding Done}" Value="False">
+                                                    <Setter Property="Source" Value="notdone.png" />
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                        <Label VerticalTextAlignment="Center" FontAutoScalingEnabled="False" FontFamily="Inter-Bold" TextColor="{AppThemeBinding Dark=White, Light=Black}">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="True">
+                                                    <Setter Property="Text" Value="Done" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="False">
+                                                    <Setter Property="Text" Value="Not done" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                            </Label>
+                                        </HorizontalStackLayout>
+                                </Frame>
                             </Grid>
                         </Border>
                     </ViewCell>

@@ -14,6 +14,7 @@ namespace ToDoListApp.Views
     {
         // dark mode property
         private AppTheme darkmode = AppTheme.Dark;
+
         public TodoListPage()
         {
             InitializeComponent();
