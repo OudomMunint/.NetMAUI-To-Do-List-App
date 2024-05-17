@@ -120,10 +120,9 @@ public partial class Settings : ContentPage
         // Alert
         var userConfirmed = await DisplayAlert("Generate Dummy Data", "This action will generate dummy data and will affect existing To-Do items. Are you sure you want to continue", "Yes", "No");
 
-        await Settings.MakeDummyData();
-
         if (userConfirmed)
         {
+            await Settings.MakeDummyData();
             await DisplayAlert("Success", "Dummy data has been generated", "OK");
         }
     }

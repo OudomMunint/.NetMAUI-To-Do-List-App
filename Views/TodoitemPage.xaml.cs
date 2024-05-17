@@ -17,14 +17,14 @@ namespace ToDoListApp.Views
             InitializeComponent();
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             UpdateToolbarTitle();
             GetAttachmentCount();
         }
 
-        private async void GetAttachmentCount()
+        private void GetAttachmentCount()
         {
             var todoItem = (Todoitem)BindingContext;
 
@@ -211,7 +211,7 @@ namespace ToDoListApp.Views
                     TodoitemDatabase database = await TodoitemDatabase.Instance;
                     todoItem.Attachment = File.ReadAllBytes(localFilePath);
 
-                    Task.Delay(1000);
+                    await Task.Delay(1000);
 
                     attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
 
