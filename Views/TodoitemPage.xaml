@@ -16,9 +16,10 @@
 
             <Label x:Name="itemTitle" Grid.Column="0" TextColor="White" VerticalTextAlignment="Center" FontSize="18" FontFamily="Inter-Regular"/>
 
-            <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="10">
+            <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="5">
                 <ImageButton HorizontalOptions="Start" Source="saveitem.png" Clicked="OnSaveClicked" HeightRequest="25"/>
-                <ImageButton HorizontalOptions="End" Source="menu.png" Clicked="OpenMenu2" HeightRequest="35"/>
+                <ImageButton HorizontalOptions="End" WidthRequest="25" Source="attachment.png" Clicked="AttMenu_Clicked" HeightRequest="35"/>
+                <ImageButton HorizontalOptions="End" Source="menu.png" Clicked="OpenMenu" HeightRequest="35"/>
             </HorizontalStackLayout>
 
         </Grid>
@@ -69,7 +70,7 @@
                 </HorizontalStackLayout>
 
                 <Frame Style="{DynamicResource ToDoItemFrame}" Padding="10" Margin="0,10,0,0" CornerRadius="10">
-                    <Picker x:Name="PriorityPicker" Title="Tap to set priority">
+                    <Picker x:Name="PriorityPicker">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Low</x:String>
@@ -108,36 +109,19 @@
 
             <!--<BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>-->
 
-            <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                    <Label Margin="10,0,10,0"
+                <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Margin="10,0,10,0"
                            HorizontalOptions="Start"
                            VerticalOptions="Center"
                            FontFamily="Inter-Bold"
                            Text="Mark as Done" />
 
-                    <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
+                        <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
 
-                </StackLayout>
-            </Frame>
-
-            <!--<Grid ColumnSpacing="20" RowSpacing="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Grid.Row="0" Grid.Column="0" BackgroundColor="BlueViolet" Clicked="OnSaveClicked" Text="Save" FontFamily="Inter-Regular"/>
-                <Button Grid.Row="0" Grid.Column="1" BackgroundColor="Grey" Clicked="OnCancelClicked" Text="Cancel" FontFamily="Inter-Regular"/>
-                <Button Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Red" Clicked="OnDeleteClicked" Text="Delete" FontFamily="Inter-Regular"/>
-
-            </Grid>-->
-        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
       </ScrollView>
     </ContentPage.Content>
 </ContentPage>
