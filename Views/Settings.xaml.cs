@@ -25,25 +25,7 @@ public partial class Settings : ContentPage
 
     protected override void OnAppearing()
     {
-#if IOS
-        UpdateTitle();
-#endif
         base.OnAppearing();
-    }
-
-    private void UpdateTitle()
-    {
-        TodoListPage todolistapge = new TodoListPage();
-        ListView listView = todolistapge.todolistlist;
-
-        int totalItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-        string task = "Task";
-
-        if (totalItems != 1)
-        {
-            task += "s";
-        }
-        Title = $"🏠 {totalItems} Opened";
     }
 
     // Dark Mode
@@ -111,8 +93,6 @@ public partial class Settings : ContentPage
 
                 await database.SaveItemAsync(item);
             }
-
-            // await UpdateListView();
         }
 
     private async void GenerateData_Button_Pressed(System.Object sender, System.EventArgs e)
