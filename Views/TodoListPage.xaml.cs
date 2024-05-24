@@ -13,21 +13,27 @@ namespace ToDoListApp.Views
     public partial class TodoListPage : ContentPage
     {
         // dark mode property
-        private AppTheme darkmode = AppTheme.Dark;
+        private readonly AppTheme darkmode = AppTheme.Dark;
 
+        [Obsolete]
         public TodoListPage()
         {
             InitializeComponent();
             todolistlist = listView;
 
-        Application.Current.RequestedThemeChanged += (s, a) =>
+            Application.Current.RequestedThemeChanged += (s, a) =>
             {
                 if (Application.Current.RequestedTheme == darkmode)
                 {
                     // set searchbar background color to DarkGH from Colors.xaml
-                    SearchContainer.BackgroundColor = (Color)Application.Current.Resources["DarkGH"];
+                    SearchContainer.BackgroundColor = Color.FromHex("#161B22");
+                    listView.BackgroundColor = Colors.Black;
                 }
 
+                else
+                {
+                    listView.BackgroundColor = Colors.White;
+                }
             };
         }
 

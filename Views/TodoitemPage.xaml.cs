@@ -22,6 +22,37 @@ namespace ToDoListApp.Views
             base.OnAppearing();
             UpdateToolbarTitle();
             GetAttachmentCount();
+            SetSelectedPriorityLabel();
+        }
+
+        private void SetSelectedPriorityLabel()
+        {
+            var todoItem = (Todoitem)BindingContext;
+
+            if (todoItem.Priority == "Low")
+            {
+                PriorityPicker.Title = "Low";
+                PriorityPicker.SelectedIndex = 0;
+            }
+            else if (todoItem.Priority == "Medium")
+            {
+                PriorityPicker.Title = "Medium";
+                PriorityPicker.SelectedIndex = 1;
+            }
+            else if (todoItem.Priority == "High")
+            {
+                PriorityPicker.Title = "High";
+                PriorityPicker.SelectedIndex = 2;
+            }
+            else if (todoItem.Priority == "Critical")
+            {
+                PriorityPicker.Title = "Critical";
+                PriorityPicker.SelectedIndex = 3;
+            }
+            else
+            {
+                PriorityPicker.Title = "Select Priority";
+            }
         }
 
         private void GetAttachmentCount()
@@ -220,26 +251,33 @@ namespace ToDoListApp.Views
             }
         }
 
-        public async void OpenMenu2(object sender, EventArgs e)
+        public async void OpenMenu(object sender, EventArgs e)
         {
-            string addatachment = "Take Photo";
-            string uploadatachment = "Upload Attachment";
             string delete = "Delete Item";
             string clear = "Clear Form";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { addatachment, uploadatachment, delete, clear });
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { delete, clear });
 
             if (action != null && action.Equals(delete))
             {
                 OnDeleteClicked(sender, e);
             }
-            else if (action != null && action.Equals(addatachment))
-            {
-                TakePhoto(sender, e);
-            }
             else if (action != null && action.Equals(clear))
             {
                 OnClearClicked(sender, e);
+            }
+        }
+
+        public async void AttMenu_Clicked(object sender, EventArgs e)
+        {
+            string addatachment = "Take Photo";
+            string uploadatachment = "Upload Attachment";
+
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { addatachment, uploadatachment });
+
+            if (action != null && action.Equals(addatachment))
+            {
+                TakePhoto(sender, e);
             }
             else if (action != null && action.Equals(uploadatachment))
             {
