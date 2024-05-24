@@ -27,5 +27,7 @@ namespace ToDoListApp.Models
         public Byte[] Attachment { get; set; }
 
         public bool HasAttachment { get; set; }
+
+        public bool IsPinned { get; set; }
     }
 }

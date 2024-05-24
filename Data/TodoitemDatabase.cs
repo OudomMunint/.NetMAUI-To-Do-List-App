@@ -67,6 +67,11 @@ namespace ToDoListApp.Data
             return Database.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM [TodoItem] WHERE [HasAttachment] = '" + hasAttachment + "'");
         }
 
+        public Task<Todoitem> GetAllPinnedItemsAsync()
+        {
+            return Database.Table<Todoitem>().Where(i => i.IsPinned == true).FirstOrDefaultAsync();
+        }
+
         public Task<Todoitem> GetItemAsync(int id)
         {
             return Database.Table<Todoitem>().Where(i => i.ID == id).FirstOrDefaultAsync();
