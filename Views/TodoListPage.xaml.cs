@@ -15,11 +15,12 @@ namespace ToDoListApp.Views
         // dark mode property
         private readonly AppTheme darkmode = AppTheme.Dark;
 
-        [Obsolete]
         public TodoListPage()
         {
             InitializeComponent();
             todolistlist = listView;
+
+            NavigationPage.SetBackButtonTitle(this, " ");
 
             Application.Current.RequestedThemeChanged += (s, a) =>
             {
