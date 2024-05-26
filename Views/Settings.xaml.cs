@@ -73,27 +73,27 @@ public partial class Settings : ContentPage
         }
     }
     private static async Task MakeDummyData()
+    {
+        TodoitemDatabase database = await TodoitemDatabase.Instance;
+
+        string[] priorities = { "Low", "Medium", "High", "Critical" };
+
+        Random random = new Random();
+
+        for (int i = 0; i < 10; i++)
         {
-            TodoitemDatabase database = await TodoitemDatabase.Instance;
-
-            string[] priorities = ["Low", "Medium", "High", "Critical"];
-
-            Random random = new();
-
-            for (int i = 0; i < 10; i++)
+            var item = new Todoitem
             {
-                var item = new Todoitem
-                {
-                    Name = $"Task {i + 1}",
-                    Notes = $"Description {i + 1}",
-                    Priority = priorities[random.Next(priorities.Length)],
-                    Date = DateTime.Now.AddDays(i),
-                    Done = i % 2 == 0
-                };
+                Name = $"Task {i + 1}",
+                Notes = $"Description {i + 1}",
+                Priority = priorities[random.Next(priorities.Length)],
+                Date = DateTime.Now.AddDays(-i),
+                Done = i % 2 == 0
+            };
 
-                await database.SaveItemAsync(item);
-            }
+            await database.SaveItemAsync(item);
         }
+    }
 
     private async void GenerateData_Button_Pressed(System.Object sender, System.EventArgs e)
     {
