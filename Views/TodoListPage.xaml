@@ -12,18 +12,22 @@
     <NavigationPage.TitleView>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label x:Name="labeltitle" Grid.Column="0" TextColor="White" VerticalOptions="Center" FontFamily="Inter-Regular"
+            <ScrollView x:Name="ScrollViewAnimate" Grid.Column="0" Orientation="Horizontal" HorizontalScrollBarVisibility="Always" VerticalOptions="CenterAndExpand">
+                <Label x:Name="labeltitle" TextColor="White" VerticalOptions="Center" FontFamily="Inter-Regular"
                    VerticalTextAlignment="Center" FontSize="16" HorizontalOptions="Start"/>
+            </ScrollView>
             <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="30" Clicked="MarkSelectedItemsComplete"/>
             <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="30" HeightRequest="25" Clicked="DeleteSelectedItems"/>
             <ImageButton Grid.Column="3" Source="icon.png" WidthRequest="30" HeightRequest="25" Clicked="OnItemAdded"/>
-            <ImageButton Grid.Column="4" Source="menu.png" WidthRequest="30" Clicked="OpenMenu"/>
+            <ImageButton Grid.Column="4" Source="prioritytoolbar.png" WidthRequest="30" HeightRequest="30" Clicked="SetSelectedItemPriority"/>
+            <ImageButton Grid.Column="5" Source="menu.png" WidthRequest="30" Clicked="OpenMenu"/>
         </Grid>
     </NavigationPage.TitleView>
 
@@ -36,7 +40,7 @@
 
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Frame x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent}" Grid.Row="1" Margin="5" Padding="5" Style="{StaticResource CustomFrame}" >
+        <Frame x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent, Android={StaticResource OffWhite2}}" Grid.Row="1" Margin="10" Padding="5" Style="{StaticResource CustomFrame}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

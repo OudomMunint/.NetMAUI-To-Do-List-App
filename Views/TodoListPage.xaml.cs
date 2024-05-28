@@ -340,6 +340,36 @@ namespace ToDoListApp.Views
             }
         }
 
+        async void SetSelectedItemPriority(object sender, EventArgs e)
+        {
+            var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
+
+            if(!selectedItems.Any())
+            {
+                await DisplayAlert("No Items Selected", "Please select items to set priority", "OK");
+            }
+            else
+            {
+                var action = await Application.Current.MainPage.DisplayActionSheet("Set Priority", "Cancel", null, new[] { "Low", "Medium", "High", "Critical" });
+
+                if (action != null)
+                {
+                    foreach (var item in selectedItems)
+                    {
+                        item.Priority = action;
+                        item.IsSelected = false; // Uncheck
+                    }
+
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    foreach (var item in selectedItems)
+                    {
+                        await database.SaveItemAsync(item);
+                    }
+                    await UpdateListView();
+                }
+            }
+        }
+
         private async void RefreshView_Refreshing(object sender, EventArgs e)
         {
             listView.IsRefreshing = true;
