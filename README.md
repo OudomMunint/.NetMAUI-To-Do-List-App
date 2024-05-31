@@ -39,24 +39,24 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 # Screenshots
 ### iOS, iPhone 15
 <h1 float="center">
-  <img src="Media/dashboarddark.PNG" style="height:700px; width:370" />
-  <img src="Media/dashboardlight.PNG" style="height:700px; width:370" />
+  <img src="Media/iosdashdark.PNG" style="height:700px; width:330" />
+  <img src="Media/iosdashlight.PNG" style="height:700px; width:330" />
 </h1>
 
 <h1 float="center">
-  <img src="Media/homescreendark.png" style="height:700px; width:360" />
-  <img src="Media/homescreenlight.png" style="height:700px; width:360" />
+  <img src="Media/ioshomedark.png" style="height:700px; width:330" />
+  <img src="Media/ioshomelight.png" style="height:700px; width:330" />
 </h1>
 
 ### Android, Galaxy Z Flip 4
 <h1 float="center">
-  <img src="Media/ad1.png" style="height:700px; width:340" />
-  <img src="Media/ad2.png" style="height:700px; width:340" />
+  <img src="Media/addashlight.jpg" style="height:700px; width:300" />
+  <img src="Media/adhomelight.jpg" style="height:700px; width:300" />
 </h1>
 
 ### Android & iOS, Galaxy Z Flip 4 / iPhone 15
 <h1 float="center">
-  <img src="Media/adatt.jpeg" style="height:700px; width:340" />
+  <img src="Media/adatt.jpeg" style="height:700px; width:310" />
   <img src="Media/iosatt.jpeg" style="height:700px; width:340" />
 </h1>
 
