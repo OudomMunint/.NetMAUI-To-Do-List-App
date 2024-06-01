@@ -14,6 +14,7 @@ namespace ToDoListApp.Views
     public partial class Dashboard : ContentPage
     {
         private int totalItems;
+        private int pinnedItems;
         private int doneItems;
         private int notDone;
         private ChartEntry[] entries;
@@ -70,8 +71,9 @@ namespace ToDoListApp.Views
 
         private void UpdateLabel()
         {
+            int pinnedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.IsPinned);
             int totalTodoItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-            todoitems.Text = $"📋 {totalItems} Total";
+            todoitems.Text = $"📋 {totalItems} Total 📌 {pinnedItems} Pinned";
 
             int lowPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Low");
             lowpriority.Text = $"🟢 {lowPriorityItems} Low";
