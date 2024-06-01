@@ -51,6 +51,11 @@ namespace ToDoListApp.Views
             await GetPinnedItems();
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+        }
+
         public bool EmptyList { get; set; }
         private async Task IsEmptyList()
         {
@@ -276,9 +281,10 @@ namespace ToDoListApp.Views
         {
             string sortbydate = "Most Recent";
             string sortbypriority = "Highest Priority";
-            string clearsorting = "Clear Sorting"; // Add clear sorting option
+            string clearsorting = "Clear Sorting";
+            string sortbypinned = "Pinned";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet("Sorting", "Cancel", null, new[] { sortbydate, sortbypriority, clearsorting });
+            var action = await Application.Current.MainPage.DisplayActionSheet("Sorting", "Cancel", null, new[] { sortbydate, sortbypriority, sortbypinned, clearsorting });
 
             if (action != null && action.Equals(sortbydate))
             {
@@ -295,6 +301,11 @@ namespace ToDoListApp.Views
                 // Reset ListView
                 listView.ItemsSource = ((IEnumerable<Todoitem>)listView.ItemsSource).ToList();
                 await UpdateListView();
+            }
+            else if (action != null && action.Equals(sortbypinned))
+            {
+                var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.IsPinned);
+                listView.ItemsSource = sortedItems.ToList();
             }
         }
 
@@ -373,6 +384,57 @@ namespace ToDoListApp.Views
                     TodoitemDatabase database = await TodoitemDatabase.Instance;
                     foreach (var item in selectedItems)
                     {
+                        await database.SaveItemAsync(item);
+                    }
+                    await UpdateListView();
+                }
+            }
+        }
+
+        async void SetItemPinned(object sender, EventArgs e)
+        {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
+            bool selectedItemsPinned = selectedItems.Any(item => item.IsPinned == true);
+            bool selectedItemsUnpinned = selectedItems.Any(item => item.IsPinned == false);
+
+            if (!selectedItems.Any())
+            {
+                await DisplayAlert("No Items Selected", "Please select items to pin", "OK");
+                return;
+            }
+
+            string alertTitleForPinned = "Pin items";
+            string alertMessageForPinned = "Do you want to pin all selected items?";
+            string alertTitleForUnpinned = "Unpin items";
+            string alertMessageForUnpinned = "Do you want to unpin all selected items?";
+
+            //Unpin
+            if (selectedItemsPinned)
+            {
+                bool confirmed = await DisplayAlert(alertTitleForUnpinned, alertMessageForUnpinned, "Yes", "No");
+                if (confirmed)
+                {
+                    foreach (var item in selectedItems)
+                    {
+                        item.IsPinned = false;
+                        item.IsSelected = false;
+                        await database.SaveItemAsync(item);
+                    }
+                    await UpdateListView();
+                }
+            }
+
+            //Pin
+            if (selectedItemsUnpinned)
+            {
+                bool confirmed2 = await DisplayAlert(alertTitleForPinned, alertMessageForPinned, "Yes", "No");
+                if (confirmed2)
+                {
+                    foreach (var item in selectedItems)
+                    {
+                        item.IsPinned = true;
+                        item.IsSelected = false;
                         await database.SaveItemAsync(item);
                     }
                     await UpdateListView();
