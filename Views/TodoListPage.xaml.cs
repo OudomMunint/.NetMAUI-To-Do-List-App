@@ -48,6 +48,7 @@ namespace ToDoListApp.Views
             await GetItemsWithAttachment();
             await UpdateListView();
             await IsEmptyList();
+            await GetPinnedItems();
         }
 
         public bool EmptyList { get; set; }
@@ -67,6 +68,15 @@ namespace ToDoListApp.Views
                 VStack.IsVisible = false;
                 Console.WriteLine("List is not empty");
             }
+        }
+
+        private async Task GetPinnedItems()
+        {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            var items = await database.GetItemsAysnc();
+
+            var pinnedItems = items.Count(item => item.IsPinned);
+            Console.WriteLine("Pinned Items: " + pinnedItems);
         }
 
         private async Task GetItemsWithAttachment()

@@ -19,10 +19,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ScrollView x:Name="ScrollViewAnimate" Grid.Column="0" Orientation="Horizontal" HorizontalScrollBarVisibility="Always" VerticalOptions="CenterAndExpand">
-                <Label x:Name="labeltitle" TextColor="White" VerticalOptions="Center" FontFamily="Inter-Regular"
-                   VerticalTextAlignment="Center" FontSize="16" HorizontalOptions="Start"/>
-            </ScrollView>
+            <Label Grid.Column="0" x:Name="labeltitle" TextColor="White" FontFamily="Inter-Regular" VerticalTextAlignment="Center" FontSize="16"
+                   Margin="0,0,15,0"/>
             <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="30" Clicked="MarkSelectedItemsComplete"/>
             <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="30" HeightRequest="25" Clicked="DeleteSelectedItems"/>
             <ImageButton Grid.Column="3" Source="icon.png" WidthRequest="30" HeightRequest="25" Clicked="OnItemAdded"/>
@@ -40,7 +38,8 @@
 
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Frame x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent, Android={StaticResource OffWhite2}}" Grid.Row="1" Margin="10" Padding="5" Style="{StaticResource CustomFrame}" >
+        <Frame Grid.Row="0" x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent, Android={AppThemeBinding Dark={StaticResource DarkGH}, Light={StaticResource OffWhite}}}"
+               Margin="10" Padding="5" CornerRadius="15" BorderColor="Transparent" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -90,8 +89,13 @@
                                        Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" />
 
                                 <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
-                                       BackgroundColor="{AppThemeBinding Dark=DarkGray, Light={StaticResource DarkGH}}" IsVisible="{Binding HasAttachment}">
+                                       BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}" IsVisible="{Binding HasAttachment}">
                                     <Image Source="attachment.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="15"/>
+                                </Frame>
+
+                                <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
+                                       BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}" IsVisible="{Binding IsPinned}">
+                                    <Image Source="pin.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="20"/>
                                 </Frame>
 
                                 </HorizontalStackLayout>
@@ -163,7 +167,7 @@
                                                 </DataTrigger>
                                             </Image.Triggers>
                                         </Image>
-                                        <Label VerticalTextAlignment="Center" FontAutoScalingEnabled="False" FontFamily="Inter-Bold" TextColor="{AppThemeBinding Dark=White, Light=Black}"
+                                        <Label VerticalTextAlignment="Center" FontAutoScalingEnabled="False" FontFamily="Inter-Bold" TextColor="{AppThemeBinding Dark=Black, Light=Black}"
                                                Margin="{OnPlatform Android='0,0,0,0'}">
                                             <Label.Triggers>
                                                 <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="True">
