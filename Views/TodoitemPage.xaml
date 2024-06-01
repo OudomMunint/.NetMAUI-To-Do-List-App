@@ -110,16 +110,19 @@
             <!--<BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>-->
 
                 <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Label Margin="10,0,10,0"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           FontFamily="Inter-Bold"
-                           Text="Mark as Done" />
+                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
 
-                        <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
+                        <Label Margin="10,0,10,0" Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
+                               Text="Mark as Done" />
 
-                    </StackLayout>
+                        <Switch Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
+                               Margin="10,0,10,0"/>
+
+                        <Switch Grid.Column="1" Grid.Row="1" HorizontalOptions="EndAndExpand" IsToggled="{Binding IsPinned}" OnColor="Green" ThumbColor="Gray" />
+
+                    </Grid>
                 </Frame>
             </StackLayout>
       </ScrollView>
