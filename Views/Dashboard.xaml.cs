@@ -85,7 +85,7 @@ namespace ToDoListApp.Views
             highpriority.Text = $"🟠 {highPriorityItems} High";
 
             int criticalPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Critical");
-            criticalpriority.Text = $"🔴 {criticalPriorityItems} Critical";
+            criticalpriority.Text = $"🟤 {criticalPriorityItems} Critical";
         }
 
         private void GetTotalItems()
@@ -117,7 +117,7 @@ namespace ToDoListApp.Views
                 {
                     Label = "Critical",
                     //ValueLabel = criticalPriorityItems.ToString(),
-                    Color = SKColor.Parse("#FF2c2c")
+                    Color = SKColor.Parse("#808080")
                 },
 
                 new ChartEntry(lowPriorityItems)
