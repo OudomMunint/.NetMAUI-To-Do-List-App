@@ -110,7 +110,7 @@
             <!--<BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>-->
 
                 <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
-                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" RowSpacing="20">
 
                         <Label Margin="10,0,10,0" Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
                                Text="Mark as Done" />
