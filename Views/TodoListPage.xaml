@@ -18,16 +18,16 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ScrollView x:Name="ScrollViewAnimate" Grid.Column="0" Orientation="Horizontal" HorizontalScrollBarVisibility="Always" VerticalOptions="CenterAndExpand">
-                <Label x:Name="labeltitle" TextColor="White" VerticalOptions="Center" FontFamily="Inter-Regular"
-                   VerticalTextAlignment="Center" FontSize="16" HorizontalOptions="Start"/>
-            </ScrollView>
+            <Label Grid.Column="0" x:Name="labeltitle" TextColor="White" FontFamily="Inter-Regular" VerticalTextAlignment="Center" FontSize="16"
+                   Margin="0,0,5,0"/>
             <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="30" Clicked="MarkSelectedItemsComplete"/>
             <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="30" HeightRequest="25" Clicked="DeleteSelectedItems"/>
             <ImageButton Grid.Column="3" Source="icon.png" WidthRequest="30" HeightRequest="25" Clicked="OnItemAdded"/>
             <ImageButton Grid.Column="4" Source="prioritytoolbar.png" WidthRequest="30" HeightRequest="30" Clicked="SetSelectedItemPriority"/>
-            <ImageButton Grid.Column="5" Source="menu.png" WidthRequest="30" Clicked="OpenMenu"/>
+            <ImageButton Grid.Column="5" Source="pin.png" WidthRequest="30" HeightRequest="30" Clicked="SetItemPinned"/>
+            <ImageButton Grid.Column="6" Source="menu.png" WidthRequest="30" Clicked="OpenMenu"/>
         </Grid>
     </NavigationPage.TitleView>
 
@@ -40,7 +40,8 @@
 
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Frame x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent, Android={StaticResource OffWhite2}}" Grid.Row="1" Margin="10" Padding="5" Style="{StaticResource CustomFrame}" >
+        <Frame Grid.Row="0" x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent, Android={AppThemeBinding Dark={StaticResource DarkGH}, Light={StaticResource OffWhite}}}"
+               Margin="10" Padding="5" CornerRadius="15" BorderColor="Transparent" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -90,8 +91,13 @@
                                        Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" />
 
                                 <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
-                                       BackgroundColor="{AppThemeBinding Dark=DarkGray, Light={StaticResource DarkGH}}" IsVisible="{Binding HasAttachment}">
+                                       BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}" IsVisible="{Binding HasAttachment}">
                                     <Image Source="attachment.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="15"/>
+                                </Frame>
+
+                                <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
+                                       BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}" IsVisible="{Binding IsPinned}">
+                                    <Image Source="pin.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="20"/>
                                 </Frame>
 
                                 </HorizontalStackLayout>
@@ -141,7 +147,8 @@
                                     </HorizontalStackLayout>
                                 </Frame>
 
-                                <Frame Grid.Row="2" Grid.Column="{OnPlatform Android=2, iOS=3}" HorizontalOptions="{OnPlatform Android=Start}" HeightRequest="25" Margin="0,10,0,0" Padding="{OnPlatform Android=3, iOS=5}" BorderColor="Gray">
+                                <Frame Grid.Row="2" Grid.Column="{OnPlatform Android=2, iOS=3}" HorizontalOptions="{OnPlatform Android=Start}" HeightRequest="25" Margin="0,10,0,0" Padding="{OnPlatform Android=3, iOS=5}" BorderColor="Gray"
+                                       BackgroundColor="{AppThemeBinding Dark=Black, Light=White}">
                                     <Frame.Triggers>
                                         <DataTrigger TargetType="Frame" Binding="{Binding Done}" Value="True">
                                             <Setter Property="WidthRequest" Value="80" />

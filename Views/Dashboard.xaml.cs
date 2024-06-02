@@ -14,6 +14,7 @@ namespace ToDoListApp.Views
     public partial class Dashboard : ContentPage
     {
         private int totalItems;
+        private int pinnedItems;
         private int doneItems;
         private int notDone;
         private ChartEntry[] entries;
@@ -70,8 +71,9 @@ namespace ToDoListApp.Views
 
         private void UpdateLabel()
         {
+            int pinnedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.IsPinned);
             int totalTodoItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-            todoitems.Text = $"📋 {totalItems} Total";
+            todoitems.Text = $"📋 {totalItems} Total 📌 {pinnedItems} Pinned";
 
             int lowPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Low");
             lowpriority.Text = $"🟢 {lowPriorityItems} Low";
@@ -83,7 +85,7 @@ namespace ToDoListApp.Views
             highpriority.Text = $"🟠 {highPriorityItems} High";
 
             int criticalPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Critical");
-            criticalpriority.Text = $"🔴 {criticalPriorityItems} Critical";
+            criticalpriority.Text = $"🟤 {criticalPriorityItems} Critical";
         }
 
         private void GetTotalItems()
@@ -115,7 +117,7 @@ namespace ToDoListApp.Views
                 {
                     Label = "Critical",
                     //ValueLabel = criticalPriorityItems.ToString(),
-                    Color = SKColor.Parse("#FF2c2c")
+                    Color = SKColor.Parse("#808080")
                 },
 
                 new ChartEntry(lowPriorityItems)
