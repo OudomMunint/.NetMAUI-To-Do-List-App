@@ -10,9 +10,9 @@
     Shell.PresentationMode="ModalAnimated">
 
     <NavigationPage.TitleView>
-        <Grid>
+        <Grid ColumnSpacing="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="115" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -35,6 +35,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -185,6 +186,22 @@
                                 </Frame>
                             </Grid>
                         </Border>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="pinnedList" Grid.Row="3" Margin="10" ItemSelected="OnListItemSelected" SeparatorVisibility="Default"
+                  CachingStrategy="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" />
+                            <Label Text="{Binding Notes}" FontSize="Body" FontFamily="Inter-Regular" />
+                            <Label Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" FontSize="Body" FontFamily="Inter-Regular" />
+                            <Label Text="{Binding Priority}" FontSize="Body" FontFamily="Inter-Regular" />
+                            <Label Text="{Binding Done}" FontSize="Body" FontFamily="Inter-Regular" />
+                        </VerticalStackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
