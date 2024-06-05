@@ -48,6 +48,7 @@ namespace ToDoListApp.Views
             await GetItemsWithAttachment();
             await UpdateListView();
             await IsEmptyList();
+            await SetPinnedOnlyListSource();
             await GetPinnedItems();
         }
 
@@ -440,6 +441,12 @@ namespace ToDoListApp.Views
                     await UpdateListView();
                 }
             }
+        }
+
+        private async Task SetPinnedOnlyListSource()
+        {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            pinnedList.ItemsSource = listView.ItemsSource = await database.GetItemsPinnedAysnc();
         }
 
         private async void RefreshView_Refreshing(object sender, EventArgs e)
