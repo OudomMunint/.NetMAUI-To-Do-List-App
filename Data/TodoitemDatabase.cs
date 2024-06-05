@@ -36,6 +36,10 @@ namespace ToDoListApp.Data
         {
             return Database.Table<Todoitem>().ToListAsync();
         }
+        public Task<List<Todoitem>> GetItemsPinnedAysnc()
+        {
+            return Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [IsPinned] = 1");
+        }
 
         public Task<List<Todoitem>> GetItemsNotDoneAysnc()
         {
