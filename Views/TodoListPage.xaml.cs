@@ -43,13 +43,14 @@ namespace ToDoListApp.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            await IsEmptyList();
             await UpdateListView();
             GetDoneItems();
             await GetItemsWithAttachment();
-            await UpdateListView();
-            await IsEmptyList();
             await SetPinnedOnlyListSource();
             await GetPinnedItems();
+            await UpdateListView();
+            await UpdateCollectionView();
         }
 
         protected override void OnDisappearing()
@@ -57,23 +58,18 @@ namespace ToDoListApp.Views
             base.OnDisappearing();
         }
 
-        public bool EmptyList { get; set; }
         private async Task IsEmptyList()
         {
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             var items = await database.GetItemsAysnc();
-            if (items.Count == 0)
-            {
-                VStack.IsVisible = true;
-                listView.IsVisible = false;
-                Console.WriteLine("List is empty");
-            }
-            else
-            {
-                listView.IsVisible = true;
-                VStack.IsVisible = false;
-                Console.WriteLine("List is not empty");
-            }
+            var pinneditems = await database.GetItemsPinnedAysnc();
+
+            bool isItemsEmpty = items.Count == 0;
+            bool isPinnedItemsEmpty = pinneditems.Count == 0;
+
+            VStack.IsVisible = isItemsEmpty;
+            listView.IsVisible = !isItemsEmpty;
+            pinnedcontainer.IsVisible = !isPinnedItemsEmpty;
         }
 
         private async Task GetPinnedItems()
@@ -111,7 +107,13 @@ namespace ToDoListApp.Views
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             listView.ItemsSource = await database.GetItemsAysnc();
             UpdateTitle();
-            Console.WriteLine("Listview Refreshed");
+        }
+
+        private async Task UpdateCollectionView()
+        {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
+            pinnedList.ItemsSource = await database.GetItemsPinnedAysnc();
+            await IsEmptyList();
         }
 
         async void OnItemAdded(object sender, EventArgs e)
@@ -332,59 +334,50 @@ namespace ToDoListApp.Views
             }
         }
 
-        async void MarkSelectedItemsComplete(object sender, EventArgs e)
+        async void SetSelectedItemStatus(object sender, EventArgs e)
         {
+            TodoitemDatabase database = await TodoitemDatabase.Instance;
             var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
+            bool selectedItemsDone = selectedItems.Any(item => item.Done == true);
+            bool selectedItemsNotDone = selectedItems.Any(item => item.Done == false);
 
             if (!selectedItems.Any())
             {
                 await DisplayAlert("No Items Selected", "Please select items to mark as complete", "OK");
+                return;
             }
-            else
+
+            string alertTitleForDone = "Mark selected tasks as complete";
+            string alertMessageForDone = "Do you want to mark all selected items as complete?";
+            string alertTitleForNotDone = "Mark selected tasks as incomplete";
+            string alertMessageForNotDone = "Do you want to mark all selected items as incomplete?";
+
+            //Mark as done
+            if (selectedItemsDone)
             {
-                foreach (var item in selectedItems)
+                bool confirmed = await DisplayAlert(alertTitleForNotDone, alertMessageForNotDone, "Yes", "No");
+                if (confirmed)
                 {
-                    item.Done = true;
-                    item.IsSelected = false; // Uncheck
-                }
-
-                bool Confirmed = await DisplayAlert("Mark selected tasks as complete", "Do you want to mark all selected items as complete?", "Yes", "No");
-
-                if (Confirmed)
-                {
-                    TodoitemDatabase database = await TodoitemDatabase.Instance;
                     foreach (var item in selectedItems)
                     {
+                        item.Done = false;
+                        item.IsSelected = false;
                         await database.SaveItemAsync(item);
                     }
                     await UpdateListView();
                 }
             }
-        }
 
-        async void SetSelectedItemPriority(object sender, EventArgs e)
-        {
-            var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
-
-            if(!selectedItems.Any())
+            //Mark as incomplete
+            if (selectedItemsNotDone)
             {
-                await DisplayAlert("No Items Selected", "Please select items to set priority", "OK");
-            }
-            else
-            {
-                var action = await Application.Current.MainPage.DisplayActionSheet("Set Priority", "Cancel", null, new[] { "Low", "Medium", "High", "Critical" });
-
-                if (action != null)
+                bool confirmed2 = await DisplayAlert(alertTitleForDone, alertMessageForDone, "Yes", "No");
+                if (confirmed2)
                 {
                     foreach (var item in selectedItems)
                     {
-                        item.Priority = action;
-                        item.IsSelected = false; // Uncheck
-                    }
-
-                    TodoitemDatabase database = await TodoitemDatabase.Instance;
-                    foreach (var item in selectedItems)
-                    {
+                        item.Done = true;
+                        item.IsSelected = false;
                         await database.SaveItemAsync(item);
                     }
                     await UpdateListView();
@@ -423,6 +416,9 @@ namespace ToDoListApp.Views
                         await database.SaveItemAsync(item);
                     }
                     await UpdateListView();
+                    await UpdateCollectionView();
+                    await SetPinnedOnlyListSource();
+                    await IsEmptyList();
                 }
             }
 
@@ -439,6 +435,39 @@ namespace ToDoListApp.Views
                         await database.SaveItemAsync(item);
                     }
                     await UpdateListView();
+                    await UpdateCollectionView();
+                    await SetPinnedOnlyListSource();
+                    await IsEmptyList();
+                }
+            }
+        }
+
+        async void SetSelectedItemPriority(object sender, EventArgs e)
+        {
+            var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
+
+            if(!selectedItems.Any())
+            {
+                await DisplayAlert("No Items Selected", "Please select items to set priority", "OK");
+            }
+            else
+            {
+                var action = await Application.Current.MainPage.DisplayActionSheet("Set Priority", "Cancel", null, new[] { "Low", "Medium", "High", "Critical" });
+
+                if (action != null)
+                {
+                    foreach (var item in selectedItems)
+                    {
+                        item.Priority = action;
+                        item.IsSelected = false; // Uncheck
+                    }
+
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    foreach (var item in selectedItems)
+                    {
+                        await database.SaveItemAsync(item);
+                    }
+                    await UpdateListView();
                 }
             }
         }
@@ -446,7 +475,9 @@ namespace ToDoListApp.Views
         private async Task SetPinnedOnlyListSource()
         {
             TodoitemDatabase database = await TodoitemDatabase.Instance;
-            pinnedList.ItemsSource = listView.ItemsSource = await database.GetItemsPinnedAysnc();
+            var pinnedItems = await database.GetItemsPinnedAysnc();
+            pinnedList.ItemsSource = pinnedItems;
+            await UpdateCollectionView();
         }
 
         private async void RefreshView_Refreshing(object sender, EventArgs e)
