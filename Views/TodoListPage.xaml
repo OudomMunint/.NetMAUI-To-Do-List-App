@@ -22,7 +22,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" x:Name="labeltitle" TextColor="White" FontFamily="Inter-Regular" VerticalTextAlignment="Center" FontSize="16"
                    Margin="0,0,5,0"/>
-            <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="30" Clicked="MarkSelectedItemsComplete"/>
+            <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="30" Clicked="SetSelectedItemStatus"/>
             <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="30" HeightRequest="25" Clicked="DeleteSelectedItems"/>
             <ImageButton Grid.Column="3" Source="icon.png" WidthRequest="30" HeightRequest="25" Clicked="OnItemAdded"/>
             <ImageButton Grid.Column="4" Source="prioritytoolbar.png" WidthRequest="30" HeightRequest="30" Clicked="SetSelectedItemPriority"/>
@@ -35,7 +35,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -58,6 +57,28 @@
                 <!-- Sort Button -->
                 <ImageButton Clicked="OpenSortMenu" Source="sort.png" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="1" BorderColor="Transparent" HorizontalOptions="End"
                              Margin="0,0,0,0" AbsoluteLayout.LayoutBounds="0.2, 0.5, 30, 35" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            </Grid>
+        </Frame>
+
+        <Frame x:Name="pinnedcontainer" Grid.Row="1" BorderColor="Transparent" BackgroundColor="Transparent" Margin="15,0,15,0" Padding="10">
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Pinned Items" FontSize="20" FontFamily="Inter-Bold" HorizontalOptions="Center" />
+                <CollectionView x:Name="pinnedList" Grid.Row="1" ItemsLayout="HorizontalList" HorizontalScrollBarVisibility="Always">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="10" Margin="5,0,5,0">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" />
+                                    <Label Text="{Binding Priority}" FontSize="14" FontFamily="Inter-Regular" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
         </Frame>
 
@@ -91,15 +112,15 @@
                                     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="15,10,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
                                        Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" />
 
-                                <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
+                                    <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
                                        BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}" IsVisible="{Binding HasAttachment}">
-                                    <Image Source="attachment.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="15"/>
-                                </Frame>
+                                        <Image Source="attachment.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="15"/>
+                                    </Frame>
 
-                                <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
+                                    <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
                                        BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}" IsVisible="{Binding IsPinned}">
-                                    <Image Source="pin.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="20"/>
-                                </Frame>
+                                        <Image Source="pin.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="20"/>
+                                    </Frame>
 
                                 </HorizontalStackLayout>
 
@@ -136,11 +157,11 @@
 
                                 <Frame Grid.Row="2" Grid.Column="1" WidthRequest="130" Padding="6,0,0,0" Margin="20,10,15,0" HeightRequest="25" BackgroundColor="Transparent" BorderColor="Gray">
                                     <HorizontalStackLayout>
-                                    <Image Source="calendar.png" Aspect="AspectFit" MaximumWidthRequest="15" Margin="0,0,4,0"/>
+                                        <Image Source="calendar.png" Aspect="AspectFit" MaximumWidthRequest="15" Margin="0,0,4,0"/>
                                         <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}" FontFamily="Inter-Regular">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <!--<Span Text="📅 " FontSize="Medium"/>  Emoji--> 
+                                                    <!--<Span Text="📅 " FontSize="Medium"/>  Emoji-->
                                                     <Span Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -181,27 +202,11 @@
                                                     <Setter Property="Text" Value="Not done" />
                                                 </DataTrigger>
                                             </Label.Triggers>
-                                            </Label>
-                                        </HorizontalStackLayout>
+                                        </Label>
+                                    </HorizontalStackLayout>
                                 </Frame>
                             </Grid>
                         </Border>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView x:Name="pinnedList" Grid.Row="3" Margin="10" ItemSelected="OnListItemSelected" SeparatorVisibility="Default"
-                  CachingStrategy="RecycleElement">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" />
-                            <Label Text="{Binding Notes}" FontSize="Body" FontFamily="Inter-Regular" />
-                            <Label Text="{Binding Date, StringFormat='{0:MMM dd, HH:mm}'}" FontSize="Body" FontFamily="Inter-Regular" />
-                            <Label Text="{Binding Priority}" FontSize="Body" FontFamily="Inter-Regular" />
-                            <Label Text="{Binding Done}" FontSize="Body" FontFamily="Inter-Regular" />
-                        </VerticalStackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
