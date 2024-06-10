@@ -44,8 +44,8 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 </h1>
 
 <h1 float="center">
-  <img src="Media/ioshomedark.png" style="height:700px; width:330" />
-  <img src="Media/ioshomelight.png" style="height:700px; width:330" />
+  <img src="Media/ioshomedark.PNG" style="height:700px; width:330" />
+  <img src="Media/ioshomelight.PNG" style="height:700px; width:330" />
 </h1>
 
 ### Android, Galaxy Z Flip 4
