@@ -74,7 +74,7 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate> 
-                            <Border Grid.Row="1" Padding="12,10,10,10" Margin="5,0,5,0">
+                            <Border Grid.Row="1" Padding="{OnPlatform Android='12,7,10,10', iOS='12,10,10,10'}" Margin="5,0,1,0">
                                 <VerticalStackLayout>
                                     <Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="100" LineBreakMode="TailTruncation"/>
                                     <Label Text="{Binding Priority}" FontSize="14" FontFamily="Inter-Regular" Margin="5,0,0,0" />
