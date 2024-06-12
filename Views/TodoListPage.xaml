@@ -22,9 +22,9 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" x:Name="labeltitle" TextColor="White" FontFamily="Inter-Regular" VerticalTextAlignment="Center" FontSize="16"
                    Margin="0,0,0,0" VerticalOptions="Center"/>
-            <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemStatus"/>
-            <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="25" HeightRequest="25" Clicked="DeleteSelectedItems"/>
-            <ImageButton Grid.Column="3" Source="icon.png" WidthRequest="23" HeightRequest="23" Clicked="OnItemAdded"/>
+            <ImageButton Grid.Column="1" Source="icon.png" WidthRequest="23" HeightRequest="23" Clicked="OnItemAdded"/>
+            <ImageButton Grid.Column="2" Source="donetoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemStatus"/>
+            <ImageButton Grid.Column="3" Source="trash.png" WidthRequest="25" HeightRequest="25" Clicked="DeleteSelectedItems"/>
             <ImageButton Grid.Column="4" Source="prioritytoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemPriority"/>
             <ImageButton Grid.Column="5" Source="pin.png" WidthRequest="25" HeightRequest="25" Clicked="SetItemPinned"/>
             <ImageButton Grid.Column="6" Source="menu.png" WidthRequest="25" Clicked="OpenMenu"/>
@@ -68,7 +68,7 @@
                     <RowDefinition Height="65" />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Text="Pinned Items" FontSize="20" FontFamily="Inter-Bold" HorizontalOptions="Center" />
-                <CollectionView x:Name="pinnedList" SelectedItem="OnListItemSelected" Grid.Row="1" HorizontalScrollBarVisibility="Never">
+                <CollectionView x:Name="pinnedList" Grid.Row="1" HorizontalScrollBarVisibility="Never">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="14" />
                     </CollectionView.ItemsLayout>
@@ -128,7 +128,8 @@
 
                                 </HorizontalStackLayout>
 
-                                <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,0,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"/>
+                                <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,0,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"
+                                          Scale="{OnPlatform iOS=1.2,Android=1.1}"/>
 
                                 <Frame BorderColor="Transparent" Grid.Column="0" HasShadow="False" Grid.RowSpan="5" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}" WidthRequest="25" HorizontalOptions="Start">
                                     <Frame.Triggers>

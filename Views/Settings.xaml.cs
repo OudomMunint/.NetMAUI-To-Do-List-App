@@ -88,7 +88,8 @@ public partial class Settings : ContentPage
                 Notes = $"Description {i + 1}",
                 Priority = priorities[random.Next(priorities.Length)],
                 Date = DateTime.Now.AddDays(-i),
-                Done = i % 2 == 0
+                Done = i % 2 == 0,
+                IsPinned = i % 3 == 0
             };
 
             await database.SaveItemAsync(item);
