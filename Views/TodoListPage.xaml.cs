@@ -45,12 +45,12 @@ namespace ToDoListApp.Views
             base.OnAppearing();
             await IsEmptyList();
             await UpdateListView();
-            GetDoneItems();
+            //GetDoneItems();
             await GetItemsWithAttachment();
             await SetPinnedOnlyListSource();
-            await GetPinnedItems();
-            await UpdateListView();
-            await UpdateCollectionView();
+            //await GetPinnedItems();
+            //await UpdateListView();
+            //await UpdateCollectionView();
         }
 
         protected override void OnDisappearing()
@@ -72,14 +72,14 @@ namespace ToDoListApp.Views
             pinnedcontainer.IsVisible = !isPinnedItemsEmpty;
         }
 
-        private async Task GetPinnedItems()
-        {
-            TodoitemDatabase database = await TodoitemDatabase.Instance;
-            var items = await database.GetItemsAysnc();
+        //private async Task GetPinnedItems()
+        //{
+        //    TodoitemDatabase database = await TodoitemDatabase.Instance;
+        //    var items = await database.GetItemsAysnc();
 
-            var pinnedItems = items.Count(item => item.IsPinned);
-            Console.WriteLine("Pinned Items: " + pinnedItems);
-        }
+        //    var pinnedItems = items.Count(item => item.IsPinned);
+        //    Console.WriteLine("Pinned Items: " + pinnedItems);
+        //}
 
         private async Task GetItemsWithAttachment()
         {
@@ -189,16 +189,16 @@ namespace ToDoListApp.Views
             labeltitle.Text = $"🏠 {totalItems} Opened";
         }
 
-        private void GetDoneItems()
-        {
-            var doneItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Done);
-            var total = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-            var notDone = total - doneItems;
-            // print how many items are done
-            Console.WriteLine(doneItems);
-            Console.WriteLine(notDone);
-            Console.WriteLine(total);
-        }
+        //private void GetDoneItems()
+        //{
+        //    var doneItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Done);
+        //    var total = listView.ItemsSource?.Cast<object>().Count() ?? 0;
+        //    var notDone = total - doneItems;
+        //    // print how many items are done
+        //    Console.WriteLine(doneItems);
+        //    Console.WriteLine(notDone);
+        //    Console.WriteLine(total);
+        //}
 
         private void OnCheckBoxChecked(object sender, EventArgs e)
         {
