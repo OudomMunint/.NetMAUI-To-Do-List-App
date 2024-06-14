@@ -27,7 +27,7 @@ namespace ToDoListApp.Views
                 if (Application.Current.RequestedTheme == darkmode)
                 {
                     // set searchbar background color to DarkGH from Colors.xaml
-                    SearchContainer.BackgroundColor = Color.FromHex("#161B22");
+                    //SearchContainer.BackgroundColor = Color.FromHex("#161B22");
                     listView.BackgroundColor = Colors.Black;
                 }
 
@@ -47,6 +47,7 @@ namespace ToDoListApp.Views
             await GetItemsWithAttachment();
             await SetPinnedOnlyListSource();
             await UpdateListView();
+            await UpdateCollectionView();
         }
 
         protected override void OnDisappearing()
