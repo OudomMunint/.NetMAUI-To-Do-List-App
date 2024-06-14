@@ -44,13 +44,9 @@ namespace ToDoListApp.Views
         {
             base.OnAppearing();
             await IsEmptyList();
-            await UpdateListView();
-            //GetDoneItems();
             await GetItemsWithAttachment();
             await SetPinnedOnlyListSource();
-            //await GetPinnedItems();
-            //await UpdateListView();
-            //await UpdateCollectionView();
+            await UpdateListView();
         }
 
         protected override void OnDisappearing()
@@ -71,15 +67,6 @@ namespace ToDoListApp.Views
             listView.IsVisible = !isItemsEmpty;
             pinnedcontainer.IsVisible = !isPinnedItemsEmpty;
         }
-
-        //private async Task GetPinnedItems()
-        //{
-        //    TodoitemDatabase database = await TodoitemDatabase.Instance;
-        //    var items = await database.GetItemsAysnc();
-
-        //    var pinnedItems = items.Count(item => item.IsPinned);
-        //    Console.WriteLine("Pinned Items: " + pinnedItems);
-        //}
 
         private async Task GetItemsWithAttachment()
         {
@@ -189,17 +176,6 @@ namespace ToDoListApp.Views
             labeltitle.Text = $"🏠 {totalItems} Opened";
         }
 
-        //private void GetDoneItems()
-        //{
-        //    var doneItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Done);
-        //    var total = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-        //    var notDone = total - doneItems;
-        //    // print how many items are done
-        //    Console.WriteLine(doneItems);
-        //    Console.WriteLine(notDone);
-        //    Console.WriteLine(total);
-        //}
-
         private void OnCheckBoxChecked(object sender, EventArgs e)
         {
             var checkBox = (CheckBox)sender;
@@ -275,9 +251,6 @@ namespace ToDoListApp.Views
                 ? ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => item.Date)
                 : ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.Date);
             listView.ItemsSource = sortedItems.ToList();
-
-            Console.WriteLine("clicked");
-            //await UpdateListView();
         }
 
         public async void OpenSortMenu(object sender, EventArgs e)
@@ -417,8 +390,6 @@ namespace ToDoListApp.Views
                     }
                     await UpdateListView();
                     await UpdateCollectionView();
-                    await SetPinnedOnlyListSource();
-                    await IsEmptyList();
                 }
             }
 
@@ -436,8 +407,6 @@ namespace ToDoListApp.Views
                     }
                     await UpdateListView();
                     await UpdateCollectionView();
-                    await SetPinnedOnlyListSource();
-                    await IsEmptyList();
                 }
             }
         }
@@ -477,7 +446,6 @@ namespace ToDoListApp.Views
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             var pinnedItems = await database.GetItemsPinnedAysnc();
             pinnedList.ItemsSource = pinnedItems;
-            await UpdateCollectionView();
         }
 
         private async void RefreshView_Refreshing(object sender, EventArgs e)
