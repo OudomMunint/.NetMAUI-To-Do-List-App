@@ -10,18 +10,17 @@
     <NavigationPage.TitleView>
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="165" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="itemTitle" Grid.Column="0" TextColor="White" VerticalTextAlignment="Center" FontSize="18" FontFamily="Inter-Regular"/>
-
-            <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="5">
-                <ImageButton HorizontalOptions="Start" Source="saveitem.png" Clicked="OnSaveClicked" HeightRequest="25"/>
-                <ImageButton HorizontalOptions="End" WidthRequest="25" Source="attachment.png" Clicked="AttMenu_Clicked" HeightRequest="35"/>
-                <ImageButton HorizontalOptions="End" Source="menu.png" Clicked="OpenMenu" HeightRequest="35"/>
-            </HorizontalStackLayout>
-
+            <Label x:Name="itemTitle" Grid.Column="0" TextColor="White" VerticalTextAlignment="Center" FontSize="18" FontFamily="Inter-Regular"
+                   LineBreakMode="TailTruncation"/>
+            <ImageButton Grid.Column="1" HorizontalOptions="Center" Source="saveitem.png" Clicked="OnSaveClicked" HeightRequest="25"/>
+            <ImageButton Grid.Column="2" HorizontalOptions="Center" Source="attachment.png" Clicked="AttMenu_Clicked" WidthRequest="25" HeightRequest="35"/>
+            <ImageButton Grid.Column="3" HorizontalOptions="Center" Source="menu.png" Clicked="OpenMenu" HeightRequest="35"/>
         </Grid>
     </NavigationPage.TitleView>
 

@@ -27,7 +27,7 @@ namespace ToDoListApp.Views
                 if (Application.Current.RequestedTheme == darkmode)
                 {
                     // set searchbar background color to DarkGH from Colors.xaml
-                    SearchContainer.BackgroundColor = Color.FromHex("#161B22");
+                    //SearchContainer.BackgroundColor = Color.FromHex("#161B22");
                     listView.BackgroundColor = Colors.Black;
                 }
 
@@ -44,13 +44,10 @@ namespace ToDoListApp.Views
         {
             base.OnAppearing();
             await IsEmptyList();
-            await UpdateListView();
-            //GetDoneItems();
             await GetItemsWithAttachment();
             await SetPinnedOnlyListSource();
-            //await GetPinnedItems();
-            //await UpdateListView();
-            //await UpdateCollectionView();
+            await UpdateListView();
+            await UpdateCollectionView();
         }
 
         protected override void OnDisappearing()
@@ -67,19 +64,13 @@ namespace ToDoListApp.Views
             bool isItemsEmpty = items.Count == 0;
             bool isPinnedItemsEmpty = pinneditems.Count == 0;
 
-            VStack.IsVisible = isItemsEmpty;
-            listView.IsVisible = !isItemsEmpty;
-            pinnedcontainer.IsVisible = !isPinnedItemsEmpty;
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                VStack.IsVisible = isItemsEmpty;
+                listView.IsVisible = !isItemsEmpty;
+                pinnedcontainer.IsVisible = !isPinnedItemsEmpty;
+            });
         }
-
-        //private async Task GetPinnedItems()
-        //{
-        //    TodoitemDatabase database = await TodoitemDatabase.Instance;
-        //    var items = await database.GetItemsAysnc();
-
-        //    var pinnedItems = items.Count(item => item.IsPinned);
-        //    Console.WriteLine("Pinned Items: " + pinnedItems);
-        //}
 
         private async Task GetItemsWithAttachment()
         {
@@ -90,13 +81,19 @@ namespace ToDoListApp.Views
             {
                 if (item.Attachment != null)
                 {
-                    item.HasAttachment = true;
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        item.HasAttachment = true;
+                    });
                     await database.SaveItemAsync(item);
                 }
 
                 else
                 {
-                    item.HasAttachment = false;
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        item.HasAttachment = false;
+                    });
                     await database.SaveItemAsync(item);
                 }
             }
@@ -189,17 +186,6 @@ namespace ToDoListApp.Views
             labeltitle.Text = $"🏠 {totalItems} Opened";
         }
 
-        //private void GetDoneItems()
-        //{
-        //    var doneItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Done);
-        //    var total = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-        //    var notDone = total - doneItems;
-        //    // print how many items are done
-        //    Console.WriteLine(doneItems);
-        //    Console.WriteLine(notDone);
-        //    Console.WriteLine(total);
-        //}
-
         private void OnCheckBoxChecked(object sender, EventArgs e)
         {
             var checkBox = (CheckBox)sender;
@@ -275,9 +261,6 @@ namespace ToDoListApp.Views
                 ? ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => item.Date)
                 : ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.Date);
             listView.ItemsSource = sortedItems.ToList();
-
-            Console.WriteLine("clicked");
-            //await UpdateListView();
         }
 
         public async void OpenSortMenu(object sender, EventArgs e)
@@ -296,7 +279,7 @@ namespace ToDoListApp.Views
             }
             else if (action != null && action.Equals(sortbypriority))
             {
-                var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => item.Priority);
+                var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => TodoListPage.GetPriorityValue(item.Priority));
                 listView.ItemsSource = sortedItems.ToList();
             }
             else if (action != null && action.Equals(clearsorting)) // Handle clear sorting option
@@ -310,6 +293,18 @@ namespace ToDoListApp.Views
                 var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.IsPinned);
                 listView.ItemsSource = sortedItems.ToList();
             }
+        }
+
+        private static int GetPriorityValue(string priority)
+        {
+            return priority switch
+            {
+                "Critical" => 1,
+                "High" => 2,
+                "Medium" => 3,
+                "Low" => 4,
+                _ => 5 // Default || unknown priorities
+            };
         }
 
         //Searching
@@ -417,8 +412,6 @@ namespace ToDoListApp.Views
                     }
                     await UpdateListView();
                     await UpdateCollectionView();
-                    await SetPinnedOnlyListSource();
-                    await IsEmptyList();
                 }
             }
 
@@ -436,8 +429,6 @@ namespace ToDoListApp.Views
                     }
                     await UpdateListView();
                     await UpdateCollectionView();
-                    await SetPinnedOnlyListSource();
-                    await IsEmptyList();
                 }
             }
         }
@@ -477,7 +468,6 @@ namespace ToDoListApp.Views
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             var pinnedItems = await database.GetItemsPinnedAysnc();
             pinnedList.ItemsSource = pinnedItems;
-            await UpdateCollectionView();
         }
 
         private async void RefreshView_Refreshing(object sender, EventArgs e)
