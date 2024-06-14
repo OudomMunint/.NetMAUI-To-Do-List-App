@@ -64,9 +64,12 @@ namespace ToDoListApp.Views
             bool isItemsEmpty = items.Count == 0;
             bool isPinnedItemsEmpty = pinneditems.Count == 0;
 
-            VStack.IsVisible = isItemsEmpty;
-            listView.IsVisible = !isItemsEmpty;
-            pinnedcontainer.IsVisible = !isPinnedItemsEmpty;
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                VStack.IsVisible = isItemsEmpty;
+                listView.IsVisible = !isItemsEmpty;
+                pinnedcontainer.IsVisible = !isPinnedItemsEmpty;
+            });
         }
 
         private async Task GetItemsWithAttachment()
@@ -78,13 +81,19 @@ namespace ToDoListApp.Views
             {
                 if (item.Attachment != null)
                 {
-                    item.HasAttachment = true;
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        item.HasAttachment = true;
+                    });
                     await database.SaveItemAsync(item);
                 }
 
                 else
                 {
-                    item.HasAttachment = false;
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        item.HasAttachment = false;
+                    });
                     await database.SaveItemAsync(item);
                 }
             }
@@ -270,7 +279,7 @@ namespace ToDoListApp.Views
             }
             else if (action != null && action.Equals(sortbypriority))
             {
-                var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => item.Priority);
+                var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => TodoListPage.GetPriorityValue(item.Priority));
                 listView.ItemsSource = sortedItems.ToList();
             }
             else if (action != null && action.Equals(clearsorting)) // Handle clear sorting option
@@ -284,6 +293,18 @@ namespace ToDoListApp.Views
                 var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.IsPinned);
                 listView.ItemsSource = sortedItems.ToList();
             }
+        }
+
+        private static int GetPriorityValue(string priority)
+        {
+            return priority switch
+            {
+                "Critical" => 1,
+                "High" => 2,
+                "Medium" => 3,
+                "Low" => 4,
+                _ => 5 // Default || unknown priorities
+            };
         }
 
         //Searching
