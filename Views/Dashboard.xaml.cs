@@ -150,7 +150,9 @@ namespace ToDoListApp.Views
                     Entries = entries,
                     IsAnimated = false,
                     BackgroundColor = SKColor.Parse("#00FFFFFF"),
-                    //LabelMode = LabelMode.None
+#if ANDROID
+                    Margin = 65
+#endif
                 };
             }
             else
@@ -172,7 +174,12 @@ namespace ToDoListApp.Views
                     IsAnimated = true,
                     BackgroundColor = SKColor.Parse("#00FFFFFF"),
                     LabelMode = LabelMode.None,
+#if ANDROID
+                    Margin = 30
+#endif
+#if IOS
                     Margin = 0
+#endif
                 };
             }
         }
