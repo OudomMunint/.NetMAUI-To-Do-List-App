@@ -14,7 +14,6 @@ namespace ToDoListApp.Views
     public partial class Dashboard : ContentPage
     {
         private int totalItems;
-        private int pinnedItems;
         private int doneItems;
         private int notDone;
         private ChartEntry[] entries;
