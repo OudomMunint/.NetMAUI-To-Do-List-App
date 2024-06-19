@@ -50,8 +50,8 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 
 ### Android, Galaxy Z Flip 4
 <h1 float="center">
-  <img src="Media/addashlight.jpg" style="height:700px; width:300" />
-  <img src="Media/adhomelight.jpg" style="height:700px; width:300" />
+  <img src="Media/addashlight.jpeg" style="height:700px; width:300" />
+  <img src="Media/adhomelight.jpeg" style="height:700px; width:300" />
 </h1>
 
 ### Android & iOS, Galaxy Z Flip 4 / iPhone 15
