@@ -1,4 +1,5 @@
-﻿using ToDoListApp.Data;
+﻿using System.Text;
+using ToDoListApp.Data;
 using ToDoListApp.Models;
 using ToDoListApp.Views;
 
@@ -89,7 +90,8 @@ public partial class Settings : ContentPage
                 Priority = priorities[random.Next(priorities.Length)],
                 Date = DateTime.Now.AddDays(-i),
                 Done = i % 2 == 0,
-                IsPinned = i % 3 == 0
+                IsPinned = i % 3 == 0,
+                HasAttachment = i % 4 == 0 //Doesn't actually generate Images.
             };
 
             await database.SaveItemAsync(item);
