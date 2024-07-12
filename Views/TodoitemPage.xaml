@@ -82,44 +82,43 @@
                 </Frame>
             </StackLayout>
 
+            <!--Attachment-->
             <StackLayout>
                 <StackLayout>
-                    <HorizontalStackLayout Spacing="15">
-                        <Label FontSize="20" Text="Attachment" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
-                        <Image Source="attachment.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
-                    </HorizontalStackLayout>
-
-                    <Frame Style="{DynamicResource ToDoItemFrame}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-
-                        <StackLayout>
-                            <!--Attachment Image-->
-                            <Image x:Name="attachmentImage" Source="{Binding Attachment, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
-
-                            <Label x:Name="attlabel" Text="No Attachment found. If attachment is already added, click save." FontFamily="Inter-Regular"
-                                   FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}" HorizontalTextAlignment="Center" Margin="15,0,15,0"/>
-
-                            <Button Text="Delete Attachment" Clicked="DeleteAttachmentClicked" FontFamily="Inter-Regular" BackgroundColor="Red" TextColor="White"
-                                MaximumWidthRequest="{OnPlatform iOS=150, Android=200}" HorizontalOptions="Center" Margin="0,15,0,10" />
-                        </StackLayout>
-
-                    </Frame>
+                        <HorizontalStackLayout Spacing="15">
+                            <Label FontSize="20" Text="Attachment" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
+                            <Image Source="{AppThemeBinding Dark=attachment.png, Light=attachmentblack.png}" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
+                        </HorizontalStackLayout>
+                        <Frame Style="{DynamicResource ToDoItemFrame}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                            <StackLayout>
+                                <Label x:Name="attsize" Text="{Binding AttachmentSize}" FontFamily="Inter-Regular" FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}"
+                                       HorizontalTextAlignment="Center" Margin="15,10,15,10"/>
+                                <Image x:Name="attachmentImage" Source="{Binding Attachment, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+                                <Label x:Name="attlabel" Text="No Attachment found. If attachment is already added, click save." FontFamily="Inter-Regular"
+                                       FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}" HorizontalTextAlignment="Center" Margin="15,0,15,0"/>
+                                <Button Text="Delete Attachment" Clicked="DeleteAttachmentClicked" FontFamily="Inter-Regular" BackgroundColor="Red" TextColor="White"
+                                        MaximumWidthRequest="{OnPlatform iOS=150, Android=200}" HorizontalOptions="Center" Margin="0,15,0,10" />
+                            </StackLayout>
+                        </Frame>
                 </StackLayout>
             </StackLayout>
 
             <!--<BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>-->
 
                 <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
-                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" RowSpacing="20">
+                    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" RowSpacing="5">
 
-                        <Label Margin="10,0,10,0" Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
+                        <Label Grid.Column="0" Grid.Row="0" Margin="10,0,10,0" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
                                Text="Mark as Done" />
 
                         <Switch Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
 
-                        <Label Grid.Row="1" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
+                        <BoxView Grid.Row="1" HeightRequest="1" Color="{StaticResource Gray200}" Grid.ColumnSpan="3"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
                                Margin="10,0,10,0"/>
 
-                        <Switch Grid.Column="1" Grid.Row="1" HorizontalOptions="EndAndExpand" IsToggled="{Binding IsPinned}" OnColor="Green" ThumbColor="Gray" />
+                        <Switch Grid.Column="1" Grid.Row="2" HorizontalOptions="EndAndExpand" IsToggled="{Binding IsPinned}" OnColor="Green" ThumbColor="Gray" />
 
                     </Grid>
                 </Frame>

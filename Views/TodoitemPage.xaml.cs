@@ -23,6 +23,18 @@ namespace ToDoListApp.Views
             UpdateToolbarTitle();
             GetAttachmentCount();
             SetSelectedPriorityLabel();
+            GetAttachmentSize();
+        }
+
+        private void GetAttachmentSize()
+        {
+            var todoItem = (Todoitem)BindingContext;
+
+            if (todoItem.Attachment != null)
+            {
+                var AttachmentSize = todoItem.Attachment.Length / 1000;
+                attsize.Text = AttachmentSize.ToString() + " KB";
+            }
         }
 
         private void SetSelectedPriorityLabel()
@@ -114,6 +126,7 @@ namespace ToDoListApp.Views
                 todoItem.Attachment = null;
                 attlabel.IsVisible = true;
                 attachmentImage.Source = null;
+                attsize.Text = null;
 
                 // Save the updated todoItem to the database
                 await database.SaveItemAsync(todoItem);
@@ -212,7 +225,8 @@ namespace ToDoListApp.Views
                     await Task.Delay(1000);
 
                     attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
-
+                    var AttachmentSize = todoItem.Attachment.Length / 1000;
+                    attsize.Text = AttachmentSize.ToString() + " KB";
                     attlabel.IsVisible = false;
                 }
             }
@@ -245,7 +259,8 @@ namespace ToDoListApp.Views
                     await Task.Delay(1000);
 
                     attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
-
+                    var AttachmentSize = todoItem.Attachment.Length / 1000;
+                    attsize.Text = AttachmentSize.ToString() + " KB";
                     attlabel.IsVisible = false;
                 }
             }

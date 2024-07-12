@@ -70,16 +70,19 @@
                 <Label Grid.Row="0" Text="Pinned Items" FontSize="20" FontFamily="Inter-Bold" HorizontalOptions="Center" />
                 <CollectionView x:Name="pinnedList" Grid.Row="1" HorizontalScrollBarVisibility="Never">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="14" />
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="1" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Border Grid.Row="1" Padding="{OnPlatform Android='12,7,10,10', iOS='12,10,10,10'}" Margin="5,0,1,0">
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="100" LineBreakMode="TailTruncation"/>
-                                    <Label Text="{Binding Priority}" FontSize="14" FontFamily="Inter-Regular" Margin="5,0,0,0" />
-                                </VerticalStackLayout>
-                            </Border>
+                            <StackLayout>
+                                <Border Grid.Row="1" Padding="{OnPlatform Android='12,7,10,10', iOS='12,10,10,10'}" Margin="0,0,15,0">
+                                    <!--Margin="5,0,1,0"-->
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="100" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Priority}" FontSize="14" FontFamily="Inter-Regular" Margin="5,0,0,0" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
