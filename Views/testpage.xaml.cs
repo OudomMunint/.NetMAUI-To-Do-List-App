@@ -1,8 +1,8 @@
 namespace ToDoListApp.Views;
 
-public partial class testpage : ContentPage
+public partial class TestPage : ContentPage
 {
-	public testpage()
+	public TestPage()
 	{
 		InitializeComponent();
 	}
