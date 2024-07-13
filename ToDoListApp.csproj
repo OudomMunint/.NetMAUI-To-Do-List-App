@@ -73,6 +73,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="7.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="8.0.14" />
@@ -95,6 +96,9 @@
 	  <Compile Update="Views\Settings.xaml.cs">
 	    <DependentUpon>Settings.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\testpage.xaml.cs">
+	    <DependentUpon>TestPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<!--<ItemGroup>
@@ -114,7 +118,7 @@
 		<MauiXaml Update="Views\MyBottomSheet.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\testpage.xaml">
+		<MauiXaml Update="Views\TestPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\TodoitemPage.xaml">
