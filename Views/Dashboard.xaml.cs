@@ -25,7 +25,6 @@ namespace ToDoListApp.Views
         public Dashboard()
         {
             InitializeComponent();
-            GetTotalItems();
         }
 
         private async Task CountItemsHasAttachment()
@@ -49,14 +48,15 @@ namespace ToDoListApp.Views
         {
             base.OnAppearing();
             await UpdateListView();
-            GetTotalItems();
-            GetDoneItems();
             await CountItemsHasAttachment();
-            await Task.Delay(100);
+            await Task.WhenAll(
+                GetTotalItems(),
+                GetDoneItems(),
+                UpdateLabel()
+            );
             CreateChart1();
             CreateChart2();
             CreateChart3();
-            UpdateLabel();
         }
 
         // Dispose both charts, fixes #155
@@ -68,7 +68,7 @@ namespace ToDoListApp.Views
             chartView3.Chart = null;
         }
 
-        private void UpdateLabel()
+        private Task UpdateLabel()
         {
             int pinnedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.IsPinned);
             int totalTodoItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
@@ -85,17 +85,21 @@ namespace ToDoListApp.Views
 
             int criticalPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Critical");
             criticalpriority.Text = $"🟤 {criticalPriorityItems} Critical";
+
+            return Task.CompletedTask;
         }
 
-        private void GetTotalItems()
+        private Task GetTotalItems()
         {
             totalItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
+            return Task.CompletedTask;
         }
 
-        private void GetDoneItems()
+        private Task GetDoneItems()
         {
             doneItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Done);
             notDone = totalItems - doneItems;
+            return Task.CompletedTask;
         }
 
         void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)

@@ -6,6 +6,7 @@
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     x:Class="ToDoListApp.Views.TodoListPage"
     x:Name="todoListPage"
+    HideSoftInputOnTapped="True"
     Title="Home"
     Shell.PresentationMode="ModalAnimated">
 
@@ -95,8 +96,8 @@
             <Label Text="Or go into settings and generate some dummy data!" HorizontalTextAlignment="Center" FontSize="14" FontFamily="Inter-Regular"/>
         </VerticalStackLayout>
 
-        <ListView x:Name="listView" Grid.Row="2" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None"
-                  CachingStrategy="RecycleElement" IsPullToRefreshEnabled="True" Refreshing="RefreshView_Refreshing">
+        <ListView x:Name="listView" Grid.Row="2" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None" VerticalScrollBarVisibility="Never"
+                  CachingStrategy="RecycleElement" IsPullToRefreshEnabled="True" Refreshing="RefreshView_Refreshing" Scrolled="ListView_Scrolled">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

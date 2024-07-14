@@ -7,9 +7,7 @@ using System;
 
 namespace ToDoListApp.Views
 {
-#if ANDROID
     [XamlCompilation(XamlCompilationOptions.Compile)]
-#endif
     public partial class TodoListPage : ContentPage
     {
         // dark mode property
@@ -26,8 +24,6 @@ namespace ToDoListApp.Views
             {
                 if (Application.Current.RequestedTheme == darkmode)
                 {
-                    // set searchbar background color to DarkGH from Colors.xaml
-                    //SearchContainer.BackgroundColor = Color.FromHex("#161B22");
                     listView.BackgroundColor = Colors.Black;
                 }
 
@@ -476,6 +472,32 @@ namespace ToDoListApp.Views
             await UpdateListView();
             await Task.Delay(1000); // Temporary fix, sometimes the refresh spinner doesn't disappear.
             listView.IsRefreshing = false;
+        }
+
+        private async void ListView_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            await SearchBar.HideKeyboardAsync();
+#if IOS
+            var scrollThreshold = 70;
+            if (e.ScrollY > scrollThreshold)
+            {
+                // Scroll down
+                if (pinnedcontainer.IsVisible)
+                {
+                    await pinnedcontainer.FadeTo(0, 250);
+                    pinnedcontainer.IsVisible = false;
+                }
+            }
+            else
+            {
+                // Scroll up
+                if (!pinnedcontainer.IsVisible)
+                {
+                    pinnedcontainer.IsVisible = true;
+                    await pinnedcontainer.FadeTo(1, 250);
+                }
+            }
+#endif
         }
     }
 }

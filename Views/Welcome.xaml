@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListApp.Views.Welcome"
@@ -9,6 +9,7 @@
 
 
             <CarouselView Grid.Row="0"
+              HorizontalScrollBarVisibility="Never"
               IsBounceEnabled="True"
               IndicatorView="indicator1"
               ItemsSource="{Binding UserCollection}"
@@ -16,7 +17,7 @@
               PositionChanged="OnPositionChanged">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Image HeightRequest="420" Aspect="AspectFit" Source="{Binding UserImage}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image HeightRequest="370" Aspect="AspectFit" Source="{Binding UserImage}" HorizontalOptions="Center" VerticalOptions="Center">
                             <Image.Shadow>
                                 <Shadow Brush="Transparent"
                                 Offset="10,10"
@@ -39,8 +40,8 @@
                FontSize="20" FontFamily="Inter-Bold"
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
-        <Label Grid.Row="3" HorizontalTextAlignment="Center" Margin="0, 0, 0, 30"
-               FontSize="16" FontFamily="Inter-Regular" Text="Create, Edit, Delete tasks &amp; more!"
+        <Label Grid.Row="3" HorizontalTextAlignment="Center" Margin="20, 0, 20, 20"
+               FontSize="16" FontFamily="Inter-Regular" x:Name="ChangingSubText"
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
         <Button BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="4" Margin="20, 0, 20, 30" CornerRadius="20"
