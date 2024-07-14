@@ -1,15 +1,18 @@
-﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui;
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Hosting;
-using The49.Maui.BottomSheet;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using ToDoListApp;
 using System;
+using Microcharts.Maui;
 #if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 #endif
-using Microcharts.Maui;
+#if DEBUG
+using The49.Maui.BottomSheet;
+using DotNet.Meteor.HotReload.Plugin;
+#endif
 
 namespace ToDoListApp;
 
@@ -19,15 +22,15 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder
-
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-            .UseBottomSheet()
             .UseMicrocharts()
+#if DEBUG
+            .UseBottomSheet()
+            .EnableHotReload()
+#endif
             .ConfigureFonts(fonts =>
             {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("Inter-Regular.ttf", "InterRegular");
                 fonts.AddFont("Inter-SemiBold.ttf", "InterSemiBold");
                 fonts.AddFont("Inter-Bold.ttf", "InterBold");
@@ -38,14 +41,7 @@ public static class MauiProgram
                 handlers.AddHandler<CustomViewCell, CustomViewCellHandler>();
 #endif
             });
-        //.ConfigureMauiHandlers(handlers =>
-        //    {
-        //        handlers.AddHandler<Label>(handler =>
-        //        {
-        //            handler.UseDefaults = false;
-        //            handler.FontAutoScalingEnabled = false;
-        //        });
-        //    });
+
         AndroidHandlers.Apply();
 
         return builder.Build();
