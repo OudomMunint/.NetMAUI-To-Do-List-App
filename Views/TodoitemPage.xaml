@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="ToDoListApp.Views.TodoitemPage"
+    HideSoftInputOnTapped="True"
     Title="{Binding Name}"
     Shell.PresentationMode="ModalAnimated">
 
@@ -103,8 +104,6 @@
                 </StackLayout>
             </StackLayout>
 
-            <!--<BoxView HeightRequest="1" Color="Gray" Margin="0,-10,0,0"/>-->
-
                 <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
                     <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" RowSpacing="5">
 
@@ -113,7 +112,7 @@
 
                         <Switch Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
 
-                        <BoxView Grid.Row="1" HeightRequest="1" Color="{StaticResource Gray200}" Grid.ColumnSpan="3"/>
+                        <BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Margin="{OnPlatform iOS='0,8,0,0'}" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"/>
 
                         <Label Grid.Row="2" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
                                Margin="10,0,10,0"/>

@@ -298,6 +298,6 @@ namespace ToDoListApp.Views
             {
                 UploadPhoto(sender, e);
             }
-        }
+        }      
     }
 }
