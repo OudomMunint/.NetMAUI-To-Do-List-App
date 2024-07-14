@@ -23,6 +23,7 @@ public partial class Welcome : ContentPage
         if (CarouselZoos.Position == 0)
         {
             ChangingText.Text = "Managing your task made easy";
+            ChangingSubText.Text = "You can view your stats with an informative dashboard";
         }
     }
 
@@ -53,24 +54,22 @@ public partial class Welcome : ContentPage
 
     private void OnPositionChanged(object sender, PositionChangedEventArgs e)
     {
-        if (e.CurrentPosition == 0)
+        ChangingText.Text = e.CurrentPosition switch
         {
-            ChangingText.Text = "Managing your task made easy";
-        }
+            0 => "Managing your task made easy",
+            1 => "Add new tasks or mark it as done",
+            2 => "Bulk actions supported",
+            3 => "Settings and more",
+            _ => string.Empty,
+        };
 
-        if (e.CurrentPosition == 1)
+        ChangingSubText.Text = e.CurrentPosition switch
         {
-            ChangingText.Text = "Add new tasks or mark it as done";
-        }
-
-        else if (e.CurrentPosition == 2)
-        {
-            ChangingText.Text = "Bulk actions supported";
-        }
-
-        else if (e.CurrentPosition == 3)
-        {
-            ChangingText.Text = "Generate some dummy data";
-        }
+            0 => "You can view your stats with an informative dashboard",
+            1 => "Click + to add a new task or click on the task to edit",
+            2 => "Perform bulk actions like delete, mark as done",
+            3 => "Switch themes or generate some data to get started",
+            _ => string.Empty,
+        };
     }
 }
