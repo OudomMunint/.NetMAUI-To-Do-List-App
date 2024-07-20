@@ -118,4 +118,46 @@ public partial class Settings : ContentPage
             Navigation.RemovePage(this);
         });
     }
+
+    private async void Home_Clicked(System.Object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.ToString(), "Cancel");
+        }
+    }
+
+    private async void Feedback_Clicked(System.Object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.ToString(), "Cancel");
+        }
+    }
+
+    private async void AboutMe_Clicked(System.Object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new("https://github.com/OudomMunint");
+            Uri uri2 = new("https://oudommunint.netlify.app");
+
+            bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
+            await Browser.Default.OpenAsync(result ? uri : uri2, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.ToString(), "Cancel");
+        }
+    }
 }

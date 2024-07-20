@@ -196,6 +196,13 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Image" x:Key="SettingsCaret">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="Source" Value="disclosure_indicator_icon.png" />
+        <Setter Property="Aspect" Value="AspectFit" />
+        <Setter Property="HeightRequest" Value="20" />
+    </Style>
+
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
