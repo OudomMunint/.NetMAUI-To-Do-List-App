@@ -159,6 +159,7 @@ namespace ToDoListApp.Views
 
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
             if (e.SelectedItem != null)
             {
                 await Navigation.PushAsync(new TodoitemPage
@@ -208,7 +209,12 @@ namespace ToDoListApp.Views
 
             if (!selectedItems.Any())
             {
-                await DisplayAlert("No Items Selected", "Please select items to delete", "OK");
+                bool Confirmed = await DisplayAlert("Delete All", "Are you sure you want to delete everything?", "OK", "Cancel");
+
+                if (Confirmed)
+                {
+                    DeleteAllItems(sender, e);
+                }
             }
             else
             {
@@ -234,7 +240,7 @@ namespace ToDoListApp.Views
             string deleteall = "Delete all";
             string settings = "Settings";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { deleteall, settings });
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, [settings]);
 
             if (action != null && action.Equals(deleteall))
             {
