@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 
 namespace ToDoListApp.Views
 {
@@ -135,6 +137,11 @@ namespace ToDoListApp.Views
 
         async void OnSaveClicked(object sender, EventArgs e)
         {
+            CancellationTokenSource cancellationTokenSource = new();
+            ToastDuration duration = ToastDuration.Short;
+            string text = "Task Saved ✅";
+            var toast = Toast.Make(text, duration, 16);
+
             if (string.IsNullOrWhiteSpace(NameField.Text) || string.IsNullOrWhiteSpace(DescField.Text))
             {
                 HapticFeedback.Perform(HapticFeedbackType.LongPress);
@@ -173,10 +180,16 @@ namespace ToDoListApp.Views
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             await database.SaveItemAsync(todoItem);
             await Navigation.PopAsync();
+            await toast.Show(cancellationTokenSource.Token);
         }
 
         async void OnDeleteClicked(object sender, EventArgs e)
         {
+            CancellationTokenSource cancellationTokenSource = new();
+            ToastDuration duration = ToastDuration.Short;
+            string text = "Task Deleted 🗑️";
+            var toast = Toast.Make(text, duration, 16);
+
             HapticFeedback.Perform(HapticFeedbackType.LongPress);
             bool Confirmed = await DisplayAlert("Delete To-Do Item.", "Are you sure you want to delete this item? all attachments bound to this item will be lost", "Yes", "No");
 
@@ -187,6 +200,7 @@ namespace ToDoListApp.Views
                 TodoitemDatabase database = await TodoitemDatabase.Instance;
                 await database.DeleteItemAsync(todoItem);
                 await Navigation.PopAsync();
+                await toast.Show(cancellationTokenSource.Token);
             }
         }
 
