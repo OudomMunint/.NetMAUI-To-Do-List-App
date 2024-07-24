@@ -2,6 +2,9 @@
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 using ToDoListApp.Views;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToDoListApp;
 
@@ -23,6 +26,18 @@ public partial class Settings : ContentPage
             DarkModeSwitch.IsToggled = false;
         }
 	}
+
+    private static async void DataGenerated()
+    {
+        await Task.Delay(1000);
+        CancellationTokenSource cancellationTokenSource = new();
+        ToastDuration duration = ToastDuration.Short;
+
+        string text = "Data Generated!"; 
+        var toast = Toast.Make(text, duration, 16);
+
+        await toast.Show(cancellationTokenSource.Token);
+    }
 
     protected override void OnAppearing()
     {
@@ -105,8 +120,15 @@ public partial class Settings : ContentPage
 
         if (userConfirmed)
         {
-            await Settings.MakeDummyData();
-            await DisplayAlert("Success", "Dummy data has been generated", "OK");
+            try
+            {
+                await MakeDummyData();
+                DataGenerated();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.ToString(), "Ok");
+            }
         }
     }
 
