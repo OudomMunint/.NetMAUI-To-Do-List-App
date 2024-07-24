@@ -1,8 +1,10 @@
-﻿using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 using CommunityToolkit.Maui.Core.Platform;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using System;
 
 namespace ToDoListApp.Views
@@ -130,6 +132,11 @@ namespace ToDoListApp.Views
 
         async void DeleteAllItems(object sender, EventArgs e)
         {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            ToastDuration duration = ToastDuration.Short;
+            string text2 = "All Task(s) Deleted 🗑";
+            var deleteAllToast = Toast.Make(text2, duration, 16);
+
             bool userConfirmed = await DisplayAlert("Delete All Tasks", "Confirm you want to DELETE ALL items?", "Yes", "No");
 
             if (userConfirmed)
@@ -145,6 +152,15 @@ namespace ToDoListApp.Views
                 listView.ItemsSource = null;
                 await IsEmptyList();
                 await UpdateListView();
+                try
+                {
+                    await deleteAllToast.Show(cancellationTokenSource.Token);
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Error", ex.ToString(), "Cancel");
+                    Console.WriteLine(ex);
+                }
             }
         }
 
@@ -205,6 +221,11 @@ namespace ToDoListApp.Views
 
         async void DeleteSelectedItems(object sender, EventArgs e)
         {
+            CancellationTokenSource cancellationTokenSource = new();
+            ToastDuration duration = ToastDuration.Short;
+            string text = "Selected Task(s) Deleted 🗑️";
+            var deleteSelectedToast = Toast.Make(text, duration, 16);
+
             var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
 
             if (!selectedItems.Any())
@@ -231,6 +252,7 @@ namespace ToDoListApp.Views
                     // Refresh ListView
                     await IsEmptyList();
                     await UpdateListView();
+                    await deleteSelectedToast.Show(cancellationTokenSource.Token);
                 }
             }
         }
