@@ -7,7 +7,6 @@
 
     <Grid RowDefinitions="*, 40, Auto, Auto, Auto">
 
-
             <CarouselView Grid.Row="0"
               HorizontalScrollBarVisibility="Never"
               IsBounceEnabled="True"
