@@ -1,4 +1,4 @@
-using Microsoft.Maui.ApplicationModel;
+﻿using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
@@ -259,19 +259,15 @@ namespace ToDoListApp.Views
 
         public async void OpenMenu(object sender, EventArgs e)
         {
-            string deleteall = "Delete all";
             string settings = "Settings";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, [settings]);
-
-            if (action != null && action.Equals(deleteall))
-            {
-                DeleteAllItems(sender, e);
-            }
-            else if (action != null && action.Equals(settings))
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] {settings});
+            
+            if (action != null)
             {
                 OpenSettings(sender, e);
             }
+            
         }
 
         //Sorting
