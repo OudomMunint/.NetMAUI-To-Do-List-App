@@ -2,6 +2,9 @@
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 using ToDoListApp.Views;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToDoListApp;
 
@@ -23,6 +26,18 @@ public partial class Settings : ContentPage
             DarkModeSwitch.IsToggled = false;
         }
 	}
+
+    private static async void DataGenerated()
+    {
+        await Task.Delay(1000);
+        CancellationTokenSource cancellationTokenSource = new();
+        ToastDuration duration = ToastDuration.Short;
+
+        string text = "Data Generated!"; 
+        var toast = Toast.Make(text, duration, 16);
+
+        await toast.Show(cancellationTokenSource.Token);
+    }
 
     protected override void OnAppearing()
     {
@@ -105,8 +120,15 @@ public partial class Settings : ContentPage
 
         if (userConfirmed)
         {
-            await Settings.MakeDummyData();
-            await DisplayAlert("Success", "Dummy data has been generated", "OK");
+            try
+            {
+                await MakeDummyData();
+                DataGenerated();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.ToString(), "Ok");
+            }
         }
     }
 
@@ -117,5 +139,47 @@ public partial class Settings : ContentPage
             await Navigation.PushAsync(new Welcome());
             Navigation.RemovePage(this);
         });
+    }
+
+    private async void Home_Clicked(System.Object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.ToString(), "Cancel");
+        }
+    }
+
+    private async void Feedback_Clicked(System.Object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.ToString(), "Cancel");
+        }
+    }
+
+    private async void AboutMe_Clicked(System.Object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new("https://github.com/OudomMunint");
+            Uri uri2 = new("https://oudommunint.netlify.app");
+
+            bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
+            await Browser.Default.OpenAsync(result ? uri : uri2, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.ToString(), "Cancel");
+        }
     }
 }

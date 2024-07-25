@@ -34,12 +34,12 @@
     <ContentPage.Content>
         <ScrollView VerticalScrollBarVisibility="Always">
         <StackLayout Margin="20" Spacing="20" VerticalOptions="StartAndExpand">
-
+            <!-- Task -->
             <StackLayout>
                 <StackLayout>
                     <HorizontalStackLayout Spacing="10">
-                        <Label FontSize="20" Text="Task" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
-                        <Image Source="todo.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
+                        <Image Margin="10,0,0,0" Source="todo.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
+                        <Label FontSize="20" Text="Task" FontAttributes="Bold" FontFamily="Inter-SemiBold" />                       
                     </HorizontalStackLayout>
 
                     <Frame Style="{DynamicResource ToDoItemFrame}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
@@ -51,10 +51,11 @@
                 </StackLayout>
             </StackLayout>
 
+            <!-- Description -->
             <StackLayout>
                 <HorizontalStackLayout Spacing="10">
+                    <Image Margin="10,0,0,0" Source="description.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=23}"/>
                     <Label FontSize="20" Text="Description" FontFamily="Inter-SemiBold" />
-                    <Image Source="description.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=20}"/>
                 </HorizontalStackLayout>
 
                 <Frame Style="{DynamicResource ToDoItemFrame}" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
@@ -63,14 +64,15 @@
                 </Frame>
             </StackLayout>
 
+            <!-- Priority -->
             <StackLayout>
                 <HorizontalStackLayout Spacing="10">
+                    <Image Margin="10,0,0,0" Source="priority.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=25}"/>
                     <Label FontSize="20" Text="Task Priority" FontFamily="Inter-SemiBold"/>
-                    <Image Source="priority.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=20}"/>
                 </HorizontalStackLayout>
 
                 <Frame Style="{DynamicResource ToDoItemFrame}" Padding="10" Margin="0,10,0,0" CornerRadius="10">
-                    <Picker x:Name="PriorityPicker">
+                    <Picker x:Name="PriorityPicker" Title="Set Priority">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Low</x:String>
@@ -87,8 +89,8 @@
             <StackLayout>
                 <StackLayout>
                         <HorizontalStackLayout Spacing="15">
+                            <Image Margin="12,0,0,0" Source="{AppThemeBinding Dark=attachment.png, Light=attachmentblack.png}" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
                             <Label FontSize="20" Text="Attachment" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
-                            <Image Source="{AppThemeBinding Dark=attachment.png, Light=attachmentblack.png}" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>
                         </HorizontalStackLayout>
                         <Frame Style="{DynamicResource ToDoItemFrame}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
                             <StackLayout>
@@ -104,23 +106,24 @@
                 </StackLayout>
             </StackLayout>
 
-                <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
-                    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" RowSpacing="5">
+            <!-- Item options -->
+            <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
+                <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" RowSpacing="5">
 
-                        <Label Grid.Column="0" Grid.Row="0" Margin="10,0,10,0" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
-                               Text="Mark as Done" />
+                    <Label Grid.Column="0" Grid.Row="0" Margin="10,0,10,0" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
+                           Text="Mark as Done" />
 
-                        <Switch Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
+                    <Switch Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
 
-                        <BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Margin="{OnPlatform iOS='0,8,0,0'}" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"/>
+                    <BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Margin="{OnPlatform iOS='0,8,0,0'}" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"/>
 
-                        <Label Grid.Row="2" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
-                               Margin="10,0,10,0"/>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold"
+                           Margin="10,0,10,0"/>
 
-                        <Switch Grid.Column="1" Grid.Row="2" HorizontalOptions="EndAndExpand" IsToggled="{Binding IsPinned}" OnColor="Green" ThumbColor="Gray" />
+                    <Switch Grid.Column="1" Grid.Row="2" HorizontalOptions="EndAndExpand" IsToggled="{Binding IsPinned}" OnColor="Green" ThumbColor="Gray" />
 
-                    </Grid>
-                </Frame>
+                </Grid>
+            </Frame>
             </StackLayout>
       </ScrollView>
     </ContentPage.Content>

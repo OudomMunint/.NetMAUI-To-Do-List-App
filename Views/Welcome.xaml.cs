@@ -65,10 +65,10 @@ public partial class Welcome : ContentPage
 
         ChangingSubText.Text = e.CurrentPosition switch
         {
-            0 => "You can view your stats with an informative dashboard",
-            1 => "Click + to add a new task or click on the task to edit",
-            2 => "Perform bulk actions like delete, mark as done",
-            3 => "Switch themes or generate some data to get started",
+            0 => "You can view your stats with an informative dashboard.",
+            1 => "Click on + to add a new task or click on the task to edit it.",
+            2 => "Perform bulk actions like delete, mark as done, set priority.",
+            3 => "Give feedback, switch themes or generate some data to get started.",
             _ => string.Empty,
         };
     }

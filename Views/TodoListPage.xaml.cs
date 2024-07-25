@@ -3,6 +3,8 @@ using Microsoft.Maui.Controls;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 using CommunityToolkit.Maui.Core.Platform;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using System;
 
 namespace ToDoListApp.Views
@@ -130,6 +132,11 @@ namespace ToDoListApp.Views
 
         async void DeleteAllItems(object sender, EventArgs e)
         {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            ToastDuration duration = ToastDuration.Short;
+            string text2 = "All Task(s) Deleted 🗑";
+            var deleteAllToast = Toast.Make(text2, duration, 16);
+
             bool userConfirmed = await DisplayAlert("Delete All Tasks", "Confirm you want to DELETE ALL items?", "Yes", "No");
 
             if (userConfirmed)
@@ -145,6 +152,15 @@ namespace ToDoListApp.Views
                 listView.ItemsSource = null;
                 await IsEmptyList();
                 await UpdateListView();
+                try
+                {
+                    await deleteAllToast.Show(cancellationTokenSource.Token);
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Error", ex.ToString(), "Cancel");
+                    Console.WriteLine(ex);
+                }
             }
         }
 
@@ -159,6 +175,7 @@ namespace ToDoListApp.Views
 
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
             if (e.SelectedItem != null)
             {
                 await Navigation.PushAsync(new TodoitemPage
@@ -204,11 +221,21 @@ namespace ToDoListApp.Views
 
         async void DeleteSelectedItems(object sender, EventArgs e)
         {
+            CancellationTokenSource cancellationTokenSource = new();
+            ToastDuration duration = ToastDuration.Short;
+            string text = "Selected Task(s) Deleted 🗑️";
+            var deleteSelectedToast = Toast.Make(text, duration, 16);
+
             var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
 
             if (!selectedItems.Any())
             {
-                await DisplayAlert("No Items Selected", "Please select items to delete", "OK");
+                bool Confirmed = await DisplayAlert("Delete All", "Are you sure you want to delete everything?", "OK", "Cancel");
+
+                if (Confirmed)
+                {
+                    DeleteAllItems(sender, e);
+                }
             }
             else
             {
@@ -225,25 +252,22 @@ namespace ToDoListApp.Views
                     // Refresh ListView
                     await IsEmptyList();
                     await UpdateListView();
+                    await deleteSelectedToast.Show(cancellationTokenSource.Token);
                 }
             }
         }
 
         public async void OpenMenu(object sender, EventArgs e)
         {
-            string deleteall = "Delete all";
             string settings = "Settings";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { deleteall, settings });
-
-            if (action != null && action.Equals(deleteall))
-            {
-                DeleteAllItems(sender, e);
-            }
-            else if (action != null && action.Equals(settings))
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] {settings});
+            
+            if (action != null)
             {
                 OpenSettings(sender, e);
             }
+            
         }
 
         //Sorting
