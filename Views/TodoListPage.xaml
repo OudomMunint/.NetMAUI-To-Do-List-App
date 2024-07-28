@@ -97,7 +97,7 @@
         </VerticalStackLayout>
 
         <ListView x:Name="listView" Grid.Row="2" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None" VerticalScrollBarVisibility="Never"
-                  CachingStrategy="RecycleElement" IsPullToRefreshEnabled="True" Refreshing="RefreshView_Refreshing" Scrolled="ListView_Scrolled">
+                  CachingStrategy="RecycleElement" IsPullToRefreshEnabled="True" Refreshing="RefreshView_Refreshing" Scrolled="listView_Scrolled2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

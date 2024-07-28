@@ -498,7 +498,7 @@ namespace ToDoListApp.Views
             listView.IsRefreshing = false;
         }
 
-        private async void ListView_Scrolled(object sender, ScrolledEventArgs e)
+        async void listView_Scrolled2(System.Object sender, Microsoft.Maui.Controls.ScrolledEventArgs e)
         {
             await SearchBar.HideKeyboardAsync();
 
