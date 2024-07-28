@@ -498,30 +498,32 @@ namespace ToDoListApp.Views
             listView.IsRefreshing = false;
         }
 
-        private async void ListView_Scrolled(object sender, ScrolledEventArgs e)
+        async void listView_Scrolled2(System.Object sender, Microsoft.Maui.Controls.ScrolledEventArgs e)
         {
             await SearchBar.HideKeyboardAsync();
-#if IOS
-            var scrollThreshold = 70;
-            if (e.ScrollY > scrollThreshold)
+
+            if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
-                // Scroll down
-                if (pinnedcontainer.IsVisible)
+                var scrollThreshold = 70;
+                if (e.ScrollY > scrollThreshold)
                 {
-                    await pinnedcontainer.FadeTo(0, 250);
-                    pinnedcontainer.IsVisible = false;
+                    // Scroll down
+                    if (pinnedcontainer.IsVisible)
+                    {
+                        await pinnedcontainer.FadeTo(0, 250);
+                        pinnedcontainer.IsVisible = false;
+                    }
+                }
+                else
+                {
+                    // Scroll up
+                    if (!pinnedcontainer.IsVisible)
+                    {
+                        pinnedcontainer.IsVisible = true;
+                        await pinnedcontainer.FadeTo(1, 250);
+                    }
                 }
             }
-            else
-            {
-                // Scroll up
-                if (!pinnedcontainer.IsVisible)
-                {
-                    pinnedcontainer.IsVisible = true;
-                    await pinnedcontainer.FadeTo(1, 250);
-                }
-            }
-#endif
         }
     }
 }

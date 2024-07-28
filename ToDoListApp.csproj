@@ -58,23 +58,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="Resources\AppIcon\appicon.png" />
-		<None Remove="Resources\Images\addnew.png" />
-		<None Remove="Resources\Images\checkLight.png" />
-		<None Remove="Resources\Images\donetoolbar.png" />
-		<None Remove="Resources\Images\doneselected.png" />
-		<None Remove="Resources\Images\icon.png" />
 		<None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
-		<None Remove="Resources\Images\settingsWhite.png" />
-		<None Remove="Resources\Images\themewhite.png" />
-		<None Remove="Resources\Splash\splash3.svg" />
-		<None Remove="Resources\Images\attachment.png" />
-		<None Remove="Resources\Images\saveitem.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="9.0.2" />
 		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="8.0.14" />
@@ -145,9 +134,5 @@
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
 	  <PackageReference Include="Microcharts.Maui" Version="1.0.0" />
-	</ItemGroup>
-	<ItemGroup>
-	  <BundleResource Include="Resources\Images\attachment.png" />
-	  <BundleResource Include="Resources\Images\saveitem.png" />
 	</ItemGroup>
 </Project>
