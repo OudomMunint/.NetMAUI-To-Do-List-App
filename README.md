@@ -2,6 +2,9 @@
 
 A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLite`
 
+- No Login required.
+- No Internet connection required.
+
 # CI/CD Status & Release
 
 [![CI Build](https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/actions/workflows/ci.yml)
@@ -18,16 +21,19 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
     <th>Platform</th>
     <th>Version</th>
     <th>Target</th>
+    <th>Latest Stable</th>
   </tr>
   <tr>
     <td>Android</td>
     <td>API 21+</td>
     <td>API 34 / Android 14</td>
+    <td>Android 14</td>
   </tr>
   <tr>
     <td>iOS</td>
     <td>iOS 11+</td>
-    <td>iOS 16.7 & 17.4.1</td>
+    <td>iOS 16 & 17</td>
+    <td>iOS 16.7.8 & 17.5.1</td>
   </tr>
 </table>
 
