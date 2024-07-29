@@ -101,6 +101,12 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem x:Name="pinitem" Text="Favorite"
+                                      Clicked="pinitem_Clicked" />
+                            <MenuItem x:Name="deleteitem" Text="Delete"
+                                      Clicked="deleteitem_Clicked" />
+                        </ViewCell.ContextActions>
                         <Border Padding="5,0,0,0" Margin="5">
                             <Grid RowSpacing="0" ColumnSpacing="0" Margin="-5">
                                 <Grid.RowDefinitions>
