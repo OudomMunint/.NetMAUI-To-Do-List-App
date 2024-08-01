@@ -530,6 +530,7 @@ namespace ToDoListApp.Views
             var menuItem = sender as MenuItem;
             if (menuItem != null)
             {
+                HapticFeedback.Perform(HapticFeedbackType.Click);
                 var todoItem = menuItem.BindingContext as Todoitem;
                 if (todoItem != null)
                 {
@@ -548,6 +549,7 @@ namespace ToDoListApp.Views
 
         private async void deleteitem_Clicked(object sender, EventArgs e)
         {
+            HapticFeedback.Perform(HapticFeedbackType.Click);
             var menuItem = sender as MenuItem;
             if (menuItem != null)
             {
