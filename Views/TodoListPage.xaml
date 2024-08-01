@@ -102,9 +102,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem x:Name="pinitem" Text="Favorite"
+                            <MenuItem x:Name="pinitem" IconImageSource="pin.png"
                                       Clicked="pinitem_Clicked" />
-                            <MenuItem x:Name="deleteitem" Text="Delete"
+                            <MenuItem x:Name="deleteitem" IconImageSource="trash.png"
                                       Clicked="deleteitem_Clicked" />
                         </ViewCell.ContextActions>
                         <Border Padding="5,0,0,0" Margin="5">
