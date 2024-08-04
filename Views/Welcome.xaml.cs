@@ -46,10 +46,15 @@ public partial class Welcome : ContentPage
 
     private void Continue_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Dashboard());
-
-        // Prevent the user from going back
-        Navigation.RemovePage(this);
+        try {
+            Navigation.PushAsync(new Dashboard());
+            // Prevent the user from going back
+            //Navigation.RemovePage(this); // Disabled for now due to #236
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Error", ex.Message, "OK");
+        }
     }
 
     private void OnPositionChanged(object sender, PositionChangedEventArgs e)
