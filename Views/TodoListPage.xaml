@@ -128,6 +128,19 @@
                                 </MenuItem.Text>
                             </MenuItem>
 
+                            <MenuItem x:Name="markasdoneitem" Clicked="markasdoneitem_Clicked">
+                                <MenuItem.IconImageSource>
+                                    <OnPlatform x:TypeArguments="ImageSource">
+                                        <On Platform="Android">done.png</On>
+                                    </OnPlatform>
+                                </MenuItem.IconImageSource>
+                                <MenuItem.Text>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Completed</On>
+                                    </OnPlatform>
+                                </MenuItem.Text>
+                            </MenuItem>
+
                         </ViewCell.ContextActions>
                         <Border Padding="5,0,0,0" Margin="5">
                             <Grid RowSpacing="0" ColumnSpacing="0" Margin="-5">

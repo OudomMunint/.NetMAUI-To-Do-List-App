@@ -568,5 +568,34 @@ namespace ToDoListApp.Views
                 }
             }
         }
+
+        private async void markasdoneitem_Clicked(System.Object sender, System.EventArgs e)
+        {
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                var todoItem = menuItem.BindingContext as Todoitem;
+                if (todoItem != null)
+                {
+                    if (todoItem.Done == true)
+                    {
+                        await DisplayAlert("Task already completed", null, "OK");
+                    }
+
+                    else
+                    {
+                        todoItem.Done = true;
+
+                        TodoitemDatabase database = await TodoitemDatabase.Instance;
+                        await database.SaveItemAsync(todoItem);
+
+                        await UpdateListView();
+
+                        await Toast.Make(todoItem.Name + " Marked as complete", ToastDuration.Long).Show();
+                    }
+                }
+            }
+        }
     }
 }
