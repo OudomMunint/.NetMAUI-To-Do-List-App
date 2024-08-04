@@ -12,8 +12,9 @@ namespace ToDoListApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TodoListPage : ContentPage
     {
-        // dark mode property
         private readonly AppTheme darkmode = AppTheme.Dark;
+
+        public ListView todolistlist;
 
         public TodoListPage()
         {
@@ -35,8 +36,6 @@ namespace ToDoListApp.Views
                 }
             };
         }
-
-        public ListView todolistlist;
 
         protected override async void OnAppearing()
         {
@@ -521,6 +520,79 @@ namespace ToDoListApp.Views
                     {
                         pinnedcontainer.IsVisible = true;
                         await pinnedcontainer.FadeTo(1, 250);
+                    }
+                }
+            }
+        }
+
+        private async void pinitem_Clicked(object sender, EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                HapticFeedback.Perform(HapticFeedbackType.Click);
+                var todoItem = menuItem.BindingContext as Todoitem;
+                if (todoItem != null)
+                {
+                    todoItem.IsPinned = true;
+
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    await database.SaveItemAsync(todoItem);
+
+                    await UpdateListView();
+                    await UpdateCollectionView();
+
+                    await Toast.Make(todoItem.Name + " Pinned", ToastDuration.Long).Show();
+                }
+            }
+        }
+
+        private async void deleteitem_Clicked(object sender, EventArgs e)
+        {
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                var todoItem = menuItem.BindingContext as Todoitem;
+                if (todoItem != null)
+                {
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+
+                    await database.DeleteItemAsync(todoItem);
+                    await database.SaveItemAsync(todoItem);
+
+                    await UpdateListView();
+                    await UpdateCollectionView();
+
+                    await Toast.Make(todoItem.Name + " Deleted", ToastDuration.Long).Show();
+                }
+            }
+        }
+
+        private async void markasdoneitem_Clicked(System.Object sender, System.EventArgs e)
+        {
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                var todoItem = menuItem.BindingContext as Todoitem;
+                if (todoItem != null)
+                {
+                    if (todoItem.Done == true)
+                    {
+                        await DisplayAlert("Task already completed", null, "OK");
+                    }
+
+                    else
+                    {
+                        todoItem.Done = true;
+
+                        TodoitemDatabase database = await TodoitemDatabase.Instance;
+                        await database.SaveItemAsync(todoItem);
+
+                        await UpdateListView();
+
+                        await Toast.Make(todoItem.Name + " Marked as complete", ToastDuration.Long).Show();
                     }
                 }
             }

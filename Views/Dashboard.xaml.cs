@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ToDoListApp.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Skip)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Dashboard : ContentPage
     {
         private int totalItems;
@@ -46,17 +46,25 @@ namespace ToDoListApp.Views
 
         protected override async void OnAppearing()
         {
-            base.OnAppearing();
-            await UpdateListView();
-            await CountItemsHasAttachment();
-            await Task.WhenAll(
-                GetTotalItems(),
-                GetDoneItems(),
-                UpdateLabel()
-            );
-            CreateChart1();
-            CreateChart2();
-            CreateChart3();
+            try
+            {
+                base.OnAppearing();
+                await UpdateListView();
+                await CountItemsHasAttachment();
+                await Task.WhenAll(
+                    GetTotalItems(),
+                    GetDoneItems(),
+                    UpdateLabel()
+                );
+                CreateChart1();
+                CreateChart2();
+                CreateChart3();
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception here
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
         }
 
         // Dispose both charts, fixes #155

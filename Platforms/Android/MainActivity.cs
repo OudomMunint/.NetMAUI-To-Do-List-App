@@ -8,9 +8,9 @@ namespace ToDoListApp;
 public class MainActivity : MauiAppCompatActivity
 {
     // force portrait orientation and prevent orientation change
-    protected override void OnCreate(Bundle savedInstanceState)
-    {
-        base.OnCreate(savedInstanceState);
-        RequestedOrientation = ScreenOrientation.Portrait;
-    }
+    //protected override void OnCreate(Bundle savedInstanceState)
+    //{
+    //    base.OnCreate(savedInstanceState);
+    //    RequestedOrientation = ScreenOrientation.Portrait;
+    //}
 }
