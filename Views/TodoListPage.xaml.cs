@@ -262,7 +262,7 @@ namespace ToDoListApp.Views
 
             var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] {settings});
             
-            if (action != null)
+            if (action == settings)
             {
                 OpenSettings(sender, e);
             }
