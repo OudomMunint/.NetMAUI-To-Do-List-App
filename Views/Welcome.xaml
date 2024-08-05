@@ -16,14 +16,7 @@
               PositionChanged="OnPositionChanged">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Image HeightRequest="370" Aspect="AspectFit" Source="{Binding UserImage}" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Image.Shadow>
-                                <Shadow Brush="Transparent"
-                                Offset="10,10"
-                                Radius="15"
-                                Opacity="0.4" />
-                            </Image.Shadow>
-                        </Image>
+                        <Image Source="{Binding UserImage}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,25,10,10"/>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
@@ -43,8 +36,8 @@
                FontSize="16" FontFamily="Inter-Regular" x:Name="ChangingSubText"
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
-        <Button BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="4" Margin="20, 0, 20, 30" CornerRadius="20"
-                Text="Continue" FontFamily="Inter-Regular" VerticalOptions="End" HeightRequest="40" WidthRequest="320" Clicked="Continue_Clicked"
+        <Button BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="4" Margin="30, 0, 30, 30"
+                Text="Continue" FontFamily="Inter-Regular" Clicked="Continue_Clicked"
                 TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
 
     </Grid>
