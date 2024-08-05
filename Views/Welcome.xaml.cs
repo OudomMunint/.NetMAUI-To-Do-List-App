@@ -4,21 +4,17 @@ namespace ToDoListApp.Views;
 
 public partial class Welcome : ContentPage
 {
-    private int itemcount;
-
     public Welcome()
 	{
 		InitializeComponent();
         BindingContext = this;
         UserCollection = new ObservableCollection<UserInformation>
-            {
-                new UserInformation{UserImage = "iphone1.png"},
-                new UserInformation{UserImage = "iphone2.png"},
-                new UserInformation{UserImage = "iphone3.png"},
-                new UserInformation{UserImage = "iphone4.png"},
-            };
-
-        itemcount = UserCollection.Count;
+        {
+            new UserInformation{UserImage = "iphone1.png"},
+            new UserInformation{UserImage = "iphone2.png"},
+            new UserInformation{UserImage = "iphone3.png"},
+            new UserInformation{UserImage = "iphone4.png"},
+        };
 
         if (CarouselZoos.Position == 0)
         {
@@ -30,10 +26,10 @@ public partial class Welcome : ContentPage
     public class UserInformation
     {
         public ImageSource UserImage { get; set; }
-
     }
 
     private ObservableCollection<UserInformation> userCollection;
+
     public ObservableCollection<UserInformation> UserCollection
     {
         get { return userCollection; }
@@ -46,10 +42,11 @@ public partial class Welcome : ContentPage
 
     private void Continue_Clicked(object sender, EventArgs e)
     {
-        try {
+        try
+        {
             Navigation.PushAsync(new Dashboard());
             // Prevent the user from going back
-            //Navigation.RemovePage(this); // Disabled for now due to #236
+            // Navigation.RemovePage(this); // Disabled for now due to #236
         }
         catch (Exception ex)
         {
