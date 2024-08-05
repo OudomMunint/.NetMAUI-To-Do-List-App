@@ -25,11 +25,11 @@ public partial class Settings : ContentPage
         {
             DarkModeSwitch.IsToggled = false;
         }
-	}
+    }
 
     private static async void DataGenerated()
     {
-        await Task.Delay(1000);
+        await Task.Delay(500);
         CancellationTokenSource cancellationTokenSource = new();
         ToastDuration duration = ToastDuration.Short;
 
@@ -60,12 +60,9 @@ public partial class Settings : ContentPage
         }
         catch (Exception ex)
         {
-            // Handle ex
-            Console.WriteLine($"An error occurred while toggling dark mode: {ex.Message}");
             // Revert Switch
             DarkModeSwitch.IsToggled = !DarkModeSwitch.IsToggled;
-            // Error message
-            DisplayAlert("Error", "An error occurred while toggling dark mode.", "Cancel");
+            DisplayAlert("Error", "An error occurred while toggling dark mode." + ex.Message, "Cancel");
         }
     }
 
