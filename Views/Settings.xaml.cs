@@ -5,6 +5,7 @@ using ToDoListApp.Views;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using System.ComponentModel.DataAnnotations.Schema;
+using static ToDoListApp.ToastService;
 
 namespace ToDoListApp;
 
@@ -45,13 +46,14 @@ public partial class Settings : ContentPage
     }
 
     // Dark Mode
-    private void DarkMode(object sender, EventArgs e)
+    private async void DarkMode(object sender, EventArgs e)
     {
         try
         {
             if (DarkModeSwitch.IsToggled)
             {
                 Application.Current.UserAppTheme = AppTheme.Dark;
+                await ShowToastAsync("Dark Mode Enabled");
             }
             else
             {
@@ -62,7 +64,7 @@ public partial class Settings : ContentPage
         {
             // Revert Switch
             DarkModeSwitch.IsToggled = !DarkModeSwitch.IsToggled;
-            DisplayAlert("Error", "An error occurred while toggling dark mode." + ex.Message, "Cancel");
+            await DisplayAlert("Error", "An error occurred while toggling dark mode." + ex.Message, "Cancel");
         }
     }
 
