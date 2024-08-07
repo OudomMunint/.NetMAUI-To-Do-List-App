@@ -28,18 +28,6 @@ public partial class Settings : ContentPage
         }
     }
 
-    private static async void DataGenerated()
-    {
-        await Task.Delay(500);
-        CancellationTokenSource cancellationTokenSource = new();
-        ToastDuration duration = ToastDuration.Short;
-
-        string text = "Data Generated!"; 
-        var toast = Toast.Make(text, duration, 16);
-
-        await toast.Show(cancellationTokenSource.Token);
-    }
-
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -53,7 +41,6 @@ public partial class Settings : ContentPage
             if (DarkModeSwitch.IsToggled)
             {
                 Application.Current.UserAppTheme = AppTheme.Dark;
-                await ShowToastAsync("Dark Mode Enabled");
             }
             else
             {
@@ -81,9 +68,10 @@ public partial class Settings : ContentPage
                 await database.DeleteItemAsync(item);
             }
             // Navigate with main thread!!!
-            MainThread.BeginInvokeOnMainThread(() =>
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                Navigation.PushAsync(new Welcome());
+                await Navigation.PushAsync(new Welcome());
+                await ShowToastAsync("Application has been reset", 16, ToastDuration.Short);
             });
         }
     }
@@ -122,7 +110,8 @@ public partial class Settings : ContentPage
             try
             {
                 await MakeDummyData();
-                DataGenerated();
+                HapticFeedback.Perform(HapticFeedbackType.Click);
+                await ShowToastAsync("Data Generated ✅", 16, ToastDuration.Short);
             }
             catch (Exception ex)
             {

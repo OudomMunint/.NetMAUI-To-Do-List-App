@@ -8,6 +8,7 @@ using ToDoListApp.Data;
 using ToDoListApp.Models;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using static ToDoListApp.ToastService;
 
 namespace ToDoListApp.Views
 {
@@ -112,6 +113,7 @@ namespace ToDoListApp.Views
         {
             var todoItem = (Todoitem)BindingContext;
             TodoitemDatabase database = await TodoitemDatabase.Instance;
+
             // if null
             if (todoItem.Attachment == null)
             {
@@ -120,7 +122,6 @@ namespace ToDoListApp.Views
             }
 
             // Alert
-
             bool Confirmed = await DisplayAlert("Delete Attachment.", "Are you sure you want to delete this Attachment?", "Yes", "No");
 
             if (Confirmed)
@@ -137,11 +138,6 @@ namespace ToDoListApp.Views
 
         async void OnSaveClicked(object sender, EventArgs e)
         {
-            CancellationTokenSource cancellationTokenSource = new();
-            ToastDuration duration = ToastDuration.Short;
-            string text = "Task Saved ✅";
-            var toast = Toast.Make(text, duration, 16);
-
             if (string.IsNullOrWhiteSpace(NameField.Text) || string.IsNullOrWhiteSpace(DescField.Text))
             {
                 HapticFeedback.Perform(HapticFeedbackType.LongPress);
@@ -178,18 +174,14 @@ namespace ToDoListApp.Views
 
             HapticFeedback.Perform(HapticFeedbackType.Click);
             TodoitemDatabase database = await TodoitemDatabase.Instance;
+
             await database.SaveItemAsync(todoItem);
+            await ShowToastAsync("Task Saved ✅", 16, ToastDuration.Long);
             await Navigation.PopAsync();
-            await toast.Show(cancellationTokenSource.Token);
         }
 
         async void OnDeleteClicked(object sender, EventArgs e)
         {
-            CancellationTokenSource cancellationTokenSource = new();
-            ToastDuration duration = ToastDuration.Short;
-            string text = "Task Deleted 🗑️";
-            var toast = Toast.Make(text, duration, 16);
-
             HapticFeedback.Perform(HapticFeedbackType.LongPress);
             bool Confirmed = await DisplayAlert("Delete To-Do Item.", "Are you sure you want to delete this item? all attachments bound to this item will be lost", "Yes", "No");
 
@@ -198,18 +190,20 @@ namespace ToDoListApp.Views
                 HapticFeedback.Perform(HapticFeedbackType.Click);
                 var todoItem = (Todoitem)BindingContext;
                 TodoitemDatabase database = await TodoitemDatabase.Instance;
+
                 await database.DeleteItemAsync(todoItem);
+                await ShowToastAsync("Task Deleted 🗑️", 16, ToastDuration.Short);
                 await Navigation.PopAsync();
-                await toast.Show(cancellationTokenSource.Token);
             }
         }
 
-        private void OnClearClicked(object sender, EventArgs e)
+        private async void OnClearClicked(object sender, EventArgs e)
         {
-            HapticFeedback.Perform(HapticFeedbackType.Click);
             NameField.Text = " ";
             DescField.Text = " ";
             attachmentImage.Source = null;
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+            await ShowToastAsync("Form Cleared ⌫", 16, ToastDuration.Short);
         }
 
         public async void TakePhoto(object sender, EventArgs e)
