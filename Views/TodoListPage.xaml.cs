@@ -5,6 +5,7 @@ using ToDoListApp.Models;
 using CommunityToolkit.Maui.Core.Platform;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using static ToDoListApp.ToastService;
 using System;
 
 namespace ToDoListApp.Views
@@ -15,6 +16,8 @@ namespace ToDoListApp.Views
         private readonly AppTheme darkmode = AppTheme.Dark;
 
         public ListView todolistlist;
+
+        private bool sortByDateAscending = false;
 
         public TodoListPage()
         {
@@ -131,29 +134,25 @@ namespace ToDoListApp.Views
 
         async void DeleteAllItems(object sender, EventArgs e)
         {
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            ToastDuration duration = ToastDuration.Short;
-            string text2 = "All Task(s) Deleted 🗑";
-            var deleteAllToast = Toast.Make(text2, duration, 16);
-
             bool userConfirmed = await DisplayAlert("Delete All Tasks", "Confirm you want to DELETE ALL items?", "Yes", "No");
 
             if (userConfirmed)
             {
-                TodoitemDatabase database = await TodoitemDatabase.Instance;
-                var allitems = await database.GetItemsAysnc();
-
-                foreach (var item in allitems)
-                {
-                    await database.DeleteItemAsync(item);
-                }
-
-                listView.ItemsSource = null;
-                await IsEmptyList();
-                await UpdateListView();
                 try
                 {
-                    await deleteAllToast.Show(cancellationTokenSource.Token);
+                    TodoitemDatabase database = await TodoitemDatabase.Instance;
+                    var allitems = await database.GetItemsAysnc();
+
+                    foreach (var item in allitems)
+                    {
+                        await database.DeleteItemAsync(item);
+                    }
+
+                    //listView.ItemsSource = null;
+                    await IsEmptyList();
+                    await UpdateListView();
+                    HapticFeedback.Perform(HapticFeedbackType.Click);
+                    await ShowToastAsync("All Task(s) Deleted 🗑", 16, ToastDuration.Short);
                 }
                 catch (Exception ex)
                 {
@@ -220,11 +219,6 @@ namespace ToDoListApp.Views
 
         async void DeleteSelectedItems(object sender, EventArgs e)
         {
-            CancellationTokenSource cancellationTokenSource = new();
-            ToastDuration duration = ToastDuration.Short;
-            string text = "Selected Task(s) Deleted 🗑️";
-            var deleteSelectedToast = Toast.Make(text, duration, 16);
-
             var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
 
             if (!selectedItems.Any())
@@ -251,7 +245,7 @@ namespace ToDoListApp.Views
                     // Refresh ListView
                     await IsEmptyList();
                     await UpdateListView();
-                    await deleteSelectedToast.Show(cancellationTokenSource.Token);
+                    await ShowToastAsync("Selected Task(s) Deleted 🗑️", 16, ToastDuration.Short);
                 }
             }
         }
@@ -262,7 +256,7 @@ namespace ToDoListApp.Views
 
             var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] {settings});
             
-            if (action != null)
+            if (action == settings)
             {
                 OpenSettings(sender, e);
             }
@@ -270,8 +264,6 @@ namespace ToDoListApp.Views
         }
 
         //Sorting
-        private bool sortByDateAscending = false;
-
         private void SortByDateClicked(object sender, EventArgs e)
         {
             sortByDateAscending = !sortByDateAscending;
@@ -542,7 +534,7 @@ namespace ToDoListApp.Views
                     await UpdateListView();
                     await UpdateCollectionView();
 
-                    await Toast.Make(todoItem.Name + " Pinned", ToastDuration.Long).Show();
+                    await ShowToastAsync(todoItem.Name + " Pinned 📌", 16, ToastDuration.Long);
                 }
             }
         }
@@ -564,7 +556,7 @@ namespace ToDoListApp.Views
                     await UpdateListView();
                     await UpdateCollectionView();
 
-                    await Toast.Make(todoItem.Name + " Deleted", ToastDuration.Long).Show();
+                    await ShowToastAsync(todoItem.Name + " Deleted 🗑️", 16, ToastDuration.Long);
                 }
             }
         }
@@ -591,8 +583,7 @@ namespace ToDoListApp.Views
                         await database.SaveItemAsync(todoItem);
 
                         await UpdateListView();
-
-                        await Toast.Make(todoItem.Name + " Marked as complete", ToastDuration.Long).Show();
+                        await ShowToastAsync(todoItem.Name + " marked as complete ✅", 16, ToastDuration.Long);
                     }
                 }
             }

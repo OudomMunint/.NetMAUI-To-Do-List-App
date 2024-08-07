@@ -5,6 +5,7 @@ using ToDoListApp.Views;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using System.ComponentModel.DataAnnotations.Schema;
+using static ToDoListApp.ToastService;
 
 namespace ToDoListApp;
 
@@ -25,18 +26,6 @@ public partial class Settings : ContentPage
         {
             DarkModeSwitch.IsToggled = false;
         }
-	}
-
-    private static async void DataGenerated()
-    {
-        await Task.Delay(1000);
-        CancellationTokenSource cancellationTokenSource = new();
-        ToastDuration duration = ToastDuration.Short;
-
-        string text = "Data Generated!"; 
-        var toast = Toast.Make(text, duration, 16);
-
-        await toast.Show(cancellationTokenSource.Token);
     }
 
     protected override void OnAppearing()
@@ -45,7 +34,7 @@ public partial class Settings : ContentPage
     }
 
     // Dark Mode
-    private void DarkMode(object sender, EventArgs e)
+    private async void DarkMode(object sender, EventArgs e)
     {
         try
         {
@@ -60,12 +49,9 @@ public partial class Settings : ContentPage
         }
         catch (Exception ex)
         {
-            // Handle ex
-            Console.WriteLine($"An error occurred while toggling dark mode: {ex.Message}");
             // Revert Switch
             DarkModeSwitch.IsToggled = !DarkModeSwitch.IsToggled;
-            // Error message
-            DisplayAlert("Error", "An error occurred while toggling dark mode.", "Cancel");
+            await DisplayAlert("Error", "An error occurred while toggling dark mode." + ex.Message, "Cancel");
         }
     }
 
@@ -82,9 +68,10 @@ public partial class Settings : ContentPage
                 await database.DeleteItemAsync(item);
             }
             // Navigate with main thread!!!
-            MainThread.BeginInvokeOnMainThread(() =>
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                Navigation.PushAsync(new Welcome());
+                await Navigation.PushAsync(new Welcome());
+                await ShowToastAsync("Application has been reset", 16, ToastDuration.Short);
             });
         }
     }
@@ -123,7 +110,8 @@ public partial class Settings : ContentPage
             try
             {
                 await MakeDummyData();
-                DataGenerated();
+                HapticFeedback.Perform(HapticFeedbackType.Click);
+                await ShowToastAsync("Data Generated ✅", 16, ToastDuration.Short);
             }
             catch (Exception ex)
             {
