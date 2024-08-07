@@ -7,8 +7,9 @@ namespace ToDoListApp
 {
     public static class ToastService
     {
-        public static async Task ShowToastAsync(string message, ToastDuration duration = ToastDuration.Short, int fontSize = 16)
+        public static async Task ShowToastAsync(string message, int fontSize, ToastDuration duration = ToastDuration.Short)
         {
+            await Task.Delay(500);
             CancellationTokenSource cancellationTokenSource = new();
             var toast = Toast.Make(message, duration, fontSize);
             await toast.Show(cancellationTokenSource.Token);
