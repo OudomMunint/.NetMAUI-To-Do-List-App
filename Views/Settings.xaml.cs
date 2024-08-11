@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 using ToDoListApp.Views;
@@ -142,6 +142,7 @@ public partial class Settings : ContentPage
         }
     }
 
+    private async Task MakeDummyData(bool includeAttachments)
     {
         TodoitemDatabase database = await TodoitemDatabase.Instance;
 
@@ -158,9 +159,22 @@ public partial class Settings : ContentPage
                 Priority = priorities[random.Next(priorities.Length)],
                 Date = DateTime.Now.AddDays(-i),
                 Done = i % 2 == 0,
-                IsPinned = i % 3 == 0,
-                HasAttachment = i % 4 == 0 //Doesn't actually generate Images.
+                IsPinned = i % 2 == 0
             };
+
+            if (includeAttachments && i % 3 == 0)
+            {
+                var attachment = await ReadFileFromOnlineSource("https://cdn-icons-png.flaticon.com/512/1721/1721929.png");
+
+                item.Attachment = attachment;
+
+                if (hasErrorShown)
+                {
+                    // Reset flag
+                    //hasErrorShown = false;
+                    break;
+                }
+            }
 
             await database.SaveItemAsync(item);
         }
