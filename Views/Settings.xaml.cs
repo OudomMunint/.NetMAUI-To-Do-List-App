@@ -5,13 +5,32 @@ using ToDoListApp.Views;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net.Http;
 using static ToDoListApp.ToastService;
+using System.Net.Mail;
+using System.Net;
 
 namespace ToDoListApp;
 
 public partial class Settings : ContentPage
 {
     public bool IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
+
+    public bool hasErrorShown = false;
+
+    private bool IsConnectedToInternet()
+    {
+        var current = Connectivity.NetworkAccess;
+
+        if (current == NetworkAccess.Internet)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public Settings()
 	{
