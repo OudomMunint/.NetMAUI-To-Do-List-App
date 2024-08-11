@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using ToDoListApp.Data;
 using ToDoListApp.Models;
 using ToDoListApp.Views;
@@ -33,7 +33,7 @@ public partial class Settings : ContentPage
     }
 
     public Settings()
-	{
+    {
         InitializeComponent();
 
         if (IsDarkMode)
@@ -182,21 +182,29 @@ public partial class Settings : ContentPage
 
     private async void GenerateData_Button_Pressed(System.Object sender, System.EventArgs e)
     {
-        // Alert
-        var userConfirmed = await DisplayAlert("Generate Dummy Data", "This action will generate dummy data and will affect existing To-Do items. Are you sure you want to continue", "Yes", "No");
+        var titlestring = "You need an internet connection if you choose with attachments.";
+        string action = await Application.Current.MainPage.DisplayActionSheet( titlestring, "Cancel", null, "With Attachments", "Without Attachments");
 
-        if (userConfirmed)
+        if (action == "With Attachments")
         {
-            try
+            await MakeDummyData(true);
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+            
+            if (hasErrorShown)
             {
-                await MakeDummyData();
-                HapticFeedback.Perform(HapticFeedbackType.Click);
+                await ShowToastAsync("Data Not Generated ❎", 16, ToastDuration.Short);
+                hasErrorShown = false;
+            }
+            else
+            {
                 await ShowToastAsync("Data Generated ✅", 16, ToastDuration.Short);
             }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.ToString(), "Ok");
-            }
+        }
+        else if (action == "Without Attachments")
+        {
+            await MakeDummyData(false);
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+            await ShowToastAsync("Data Generated ✅", 16, ToastDuration.Short);
         }
     }
 
