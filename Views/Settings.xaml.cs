@@ -5,7 +5,10 @@ using ToDoListApp.Views;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net.Http;
 using static ToDoListApp.ToastService;
+using System.Net.Mail;
+using System.Net;
 
 namespace ToDoListApp;
 
@@ -13,8 +16,24 @@ public partial class Settings : ContentPage
 {
     public bool IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
 
+    public bool hasErrorShown = false;
+
+    private bool IsConnectedToInternet()
+    {
+        var current = Connectivity.NetworkAccess;
+
+        if (current == NetworkAccess.Internet)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public Settings()
-	{
+    {
         InitializeComponent();
 
         if (IsDarkMode)
@@ -75,7 +94,55 @@ public partial class Settings : ContentPage
             });
         }
     }
-    private static async Task MakeDummyData()
+
+    private async Task<byte[]> ReadFileFromOnlineSource(string url)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsByteArrayAsync();
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    if (!hasErrorShown)
+                    {
+                        await DisplayAlert("Error", "File not found at " + url, "OK");
+                        hasErrorShown = true;
+                    }
+                    return null;
+                }
+                else if (IsConnectedToInternet() == false)
+                {
+                    if (!hasErrorShown)
+                    {
+                        await DisplayAlert("No Internet", "Device not connected to the internet", "OK");
+                        hasErrorShown = true;
+                    }
+                    return null;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                if (!hasErrorShown)
+                {
+                    await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
+                    hasErrorShown = true;
+                }
+                return null;
+            }
+        }
+    }
+
+    private async Task MakeDummyData(bool includeAttachments)
     {
         TodoitemDatabase database = await TodoitemDatabase.Instance;
 
@@ -92,9 +159,22 @@ public partial class Settings : ContentPage
                 Priority = priorities[random.Next(priorities.Length)],
                 Date = DateTime.Now.AddDays(-i),
                 Done = i % 2 == 0,
-                IsPinned = i % 3 == 0,
-                HasAttachment = i % 4 == 0 //Doesn't actually generate Images.
+                IsPinned = i % 2 == 0
             };
+
+            if (includeAttachments && i % 3 == 0)
+            {
+                var attachment = await ReadFileFromOnlineSource("https://cdn-icons-png.flaticon.com/512/1721/1721929.png");
+
+                item.Attachment = attachment;
+
+                if (hasErrorShown)
+                {
+                    // Reset flag
+                    //hasErrorShown = false;
+                    break;
+                }
+            }
 
             await database.SaveItemAsync(item);
         }
@@ -102,21 +182,29 @@ public partial class Settings : ContentPage
 
     private async void GenerateData_Button_Pressed(System.Object sender, System.EventArgs e)
     {
-        // Alert
-        var userConfirmed = await DisplayAlert("Generate Dummy Data", "This action will generate dummy data and will affect existing To-Do items. Are you sure you want to continue", "Yes", "No");
+        var titlestring = "You need an internet connection if you choose with attachments.";
+        string action = await Application.Current.MainPage.DisplayActionSheet( titlestring, "Cancel", null, "With Attachments", "Without Attachments");
 
-        if (userConfirmed)
+        if (action == "With Attachments")
         {
-            try
+            await MakeDummyData(true);
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+            
+            if (hasErrorShown)
             {
-                await MakeDummyData();
-                HapticFeedback.Perform(HapticFeedbackType.Click);
+                await ShowToastAsync("Data Not Generated ❎", 16, ToastDuration.Short);
+                hasErrorShown = false;
+            }
+            else
+            {
                 await ShowToastAsync("Data Generated ✅", 16, ToastDuration.Short);
             }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.ToString(), "Ok");
-            }
+        }
+        else if (action == "Without Attachments")
+        {
+            await MakeDummyData(false);
+            HapticFeedback.Perform(HapticFeedbackType.Click);
+            await ShowToastAsync("Data Generated ✅", 16, ToastDuration.Short);
         }
     }
 

@@ -131,7 +131,7 @@
                             <MenuItem x:Name="markasdoneitem" Clicked="markasdoneitem_Clicked">
                                 <MenuItem.IconImageSource>
                                     <OnPlatform x:TypeArguments="ImageSource">
-                                        <On Platform="Android">done.png</On>
+                                        <On Platform="Android">done_context.png</On>
                                     </OnPlatform>
                                 </MenuItem.IconImageSource>
                                 <MenuItem.Text>
