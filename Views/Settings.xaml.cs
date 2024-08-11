@@ -94,7 +94,54 @@ public partial class Settings : ContentPage
             });
         }
     }
-    private static async Task MakeDummyData()
+
+    private async Task<byte[]> ReadFileFromOnlineSource(string url)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsByteArrayAsync();
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    if (!hasErrorShown)
+                    {
+                        await DisplayAlert("Error", "File not found at " + url, "OK");
+                        hasErrorShown = true;
+                    }
+                    return null;
+                }
+                else if (IsConnectedToInternet() == false)
+                {
+                    if (!hasErrorShown)
+                    {
+                        await DisplayAlert("No Internet", "Device not connected to the internet", "OK");
+                        hasErrorShown = true;
+                    }
+                    return null;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                if (!hasErrorShown)
+                {
+                    await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
+                    hasErrorShown = true;
+                }
+                return null;
+            }
+        }
+    }
+
     {
         TodoitemDatabase database = await TodoitemDatabase.Instance;
 
