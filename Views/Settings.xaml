@@ -8,9 +8,9 @@
         <Grid Padding="10" ColumnDefinitions="{OnIdiom Phone='Auto,*,Auto', Default='.05*,.9*,.05*'}">
             <StackLayout Grid.Column="1">
                 <!--Theme settings-->
-                <HorizontalStackLayout>
-                    <Label Text="Appearance" FontSize="Title" Margin="5,15,20,20" />
-                    <Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>
+                <HorizontalStackLayout Margin="10,0,0,10">
+                    <Label Text="Appearance" FontSize="Title"/>
+                    <!--<Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
 
                 <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
@@ -27,12 +27,13 @@
                     </Grid>
                 </Frame>
 
-                <!--Reset App-->
-                <HorizontalStackLayout>
-                    <Label Text="Application" FontSize="Title" Margin="5,15,20,20" />
-                    <Image Source="{AppThemeBinding Light=settings.png, Dark=settingswhite.png}" Aspect="AspectFit" HeightRequest="30"/>
+                <!--App Settings-->
+                <HorizontalStackLayout Margin="10,10,0,0">
+                    <Label Text="Application" FontSize="Title" />
+                    <!--<Image Source="{AppThemeBinding Light=settings.png, Dark=settingswhite.png}" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
 
+                <!--Reset-->
                 <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Reset Application" FontAutoScalingEnabled="False"/>
@@ -40,6 +41,7 @@
                      </Grid>
                 </Frame>
 
+                <!--Onboarding-->
                 <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Tutorial" FontAutoScalingEnabled="False"/>
@@ -47,6 +49,7 @@
                     </Grid>
                 </Frame>
 
+                <!--Generate data-->
                 <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Dummy data" FontAutoScalingEnabled="False"/>
@@ -54,12 +57,15 @@
                     </Grid>
                 </Frame>
 
-                <HorizontalStackLayout>
-                    <Label Text="App Info" FontSize="Title" Margin="5,15,20,20" />
-                    <Image Source="description.png" Aspect="AspectFit" HeightRequest="30"/>
+                <!--App info-->
+                <HorizontalStackLayout Margin="10,10,0,10">
+                    <Label Text="Contact" FontSize="Title"/>
+                    <!--<Image Source="description.png" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
 
-                <Frame CornerRadius="20" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
+
+                <!--About-->
+                <Frame CornerRadius="20" Style="{DynamicResource SettingsFrame}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" RowSpacing="20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -95,6 +101,23 @@
                         </Label>
                         <ImageButton x:Name="AboutMe" Style="{StaticResource SettingsCaret}" Grid.Column="2" Grid.Row="2" Clicked="AboutMe_Clicked"/>   
                     </Grid>
+                </Frame>
+
+                <HorizontalStackLayout Margin="10,10,0,0">
+                    <Label Text="About" FontSize="Title"/>
+                    <!--<Image Source="description.png" Aspect="AspectFit" HeightRequest="30"/>-->
+                </HorizontalStackLayout>
+
+                <Frame CornerRadius="20" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
+                    <StackLayout Spacing="15" Padding="-2">
+                        <Label x:Name="formattedVersionInfo" HorizontalTextAlignment="Center"/>
+                        <Label Text="See Previous versions" TextColor="{AppThemeBinding Dark=lightgray, Light=blue}" TextDecorations="Underline"
+                               HorizontalTextAlignment="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="seePrevious" Tapped="seePrevious_Tapped" NumberOfTapsRequired="1"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
                 </Frame>
                 
             </StackLayout>
