@@ -40,6 +40,10 @@ public static class MauiProgram
 #if ANDROID
                 handlers.AddHandler<CustomViewCell, CustomViewCellHandler>();
 #endif
+            })
+            .ConfigureEssentials(essentials =>
+            {
+                essentials.UseVersionTracking();
             });
 
         AndroidHandlers.Apply();
