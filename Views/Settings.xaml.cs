@@ -50,6 +50,12 @@ public partial class Settings : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        VersionTracker();
+    }
+
+    private void VersionTracker()
+    {
+        formattedVersionInfo.Text = $"Checkmate Mobile Version {VersionTracking.Default.CurrentVersion} ({VersionTracking.Default.CurrentBuild})";
     }
 
     // Dark Mode
@@ -252,6 +258,19 @@ public partial class Settings : ContentPage
 
             bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
             await Browser.Default.OpenAsync(result ? uri : uri2, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.ToString(), "Cancel");
+        }
+    }
+
+    async void seePrevious_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        try
+        {
+            Uri uri = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/releases");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
         }
         catch (Exception ex)
         {
