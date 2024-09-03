@@ -18,6 +18,8 @@ public partial class Settings : ContentPage
 
     public bool hasErrorShown = false;
 
+    public string runtimeOS = DeviceInfo.Platform.ToString();
+
     private bool IsConnectedToInternet()
     {
         var current = Connectivity.NetworkAccess;
@@ -55,7 +57,7 @@ public partial class Settings : ContentPage
 
     private void VersionTracker()
     {
-        formattedVersionInfo.Text = $"Checkmate Mobile Version {VersionTracking.Default.CurrentVersion} ({VersionTracking.Default.CurrentBuild})";
+        formattedVersionInfo.Text = $"Checkmate {runtimeOS} Version {VersionTracking.Default.CurrentVersion} ({VersionTracking.Default.CurrentBuild})";
     }
 
     // Dark Mode
@@ -189,13 +191,13 @@ public partial class Settings : ContentPage
     private async void GenerateData_Button_Pressed(System.Object sender, System.EventArgs e)
     {
         var titlestring = "You need an internet connection if you choose with attachments.";
-        string action = await Application.Current.MainPage.DisplayActionSheet( titlestring, "Cancel", null, "With Attachments", "Without Attachments");
+        string action = await Application.Current.MainPage.DisplayActionSheet(titlestring, "Cancel", null, "With Attachments", "Without Attachments");
 
         if (action == "With Attachments")
         {
             await MakeDummyData(true);
             HapticFeedback.Perform(HapticFeedbackType.Click);
-            
+
             if (hasErrorShown)
             {
                 await ShowToastAsync("Data Not Generated ❎", 16, ToastDuration.Short);
@@ -225,52 +227,45 @@ public partial class Settings : ContentPage
 
     private async void Home_Clicked(System.Object sender, System.EventArgs e)
     {
-        try
-        {
-            Uri uri = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
-            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", ex.ToString(), "Cancel");
-        }
+        Uri appRepo = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
+        await OpenLinks(appRepo);
     }
 
     private async void Feedback_Clicked(System.Object sender, System.EventArgs e)
     {
-        try
-        {
-            Uri uri = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues");
-            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", ex.ToString(), "Cancel");
-        }
+        Uri issues = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues");
+        await OpenLinks(issues);
     }
 
     private async void AboutMe_Clicked(System.Object sender, System.EventArgs e)
     {
-        try
-        {
-            Uri uri = new("https://github.com/OudomMunint");
-            Uri uri2 = new("https://oudommunint.netlify.app");
+        Uri github = new("https://github.com/OudomMunint");
+        Uri portfolio = new("https://oudommunint.netlify.app");
 
-            bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
-            await Browser.Default.OpenAsync(result ? uri : uri2, BrowserLaunchMode.SystemPreferred);
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", ex.ToString(), "Cancel");
-        }
+        bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
+        await OpenLinks(result ? github : portfolio);
     }
 
-    async void seePrevious_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    async void SeePrevious_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Uri previousVersions = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/releases");
+        await OpenLinks(previousVersions);
+    }
+
+    private async Task OpenLinks(Uri url)
     {
         try
         {
-            Uri uri = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/releases");
-            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+            Uri uri = url;
+            BrowserLaunchOptions options = new BrowserLaunchOptions()
+            {
+                LaunchMode = BrowserLaunchMode.SystemPreferred,
+                TitleMode = BrowserTitleMode.Show,
+                PreferredToolbarColor = Colors.WhiteSmoke,
+                PreferredControlColor = Colors.Blue
+            };
+            await Browser.OpenAsync(uri, options);
+
         }
         catch (Exception ex)
         {
