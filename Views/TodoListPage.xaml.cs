@@ -484,9 +484,10 @@ namespace ToDoListApp.Views
         private async void RefreshView_Refreshing(object sender, EventArgs e)
         {
             listView.IsRefreshing = true;
+            listView.ItemsSource = null; // Work around for blank rows issue
+
             await UpdateListView();
-            await Task.Delay(1000); // Temporary fix, sometimes the refresh spinner doesn't disappear.
-            listView.IsRefreshing = false;
+            await Task.Delay(1000).ContinueWith(t => listView.IsRefreshing = false); // Temporary fix, sometimes the refresh spinner doesn't disappear.
         }
 
         async void listView_Scrolled2(System.Object sender, Microsoft.Maui.Controls.ScrolledEventArgs e)
