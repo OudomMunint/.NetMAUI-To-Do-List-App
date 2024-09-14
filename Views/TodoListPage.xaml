@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ToDoListApp.Views"
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:sk="clr-namespace:Maui.FreakyEffects.Skeleton;assembly=Maui.FreakyEffects"
     x:Class="ToDoListApp.Views.TodoListPage"
     x:Name="todoListPage"
     HideSoftInputOnTapped="True"
@@ -62,11 +63,11 @@
         </Frame>
 
         <Frame x:Name="pinnedcontainer" Grid.Row="1" BorderColor="Transparent" BackgroundColor="Transparent" Margin="15,0,15,0" Padding="10"
-               HeightRequest="{OnPlatform iOS=110}">
+               HeightRequest="{OnPlatform iOS=110}" >
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="65" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="80" />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Text="Pinned Items" FontSize="20" FontFamily="Inter-Bold" HorizontalOptions="Center" />
                 <CollectionView x:Name="pinnedList" Grid.Row="1" HorizontalScrollBarVisibility="Never">
@@ -79,8 +80,15 @@
                                 <Border Grid.Row="1" Padding="{OnPlatform Android='12,7,10,10', iOS='12,10,10,10'}" Margin="0,0,15,0">
                                     <!--Margin="5,0,1,0"-->
                                     <VerticalStackLayout>
-                                        <Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="100" LineBreakMode="TailTruncation"/>
-                                        <Label Text="{Binding Priority}" FontSize="14" FontFamily="Inter-Regular" Margin="5,0,0,0" />
+                                        <!--Skeleton loading experimental-->
+                                        <!--<Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="100" LineBreakMode="TailTruncation"
+                                               sk:SkeletonEffect.Animation="{sk:DefaultAnimation Source=Fade, Interval='600', Parameter='0.3'}"
+                                               sk:SkeletonEffect.BackgroundColor="LightGray" sk:SkeletonEffect.IsBusy="{Binding IsBusy, Source={x:Reference todoListPage}}" />
+                                        <Label Text="{Binding Priority}" FontSize="14" FontFamily="Inter-Regular" Margin="5,5,0,0"
+                                               sk:SkeletonEffect.Animation="{sk:DefaultAnimation Source=Fade, Interval='600', Parameter='0.3'}" sk:SkeletonEffect.BackgroundColor="LightGray"
+                                               sk:SkeletonEffect.IsBusy="{Binding IsBusy, Source={x:Reference todoListPage}}" />-->
+                                        <Label Text="{Binding Name}" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="100" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding Priority}" FontSize="14" FontFamily="Inter-Regular" Margin="5,5,0,0" />
                                     </VerticalStackLayout>
                                 </Border>
                             </StackLayout>
@@ -96,8 +104,10 @@
             <Label Text="Or go into settings and generate some dummy data!" HorizontalTextAlignment="Center" FontSize="14" FontFamily="Inter-Regular"/>
         </VerticalStackLayout>
 
-        <ListView x:Name="listView" Grid.Row="2" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None" VerticalScrollBarVisibility="Never"
-                  CachingStrategy="RecycleElement" IsPullToRefreshEnabled="True" Refreshing="RefreshView_Refreshing" Scrolled="listView_Scrolled2">
+        <ListView x:Name="listView" Grid.Row="2" Margin="10" ItemSelected="OnListItemSelected" RowHeight="115" SeparatorVisibility="None"
+                  VerticalScrollBarVisibility="Never" CachingStrategy="RecycleElement" IsPullToRefreshEnabled="True"
+                  Refreshing="RefreshView_Refreshing" Scrolled="listView_Scrolled2">
+            
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -261,5 +271,15 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <!-- Loading Indicator -->
+        <!--"{Binding IsBusy, Source={x:Reference todoListPage}}"-->
+        <AbsoluteLayout IsVisible="{Binding IsPageLoading, Source={x:Reference todoListPage}}" Grid.RowSpan="5" Margin="0" Padding="0" BackgroundColor="Black"
+                        Opacity="{OnPlatform Android=0.5, iOS=0.7}">
+            <StackLayout Margin="0" Padding="0" AbsoluteLayout.LayoutBounds="0.5,0.5,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional"
+                         HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="White" Scale="{OnPlatform Android=1.5, iOS=1.6}"
+                                   IsRunning="{Binding IsPageLoading, Source={x:Reference todoListPage}}" />
+            </StackLayout>
+        </AbsoluteLayout>
     </Grid>
 </ContentPage>

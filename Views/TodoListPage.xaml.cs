@@ -7,11 +7,12 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using static ToDoListApp.ToastService;
 using System;
+using System.ComponentModel;
 
 namespace ToDoListApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TodoListPage : ContentPage
+    public partial class TodoListPage : ContentPage, INotifyPropertyChanged
     {
         private readonly AppTheme darkmode = AppTheme.Dark;
 
@@ -19,9 +20,26 @@ namespace ToDoListApp.Views
 
         private bool sortByDateAscending = false;
 
+        private bool isPageLoading;
+
+        public bool IsPageLoading
+        {
+            get => isPageLoading;
+            set
+            {
+                if (isPageLoading != value)
+                {
+                    isPageLoading = value;
+                    OnPropertyChanged(nameof(IsPageLoading));
+                }
+            }
+        }
+
         public TodoListPage()
         {
             InitializeComponent();
+
+            BindingContext = this;
             todolistlist = listView;
 
             NavigationPage.SetBackButtonTitle(this, " ");
@@ -42,12 +60,24 @@ namespace ToDoListApp.Views
 
         protected override async void OnAppearing()
         {
-            base.OnAppearing();
-            await IsEmptyList();
-            await GetItemsWithAttachment();
-            await SetPinnedOnlyListSource();
-            await UpdateListView();
-            await UpdateCollectionView();
+            try
+            {
+                IsPageLoading = true;
+
+                base.OnAppearing();
+                await IsEmptyList();
+                await GetItemsWithAttachment();
+                await SetPinnedOnlyListSource();
+                await UpdateListView();
+                await UpdateCollectionView();
+
+                IsPageLoading = false;
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.ToString(), "Cancel");
+                Console.WriteLine(ex);
+            }
         }
 
         protected override void OnDisappearing()
@@ -254,13 +284,13 @@ namespace ToDoListApp.Views
         {
             string settings = "Settings";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] {settings});
-            
+            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { settings });
+
             if (action == settings)
             {
                 OpenSettings(sender, e);
             }
-            
+
         }
 
         //Sorting
@@ -448,7 +478,7 @@ namespace ToDoListApp.Views
         {
             var selectedItems = listView.ItemsSource?.Cast<Todoitem>().Where(item => item.IsSelected).ToList();
 
-            if(!selectedItems.Any())
+            if (!selectedItems.Any())
             {
                 await DisplayAlert("No Items Selected", "Please select items to set priority", "OK");
             }
