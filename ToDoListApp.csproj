@@ -20,7 +20,7 @@
 		<ApplicationIdGuid>14966315-2970-4b3d-9ece-fe82a9956394</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.7.7.6</ApplicationDisplayVersion> <!--is = Release Tags-->
+		<ApplicationDisplayVersion>v1.7.7.7</ApplicationDisplayVersion> <!--is = Release Tags-->
 		<ApplicationVersion>$([System.DateTime]::Now.ToString('yyyyMMddHH'))</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -67,6 +67,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="FreakyEffects" Version="0.1.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
