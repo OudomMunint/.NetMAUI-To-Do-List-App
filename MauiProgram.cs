@@ -10,6 +10,7 @@ using Microcharts.Maui;
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 #endif
 #if DEBUG
+using Maui.FreakyEffects;
 using The49.Maui.BottomSheet;
 using DotNet.Meteor.HotReload.Plugin;
 #endif
@@ -28,6 +29,10 @@ public static class MauiProgram
 #if DEBUG
             .UseBottomSheet()
             .EnableHotReload()
+            .ConfigureEffects(effects =>
+            {
+                effects.InitFreakyEffects();
+            })
 #endif
             .ConfigureFonts(fonts =>
             {
