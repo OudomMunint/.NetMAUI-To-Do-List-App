@@ -7,7 +7,7 @@
 
     <Grid RowDefinitions="*, 40, Auto, Auto, Auto">
 
-            <CarouselView Grid.Row="0"
+            <CarouselView Grid.Row="0" 
               HorizontalScrollBarVisibility="Never"
               IsBounceEnabled="True"
               IndicatorView="indicator1"
@@ -36,7 +36,7 @@
                FontSize="16" FontFamily="Inter-Regular" x:Name="ChangingSubText"
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
-        <Button BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="4" Margin="30, 0, 30, 30"
+        <Button BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="4" Margin="30, 0, 30, 30" WidthRequest="320"
                 Text="Continue" FontFamily="Inter-Regular" Clicked="Continue_Clicked"
                 TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
 
