@@ -80,7 +80,8 @@ namespace ToDoListApp.Views
         {
             int pinnedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.IsPinned);
             int totalTodoItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-            todoitems.Text = $"📋 {totalItems} Total 📌 {pinnedItems} Pinned";
+            todoitems.Text = $"📋 {totalItems} Total";
+            todoitems2.Text = $"📌 {pinnedItems} Pinned";
 
             int lowPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Low");
             lowpriority.Text = $"🟢 {lowPriorityItems} Low";
