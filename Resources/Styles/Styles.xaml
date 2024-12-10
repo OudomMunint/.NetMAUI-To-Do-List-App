@@ -239,7 +239,7 @@
     </Style>
 
     <Style TargetType="Label" x:Key="HeaderGridLabel">
-        <Setter Property="TextColor" Value="AppThemeBinding Dark=White, Light=Black}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
     </Style>
 
     <Style TargetType="ListView">
