@@ -16,12 +16,14 @@
             </Grid.RowDefinitions>
 
            <Grid.ColumnDefinitions>
-               <ColumnDefinition Width="190"/>
+               <ColumnDefinition Width="{OnIdiom Phone=135, Tablet=*}"/>
                <ColumnDefinition Width="*"/>
+               <ColumnDefinition Width="{OnIdiom Phone=0, Tablet=*}"/>
+               <ColumnDefinition Width="{OnIdiom Phone=0, Tablet=*}"/>
            </Grid.ColumnDefinitions>
 
             <!-- Title -->
-            <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="3"/>
+            <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="{OnIdiom Phone=3, Tablet=5}"/>
 
             <!-- Labels -->
             <Frame Grid.Row="1" Grid.Column="0" Style="{DynamicResource ChartFrame}">
@@ -29,9 +31,11 @@
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
 
+            <ScrollView Padding="10">
                 <StackLayout>
                     <!--<Label Text="👋 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>-->
                     <Label x:Name="todoitems" FontSize="14" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
+                    <Label x:Name="todoitems2" FontSize="14" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="lowpriority" Style="{StaticResource PriorityLabel}"/>
                     <Label x:Name="mediumpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="highpriority" Style="{StaticResource PriorityLabel}" />
@@ -39,33 +43,37 @@
                     <!--<Label x:Name="hasattcount" FontSize="Medium" Style="{StaticResource PriorityLabel}" Text="{Binding ItemHasAttachment}"
                            LineBreakMode="WordWrap"/>-->
                 </StackLayout>
+            </ScrollView>
             </Frame>
 
              <!-- Priority Chart -->
-            <Frame Grid.Row="1" Grid.Column="1" Style="{DynamicResource ChartFrame}" Padding="{OnPlatform iOS=30, Android=40}">
+            <Frame Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="{OnIdiom Phone=1, Tablet=3}" Style="{DynamicResource ChartFrame}"
+                   Padding="{OnPlatform iOS=30, Android=40}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
            
-                    <charts:ChartView x:Name="chartView" WidthRequest="{OnPlatform iOS=185, Android=160}"/>
+                <charts:ChartView x:Name="chartView" WidthRequest="{OnPlatform iOS=185, Android=160}"/>
             </Frame>
 
             <!--Attachment Count Chart-->
-            <Frame Grid.Row="2" Grid.ColumnSpan="3" Style="{DynamicResource ChartFrame}">
+            <Frame Grid.Row="2" Grid.ColumnSpan="{OnIdiom Phone=3, Tablet=2}" Grid.Column="{OnIdiom Phone=0, Tablet=0}" Style="{DynamicResource ChartFrame}"
+                   Grid.RowSpan="{OnIdiom Phone=1, Tablet=3}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
            
-                    <charts:ChartView x:Name="chartView3" WidthRequest="{OnPlatform iOS=365, Android=330}" />
+                    <charts:ChartView x:Name="chartView3"  />
             </Frame>
 
             <!-- Tasks Chart -->
-            <Frame Grid.Row="3" Grid.ColumnSpan="3" Style="{DynamicResource ChartFrame}" >
+            <Frame Grid.Row="{OnIdiom Phone=3, Tablet=2}" Grid.ColumnSpan="{OnIdiom Phone=3, Tablet=2}" Grid.Column="{OnIdiom Phone=0, Tablet=2}"
+                   Grid.RowSpan="{OnIdiom Phone=1, Tablet=3}" Style="{DynamicResource ChartFrame}" >
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
             
-                <charts:ChartView x:Name="chartView2" WidthRequest="{OnPlatform iOS=365, Android=330}" />
+                <charts:ChartView x:Name="chartView2"  />
             </Frame>
 
             <ListView x:Name="listView" IsVisible="False" CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}">
