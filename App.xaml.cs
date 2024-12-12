@@ -9,6 +9,8 @@ public partial class App : Application
     {
         InitializeComponent();
 
+        bool isBiometricsEnabled = Preferences.Get("BiometricsEnabled", false);
+
         if (Preferences.ContainsKey("IsFirstRun"))
         {
             MainPage = new NavigationPage(new Dashboard());
@@ -17,6 +19,11 @@ public partial class App : Application
         {
             MainPage = new NavigationPage(new Welcome());
             Preferences.Set("IsFirstRun", true);
+        }
+
+        if (isBiometricsEnabled)
+        {
+            MainPage = new NavigationPage(new AppLockedPage());
         }
     }
 }
