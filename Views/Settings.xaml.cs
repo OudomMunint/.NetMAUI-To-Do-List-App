@@ -9,12 +9,15 @@ using System.Net.Http;
 using static ToDoListApp.ToastService;
 using System.Net.Mail;
 using System.Net;
+using Plugin.Maui.Biometric;
 
 namespace ToDoListApp;
 
 public partial class Settings : ContentPage
 {
     public bool IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
+
+    public bool IsBioAuthEnabled = Preferences.Get("BiometricsEnabled", false);
 
     public bool hasErrorShown = false;
 
@@ -47,12 +50,23 @@ public partial class Settings : ContentPage
         {
             DarkModeSwitch.IsToggled = false;
         }
+
+        if (IsBioAuthEnabled)
+        {
+            BiometricsSwitch.IsToggled = true;
+        }
+
+        else
+        {
+            BiometricsSwitch.IsToggled = false;
+        }
     }
 
-    protected override void OnAppearing()
+    protected async override void OnAppearing()
     {
         base.OnAppearing();
         VersionTracker();
+        await CheckBiometricsStatus();
     }
 
     private void VersionTracker()
@@ -271,5 +285,41 @@ public partial class Settings : ContentPage
         {
             await DisplayAlert("Error", ex.ToString(), "Cancel");
         }
+    }
+
+    private async Task CheckBiometricsStatus()
+    {
+        var biometric = BiometricAuthenticationService.Default;
+        var enrolledTypes = await biometric.GetEnrolledBiometricTypesAsync();
+
+        if (enrolledTypes.Count > 0 && enrolledTypes[0] != BiometricType.None)
+        {
+            BiometricsSection.IsEnabled = true;
+        }
+        else
+        {
+            BiometricsSection.IsEnabled = false;
+        }
+    }
+
+    private async void BiometricsSwitch_Toggled(object sender, ToggledEventArgs e)
+    {
+        if (BiometricsSwitch.IsToggled)
+        {
+            Preferences.Set("BiometricsEnabled", true);
+            await ShowToastAsync("Biometrics Enabled", 20, ToastDuration.Short);
+        }
+        else
+        {
+            Preferences.Set("BiometricsEnabled", false);
+            await ShowToastAsync("Biometrics Disabled", 20, ToastDuration.Short);
+        }
+    }
+
+    private void Button_Pressed(object sender, EventArgs e)
+    {
+        // Debug pref
+        var BioPref = Preferences.Get("BiometricsEnabled", false);
+        Console.WriteLine(BioPref);
     }
 }
