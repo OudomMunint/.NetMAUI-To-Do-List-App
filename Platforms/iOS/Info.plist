@@ -32,5 +32,7 @@
 	<string>This app needs access to the photo gallery for picking photos and videos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs access to photos gallery for picking photos and videos.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>This app needs access to Face ID for authentication.</string>
 </dict>
 </plist>

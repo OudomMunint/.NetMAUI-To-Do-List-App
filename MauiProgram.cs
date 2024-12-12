@@ -13,6 +13,7 @@ using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using Maui.FreakyEffects;
 using The49.Maui.BottomSheet;
 using DotNet.Meteor.HotReload.Plugin;
+using Plugin.Maui.Biometric;
 #endif
 
 namespace ToDoListApp;
@@ -22,6 +23,10 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+
+        // DI for biometricss
+        builder.Services.AddSingleton<IBiometric>(BiometricAuthenticationService.Default);
+
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()

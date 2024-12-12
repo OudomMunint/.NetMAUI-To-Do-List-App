@@ -20,7 +20,7 @@
 		<ApplicationIdGuid>14966315-2970-4b3d-9ece-fe82a9956394</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>v1.7.7.7</ApplicationDisplayVersion> <!--is = Release Tags-->
+		<ApplicationDisplayVersion>1.7.7.7</ApplicationDisplayVersion> <!--is = Release Tags-->
 		<ApplicationVersion>$([System.DateTime]::Now.ToString('yyyyMMddHH'))</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -73,6 +73,7 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="9.0.2" />
 		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="8.0.14" />
+		<PackageReference Include="Plugin.Maui.Biometric" Version="0.0.3-pre" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
 		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
 		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.8" />
