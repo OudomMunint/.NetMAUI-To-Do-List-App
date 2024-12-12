@@ -8,6 +8,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
+#if IOS
+using UIKit;
+#endif
+
 namespace ToDoListApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -25,6 +29,17 @@ namespace ToDoListApp.Views
         public Dashboard()
         {
             InitializeComponent();
+
+#if IOS
+            UINavigationController vc = (UINavigationController)Platform.GetCurrentUIViewController();//using UIKit, find the UINavigationController  
+            vc.InteractivePopGestureRecognizer.Enabled = false;
+#endif
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            // Return true to prevent back button 
+            return true;
         }
 
         private async Task CountItemsHasAttachment()

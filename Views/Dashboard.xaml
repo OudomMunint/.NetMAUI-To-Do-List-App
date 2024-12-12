@@ -34,8 +34,8 @@
             <ScrollView Padding="10">
                 <StackLayout>
                     <!--<Label Text="👋 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>-->
-                    <Label x:Name="todoitems" FontSize="14" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
-                    <Label x:Name="todoitems2" FontSize="14" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
+                    <Label x:Name="todoitems" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
+                    <Label x:Name="todoitems2" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="lowpriority" Style="{StaticResource PriorityLabel}"/>
                     <Label x:Name="mediumpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="highpriority" Style="{StaticResource PriorityLabel}" />
