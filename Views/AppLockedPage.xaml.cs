@@ -5,10 +5,22 @@ namespace ToDoListApp.Views;
 
 public partial class AppLockedPage : ContentPage
 {
-	public AppLockedPage()
+    private bool isAuthenticated = false;
+
+    public AppLockedPage()
 	{
 		InitializeComponent();
 	}
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        if (isAuthenticated)
+        {
+            Navigation.RemovePage(this);
+        }
+    }
 
     private async void Authenticate_Clicked(object sender, EventArgs e)
 	{
@@ -28,10 +40,12 @@ public partial class AppLockedPage : ContentPage
 
         if (biometric.Status == BiometricResponseStatus.Success)
         {
+            isAuthenticated = true;
             await Navigation.PushAsync(new Dashboard());
         }
         else
         {
+            isAuthenticated = false;
             await ShowToastAsync("Authentication failed", 20, CommunityToolkit.Maui.Core.ToastDuration.Short);
         }
     }

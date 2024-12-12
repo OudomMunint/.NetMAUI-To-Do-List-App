@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListApp.Views.AppLockedPage"
              BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource DarkGH}}"
-             Title="App Locked">
+             NavigationPage.HasNavigationBar="False">
     <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Spacing="30">
         
         <!-- Lock & Thumb Icon -->
