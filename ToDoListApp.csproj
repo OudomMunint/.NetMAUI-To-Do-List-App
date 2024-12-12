@@ -107,6 +107,9 @@
 	</ItemGroup>-->
 
 	<ItemGroup>
+		<MauiXaml Update="Views\AppLockedPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\HeaderGrid.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
