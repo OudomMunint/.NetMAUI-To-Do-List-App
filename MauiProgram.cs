@@ -6,6 +6,7 @@ using Microsoft.Maui.Controls.Hosting;
 using ToDoListApp;
 using System;
 using Microcharts.Maui;
+using Plugin.Maui.Biometric;
 #if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 #endif
@@ -13,7 +14,6 @@ using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using Maui.FreakyEffects;
 using The49.Maui.BottomSheet;
 using DotNet.Meteor.HotReload.Plugin;
-using Plugin.Maui.Biometric;
 #endif
 
 namespace ToDoListApp;

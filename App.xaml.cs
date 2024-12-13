@@ -1,5 +1,10 @@
 ﻿using ToDoListApp.Views;
 using Microsoft.Maui.Controls;
+using Plugin.Maui.Biometric;
+using static ToDoListApp.ToastService;
+#if IOS
+using WebKit;
+#endif
 
 namespace ToDoListApp;
 
@@ -24,6 +29,33 @@ public partial class App : Application
         if (isBiometricsEnabled)
         {
             MainPage = new NavigationPage(new AppLockedPage());
+        }
+    }
+
+    protected override async void OnResume()
+    {
+        base.OnResume();
+
+        bool isBiometricsEnabled = Preferences.Get("BiometricsEnabled", false);
+
+        if (isBiometricsEnabled == true)
+        {
+            // Biometric authentication
+            var biometric = await BiometricAuthenticationService.Default.AuthenticateAsync(new AuthenticationRequest()
+            {
+                Title = "Authenticate",
+                Subtitle = "Please authenticate to access the app",
+                Description = "Please use your biometric to authenticate",
+                NegativeText = "Cancel",
+                AuthStrength = AuthenticatorStrength.Weak,
+                AllowPasswordAuth = true
+
+            }, CancellationToken.None);
+
+            if (biometric.Status == BiometricResponseStatus.Failure)
+            {
+                await MainPage.Navigation.PushAsync(new AppLockedPage());
+            }
         }
     }
 }
