@@ -16,10 +16,10 @@ public partial class AppLockedPage : ContentPage
     {
         base.OnDisappearing();
 
-        if (isAuthenticated)
-        {
-            Navigation.RemovePage(this);
-        }
+        //if (isAuthenticated)
+        //{
+        //    Navigation.RemovePage(this);
+        //}
     }
 
     private async void Authenticate_Clicked(object sender, EventArgs e)
@@ -35,7 +35,10 @@ public partial class AppLockedPage : ContentPage
             Title = "Authenticate",
             Subtitle = "Please authenticate to access the app",
             Description = "Please use your biometric to authenticate",
-            NegativeText = "Cancel"
+            NegativeText = "Cancel",
+            AuthStrength = AuthenticatorStrength.Weak,
+            AllowPasswordAuth = true
+
         }, CancellationToken.None);
 
         if (biometric.Status == BiometricResponseStatus.Success)
