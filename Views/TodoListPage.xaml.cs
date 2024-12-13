@@ -519,21 +519,15 @@ namespace ToDoListApp.Views
                 {
                     listView.IsRefreshing = true;
                     listView.ItemsSource = null; // Work around for blank rows issue
-                    //UpdateListView();
-                    //Task.Delay(1000).ContinueWith(t => listView.IsRefreshing = false); // Temporary fix, sometimes the refresh spinner doesn't disappear.
                 });
 
                 await UpdateListView();
-                await Task.Delay(1000);
+                await Task.Delay(1000); // Temporary fix, sometimes the refresh spinner doesn't disappear.
                 listView.IsRefreshing = false;
-
-                //await UpdateListView();
-                //await Task.Delay(1000).ContinueWith(t => listView.IsRefreshing = false); // Temporary fix, sometimes the refresh spinner doesn't disappear.
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", ex.ToString(), "OK");
-                Console.Write(ex.ToString());
             }
         }
 
