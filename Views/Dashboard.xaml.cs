@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 #if IOS
-using UIKit;
+//using UIKit;
 #endif
 
 namespace ToDoListApp.Views
@@ -31,8 +31,8 @@ namespace ToDoListApp.Views
             InitializeComponent();
 
 #if IOS
-            UINavigationController vc = (UINavigationController)Platform.GetCurrentUIViewController();//using UIKit, find the UINavigationController  
-            vc.InteractivePopGestureRecognizer.Enabled = false;
+            //UINavigationController vc = (UINavigationController)Platform.GetCurrentUIViewController();//using UIKit, find the UINavigationController  
+            //vc.InteractivePopGestureRecognizer.Enabled = false;
 #endif
         }
 

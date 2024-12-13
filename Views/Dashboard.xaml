@@ -31,7 +31,7 @@
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
 
-            <ScrollView Padding="10">
+            <ScrollView Padding="{OnIdiom Phone='0,0,0,0', Tablet='10,10,10,10'}">
                 <StackLayout>
                     <!--<Label Text="👋 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>-->
                     <Label x:Name="todoitems" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
