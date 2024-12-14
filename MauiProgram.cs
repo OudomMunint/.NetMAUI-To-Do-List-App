@@ -6,6 +6,7 @@ using Microsoft.Maui.Controls.Hosting;
 using ToDoListApp;
 using System;
 using Microcharts.Maui;
+using Plugin.Maui.Biometric;
 #if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 #endif
@@ -22,6 +23,10 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+
+        // DI for biometricss
+        builder.Services.AddSingleton<IBiometric>(BiometricAuthenticationService.Default);
+
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()

@@ -30,6 +30,11 @@
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
+    <Style TargetType="BoxView" x:Key="Seperator">
+        <Setter Property="Color" Value="{AppThemeBinding Dark={DynamicResource DarkGH}, Light={DynamicResource OffWhite2}}" />
+        <Setter Property="HeightRequest" Value="2"/>
+    </Style>
+
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
@@ -205,7 +210,7 @@
 
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
-        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="FontFamily" Value="Inter-Regular" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -231,6 +236,10 @@
         <Setter Property="FontFamily" Value="Inter-Regular"/>
         <Setter Property="FontSize" Value="Medium"/>
         <Setter Property="Margin" Value="0,14,0,0"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="HeaderGridLabel">
+        <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
     </Style>
 
     <Style TargetType="ListView">

@@ -8,6 +8,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
+#if IOS
+//using UIKit;
+#endif
+
 namespace ToDoListApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -25,6 +29,17 @@ namespace ToDoListApp.Views
         public Dashboard()
         {
             InitializeComponent();
+
+#if IOS
+            //UINavigationController vc = (UINavigationController)Platform.GetCurrentUIViewController();//using UIKit, find the UINavigationController  
+            //vc.InteractivePopGestureRecognizer.Enabled = false;
+#endif
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            // Return true to prevent back button 
+            return true;
         }
 
         private async Task CountItemsHasAttachment()
@@ -80,7 +95,8 @@ namespace ToDoListApp.Views
         {
             int pinnedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.IsPinned);
             int totalTodoItems = listView.ItemsSource?.Cast<object>().Count() ?? 0;
-            todoitems.Text = $"📋 {totalItems} Total 📌 {pinnedItems} Pinned";
+            todoitems.Text = $"📋 {totalItems} Total";
+            todoitems2.Text = $"📌 {pinnedItems} Pinned";
 
             int lowPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Low");
             lowpriority.Text = $"🟢 {lowPriorityItems} Low";
