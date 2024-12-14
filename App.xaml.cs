@@ -36,6 +36,10 @@ public partial class App : Application
     {
         base.OnResume();
 
+#if ANDROID
+        await Task.Delay(500); // Android needs this delay or authentication will be bypassed
+#endif
+
         bool isBiometricsEnabled = Preferences.Get("BiometricsEnabled", false);
 
         if (isBiometricsEnabled == true)
