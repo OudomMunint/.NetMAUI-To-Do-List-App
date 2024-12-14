@@ -60,6 +60,12 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
   <img src="Media/adhomelight.jpeg" style="height:700px; width:300" />
 </h1>
 
+### Android & iOS, iPhone 15 / Galaxy Z Flip 4
+<h1 float="center">
+  <img src="Media/iosapplocked.png" style="height:700px; width:340" />
+  <img src="Media/adapplocked.jpg" style="height:700px; width:310" />
+</h1>
+
 ### Android & iOS, Galaxy Z Flip 4 / iPhone 15
 <h1 float="center">
   <img src="Media/adatt.jpeg" style="height:700px; width:310" />
@@ -103,6 +109,10 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI` & `SQLit
 ## Permissions
 - Android: `Read & Write External Storage`, `Read & Write Internal Storage`, `Camera access`, `Haptic feedback`, `Biometric information`.
 - iOS: `Camera access`, `Photo Library access`, `Read & Write External Storage`, `Read & Write Internal Storage`, `Haptic feedback`, `Biometric information`.
+
+> [!NOTE]  
+> FaceID, TouchID and AndroidOS equivalent must be enrolled or settings will be disabled.
+> Biomertic information access is required for biometrics.
 
 ## Clean scripts
 
