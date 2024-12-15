@@ -273,7 +273,7 @@
         </ListView>
         <!-- Loading Indicator -->
         <!--"{Binding IsBusy, Source={x:Reference todoListPage}}"-->
-        <AbsoluteLayout IsVisible="{Binding IsPageLoading, Source={x:Reference todoListPage}}" Grid.RowSpan="5" Margin="0" Padding="0" BackgroundColor="Black"
+        <AbsoluteLayout IsVisible="{Binding IsPageLoading, Source={x:Reference todoListPage}}" Grid.Row="2" Margin="0" Padding="0" BackgroundColor="Black"
                         Opacity="{OnPlatform Android=0.5, iOS=0.7}">
             <StackLayout Margin="0" Padding="0" AbsoluteLayout.LayoutBounds="0.5,0.5,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional"
                          HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
