@@ -48,12 +48,12 @@
 
              <!-- Priority Chart -->
             <Frame Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="{OnIdiom Phone=1, Tablet=3}" Style="{DynamicResource ChartFrame}"
-                   Padding="{OnPlatform iOS=30, Android=40}">
+               Padding="{OnPlatform iOS=30, Android={OnIdiom Phone=40, Tablet=0}}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
                 </Frame.GestureRecognizers>
            
-                <charts:ChartView x:Name="chartView" WidthRequest="{OnPlatform iOS=185, Android=160}"/>
+            <charts:ChartView x:Name="chartView" WidthRequest="{OnIdiom Phone={OnPlatform iOS=185, Android=160}, Tablet=210}" />
             </Frame>
 
             <!--Attachment Count Chart-->
