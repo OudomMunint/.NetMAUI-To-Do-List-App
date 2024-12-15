@@ -70,6 +70,7 @@ namespace ToDoListApp.Views
                 await SetPinnedOnlyListSource();
                 await UpdateListView();
                 await UpdateCollectionView();
+                ApplySavedSorting();
 
                 IsPageLoading = false;
             }
@@ -293,6 +294,38 @@ namespace ToDoListApp.Views
 
         }
 
+        private void SaveSortingPreference(string sortingType, bool isAscending)
+        {
+            Preferences.Set("SortingKey", sortingType);
+            Preferences.Set("SortDirectionKey", isAscending);
+        }
+
+        private void ApplySavedSorting()
+        {
+            var sortingType = Preferences.Get("SortingKey", "none");
+            var isAscending = Preferences.Get("SortDirectionKey", true);
+
+            IEnumerable<Todoitem> items = listView.ItemsSource as IEnumerable<Todoitem>;
+
+            switch (sortingType)
+            {
+                case "date":
+                    items = isAscending ? items.OrderBy(item => item.Date) : items.OrderByDescending(item => item.Date);
+                    break;
+                case "priority":
+                    items = items.OrderBy(item => TodoListPage.GetPriorityValue(item.Priority));
+                    break;
+                case "pinned":
+                    items = items.OrderByDescending(item => item.IsPinned);
+                    break;
+                case "none":
+                default:
+                    return; // No sorting
+            }
+
+            listView.ItemsSource = items.ToList();
+        }
+
         //Sorting
         private void SortByDateClicked(object sender, EventArgs e)
         {
@@ -302,6 +335,8 @@ namespace ToDoListApp.Views
                 ? ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => item.Date)
                 : ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.Date);
             listView.ItemsSource = sortedItems.ToList();
+
+            SaveSortingPreference("date", sortByDateAscending);
         }
 
         public async void OpenSortMenu(object sender, EventArgs e)
@@ -313,26 +348,30 @@ namespace ToDoListApp.Views
 
             var action = await Application.Current.MainPage.DisplayActionSheet("Sorting", "Cancel", null, new[] { sortbydate, sortbypriority, sortbypinned, clearsorting });
 
-            if (action != null && action.Equals(sortbydate))
+            if (action == sortbydate)
             {
                 var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.Date);
                 listView.ItemsSource = sortedItems.ToList();
+                SaveSortingPreference("date", false); // Descending
             }
-            else if (action != null && action.Equals(sortbypriority))
+            else if (action == sortbypriority)
             {
                 var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderBy(item => TodoListPage.GetPriorityValue(item.Priority));
                 listView.ItemsSource = sortedItems.ToList();
+                SaveSortingPreference("priority", true); // Ascending
             }
-            else if (action != null && action.Equals(clearsorting)) // Handle clear sorting option
-            {
-                // Reset ListView
-                listView.ItemsSource = ((IEnumerable<Todoitem>)listView.ItemsSource).ToList();
-                await UpdateListView();
-            }
-            else if (action != null && action.Equals(sortbypinned))
+            else if (action == sortbypinned)
             {
                 var sortedItems = ((IEnumerable<Todoitem>)listView.ItemsSource).OrderByDescending(item => item.IsPinned);
                 listView.ItemsSource = sortedItems.ToList();
+                SaveSortingPreference("pinned", false); // Descending
+            }
+            else if (action == clearsorting)
+            {
+                listView.ItemsSource = ((IEnumerable<Todoitem>)listView.ItemsSource).ToList();
+                Preferences.Remove("SortingKey");
+                Preferences.Remove("SortDirectionKey");
+                await UpdateListView();
             }
         }
 
