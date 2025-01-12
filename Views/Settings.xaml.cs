@@ -292,7 +292,7 @@ public partial class Settings : ContentPage
         var biometric = BiometricAuthenticationService.Default;
         var enrolledTypes = await biometric.GetEnrolledBiometricTypesAsync();
 
-        if (enrolledTypes.Count > 0 && enrolledTypes[0] != BiometricType.None)
+        if (enrolledTypes.Count() > 0 && enrolledTypes[0] != BiometricType.None)
         {
             BiometricsSection.IsEnabled = true;
         }
