@@ -32,7 +32,7 @@
                FontSize="20" FontFamily="Inter-Bold"
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
-        <Label Grid.Row="3" HorizontalTextAlignment="Center" Margin="20, 0, 20, 20"
+        <Label Grid.Row="3" HorizontalTextAlignment="Center" Margin="20, 0, 20, 20" WidthRequest="300"
                FontSize="16" FontFamily="Inter-Regular" x:Name="ChangingSubText"
                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
 
