@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using ToDoListApp.Views;
 
 namespace ToDoListApp.Views;
 
@@ -41,6 +42,14 @@ public partial class Welcome : ContentPage
         }
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Task.Delay(500);
+        RemoveSettingsPage();
+    }
+
     private void Continue_Clicked(object sender, EventArgs e)
     {
         try
@@ -77,4 +86,15 @@ public partial class Welcome : ContentPage
             _ => string.Empty,
         };
     }
+
+    // Remove settings page from navigation stack if navigated from settings page
+    private void RemoveSettingsPage()
+    {
+        var navigationStack = Navigation.NavigationStack;
+        if (navigationStack.Count > 1 && navigationStack[navigationStack.Count - 2] is Settings)
+        {
+            Navigation.RemovePage(navigationStack[navigationStack.Count - 2]);
+        }
+    }
+
 }
