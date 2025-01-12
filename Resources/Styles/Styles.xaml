@@ -31,7 +31,7 @@
     </Style>
 
     <Style TargetType="BoxView" x:Key="Seperator">
-        <Setter Property="Color" Value="{AppThemeBinding Dark={DynamicResource DarkGH}, Light={DynamicResource OffWhite2}}" />
+        <Setter Property="Color" Value="{AppThemeBinding Dark={StaticResource DarkGH}, Light={StaticResource OffWhite2}}" />
         <Setter Property="HeightRequest" Value="2"/>
     </Style>
 
