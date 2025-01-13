@@ -125,7 +125,7 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI`, `SQLite
 
 > [!NOTE]  
 > FaceID, TouchID and AndroidOS equivalent must be enrolled or settings will be disabled.
-> Biomertic information access is required for biometrics.
+> Biomertic information access is required.
 
 ## Clean scripts
 
