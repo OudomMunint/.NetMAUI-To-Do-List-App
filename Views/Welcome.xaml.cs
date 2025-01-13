@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using ToDoListApp.Views;
 
 namespace ToDoListApp.Views;
 
@@ -14,6 +15,7 @@ public partial class Welcome : ContentPage
             new UserInformation{UserImage = "iphone2.png"},
             new UserInformation{UserImage = "iphone3.png"},
             new UserInformation{UserImage = "iphone4.png"},
+            new UserInformation{UserImage = "iphone5.png"},
         };
 
         if (CarouselZoos.Position == 0)
@@ -40,6 +42,14 @@ public partial class Welcome : ContentPage
         }
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Task.Delay(500);
+        RemoveSettingsPage();
+    }
+
     private void Continue_Clicked(object sender, EventArgs e)
     {
         try
@@ -62,6 +72,7 @@ public partial class Welcome : ContentPage
             1 => "Add new tasks or mark it as done",
             2 => "Bulk actions supported",
             3 => "Settings and more",
+            4 => "Biometrics with FaceID or TouchID",
             _ => string.Empty,
         };
 
@@ -71,7 +82,19 @@ public partial class Welcome : ContentPage
             1 => "Click on + to add a new task or click on the task to edit it.",
             2 => "Perform bulk actions like delete, mark as done, set priority.",
             3 => "Give feedback, switch themes or generate some data to get started.",
+            4 => "Go to settings and enable Biometrics to start securing you app.",
             _ => string.Empty,
         };
     }
+
+    // Remove settings page from navigation stack if navigated from settings page
+    private void RemoveSettingsPage()
+    {
+        var navigationStack = Navigation.NavigationStack;
+        if (navigationStack.Count > 1 && navigationStack[navigationStack.Count - 2] is Settings)
+        {
+            Navigation.RemovePage(navigationStack[navigationStack.Count - 2]);
+        }
+    }
+
 }

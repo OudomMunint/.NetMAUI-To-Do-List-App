@@ -78,7 +78,8 @@
             <charts:ChartView x:Name="chartView2" />
         </Frame>
 
-        <ListView x:Name="listView" IsVisible="False" CachingStrategy="RecycleElement" BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Black}}">
+        <ListView x:Name="listView" IsVisible="False" CachingStrategy="RecycleElement"
+                  BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

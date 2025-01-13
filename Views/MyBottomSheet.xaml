@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListApp.Views.MyBottomSheet"
              xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
-             BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource DarkGH}}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkGH}}"
              HasBackdrop="True"
              HasHandle="True"
              HeightRequest="400"
