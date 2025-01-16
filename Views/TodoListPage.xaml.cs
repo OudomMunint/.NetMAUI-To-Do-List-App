@@ -572,11 +572,17 @@ namespace ToDoListApp.Views
 
         async void listView_Scrolled2(System.Object sender, Microsoft.Maui.Controls.ScrolledEventArgs e)
         {
-            await SearchBar.HideKeyboardAsync();
+            var scrollThreshold = 70;
+            var scrollThreshold2 = 1;
 
             if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
-                var scrollThreshold = 70;
+                await SearchBar.HideKeyboardAsync();
+            }
+
+            if (DeviceInfo.Platform == DevicePlatform.iOS)
+            {
+                
                 if (e.ScrollY > scrollThreshold)
                 {
                     // Scroll down
@@ -595,6 +601,12 @@ namespace ToDoListApp.Views
                         await pinnedcontainer.FadeTo(1, 250);
                     }
                 }
+            }
+
+            if (DeviceInfo.Platform == DevicePlatform.Android && e.ScrollY > scrollThreshold2)
+            {
+                await SearchBar.HideKeyboardAsync();
+                SearchBar.Unfocus();
             }
         }
 
