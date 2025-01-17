@@ -307,7 +307,7 @@ public partial class Settings : ContentPage
         Uri github = new("https://github.com/OudomMunint");
         Uri portfolio = new("https://oudommunint.netlify.app");
 
-        bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
+        bool result = await DisplayAlert("Visit GitHub or Portfolio?", null, "GitHub", "Portfolio");
         await OpenLinks(result ? github : portfolio);
     }
 
