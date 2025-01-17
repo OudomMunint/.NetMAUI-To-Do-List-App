@@ -1,12 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:Class="ToDoListApp.Views.TodoitemPage"
-    HideSoftInputOnTapped="True"
-    Title="{Binding Name}"
-    Shell.PresentationMode="ModalAnimated">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" x:Class="ToDoListApp.Views.TodoitemPage" HideSoftInputOnTapped="True" Title="{Binding Name}"
+        Shell.PresentationMode="ModalAnimated">
 
     <NavigationPage.TitleView>
         <Grid>
@@ -17,11 +12,10 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="itemTitle" Grid.Column="0" TextColor="White" VerticalTextAlignment="Center" FontSize="18" FontFamily="Inter-Regular"
-                   LineBreakMode="TailTruncation"/>
-            <ImageButton Grid.Column="1" HorizontalOptions="Center" Source="saveitem.png" Clicked="OnSaveClicked" HeightRequest="25"/>
-            <ImageButton Grid.Column="2" HorizontalOptions="Center" Source="attachment.png" Clicked="AttMenu_Clicked" WidthRequest="25" HeightRequest="35"/>
-            <ImageButton Grid.Column="3" HorizontalOptions="Center" Source="menu.png" Clicked="OpenMenu" HeightRequest="35"/>
+            <Label x:Name="itemTitle" Grid.Column="0" TextColor="White" VerticalTextAlignment="Center" FontSize="18" FontFamily="Inter-Regular" LineBreakMode="TailTruncation" />
+            <ImageButton Grid.Column="1" HorizontalOptions="Center" Source="saveitem.png" Clicked="OnSaveClicked" HeightRequest="25" />
+            <ImageButton Grid.Column="2" HorizontalOptions="Center" Source="attachment.png" Clicked="AttMenu_Clicked" WidthRequest="25" HeightRequest="35" />
+            <ImageButton Grid.Column="3" HorizontalOptions="Center" Source="menu.png" Clicked="OpenMenu" HeightRequest="35" />
         </Grid>
     </NavigationPage.TitleView>
 
@@ -33,108 +27,102 @@
 
     <ContentPage.Content>
         <ScrollView VerticalScrollBarVisibility="Always">
-        <StackLayout Margin="20" Spacing="20" VerticalOptions="StartAndExpand">
-            <!-- Task -->
-            <StackLayout>
+            <StackLayout Margin="20" Spacing="20" VerticalOptions="StartAndExpand">
+                <!-- Task -->
+                <StackLayout>
+                    <StackLayout>
+                        <HorizontalStackLayout Spacing="10">
+                            <!--<Image Margin="10,0,0,0" Source="todo.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>-->
+                            <Label Margin="10,0,0,0" FontSize="20" Text="Task" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
+                        </HorizontalStackLayout>
+
+                        <Border Style="{DynamicResource InputBorder}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand">
+                            <StackLayout>
+                                <Entry x:Name="NameField" Margin="0,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" FontFamily="Inter-Regular" PlaceholderColor="Gray"
+                                        ReturnType="Next" />
+                            </StackLayout>
+                        </Border>
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- Description -->
                 <StackLayout>
                     <HorizontalStackLayout Spacing="10">
-                        <!--<Image Margin="10,0,0,0" Source="todo.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>-->
-                            <Label Margin="10,0,0,0" FontSize="20" Text="Task" FontAttributes="Bold" FontFamily="Inter-SemiBold" />                       
+                        <!--<Image Margin="10,0,0,0" Source="description.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=23}"/>-->
+                        <Label Margin="10,0,0,0" FontSize="20" Text="Description" FontFamily="Inter-SemiBold" />
                     </HorizontalStackLayout>
 
-                    <Frame Style="{DynamicResource ToDoItemFrame}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                        <StackLayout>
-                            <Entry x:Name="NameField" Margin="0,0,0,0" Placeholder="Task name or ID" Text="{Binding Name}" FontFamily="Inter-Regular"
-                                    PlaceholderColor="Gray" ReturnType="Next"/>
-                        </StackLayout>
-                    </Frame>
+                    <Border Style="{DynamicResource InputBorder}" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand">
+                        <Editor x:Name="DescField" FontFamily="Inter-Regular" Placeholder="Task Description" Text="{Binding Notes}" HeightRequest="100" HorizontalTextAlignment="Start"
+                                VerticalTextAlignment="Start" PlaceholderColor="Grey" />
+                    </Border>
                 </StackLayout>
-            </StackLayout>
 
-            <!-- Description -->
-            <StackLayout>
-                <HorizontalStackLayout Spacing="10">
-                    <!--<Image Margin="10,0,0,0" Source="description.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=23}"/>-->
-                        <Label Margin="10,0,0,0" FontSize="20" Text="Description" FontFamily="Inter-SemiBold" />
-                </HorizontalStackLayout>
-
-                <Frame Style="{DynamicResource ToDoItemFrame}" Padding="5" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                    <Editor x:Name="DescField" FontFamily="Inter-Regular" Placeholder="Task Description" Text="{Binding Notes}"
-                           HeightRequest="100" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" PlaceholderColor="Grey" />
-                </Frame>
-            </StackLayout>
-
-            <!-- Priority -->
-            <StackLayout>
-                <HorizontalStackLayout Spacing="10">
-                    <!--<Image Margin="10,0,0,0" Source="priority.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=25}"/>-->
-                        <Label Margin="10,0,0,0" FontSize="20" Text="Task Priority" FontFamily="Inter-SemiBold"/>
-                </HorizontalStackLayout>
-
-                <Frame Style="{DynamicResource ToDoItemFrame}" Padding="10" Margin="0,10,0,0" CornerRadius="10">
-                    <Picker x:Name="PriorityPicker" Title="Set Priority">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Low</x:String>
-                                <x:String>Medium</x:String>
-                                <x:String>High</x:String>
-                                <x:String>Critical</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </Frame>
-            </StackLayout>
-
-            <!--Attachment-->
-            <StackLayout>
+                <!-- Priority -->
                 <StackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <!--<Image Margin="10,0,0,0" Source="priority.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="{OnPlatform iOS=25}"/>-->
+                        <Label Margin="10,0,0,0" FontSize="20" Text="Task Priority" FontFamily="Inter-SemiBold" />
+                    </HorizontalStackLayout>
+
+                    <Border Style="{DynamicResource InputBorder}" Padding="10" Margin="0,10,0,0">
+                        <Picker x:Name="PriorityPicker" Title="Set Priority">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Low</x:String>
+                                    <x:String>Medium</x:String>
+                                    <x:String>High</x:String>
+                                    <x:String>Critical</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+                </StackLayout>
+
+                <!--Attachment-->
+                <StackLayout>
+                    <StackLayout>
                         <HorizontalStackLayout Spacing="15">
                             <!--<Image Margin="12,0,0,0" Source="{AppThemeBinding Dark=attachment.png, Light=attachmentblack.png}" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>-->
                             <Label Margin="10,0,0,0" FontSize="20" Text="Attachment" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
                         </HorizontalStackLayout>
-                        <Frame Style="{DynamicResource ToDoItemFrame}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" CornerRadius="10">
+                        <Border Style="{DynamicResource InputBorder}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand">
                             <StackLayout>
                                 <Label x:Name="attsize" Text="{Binding AttachmentSize}" FontFamily="Inter-Regular" FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}"
-                                       HorizontalTextAlignment="Center" Margin="15,10,15,10"/>
-                                <Image x:Name="attachmentImage" Source="{Binding Attachment, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
-                                <Label x:Name="attlabel" Text="No Attachment found. If attachment is already added, click save." FontFamily="Inter-Regular"
-                                       FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}" HorizontalTextAlignment="Center" Margin="15,0,15,0"/>
+                                        HorizontalTextAlignment="Center" Margin="15,10,15,10" />
+                                <Image x:Name="attachmentImage" Source="{Binding Attachment, Converter={StaticResource ByteArrayToImageSourceConverter}}" Margin="15" />
+                                <Label x:Name="attlabel" Text="No Attachment found. If attachment is already added, click save." FontFamily="Inter-Regular" FontSize="15"
+                                        TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}" HorizontalTextAlignment="Center" Margin="15,0,15,15" />
                                 <Button Text="Delete Attachment" Clicked="DeleteAttachmentClicked" FontFamily="Inter-Regular" BackgroundColor="Red" TextColor="White"
                                         MaximumWidthRequest="{OnPlatform iOS=150, Android=200}" HorizontalOptions="Center" Margin="0,15,0,10" />
                             </StackLayout>
-                        </Frame>
+                        </Border>
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
 
-            <!-- Item options -->
+                <!-- Item options -->
                 <StackLayout>
                     <HorizontalStackLayout Spacing="15" Margin="0,5,0,10">
                         <!--<Image Margin="12,0,0,0" Source="{AppThemeBinding Dark=attachment.png, Light=attachmentblack.png}" Aspect="AspectFit" HeightRequest="20" WidthRequest="{OnPlatform iOS=20}"/>-->
-                        <Label Margin="10,0,0,0" FontSize="20" Text="Options" FontAttributes="Bold"
-                                FontFamily="Inter-SemiBold" />
+                        <Label Margin="10,0,0,0" FontSize="20" Text="Options" FontAttributes="Bold" FontFamily="Inter-SemiBold" />
                     </HorizontalStackLayout>
-                    <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ToDoItemFrame}">
+                    <Border HorizontalOptions="FillAndExpand" Style="{StaticResource InputBorder}" Padding="10">
                         <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" RowSpacing="5">
-                            <Label Grid.Column="0" Grid.Row="0" Margin="10,0,10,0" HorizontalOptions="Start"
-                                    VerticalOptions="Center" FontFamily="Inter-Bold" Text="Mark as Done" />
+                            <Label Grid.Column="0" Grid.Row="0" Margin="10,0,10,0" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold" Text="Mark as Done" />
 
-                            <Switch Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand"
-                                    IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
+                            <Switch Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" OnColor="Green" ThumbColor="Gray" />
 
-                            <BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1"
-                                    Margin="{OnPlatform iOS='0,8,0,0'}"
+                            <BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Margin="{OnPlatform iOS='0,8,0,0'}"
                                     Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
 
-                            <Label Grid.Row="2" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start"
-                                    VerticalOptions="Center" FontFamily="Inter-Bold" Margin="10,0,10,0" />
+                            <Label Grid.Row="2" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold" Margin="10,0,10,0" />
 
-                            <Switch Grid.Column="1" Grid.Row="2" HorizontalOptions="EndAndExpand"
-                                    IsToggled="{Binding IsPinned}" OnColor="Green" ThumbColor="Gray" />
+                            <Switch Grid.Column="1" Grid.Row="2" HorizontalOptions="EndAndExpand" IsToggled="{Binding IsPinned}" OnColor="Green" ThumbColor="Gray" />
                         </Grid>
-                    </Frame>
+                    </Border>
                 </StackLayout>
 
             </StackLayout>
-      </ScrollView>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

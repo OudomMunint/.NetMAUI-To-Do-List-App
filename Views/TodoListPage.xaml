@@ -42,8 +42,8 @@
 
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Frame Grid.Row="0" x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent, Android={AppThemeBinding Dark={StaticResource DarkGH}, Light={StaticResource OffWhite}}}"
-               Margin="10" Padding="5" CornerRadius="15" BorderColor="Transparent" >
+        <Border Grid.Row="0" x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent, Android={AppThemeBinding Dark={StaticResource DarkGH}, Light={StaticResource OffWhite}}}"
+               Margin="10" Padding="5" Style="{StaticResource ToDoItemBorder}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -60,9 +60,9 @@
                 <ImageButton Clicked="OpenSortMenu" Source="sort.png" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="1" BorderColor="Transparent" HorizontalOptions="End"
                              Margin="0,0,0,0" AbsoluteLayout.LayoutBounds="0.2, 0.5, 30, 35" AbsoluteLayout.LayoutFlags="PositionProportional"/>
             </Grid>
-        </Frame>
+        </Border>
 
-        <Frame x:Name="pinnedcontainer" Grid.Row="1" BorderColor="Transparent" BackgroundColor="Transparent" Margin="15,0,15,0" Padding="10"
+        <Border x:Name="pinnedcontainer" Grid.Row="1" Style="{StaticResource TransparentBorder}" BackgroundColor="Transparent" Margin="15,0,15,0" Padding="10"
                HeightRequest="{OnPlatform iOS=110}" >
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
@@ -96,7 +96,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Grid>
-        </Frame>
+        </Border>
 
         <VerticalStackLayout x:Name="VStack" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
             <Image Source="checklist_icon.png" Aspect="AspectFit" WidthRequest="200" HeightRequest="200" Margin="0,0,0,30"/>
@@ -171,51 +171,53 @@
                                     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="15,10,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
                                            Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="180"/>
 
-                                    <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
-                                       BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}" IsVisible="{Binding HasAttachment}">
+                                    <Border Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
+                                            BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}"
+                                            Style="{StaticResource DateTimeChipBorder}" IsVisible="{Binding HasAttachment}">
                                         <Image Source="attachment.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="15"/>
-                                    </Frame>
+                                    </Border>
 
-                                    <Frame Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
-                                       BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}" IsVisible="{Binding IsPinned}">
+                                    <Border Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
+                                            BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}"
+                                            Style="{StaticResource DateTimeChipBorder}" IsVisible="{Binding IsPinned}">
                                         <Image Source="pin.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="20"/>
-                                    </Frame>
+                                    </Border>
 
                                 </HorizontalStackLayout>
 
                                 <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,0,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"
                                           Scale="{OnPlatform iOS=1.2,Android=1.1}"/>
 
-                                <Frame BorderColor="Transparent" Grid.Column="0" HasShadow="False" Grid.RowSpan="5" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}" WidthRequest="25" HorizontalOptions="Start">
-                                    <Frame.Triggers>
+                                <Border Style="{StaticResource ChipBorder}" Grid.Column="0" Grid.RowSpan="5" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}" WidthRequest="25" HorizontalOptions="Start">
+                                    <Border.Triggers>
 
-                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="High">
+                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="High">
                                             <Setter Property="BackgroundColor" Value="{DynamicResource HighPriorityColor}" />
                                         </DataTrigger>
 
-                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Medium">
+                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Medium">
                                             <Setter Property="BackgroundColor" Value="{DynamicResource MediumPriorityColor}" />
                                         </DataTrigger>
 
-                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Low">
+                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Low">
                                             <Setter Property="BackgroundColor" Value="{DynamicResource LowPriorityColor}" />
                                         </DataTrigger>
 
-                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="Critical">
+                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Critical">
                                             <Setter Property="BackgroundColor" Value="{DynamicResource CriticalPriorityColor}" />
                                         </DataTrigger>
 
-                                        <DataTrigger TargetType="Frame" Binding="{Binding Priority}" Value="">
+                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="">
                                             <Setter Property="BackgroundColor" Value="Transparent" />
                                         </DataTrigger>
-                                    </Frame.Triggers>
-                                </Frame>
+                                    </Border.Triggers>
+                                </Border>
 
                                 <Label Grid.ColumnSpan="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
                                        Margin="15,5,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250" HeightRequest="{OnPlatform iOS=20}"
                                        Text="{Binding Notes}" FontFamily="Inter-Regular" />
 
-                                <Frame Grid.Row="2" Grid.Column="1" WidthRequest="130" Padding="6,0,0,0" Margin="20,10,15,0" HeightRequest="25" BackgroundColor="Transparent" BorderColor="Gray">
+                                <Border Grid.Row="2" Grid.Column="1" WidthRequest="130" Padding="6,0,0,0" Margin="20,10,15,0" HeightRequest="25" Style="{StaticResource DateTimeChipBorder}">
                                     <HorizontalStackLayout>
                                         <Image Source="calendar.png" Aspect="AspectFit" MaximumWidthRequest="15" Margin="0,0,4,0"/>
                                         <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}" FontFamily="Inter-Regular">
@@ -227,20 +229,20 @@
                                             </Label.FormattedText>
                                         </Label>
                                     </HorizontalStackLayout>
-                                </Frame>
+                                </Border>
 
-                                <Frame Grid.Row="2" Grid.Column="{OnPlatform Android=2, iOS=2}" Grid.ColumnSpan="2" HorizontalOptions="{OnPlatform Android=Start}" HeightRequest="25" Margin="0,10,0,0" Padding="{OnPlatform Android=3, iOS=5}" BorderColor="Gray"
-                                       BackgroundColor="{AppThemeBinding Dark=Black, Light=White}">
-                                    <Frame.Triggers>
-                                        <DataTrigger TargetType="Frame" Binding="{Binding Done}" Value="True">
+                                <Border Grid.Row="2" Grid.Column="{OnPlatform Android=2, iOS=2}" Grid.ColumnSpan="2" HorizontalOptions="{OnPlatform Android=Start}" HeightRequest="25" Margin="0,10,0,0" Padding="{OnPlatform Android=3, iOS=5}"
+                                        BackgroundColor="{AppThemeBinding Dark=Black, Light=White}" Style="{StaticResource DateTimeChipBorder}">
+                                    <Border.Triggers>
+                                        <DataTrigger TargetType="Border" Binding="{Binding Done}" Value="True">
                                             <Setter Property="WidthRequest" Value="80" />
                                             <!--<Setter Property="Margin" Value="0,10,15,0"/>-->
                                         </DataTrigger>
 
-                                        <DataTrigger TargetType="Frame" Binding="{Binding Done}" Value="False">
+                                        <DataTrigger TargetType="Border" Binding="{Binding Done}" Value="False">
                                             <Setter Property="WidthRequest" Value="100" />
                                         </DataTrigger>
-                                    </Frame.Triggers>
+                                    </Border.Triggers>
                                     <HorizontalStackLayout>
                                         <Image HeightRequest="20" Aspect="AspectFit" x:Name="Doneimg" Margin="0,0,2,0">
                                             <Image.Triggers>
@@ -264,7 +266,7 @@
                                             </Label.Triggers>
                                         </Label>
                                     </HorizontalStackLayout>
-                                </Frame>
+                                </Border>
                             </Grid>
                         </Border>
                     </ViewCell>
