@@ -94,47 +94,67 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Image Grid.Column="0" Grid.Row="0" Source="globe.png" Aspect="AspectFit" HeightRequest="30"
-                                HorizontalOptions="Start" />
-                        <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="0" Text="Home Page" HorizontalOptions="Start"
-                                VerticalOptions="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Home_Clicked" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <ImageButton x:Name="Home" Style="{StaticResource SettingsCaret}" Grid.Column="2" Grid.Row="0"
-                                Clicked="Home_Clicked" />
 
-                        <Image Grid.Column="0" Grid.Row="1" Source="priority.png" Aspect="AspectFit" HeightRequest="30"
-                                HorizontalOptions="Start" />
-                        <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="1" Text="Feedback &amp; Sugguestions"
-                                HorizontalOptions="Start" VerticalOptions="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Feedback_Clicked" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <ImageButton x:Name="Feedback" Style="{StaticResource SettingsCaret}" Grid.Column="2"
-                                Grid.Row="1" Clicked="Feedback_Clicked" />
+                        <!--Home page-->
+                        <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="HomePage" Tapped="HomePage_Tapped" />
+                            </HorizontalStackLayout.GestureRecognizers>
+                            
+                            <Grid Margin="0" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35" />
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Grid.Row="2" Source="dotnet_bot.png" Aspect="AspectFit"
-                                HeightRequest="30" HorizontalOptions="Center" />
-                        <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="2" Text="About Me" HorizontalOptions="Start"
-                                VerticalOptions="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="AboutMe_Clicked" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <ImageButton x:Name="AboutMe" Style="{StaticResource SettingsCaret}" Grid.Column="2"
-                                Grid.Row="2" Clicked="AboutMe_Clicked" />
+                                <Image Grid.Column="0" Source="globe.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Start" />
+                                <Label Grid.Column="1" Margin="20,0,0,0" Text="Home Page" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <ImageButton Grid.Column="2" Style="{StaticResource SettingsCaret}" HorizontalOptions="End" />
+                            </Grid>
+                        </HorizontalStackLayout>
+
+                        <!--Feedback-->
+                        <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="Feedback" Tapped="Feedback_Tapped" />
+                            </HorizontalStackLayout.GestureRecognizers>
+
+                            <Grid Margin="0" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35" />
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="priority.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Start" />
+                                <Label Grid.Column="1" Margin="20,0,0,0" Text="Feedback &amp; Sugguestions" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <ImageButton Grid.Column="2" Style="{StaticResource SettingsCaret}" HorizontalOptions="End" />
                     </Grid>
-                </Frame>
+                        </HorizontalStackLayout>
 
-                <HorizontalStackLayout Margin="10,10,0,0">
-                    <Label Text="About" FontSize="Title" />
-                    <!--<Image Source="description.png" Aspect="AspectFit" HeightRequest="30"/>-->
+                        <!--About me-->
+                        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="AboutMe" Tapped="AboutMe_Tapped" />
+                            </HorizontalStackLayout.GestureRecognizers>
+                            
+                            <Grid Margin="0" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35" />
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Margin="3,0,0,0" Source="dotnet_bot.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Start" />
+                                <Label Grid.Column="1" Margin="20,0,0,0" Text="About Me" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <ImageButton Grid.Column="2" Style="{StaticResource SettingsCaret}" HorizontalOptions="End" />
+                            </Grid>
                 </HorizontalStackLayout>
+                    </Grid>
+                </Border>
 
-                <Frame CornerRadius="20" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
+                <Border Style="{DynamicResource SettingsBorder}" Margin="0,5,0,0">
                     <StackLayout Spacing="15" Padding="-2">
                         <Label x:Name="formattedVersionInfo" HorizontalTextAlignment="Center" HorizontalOptions="Center" />
                         <Label Text="See Previous versions" TextColor="{AppThemeBinding Dark=lightgray, Light=blue}"
@@ -144,7 +164,7 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-                </Frame>
+                </Border>
 
             </StackLayout>
         </Grid>

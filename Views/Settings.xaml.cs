@@ -239,27 +239,6 @@ public partial class Settings : ContentPage
         });
     }
 
-    private async void Home_Clicked(System.Object sender, System.EventArgs e)
-    {
-        Uri appRepo = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
-        await OpenLinks(appRepo);
-    }
-
-    private async void Feedback_Clicked(System.Object sender, System.EventArgs e)
-    {
-        Uri issues = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues");
-        await OpenLinks(issues);
-    }
-
-    private async void AboutMe_Clicked(System.Object sender, System.EventArgs e)
-    {
-        Uri github = new("https://github.com/OudomMunint");
-        Uri portfolio = new("https://oudommunint.netlify.app");
-
-        bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
-        await OpenLinks(result ? github : portfolio);
-    }
-
     async void SeePrevious_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         Uri previousVersions = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/releases");
@@ -321,5 +300,26 @@ public partial class Settings : ContentPage
         // Debug pref
         var BioPref = Preferences.Get("BiometricsEnabled", false);
         Console.WriteLine(BioPref);
+    }
+
+    private async void AboutMe_Tapped(object sender, TappedEventArgs e)
+    {
+        Uri github = new("https://github.com/OudomMunint");
+        Uri portfolio = new("https://oudommunint.netlify.app");
+
+        bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
+        await OpenLinks(result ? github : portfolio);
+    }
+
+    private async void Feedback_Tapped(object sender, TappedEventArgs e)
+    {
+        Uri issues = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues");
+        await OpenLinks(issues);
+    }
+
+    private async void HomePage_Tapped(object sender, TappedEventArgs e)
+    {
+        Uri appRepo = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
+        await OpenLinks(appRepo);
     }
 }
