@@ -14,7 +14,7 @@
                     <Label Text="Appearance" FontSize="Title" />
                     <!--<Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40"
                             ColumnDefinitions="*,auto,auto">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
@@ -24,7 +24,7 @@
                                 Toggled="DarkMode">
                         </Switch>
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--App Settings-->
                 <HorizontalStackLayout Margin="10,10,0,0">
@@ -33,37 +33,37 @@
                 </HorizontalStackLayout>
 
                 <!--Reset-->
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                 Text="Reset Application" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White"
                                 Pressed="Reset_Button_Pressed" />
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--Onboarding-->
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                 Text="Tutorial" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Show Tutorial" BackgroundColor="Gray" TextColor="White"
                                 Pressed="Go_To_Welcome_Button_Pressed" />
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--Generate data-->
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                 Text="Dummy data" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Generate data" BackgroundColor="Gray" TextColor="White"
                                 Pressed="GenerateData_Button_Pressed" />
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--Biometrics-->
-                <Frame x:Name="BiometricsSection" CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border x:Name="BiometricsSection" HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Biometrics Authentication" FontAutoScalingEnabled="False" />
                         <Switch Grid.Row="0" x:Name="BiometricsSwitch" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" ThumbColor="Gray" OnColor="BlueViolet"
@@ -72,21 +72,17 @@
 
                         <Button Grid.Column="1" Text="Debug" BackgroundColor="Gray" TextColor="White" Pressed="Button_Pressed" IsVisible="False" />
                     </Grid>
-                </Frame>
+                </Border>
 
-                <!--App info-->
-                <HorizontalStackLayout Margin="10,10,0,10">
-                    <Label Text="Contact" FontSize="Title" />
+                <!--About-->
+                <HorizontalStackLayout Margin="10,10,0,0">
+                    <Label Text="About" FontSize="Title" />
                     <!--<Image Source="description.png" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
 
-
-                <!--About-->
-                <Frame CornerRadius="20" Style="{DynamicResource SettingsFrame}">
+                <Border Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" RowSpacing="20">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="250" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -119,7 +115,7 @@
                             <HorizontalStackLayout.GestureRecognizers>
                                 <TapGestureRecognizer x:Name="Feedback" Tapped="Feedback_Tapped" />
                             </HorizontalStackLayout.GestureRecognizers>
-
+                            
                             <Grid Margin="0" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="35" />
@@ -130,7 +126,7 @@
                                 <Image Grid.Column="0" Source="priority.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Start" />
                                 <Label Grid.Column="1" Margin="20,0,0,0" Text="Feedback &amp; Sugguestions" HorizontalOptions="Center" VerticalOptions="Center" />
                                 <ImageButton Grid.Column="2" Style="{StaticResource SettingsCaret}" HorizontalOptions="End" />
-                    </Grid>
+                            </Grid>
                         </HorizontalStackLayout>
 
                         <!--About me-->
@@ -150,7 +146,7 @@
                                 <Label Grid.Column="1" Margin="20,0,0,0" Text="About Me" HorizontalOptions="Center" VerticalOptions="Center" />
                                 <ImageButton Grid.Column="2" Style="{StaticResource SettingsCaret}" HorizontalOptions="End" />
                             </Grid>
-                </HorizontalStackLayout>
+                        </HorizontalStackLayout>
                     </Grid>
                 </Border>
 
