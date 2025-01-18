@@ -7,14 +7,16 @@
     xmlns:sk="clr-namespace:Maui.FreakyEffects.Skeleton;assembly=Maui.FreakyEffects"
     x:Class="ToDoListApp.Views.TodoListPage"
     x:Name="todoListPage"
+    xmlns:models="clr-namespace:ToDoListApp.Models"
+    x:DataType="models:Todoitem"
     HideSoftInputOnTapped="True"
-    Title="Home"
+    Title=""
     Shell.PresentationMode="ModalAnimated">
 
-    <NavigationPage.TitleView>
+    <Shell.TitleView>
         <Grid ColumnSpacing="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="115" />
+                <!--<ColumnDefinition Width="115" />-->
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -22,16 +24,16 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" x:Name="labeltitle" TextColor="White" FontFamily="Inter-Regular" VerticalTextAlignment="Center" FontSize="16"
-                   Margin="0,0,0,0" VerticalOptions="Center"/>
-            <ImageButton Grid.Column="1" Source="icon.png" WidthRequest="23" HeightRequest="23" Clicked="OnItemAdded"/>
-            <ImageButton Grid.Column="2" Source="donetoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemStatus"/>
-            <ImageButton Grid.Column="3" Source="trash.png" WidthRequest="25" HeightRequest="25" Clicked="DeleteSelectedItems"/>
-            <ImageButton Grid.Column="4" Source="prioritytoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemPriority"/>
-            <ImageButton Grid.Column="5" Source="pin.png" WidthRequest="25" HeightRequest="25" Clicked="SetItemPinned"/>
-            <ImageButton Grid.Column="6" Source="settingswhite.png" WidthRequest="25" Margin="{OnPlatform iOS=0, Android='0,0,5,0'}" Clicked="OpenMenu"/>
+            <!--<Label Grid.Column="0" x:Name="labeltitle" TextColor="White" FontFamily="Inter-Regular" VerticalTextAlignment="Center"
+                   FontSize="16" Margin="0,0,0,0" VerticalOptions="Center" />-->
+            <ImageButton Grid.Column="0" Source="icon.png" WidthRequest="23" HeightRequest="23" Clicked="OnItemAdded" />
+            <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemStatus" />
+            <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="25" HeightRequest="25" Clicked="DeleteSelectedItems" />
+            <ImageButton Grid.Column="3" Source="prioritytoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemPriority" />
+            <ImageButton Grid.Column="4" Source="pin.png" WidthRequest="25" HeightRequest="25" Clicked="SetItemPinned" />
+            <ImageButton Grid.Column="5" Source="settingswhite.png" WidthRequest="25" Margin="{OnPlatform iOS=0, Android='0,0,5,0'}" Clicked="OpenMenu" />
         </Grid>
-    </NavigationPage.TitleView>
+    </Shell.TitleView>
 
     <Grid BackgroundColor="Transparent">
         <Grid.RowDefinitions>
@@ -42,8 +44,9 @@
 
         <!--<views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0"/>-->
 
-        <Border Grid.Row="0" x:Name="SearchContainer" HeightRequest="40" BackgroundColor="{OnPlatform iOS=Transparent, Android={AppThemeBinding Dark={StaticResource DarkGH}, Light={StaticResource OffWhite}}}"
-               Margin="10" Padding="5" Style="{StaticResource ToDoItemBorder}" >
+        <Border Grid.Row="0" x:Name="SearchContainer" HeightRequest="40"
+                BackgroundColor="{OnPlatform iOS=Transparent, Android={AppThemeBinding Dark={StaticResource DarkGH}, Light={StaticResource OffWhite}}}"
+                Margin="10" Padding="5" Style="{StaticResource ToDoItemBorder}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -155,12 +158,12 @@
                         <Border Padding="5,0,0,0" Margin="5">
                             <Grid RowSpacing="0" ColumnSpacing="0" Margin="-5">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="37" />
                                     <RowDefinition Height="30" />
                                     <RowDefinition Height="{OnPlatform iOS=20, Android=30}" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="35" />
                                     <ColumnDefinition Width="150" />
                                     <ColumnDefinition Width="{OnPlatform iOS=Auto, Android=70}" />
                                     <ColumnDefinition Width="*" />
@@ -168,8 +171,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Spacing="5">
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="15,10,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
-                                           Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="180"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="3,10,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
+                                           Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="200" />
 
                                     <Border Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
                                             BackgroundColor="{AppThemeBinding Dark={StaticResource CriticalPriorityColor}, Light={StaticResource DarkGH}}"
@@ -185,10 +188,11 @@
 
                                 </HorizontalStackLayout>
 
-                                <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,0,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked" Unfocused="OnCheckBoxUnchecked"
-                                          Scale="{OnPlatform iOS=1.2,Android=1.1}"/>
+                                <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,0,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked"
+                                          Unfocused="OnCheckBoxUnchecked" Scale="{OnPlatform iOS=1.2,Android=1.1}"/>
 
-                                <Border Style="{StaticResource ChipBorder}" Grid.Column="0" Grid.RowSpan="5" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}" WidthRequest="25" HorizontalOptions="Start">
+                                <Border Style="{StaticResource ChipBorder}" Grid.Column="0" Grid.RowSpan="5" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}"
+                                        WidthRequest="25" HorizontalOptions="Start">
                                     <Border.Triggers>
 
                                         <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="High">
@@ -214,13 +218,14 @@
                                 </Border>
 
                                 <Label Grid.ColumnSpan="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
-                                       Margin="15,5,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250" HeightRequest="{OnPlatform iOS=20}"
+                                       Margin="5,5,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250" HeightRequest="{OnPlatform iOS=20}"
                                        Text="{Binding Notes}" FontFamily="Inter-Regular" />
 
-                                <Border Grid.Row="2" Grid.Column="1" WidthRequest="130" Padding="6,0,0,0" Margin="20,10,15,0" HeightRequest="25" Style="{StaticResource DateTimeChipBorder}">
+                                <Border Grid.Row="2" Grid.Column="1" WidthRequest="130" Padding="6,0,0,0" Margin="0,10,15,0" HeightRequest="25" Style="{StaticResource DateTimeChipBorder}">
                                     <HorizontalStackLayout>
                                         <Image Source="calendar.png" Aspect="AspectFit" MaximumWidthRequest="15" Margin="0,0,4,0"/>
-                                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}" FontFamily="Inter-Regular">
+                                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}"
+                                               FontFamily="Inter-Regular">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <!--<Span Text="📅 " FontSize="Medium"/>  Emoji-->
@@ -231,7 +236,8 @@
                                     </HorizontalStackLayout>
                                 </Border>
 
-                                <Border Grid.Row="2" Grid.Column="{OnPlatform Android=2, iOS=2}" Grid.ColumnSpan="2" HorizontalOptions="{OnPlatform Android=Start}" HeightRequest="25" Margin="0,10,0,0" Padding="{OnPlatform Android=3, iOS=5}"
+                                <Border Grid.Row="2" Grid.Column="{OnPlatform Android=2, iOS=2}" Grid.ColumnSpan="2" HorizontalOptions="{OnPlatform Android=Start}"
+                                        HeightRequest="25" Margin="0,10,0,0" Padding="{OnPlatform Android=3, iOS=5}"
                                         BackgroundColor="{AppThemeBinding Dark=Black, Light=White}" Style="{StaticResource DateTimeChipBorder}">
                                     <Border.Triggers>
                                         <DataTrigger TargetType="Border" Binding="{Binding Done}" Value="True">

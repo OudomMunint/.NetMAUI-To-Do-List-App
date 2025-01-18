@@ -71,7 +71,6 @@ public partial class Settings : ContentPage
         base.OnAppearing();
         await CheckBiometricsStatus();
         VersionTracker();
-        await CheckBiometricsStatus();
     }
 
     private void VersionTracker()

@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListApp.Settings"
-             Title="Settings"
-             x:Name="thispage">
+             x:Name="thispage"
+             NavigationPage.HasNavigationBar="False"
+             Title="">
 
     <ScrollView>
         <Grid Padding="10" ColumnDefinitions="{OnIdiom Phone='Auto,*,Auto', Default='.05*,.9*,.05*'}">
@@ -20,8 +21,7 @@
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                 Text="Dark Mode" FontAutoScalingEnabled="False" />
                         <Switch Grid.Row="0" x:Name="DarkModeSwitch" HorizontalOptions="EndAndExpand"
-                                VerticalOptions="CenterAndExpand" ThumbColor="Gray" OnColor="BlueViolet"
-                                Toggled="DarkMode">
+                                VerticalOptions="CenterAndExpand" Toggled="DarkMode">
                         </Switch>
                     </Grid>
                 </Border>
@@ -65,8 +65,9 @@
                 <!--Biometrics-->
                 <Border x:Name="BiometricsSection" HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Biometrics Authentication" FontAutoScalingEnabled="False" />
-                        <Switch Grid.Row="0" x:Name="BiometricsSwitch" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" ThumbColor="Gray" OnColor="BlueViolet"
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Biometrics Authentication"
+                               FontAutoScalingEnabled="False" />
+                        <Switch Grid.Row="0" x:Name="BiometricsSwitch" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
                                 Toggled="BiometricsSwitch_Toggled">
                         </Switch>
 

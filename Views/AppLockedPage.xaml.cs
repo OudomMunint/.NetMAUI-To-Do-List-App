@@ -22,6 +22,11 @@ public partial class AppLockedPage : ContentPage
         //}
     }
 
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
+
     private async void Authenticate_Clicked(object sender, EventArgs e)
 	{
         await Authenticate();
@@ -44,7 +49,7 @@ public partial class AppLockedPage : ContentPage
         if (biometric.Status == BiometricResponseStatus.Success)
         {
             isAuthenticated = true;
-            await Navigation.PushAsync(new Dashboard());
+            Application.Current.MainPage = new AppShell();
         }
         else
         {

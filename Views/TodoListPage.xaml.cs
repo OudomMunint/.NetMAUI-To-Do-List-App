@@ -134,7 +134,6 @@ namespace ToDoListApp.Views
         {
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             listView.ItemsSource = await database.GetItemsAysnc();
-            UpdateTitle();
         }
 
         private async Task UpdateCollectionView()
@@ -204,13 +203,22 @@ namespace ToDoListApp.Views
 
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
-            if (e.SelectedItem != null)
+            try
             {
-                await Navigation.PushAsync(new TodoitemPage
+                Routing.RegisterRoute(nameof(TodoitemPage), typeof(TodoitemPage));
+
+                HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+                if (e.SelectedItem != null)
                 {
-                    BindingContext = e.SelectedItem as Todoitem
-                });
+                    await Navigation.PushAsync(new TodoitemPage
+                    {
+                        BindingContext = e.SelectedItem as Todoitem
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.ToString(), "OK");
             }
         }
 

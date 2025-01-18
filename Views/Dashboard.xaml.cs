@@ -126,11 +126,6 @@ namespace ToDoListApp.Views
             return Task.CompletedTask;
         }
 
-        void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
-        {
-            Navigation.PushAsync(new TodoListPage());
-        }
-
         private void CreateChart1()
         {
             int lowPriorityItems = ((IEnumerable<Todoitem>)listView.ItemsSource).Count(item => item.Priority == "Low");

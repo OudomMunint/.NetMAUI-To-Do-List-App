@@ -54,7 +54,7 @@ public partial class Welcome : ContentPage
     {
         try
         {
-            Navigation.PushAsync(new Dashboard());
+            Application.Current.MainPage = new AppShell();
             // Prevent the user from going back
             // Navigation.RemovePage(this); // Disabled for now due to #236
         }

@@ -4,6 +4,11 @@
              x:Class="ToDoListApp.Views.AppLockedPage"
              BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource DarkGH}}"
              NavigationPage.HasNavigationBar="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled='False' IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
     <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Spacing="30">
         
         <!-- Lock & Thumb Icon -->
