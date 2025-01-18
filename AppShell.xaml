@@ -1,19 +1,16 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="ToDoListApp.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ToDoListApp"
-    xmlns:views="clr-namespace:ToDoListApp.Views" 
-    Shell.FlyoutBehavior="Flyout">
+﻿<Shell x:Class="ToDoListApp.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:ToDoListApp"
+       xmlns:views="clr-namespace:ToDoListApp.Views"
+       FlyoutBehavior="Disabled">
 
-    <!--BackgroundColor="DarkBlue"
-    Shell.BackgroundColor="DarkBlue"
-    Shell.TabBarForegroundColor="DarkBlue"-->
+    <FlyoutItem x:Name="AndroidFlyout" Title="Main Page" IsVisible="True">
+        <Tab Title="Main">
+            <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" />
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate views:TodoListPage}" />
+            <ShellContent Title="Settings" ContentTemplate="{DataTemplate local:Settings}" />
+        </Tab>
+    </FlyoutItem>
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:Welcome}"
-        Route="Welcome"/>
-    
 </Shell>
