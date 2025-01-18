@@ -6,10 +6,11 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Http;
-using static ToDoListApp.ToastService;
 using System.Net.Mail;
 using System.Net;
 using Plugin.Maui.Biometric;
+using ToDoListApp.Helpers;
+using static ToDoListApp.ToastService;
 
 namespace ToDoListApp;
 
@@ -41,6 +42,9 @@ public partial class Settings : ContentPage
     {
         InitializeComponent();
 
+        Switch[] switches = { DarkModeSwitch, BiometricsSwitch };
+        UiHelpers.SetSwitchColors(switches);
+
         if (IsDarkMode)
         {
             DarkModeSwitch.IsToggled = true;
@@ -65,6 +69,7 @@ public partial class Settings : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
+        await CheckBiometricsStatus();
         VersionTracker();
         await CheckBiometricsStatus();
     }
