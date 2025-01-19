@@ -4,7 +4,7 @@
              x:Class="ToDoListApp.Settings"
              x:Name="thispage"
              NavigationPage.HasNavigationBar="False"
-             Title="">
+             Title="Settings">
 
     <ScrollView>
         <Grid Padding="10" ColumnDefinitions="{OnIdiom Phone='Auto,*,Auto', Default='.05*,.9*,.05*'}">
@@ -82,7 +82,7 @@
                 </HorizontalStackLayout>
 
                 <Border Style="{DynamicResource SettingsBorder}">
-                    <Grid Margin="0" HorizontalOptions="FillAndExpand" RowSpacing="20">
+                    <Grid Margin="0" HorizontalOptions="Fill" RowSpacing="20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
@@ -100,8 +100,8 @@
                             
                             <Grid Margin="0" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="35" />
-                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="{OnPlatform iOS=225, Android=200}" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
@@ -119,8 +119,8 @@
                             
                             <Grid Margin="0" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="35" />
-                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="{OnPlatform iOS=225, Android=200}" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
@@ -138,8 +138,8 @@
                             
                             <Grid Margin="0" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="35" />
-                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="{OnPlatform iOS=225, Android=200}" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 

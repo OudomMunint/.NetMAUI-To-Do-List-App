@@ -3,14 +3,24 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:ToDoListApp"
        xmlns:views="clr-namespace:ToDoListApp.Views"
-       FlyoutBehavior="Disabled">
+       FlyoutBehavior="Disabled"
+       Shell.TabBarUnselectedColor="{AppThemeBinding Light=LightGray, Dark=Gray}">
 
-    <FlyoutItem x:Name="AndroidFlyout" Title="Main Page" IsVisible="True">
+    <!-- <FlyoutItem x:Name="AndroidFlyout" Title="Main Page" IsVisible="True">
         <Tab Title="Main">
             <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" />
             <ShellContent Title="Home" ContentTemplate="{DataTemplate views:TodoListPage}" />
             <ShellContent Title="Settings" ContentTemplate="{DataTemplate local:Settings}" />
         </Tab>
-    </FlyoutItem>
+    </FlyoutItem> -->
+
+    <TabBar>
+        <Tab Title="Dashboard" Icon="{AppThemeBinding Light=dashboard_black.png, Dark=dashboard_white.png}">
+            <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" />
+        </Tab>
+        <Tab Title="Home" Icon="{AppThemeBinding Light=home_black.png, Dark=home_white.png}">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate views:TodoListPage}" />
+        </Tab>
+    </TabBar>
 
 </Shell>
