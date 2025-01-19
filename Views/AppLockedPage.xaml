@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListApp.Views.AppLockedPage"
              BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource DarkGH}}"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             Shell.TabBarIsVisible="False"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled='False' IsVisible="False"/>
