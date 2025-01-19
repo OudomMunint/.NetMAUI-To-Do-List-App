@@ -13,7 +13,9 @@ namespace ToDoListApp
         public const SQLite.SQLiteOpenFlags Flags =
             SQLite.SQLiteOpenFlags.ReadWrite |
             SQLite.SQLiteOpenFlags.Create |
-            SQLite.SQLiteOpenFlags.SharedCache;
+            SQLite.SQLiteOpenFlags.SharedCache |
+            SQLite.SQLiteOpenFlags.Memory |
+            SQLite.SQLiteOpenFlags.Uri;
 
         public static string DatabasePath
         {
