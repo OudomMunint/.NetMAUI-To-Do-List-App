@@ -6,8 +6,9 @@ namespace ToDoListApp.Views;
 public partial class Welcome : ContentPage
 {
     public Welcome()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
+        this.Loaded += Welcome_Loaded;
         BindingContext = this;
         UserCollection = new ObservableCollection<UserInformation>
         {
@@ -23,6 +24,25 @@ public partial class Welcome : ContentPage
             ChangingText.Text = "Managing your task made easy";
             ChangingSubText.Text = "You can view your stats with an informative dashboard";
         }
+    }
+
+    private void Welcome_Loaded(object sender, EventArgs e)
+    {
+#if IOS
+        if (Handler is IPlatformViewHandler platformViewHandler)
+        {
+            var controller = platformViewHandler.ViewController?.NavigationController;
+            if (platformViewHandler.ViewController?.NavigationController != null)
+            {
+                platformViewHandler.ViewController.NavigationController.InteractivePopGestureRecognizer.Enabled = false;
+            }
+        }
+#endif
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
     }
 
     public class UserInformation
@@ -48,6 +68,12 @@ public partial class Welcome : ContentPage
 
         Task.Delay(500);
         RemoveSettingsPage();
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        this.Loaded -= Welcome_Loaded;
     }
 
     private void Continue_Clicked(object sender, EventArgs e)
