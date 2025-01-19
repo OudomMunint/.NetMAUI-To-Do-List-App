@@ -90,6 +90,11 @@ namespace ToDoListApp.Views
             base.OnDisappearing();
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+
         private async Task IsEmptyList()
         {
             TodoitemDatabase database = await TodoitemDatabase.Instance;
@@ -581,7 +586,7 @@ namespace ToDoListApp.Views
 
             if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
-                
+
                 if (e.ScrollY > scrollThreshold)
                 {
                     // Scroll down
