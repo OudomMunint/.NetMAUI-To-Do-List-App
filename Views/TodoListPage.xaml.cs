@@ -62,7 +62,9 @@ namespace ToDoListApp.Views
         {
             try
             {
+#if ANDROID
                 IsPageLoading = true;
+#endif
 
                 base.OnAppearing();
                 await IsEmptyList();
@@ -72,7 +74,9 @@ namespace ToDoListApp.Views
                 await UpdateCollectionView();
                 ApplySavedSorting();
 
+#if ANDROID
                 IsPageLoading = false;
+#endif
             }
             catch (Exception ex)
             {
@@ -153,7 +157,7 @@ namespace ToDoListApp.Views
             });
         }
 
-        async void OpenSettings(object sender, EventArgs e)
+        public async void OpenSettings(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Settings());
 
@@ -233,7 +237,7 @@ namespace ToDoListApp.Views
                 task += "s";
             }
             Title = $"🏠 {totalItems} Opened";
-            labeltitle.Text = $"🏠 {totalItems} Opened";
+            //labeltitle.Text = $"🏠 {totalItems} Opened";
         }
 
         private void OnCheckBoxChecked(object sender, EventArgs e)
@@ -287,19 +291,6 @@ namespace ToDoListApp.Views
                     await ShowToastAsync("Selected Task(s) Deleted 🗑️", 16, ToastDuration.Short);
                 }
             }
-        }
-
-        public async void OpenMenu(object sender, EventArgs e)
-        {
-            string settings = "Settings";
-
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { settings });
-
-            if (action == settings)
-            {
-                OpenSettings(sender, e);
-            }
-
         }
 
         private void SaveSortingPreference(string sortingType, bool isAscending)
