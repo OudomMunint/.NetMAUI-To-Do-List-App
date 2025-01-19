@@ -7,6 +7,17 @@
              NavigationPage.HasNavigationBar="False"
              Title="">
 
+    <Shell.TitleView>
+        <HorizontalStackLayout HorizontalOptions="Fill" Spacing="{OnPlatform iOS=130, Android=115}">
+            <!-- Title -->
+            <views:HeaderGrid x:Name="HeaderGrid" VerticalOptions="Center" HorizontalOptions="Start" />
+
+            <ImageButton x:Name="SettingsButton" Source="settingswhite.png" WidthRequest="25"
+                     Margin="{OnPlatform iOS=0, Android='0,0,5,0'}" Clicked="SettingsButton_Clicked"
+                     HorizontalOptions="End" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+
     <Grid ColumnSpacing="10" RowSpacing="10" Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -23,7 +34,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Title -->
-        <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="{OnIdiom Phone=3, Tablet=5}" />
+        <!-- <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="{OnIdiom Phone=3, Tablet=5}" /> -->
 
         <!-- Labels -->
         <Border Grid.Row="1" Grid.Column="0" Style="{DynamicResource ChartBorder}">

@@ -380,5 +380,10 @@ namespace ToDoListApp.Views
                 };
             }
         }
+
+        private void SettingsButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Settings());
+        }
     }
 }
