@@ -66,11 +66,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="FreakyEffects" Version="0.1.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.22" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.22" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="10.0.0" />
-		<PackageReference Include="CommunityToolkit.Maui.Core" Version="10.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="9.0.22" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.30" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="9.0.30" />
 		<PackageReference Include="Plugin.Maui.Biometric" Version="0.0.4-pre" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
