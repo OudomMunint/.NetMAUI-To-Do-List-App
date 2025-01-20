@@ -110,7 +110,7 @@
                             </StackLayout.GestureRecognizers>
                             
                             <Image Source="priority.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Center" />
-                            <Label Text="Feedback &amp; Sugguestions" HorizontalOptions="Center"/>
+                            <Label Text="Report an Issue" HorizontalOptions="Center"/>
                         </StackLayout>
 
                         <!--About me-->
