@@ -22,7 +22,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--<Label Grid.Column="0" x:Name="labeltitle" TextColor="White" FontFamily="Inter-Regular" VerticalTextAlignment="Center"
                    FontSize="16" Margin="0,0,0,0" VerticalOptions="Center" />-->
@@ -31,7 +30,6 @@
             <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="25" HeightRequest="25" Clicked="DeleteSelectedItems" />
             <ImageButton Grid.Column="3" Source="prioritytoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemPriority" />
             <ImageButton Grid.Column="4" Source="pin.png" WidthRequest="25" HeightRequest="25" Clicked="SetItemPinned" />
-            <ImageButton Grid.Column="5" Source="settingswhite.png" WidthRequest="25" Margin="{OnPlatform iOS=0, Android='0,0,5,0'}" Clicked="OpenSettings" />
         </Grid>
     </Shell.TitleView>
 
@@ -101,7 +99,7 @@
             </Grid>
         </Border>
 
-        <VerticalStackLayout x:Name="VStack" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+        <VerticalStackLayout x:Name="VStack" Grid.RowSpan="3" HorizontalOptions="Fill" VerticalOptions="Center">
             <Image Source="checklist_icon.png" Aspect="AspectFit" WidthRequest="200" HeightRequest="200" Margin="0,0,0,30"/>
             <Label Text="Nothing to show yet, Create an item by tapping on +" HorizontalTextAlignment="Center" FontFamily="Inter-Regular" FontSize="14"/>
             <Label Text="Or go into settings and generate some dummy data!" HorizontalTextAlignment="Center" FontSize="14" FontFamily="Inter-Regular"/>
