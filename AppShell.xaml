@@ -21,6 +21,9 @@
         <Tab Title="Home" Icon="{AppThemeBinding Light=home_black.png, Dark=home_white.png}">
             <ShellContent Title="Home" ContentTemplate="{DataTemplate views:TodoListPage}" />
         </Tab>
+        <Tab Title="Settings" Icon="{AppThemeBinding Light=settings_shell_icon_black.png, Dark=settings_shell_icon.png}">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:Settings}" />
+        </Tab>
     </TabBar>
 
 </Shell>
