@@ -82,72 +82,46 @@
                 </HorizontalStackLayout>
 
                 <Border Style="{DynamicResource SettingsBorder}">
-                    <Grid Margin="0" HorizontalOptions="Fill" RowSpacing="20">
+                    <Grid Margin="0" HorizontalOptions="Fill" RowSpacing="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
+                        
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <!--Home page-->
-                        <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                            <HorizontalStackLayout.GestureRecognizers>
+                        <StackLayout Grid.Row="0" Grid.Column="0" Spacing="10">
+                            <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer x:Name="HomePage" Tapped="HomePage_Tapped" />
-                            </HorizontalStackLayout.GestureRecognizers>
+                            </StackLayout.GestureRecognizers>
                             
-                            <Grid Margin="0" HorizontalOptions="FillAndExpand">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="{OnPlatform iOS=225, Android=200}" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="globe.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Start" />
-                                <Label Grid.Column="1" Margin="20,0,0,0" Text="Home Page" HorizontalOptions="Center" VerticalOptions="Center" />
-                                <ImageButton Grid.Column="2" Style="{StaticResource SettingsCaret}" HorizontalOptions="End" />
-                            </Grid>
-                        </HorizontalStackLayout>
+                            <Image Source="globe.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Center" />
+                            <Label Text="Home Page" HorizontalOptions="Center"/>
+                        </StackLayout>
 
                         <!--Feedback-->
-                        <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                            <HorizontalStackLayout.GestureRecognizers>
+                        <StackLayout Grid.Row="0" Grid.Column="1" Spacing="10">
+                            <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer x:Name="Feedback" Tapped="Feedback_Tapped" />
-                            </HorizontalStackLayout.GestureRecognizers>
+                            </StackLayout.GestureRecognizers>
                             
-                            <Grid Margin="0" HorizontalOptions="FillAndExpand">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="{OnPlatform iOS=225, Android=200}" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="priority.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Start" />
-                                <Label Grid.Column="1" Margin="20,0,0,0" Text="Feedback &amp; Sugguestions" HorizontalOptions="Center" VerticalOptions="Center" />
-                                <ImageButton Grid.Column="2" Style="{StaticResource SettingsCaret}" HorizontalOptions="End" />
-                            </Grid>
-                        </HorizontalStackLayout>
+                            <Image Source="priority.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Center" />
+                            <Label Text="Feedback &amp; Sugguestions" HorizontalOptions="Center"/>
+                        </StackLayout>
 
                         <!--About me-->
-                        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-                            <HorizontalStackLayout.GestureRecognizers>
+                        <StackLayout Grid.Row="0" Grid.Column="2" Spacing="10">
+                            <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer x:Name="AboutMe" Tapped="AboutMe_Tapped" />
-                            </HorizontalStackLayout.GestureRecognizers>
+                            </StackLayout.GestureRecognizers>
                             
-                            <Grid Margin="0" HorizontalOptions="FillAndExpand">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="{OnPlatform iOS=225, Android=200}" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Margin="3,0,0,0" Source="dotnet_bot.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Start" />
-                                <Label Grid.Column="1" Margin="20,0,0,0" Text="About Me" HorizontalOptions="Center" VerticalOptions="Center" />
-                                <ImageButton Grid.Column="2" Style="{StaticResource SettingsCaret}" HorizontalOptions="End" />
-                            </Grid>
-                        </HorizontalStackLayout>
+                            <Image Source="dotnet_bot.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Center" />
+                            <Label Text="About Me" HorizontalOptions="Center" />
+                        </StackLayout>
                     </Grid>
                 </Border>
 

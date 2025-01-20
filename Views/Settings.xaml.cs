@@ -285,17 +285,15 @@ public partial class Settings : ContentPage
         }
     }
 
-    private async void BiometricsSwitch_Toggled(object sender, ToggledEventArgs e)
+    private void BiometricsSwitch_Toggled(object sender, ToggledEventArgs e)
     {
         if (BiometricsSwitch.IsToggled)
         {
             Preferences.Set("BiometricsEnabled", true);
-            await ShowToastAsync("Biometrics Enabled", 20, ToastDuration.Short);
         }
         else
         {
             Preferences.Set("BiometricsEnabled", false);
-            await ShowToastAsync("Biometrics Disabled", 20, ToastDuration.Short);
         }
     }
 

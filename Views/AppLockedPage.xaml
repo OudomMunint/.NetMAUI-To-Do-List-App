@@ -12,7 +12,7 @@
         <BackButtonBehavior IsEnabled='False' IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
-    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Spacing="30">
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="30">
         
         <!-- Lock & Thumb Icon -->
         <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
@@ -25,8 +25,8 @@
                HorizontalTextAlignment="Center" />
 
         <!-- Instruction -->
-        <Label Text="Use Face ID or PIN to get back into your app." FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark={StaticResource White}}"
-               HorizontalTextAlignment="Center" />
+        <Label Text="Please use Face ID, TouchID or PIN to get back into your app." FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark={StaticResource White}}"
+               HorizontalTextAlignment="Center" WidthRequest="300" />
 
         <!-- Log in Button -->
         <Button Text="Continue" BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" CornerRadius="10" WidthRequest="300" HeightRequest="50"
