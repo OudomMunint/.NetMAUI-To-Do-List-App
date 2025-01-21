@@ -1,9 +1,16 @@
 # Check Mate ✅
 
-A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI`, `SQLite` & `.NET 9.0`
+A cross platform `To-Do list` shell application that performs CRUD operations and stores data locally. Made with `.Net MAUI`, `SQLite` & `.NET 9.0` for iOS & Android.
 
 - No Login required.
 - No Internet connection required.
+
+<h1 float="center">
+  <img src="Media/iphone14-1.png" style="height:350px; width:175" />
+  <img src="Media/iphone14-3.png" style="height:350px; width:175" />
+  <img src="Media/iphone14-4.png" style="height:350px; width:175" />
+  <img src="Media/iphone14-3.png" style="height:350px; width:175" />
+</h1>
 
 # CI/CD Status & Release
 
@@ -38,7 +45,7 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI`, `SQLite
 </table>
 
 # Required SDKs
-- .NET & XCode
+- .NET & Xcode
 
 ## Minimum SDKs
 - .Net 8.0 or newer from <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">`here`</a>
@@ -49,33 +56,17 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI`, `SQLite
 - XCode 16 or newer from <a href="https://developer.apple.com/xcode/" target="_blank">`here`</a>
 
 # Screenshots
-### iOS, iPhone 15
-<h1 float="center">
-  <img src="Media/iosdashdark.PNG" style="height:700px; width:330" />
-  <img src="Media/iosdashlight.PNG" style="height:700px; width:330" />
-</h1>
-
-<h1 float="center">
-  <img src="Media/ioshomedark.PNG" style="height:700px; width:330" />
-  <img src="Media/ioshomelight.PNG" style="height:700px; width:330" />
-</h1>
-
-### Android, Galaxy Z Flip 4
-<h1 float="center">
-  <img src="Media/addashlight.jpeg" style="height:700px; width:300" />
-  <img src="Media/adhomelight.jpeg" style="height:700px; width:300" />
-</h1>
 
 ### Android & iOS, iPhone 15 / Galaxy Z Flip 4
 <h1 float="center">
-  <img src="Media/iosapplocked.png" style="height:700px; width:340" />
-  <img src="Media/adapplocked.jpg" style="height:700px; width:310" />
+  <img src="Media/iosapplocked.png" style="height:350px; width:165" />
+  <img src="Media/adapplocked.jpg" style="height:350px; width:150" />
 </h1>
 
 ### Android & iOS, Galaxy Z Flip 4 / iPhone 15
 <h1 float="center">
-  <img src="Media/adatt.jpeg" style="height:700px; width:310" />
-  <img src="Media/iosatt.jpeg" style="height:700px; width:340" />
+  <img src="Media/adatt.jpeg" style="height:350px; width:155" />
+  <img src="Media/iosatt.jpeg" style="height:350px; width:165" />
 </h1>
 
 ## Upcoming
@@ -89,6 +80,7 @@ A `To-Do list` app that performs CRUD operations. Made with `.Net MAUI`, `SQLite
 - [x] .Net 8 Support
 - [x] Biomertic Authentication
 - [x] .Net 9 Support
+- [x] Shell migration
 
 ## Getting Started
 
