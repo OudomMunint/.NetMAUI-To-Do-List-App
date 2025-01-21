@@ -8,9 +8,10 @@ public partial class AppLockedPage : ContentPage
     private bool isAuthenticated = false;
 
     public AppLockedPage()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+        this.Loaded += AppLockedPage_Loaded;
+    }
 
     protected override void OnDisappearing()
     {
@@ -20,10 +21,31 @@ public partial class AppLockedPage : ContentPage
         //{
         //    Navigation.RemovePage(this);
         //}
+
+        this.Loaded -= AppLockedPage_Loaded;
+    }
+
+    private void AppLockedPage_Loaded(object sender, EventArgs e)
+    {
+#if IOS
+        if (Handler is IPlatformViewHandler platformViewHandler)
+        {
+            var controller = platformViewHandler.ViewController?.NavigationController;
+            if (platformViewHandler.ViewController?.NavigationController != null)
+            {
+                platformViewHandler.ViewController.NavigationController.InteractivePopGestureRecognizer.Enabled = false;
+            }
+        }
+#endif
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
     }
 
     private async void Authenticate_Clicked(object sender, EventArgs e)
-	{
+    {
         await Authenticate();
     }
 
@@ -44,7 +66,7 @@ public partial class AppLockedPage : ContentPage
         if (biometric.Status == BiometricResponseStatus.Success)
         {
             isAuthenticated = true;
-            await Navigation.PushAsync(new Dashboard());
+            Application.Current.MainPage = new AppShell();
         }
         else
         {

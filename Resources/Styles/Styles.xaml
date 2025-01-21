@@ -169,6 +169,22 @@
         </Setter>-->
     </Style>
 
+    <Style TargetType="Border" x:Key="ChartBorder">
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 15,15,15,15" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite2}, Dark={StaticResource DarkGH}}" />
+        <Setter Property="Padding" Value="10,0,10,0" />
+        <!--<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />-->
+        <!--<Setter Property="BackgroundColor">
+        <Setter.Value>
+            <OnPlatform x:TypeArguments="Color">
+                <On Platform="Android" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}" />
+                <On Platform="iOS" Value="Transparent" />
+            </OnPlatform>
+        </Setter.Value>
+    </Setter>-->
+    </Style>
+
     <Style TargetType="Frame" x:Key="SettingsFrame">
         <Setter Property="BorderColor" Value="Transparent" />
         <!--<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />-->
@@ -176,10 +192,44 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
     </Style>
 
+    <Style TargetType="Border" x:Key="SettingsBorder">
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20,20,20,20" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}" />
+    </Style>
+
     <Style TargetType="Frame" x:Key="ToDoItemFrame">
         <Setter Property="BorderColor" Value="Transparent" />
         <Setter Property="CornerRadius" Value="15" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="ToDoItemBorder">
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 15,15,15,15" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="InputBorder" BasedOn="{StaticResource ToDoItemBorder}">
+        <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="DateTimeChipBorder">
+        <Setter Property="Stroke" Value="Gray" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8,8,8,8" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="TransparentBorder">
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="ChipBorder">
+        <Setter Property="Stroke" Value="Transparent" />
+        <!--<Setter Property="StrokeShape" Value="RoundRectangle 15,15,15,15" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource DarkGH}}" />-->
     </Style>
 
     <Style TargetType="ImageButton">
@@ -239,7 +289,8 @@
     </Style>
 
     <Style TargetType="Label" x:Key="HeaderGridLabel">
-        <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+        <!-- <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" /> -->
+        <Setter Property="TextColor" Value="White" />
     </Style>
 
     <Style TargetType="ListView">

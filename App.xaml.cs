@@ -13,23 +13,34 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
+        // Register routes for navigation
+        Routing.RegisterRoute(nameof(Dashboard), typeof(Dashboard));
+        Routing.RegisterRoute(nameof(Welcome), typeof(Welcome));
+        Routing.RegisterRoute(nameof(AppLockedPage), typeof(AppLockedPage));
+        
 
-        bool isBiometricsEnabled = Preferences.Get("BiometricsEnabled", false);
+        MainPage = new AppShell();
 
-        if (Preferences.ContainsKey("IsFirstRun"))
+        MainPage.Dispatcher.Dispatch(async () =>
         {
-            MainPage = new NavigationPage(new Dashboard());
-        }
-        else
-        {
-            MainPage = new NavigationPage(new Welcome());
-            Preferences.Set("IsFirstRun", true);
-        }
+            bool isBiometricsEnabled = Preferences.Get("BiometricsEnabled", false);
 
-        if (isBiometricsEnabled)
-        {
-            MainPage = new NavigationPage(new AppLockedPage());
-        }
+            if (Preferences.ContainsKey("IsFirstRun"))
+            {
+                MainPage = new AppShell();
+            }
+            else
+            {
+                // Navigate to the Welcome page and set the first-run preference
+                await MainPage.Navigation.PushAsync(new Welcome());
+                Preferences.Set("IsFirstRun", true);
+            }
+
+            if (isBiometricsEnabled)
+            {
+                await MainPage.Navigation.PushAsync(new AppLockedPage());
+            }
+        });
     }
 
     protected override async void OnResume()

@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListApp.Settings"
-             Title="Settings"
-             x:Name="thispage">
+             x:Name="thispage"
+             NavigationPage.HasNavigationBar="False"
+             Title="Settings">
 
     <ScrollView>
         <Grid Padding="10" ColumnDefinitions="{OnIdiom Phone='Auto,*,Auto', Default='.05*,.9*,.05*'}">
@@ -14,17 +15,16 @@
                     <Label Text="Appearance" FontSize="Title" />
                     <!--<Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40"
                             ColumnDefinitions="*,auto,auto">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                 Text="Dark Mode" FontAutoScalingEnabled="False" />
                         <Switch Grid.Row="0" x:Name="DarkModeSwitch" HorizontalOptions="EndAndExpand"
-                                VerticalOptions="CenterAndExpand" ThumbColor="Gray" OnColor="BlueViolet"
-                                Toggled="DarkMode">
+                                VerticalOptions="CenterAndExpand" Toggled="DarkMode">
                         </Switch>
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--App Settings-->
                 <HorizontalStackLayout Margin="10,10,0,0">
@@ -33,108 +33,99 @@
                 </HorizontalStackLayout>
 
                 <!--Reset-->
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                 Text="Reset Application" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White"
                                 Pressed="Reset_Button_Pressed" />
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--Onboarding-->
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                 Text="Tutorial" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Show Tutorial" BackgroundColor="Gray" TextColor="White"
                                 Pressed="Go_To_Welcome_Button_Pressed" />
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--Generate data-->
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                 Text="Dummy data" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Generate data" BackgroundColor="Gray" TextColor="White"
                                 Pressed="GenerateData_Button_Pressed" />
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--Biometrics-->
-                <Frame x:Name="BiometricsSection" CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border x:Name="BiometricsSection" HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Biometrics Authentication" FontAutoScalingEnabled="False" />
-                        <Switch Grid.Row="0" x:Name="BiometricsSwitch" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" ThumbColor="Gray" OnColor="BlueViolet"
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Biometrics Authentication"
+                               FontAutoScalingEnabled="False" />
+                        <Switch Grid.Row="0" x:Name="BiometricsSwitch" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
                                 Toggled="BiometricsSwitch_Toggled">
                         </Switch>
 
                         <Button Grid.Column="1" Text="Debug" BackgroundColor="Gray" TextColor="White" Pressed="Button_Pressed" IsVisible="False" />
                     </Grid>
-                </Frame>
-
-                <!--App info-->
-                <HorizontalStackLayout Margin="10,10,0,10">
-                    <Label Text="Contact" FontSize="Title" />
-                    <!--<Image Source="description.png" Aspect="AspectFit" HeightRequest="30"/>-->
-                </HorizontalStackLayout>
-
+                </Border>
 
                 <!--About-->
-                <Frame CornerRadius="20" Style="{DynamicResource SettingsFrame}">
-                    <Grid Margin="0" HorizontalOptions="FillAndExpand" RowSpacing="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="250" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Image Grid.Column="0" Grid.Row="0" Source="globe.png" Aspect="AspectFit" HeightRequest="30"
-                                HorizontalOptions="Start" />
-                        <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="0" Text="Home Page" HorizontalOptions="Start"
-                                VerticalOptions="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Home_Clicked" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <ImageButton x:Name="Home" Style="{StaticResource SettingsCaret}" Grid.Column="2" Grid.Row="0"
-                                Clicked="Home_Clicked" />
-
-                        <Image Grid.Column="0" Grid.Row="1" Source="priority.png" Aspect="AspectFit" HeightRequest="30"
-                                HorizontalOptions="Start" />
-                        <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="1" Text="Feedback &amp; Sugguestions"
-                                HorizontalOptions="Start" VerticalOptions="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Feedback_Clicked" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <ImageButton x:Name="Feedback" Style="{StaticResource SettingsCaret}" Grid.Column="2"
-                                Grid.Row="1" Clicked="Feedback_Clicked" />
-
-                        <Image Grid.Column="0" Grid.Row="2" Source="dotnet_bot.png" Aspect="AspectFit"
-                                HeightRequest="30" HorizontalOptions="Center" />
-                        <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="2" Text="About Me" HorizontalOptions="Start"
-                                VerticalOptions="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="AboutMe_Clicked" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <ImageButton x:Name="AboutMe" Style="{StaticResource SettingsCaret}" Grid.Column="2"
-                                Grid.Row="2" Clicked="AboutMe_Clicked" />
-                    </Grid>
-                </Frame>
-
                 <HorizontalStackLayout Margin="10,10,0,0">
                     <Label Text="About" FontSize="Title" />
                     <!--<Image Source="description.png" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
 
-                <Frame CornerRadius="20" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
+                <Border Style="{DynamicResource SettingsBorder}">
+                    <Grid Margin="0" HorizontalOptions="Fill" RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!--Home page-->
+                        <StackLayout Grid.Row="0" Grid.Column="0" Spacing="10">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="HomePage" Tapped="HomePage_Tapped" />
+                            </StackLayout.GestureRecognizers>
+                            
+                            <Image Source="globe.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Center" />
+                            <Label Text="Home Page" HorizontalOptions="Center"/>
+                        </StackLayout>
+
+                        <!--Feedback-->
+                        <StackLayout Grid.Row="0" Grid.Column="1" Spacing="10">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="Feedback" Tapped="Feedback_Tapped" />
+                            </StackLayout.GestureRecognizers>
+                            
+                            <Image Source="priority.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Center" />
+                            <Label Text="Report an Issue" HorizontalOptions="Center"/>
+                        </StackLayout>
+
+                        <!--About me-->
+                        <StackLayout Grid.Row="0" Grid.Column="2" Spacing="10">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="AboutMe" Tapped="AboutMe_Tapped" />
+                            </StackLayout.GestureRecognizers>
+                            
+                            <Image Source="dotnet_bot.png" Aspect="AspectFit" HeightRequest="30" HorizontalOptions="Center" />
+                            <Label Text="About Me" HorizontalOptions="Center" />
+                        </StackLayout>
+                    </Grid>
+                </Border>
+
+                <Border Style="{DynamicResource SettingsBorder}" Margin="0,5,0,0">
                     <StackLayout Spacing="15" Padding="-2">
                         <Label x:Name="formattedVersionInfo" HorizontalTextAlignment="Center" HorizontalOptions="Center" />
                         <Label Text="See Previous versions" TextColor="{AppThemeBinding Dark=lightgray, Light=blue}"
@@ -144,7 +135,7 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-                </Frame>
+                </Border>
 
             </StackLayout>
         </Grid>

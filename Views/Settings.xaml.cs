@@ -6,10 +6,11 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Http;
-using static ToDoListApp.ToastService;
 using System.Net.Mail;
 using System.Net;
 using Plugin.Maui.Biometric;
+using ToDoListApp.Helpers;
+using static ToDoListApp.ToastService;
 
 namespace ToDoListApp;
 
@@ -41,6 +42,9 @@ public partial class Settings : ContentPage
     {
         InitializeComponent();
 
+        Switch[] switches = { DarkModeSwitch, BiometricsSwitch };
+        UiHelpers.SetSwitchColors(switches);
+
         if (IsDarkMode)
         {
             DarkModeSwitch.IsToggled = true;
@@ -65,8 +69,8 @@ public partial class Settings : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        VersionTracker();
         await CheckBiometricsStatus();
+        VersionTracker();
     }
 
     private void VersionTracker()
@@ -204,7 +208,7 @@ public partial class Settings : ContentPage
 
     private async void GenerateData_Button_Pressed(System.Object sender, System.EventArgs e)
     {
-        var titlestring = "You need an internet connection if you choose with attachments.";
+        var titlestring = "Attachments require internet access.";
         string action = await Application.Current.MainPage.DisplayActionSheet(titlestring, "Cancel", null, "With Attachments", "Without Attachments");
 
         if (action == "With Attachments")
@@ -237,27 +241,6 @@ public partial class Settings : ContentPage
             await Navigation.PushAsync(new Welcome());
             Navigation.RemovePage(this);
         });
-    }
-
-    private async void Home_Clicked(System.Object sender, System.EventArgs e)
-    {
-        Uri appRepo = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
-        await OpenLinks(appRepo);
-    }
-
-    private async void Feedback_Clicked(System.Object sender, System.EventArgs e)
-    {
-        Uri issues = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues");
-        await OpenLinks(issues);
-    }
-
-    private async void AboutMe_Clicked(System.Object sender, System.EventArgs e)
-    {
-        Uri github = new("https://github.com/OudomMunint");
-        Uri portfolio = new("https://oudommunint.netlify.app");
-
-        bool result = await DisplayAlert("About Me", "Do you want to visit my GitHub or Portfolio?", "GitHub", "Portfolio");
-        await OpenLinks(result ? github : portfolio);
     }
 
     async void SeePrevious_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
@@ -302,17 +285,15 @@ public partial class Settings : ContentPage
         }
     }
 
-    private async void BiometricsSwitch_Toggled(object sender, ToggledEventArgs e)
+    private void BiometricsSwitch_Toggled(object sender, ToggledEventArgs e)
     {
         if (BiometricsSwitch.IsToggled)
         {
             Preferences.Set("BiometricsEnabled", true);
-            await ShowToastAsync("Biometrics Enabled", 20, ToastDuration.Short);
         }
         else
         {
             Preferences.Set("BiometricsEnabled", false);
-            await ShowToastAsync("Biometrics Disabled", 20, ToastDuration.Short);
         }
     }
 
@@ -321,5 +302,26 @@ public partial class Settings : ContentPage
         // Debug pref
         var BioPref = Preferences.Get("BiometricsEnabled", false);
         Console.WriteLine(BioPref);
+    }
+
+    private async void AboutMe_Tapped(object sender, TappedEventArgs e)
+    {
+        Uri github = new("https://github.com/OudomMunint");
+        Uri portfolio = new("https://oudommunint.netlify.app");
+
+        bool result = await DisplayAlert("Visit GitHub or Portfolio?", null, "GitHub", "Portfolio");
+        await OpenLinks(result ? github : portfolio);
+    }
+
+    private async void Feedback_Tapped(object sender, TappedEventArgs e)
+    {
+        Uri issues = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues");
+        await OpenLinks(issues);
+    }
+
+    private async void HomePage_Tapped(object sender, TappedEventArgs e)
+    {
+        Uri appRepo = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
+        await OpenLinks(appRepo);
     }
 }

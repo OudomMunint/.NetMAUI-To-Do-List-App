@@ -8,6 +8,7 @@ using ToDoListApp.Data;
 using ToDoListApp.Models;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using ToDoListApp.Helpers;
 using static ToDoListApp.ToastService;
 
 namespace ToDoListApp.Views
@@ -18,6 +19,10 @@ namespace ToDoListApp.Views
         public TodoitemPage()
         {
             InitializeComponent();
+
+            Switch[] switches = {DoneSwitch, PinSwitch};
+
+            UiHelpers.SetSwitchColors(switches);
         }
 
         protected override void OnAppearing()
@@ -104,8 +109,8 @@ namespace ToDoListApp.Views
             else
             {
                 itemTitle.FormattedText = new FormattedString();
-                itemTitle.FormattedText.Spans.Add(new Span { Text = "Editing: ", FontAttributes = FontAttributes.Bold });
-                itemTitle.FormattedText.Spans.Add(new Span { Text = NameField.Text });
+                itemTitle.FormattedText.Spans.Add(new Span { Text = "Editing", FontAttributes = FontAttributes.Bold });
+                //itemTitle.FormattedText.Spans.Add(new Span { Text = NameField.Text });
             }
         }
 

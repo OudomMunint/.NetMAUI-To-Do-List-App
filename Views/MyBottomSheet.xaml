@@ -18,7 +18,7 @@
                     <Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>
                 </HorizontalStackLayout>
 
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Dark Mode"
                                Style="{DynamicResource SettingsHeader}" FontAutoScalingEnabled="False"/>
@@ -31,7 +31,7 @@
                             Toggled="DarkMode">
                         </Switch>
                     </Grid>
-                </Frame>
+                </Border>
 
                 <!--Reset App-->
                 <HorizontalStackLayout>
@@ -39,21 +39,21 @@
                     <Image Source="{AppThemeBinding Light=settings.png, Dark=settingswhite.png}" Aspect="AspectFit" HeightRequest="30"/>
                 </HorizontalStackLayout>
 
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                Style="{DynamicResource SettingsHeader}" Text="Reset Application" FontAutoScalingEnabled="False"/>
                         <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White" Pressed="Reset_Button_Pressed"/>
                     </Grid>
-                </Frame>
+                </Border>
 
-                <Frame CornerRadius="20" HeightRequest="70" Style="{DynamicResource SettingsFrame}" Margin="0,15,0,0">
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}" Margin="0,15,0,0">
                     <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                                Style="{DynamicResource SettingsHeader}" Text="Tutorial" FontAutoScalingEnabled="False"/>
                         <Button Grid.Column="1" Text="Show Tutorial" BackgroundColor="Gray" TextColor="White" Pressed="Go_To_Welcome_Button_Pressed"/>
                     </Grid>
-                </Frame>
+                </Border>
 
             </StackLayout>
         </Grid>

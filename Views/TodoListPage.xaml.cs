@@ -62,7 +62,9 @@ namespace ToDoListApp.Views
         {
             try
             {
+#if ANDROID
                 IsPageLoading = true;
+#endif
 
                 base.OnAppearing();
                 await IsEmptyList();
@@ -72,7 +74,9 @@ namespace ToDoListApp.Views
                 await UpdateCollectionView();
                 ApplySavedSorting();
 
+#if ANDROID
                 IsPageLoading = false;
+#endif
             }
             catch (Exception ex)
             {
@@ -84,6 +88,11 @@ namespace ToDoListApp.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
 
         private async Task IsEmptyList()
@@ -134,7 +143,6 @@ namespace ToDoListApp.Views
         {
             TodoitemDatabase database = await TodoitemDatabase.Instance;
             listView.ItemsSource = await database.GetItemsAysnc();
-            UpdateTitle();
         }
 
         private async Task UpdateCollectionView()
@@ -152,15 +160,6 @@ namespace ToDoListApp.Views
             {
                 BindingContext = new Todoitem()
             });
-        }
-
-        async void OpenSettings(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Settings());
-
-            // Open BottomSheet
-            //var page = new MyBottomSheet();
-            //await page.ShowAsync();
         }
 
         async void DeleteAllItems(object sender, EventArgs e)
@@ -204,13 +203,22 @@ namespace ToDoListApp.Views
 
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
-            if (e.SelectedItem != null)
+            try
             {
-                await Navigation.PushAsync(new TodoitemPage
+                Routing.RegisterRoute(nameof(TodoitemPage), typeof(TodoitemPage));
+
+                HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+                if (e.SelectedItem != null)
                 {
-                    BindingContext = e.SelectedItem as Todoitem
-                });
+                    await Navigation.PushAsync(new TodoitemPage
+                    {
+                        BindingContext = e.SelectedItem as Todoitem
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.ToString(), "OK");
             }
         }
 
@@ -225,7 +233,7 @@ namespace ToDoListApp.Views
                 task += "s";
             }
             Title = $"🏠 {totalItems} Opened";
-            labeltitle.Text = $"🏠 {totalItems} Opened";
+            //labeltitle.Text = $"🏠 {totalItems} Opened";
         }
 
         private void OnCheckBoxChecked(object sender, EventArgs e)
@@ -279,19 +287,6 @@ namespace ToDoListApp.Views
                     await ShowToastAsync("Selected Task(s) Deleted 🗑️", 16, ToastDuration.Short);
                 }
             }
-        }
-
-        public async void OpenMenu(object sender, EventArgs e)
-        {
-            string settings = "Settings";
-
-            var action = await Application.Current.MainPage.DisplayActionSheet(null, "Cancel", null, new[] { settings });
-
-            if (action == settings)
-            {
-                OpenSettings(sender, e);
-            }
-
         }
 
         private void SaveSortingPreference(string sortingType, bool isAscending)
@@ -572,11 +567,17 @@ namespace ToDoListApp.Views
 
         async void listView_Scrolled2(System.Object sender, Microsoft.Maui.Controls.ScrolledEventArgs e)
         {
-            await SearchBar.HideKeyboardAsync();
+            var scrollThreshold = 70;
+            var scrollThreshold2 = 1;
 
             if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
-                var scrollThreshold = 70;
+                await SearchBar.HideKeyboardAsync();
+            }
+
+            if (DeviceInfo.Platform == DevicePlatform.iOS)
+            {
+
                 if (e.ScrollY > scrollThreshold)
                 {
                     // Scroll down
@@ -595,6 +596,12 @@ namespace ToDoListApp.Views
                         await pinnedcontainer.FadeTo(1, 250);
                     }
                 }
+            }
+
+            if (DeviceInfo.Platform == DevicePlatform.Android && e.ScrollY > scrollThreshold2)
+            {
+                await SearchBar.HideKeyboardAsync();
+                SearchBar.Unfocus();
             }
         }
 

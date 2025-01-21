@@ -1,19 +1,29 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="ToDoListApp.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ToDoListApp"
-    xmlns:views="clr-namespace:ToDoListApp.Views" 
-    Shell.FlyoutBehavior="Flyout">
+﻿<Shell x:Class="ToDoListApp.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:ToDoListApp"
+       xmlns:views="clr-namespace:ToDoListApp.Views"
+       FlyoutBehavior="Disabled"
+       Shell.TabBarUnselectedColor="{AppThemeBinding Light=LightGray, Dark=Gray}">
 
-    <!--BackgroundColor="DarkBlue"
-    Shell.BackgroundColor="DarkBlue"
-    Shell.TabBarForegroundColor="DarkBlue"-->
+    <!-- <FlyoutItem x:Name="AndroidFlyout" Title="Main Page" IsVisible="True">
+        <Tab Title="Main">
+            <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" />
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate views:TodoListPage}" />
+            <ShellContent Title="Settings" ContentTemplate="{DataTemplate local:Settings}" />
+        </Tab>
+    </FlyoutItem> -->
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:Welcome}"
-        Route="Welcome"/>
-    
+    <TabBar>
+        <Tab Title="Dashboard" Icon="{AppThemeBinding Light=dashboard_black.png, Dark=dashboard_white.png}">
+            <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" />
+        </Tab>
+        <Tab Title="Home" Icon="{AppThemeBinding Light=home_black.png, Dark=home_white.png}">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate views:TodoListPage}" />
+        </Tab>
+        <Tab Title="Settings" Icon="{AppThemeBinding Light=settings_shell_icon_black.png, Dark=settings_shell_icon.png}">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:Settings}" />
+        </Tab>
+    </TabBar>
+
 </Shell>

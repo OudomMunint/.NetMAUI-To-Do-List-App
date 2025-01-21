@@ -2,7 +2,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListApp.Views.HeaderGrid">
-    <Grid HorizontalOptions="FillAndExpand">
+
+    <Grid HorizontalOptions="Fill">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="1" />
@@ -21,6 +22,7 @@
         <Label x:Name="titleLabel" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding CurrentDate}"
                VerticalOptions="Center" HorizontalOptions="Center" Style="{StaticResource HeaderGridLabel}"/>
         
-        <BoxView HeightRequest="2" Grid.Row="5" Grid.ColumnSpan="5" Style="{StaticResource Seperator}"/>
+        <!-- <BoxView HeightRequest="2" Grid.Row="5" Grid.ColumnSpan="5" Style="{StaticResource Seperator}"/> -->
     </Grid>
+    
 </ContentView>
