@@ -104,7 +104,7 @@ namespace ToDoListApp.Views
             if (string.IsNullOrWhiteSpace(NameField.Text))
             {
                 itemTitle.FormattedText = new FormattedString();
-                itemTitle.FormattedText.Spans.Add(new Span { Text = "Creating new task", FontAttributes = FontAttributes.Bold });
+                itemTitle.FormattedText.Spans.Add(new Span { Text = "Create task", FontAttributes = FontAttributes.Bold });
             }
             else
             {
