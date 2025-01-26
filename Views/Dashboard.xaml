@@ -8,7 +8,7 @@
              Title="">
 
     <Shell.TitleView>
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="{OnPlatform iOS=130, Android=115}">
+        <HorizontalStackLayout HorizontalOptions="Center">
             <!-- Title -->
             <views:HeaderGrid x:Name="HeaderGrid" VerticalOptions="Center" HorizontalOptions="Center" />
         </HorizontalStackLayout>
@@ -33,8 +33,8 @@
         <!-- <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="{OnIdiom Phone=3, Tablet=5}" /> -->
 
         <!-- Labels -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{DynamicResource ChartBorder}">
-            <ScrollView Padding="{OnIdiom Phone='0,0,0,0', Tablet='10,10,10,10'}">
+        <Border Grid.Row="1" Grid.Column="0" Style="{DynamicResource ChartBorder}" Padding="10">
+            <ScrollView Padding="{OnIdiom Phone='0,0,0,0', Tablet='10,10,10,10'}" VerticalScrollBarVisibility="Default">
                 <StackLayout>
                     <!--<Label Text="👋 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>-->
                     <Label x:Name="todoitems" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
