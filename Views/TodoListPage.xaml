@@ -50,8 +50,8 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <!-- Search Bar -->
                 <SearchBar HorizontalOptions="StartAndExpand" Grid.Row="0" Grid.Column="0" Placeholder="Search" x:Name="SearchBar"
