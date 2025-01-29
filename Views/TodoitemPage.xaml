@@ -93,12 +93,12 @@
                         <Border Style="{DynamicResource InputBorder}" Padding="7" Margin="0,10,0,0" HorizontalOptions="FillAndExpand">
                             <StackLayout>
                                 <Label x:Name="attsize" Text="{Binding AttachmentSize}" FontFamily="Inter-Regular" FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}"
-                                        HorizontalTextAlignment="Center" Margin="15,10,15,10" />
+                                        HorizontalTextAlignment="Center" />
                                 <Image x:Name="attachmentImage" Source="{Binding Attachment, Converter={StaticResource ByteArrayToImageSourceConverter}}" Margin="15" />
                                 <Label x:Name="attlabel" Text="No Attachment found. If attachment is already added, click save." FontFamily="Inter-Regular" FontSize="15"
-                                        TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}" HorizontalTextAlignment="Center" Margin="15,0,15,15" />
+                                        TextColor="{AppThemeBinding Dark=Gray, Light=Gray}" HorizontalTextAlignment="Center" Margin="15,0,15,15" />
                                 <Button Text="Delete Attachment" Clicked="DeleteAttachmentClicked" FontFamily="Inter-Regular" BackgroundColor="Red" TextColor="White"
-                                        MaximumWidthRequest="{OnPlatform iOS=150, Android=200}" HorizontalOptions="Center" Margin="0,15,0,10" />
+                                        MaximumWidthRequest="{OnPlatform iOS=165, Android=200}" HorizontalOptions="Center" Margin="0,0,0,10" />
                             </StackLayout>
                         </Border>
                     </StackLayout>
@@ -117,8 +117,9 @@
 
                             <Switch x:Name="DoneSwitch" Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" IsToggled="{Binding Done}" />
 
-                            <BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Margin="{OnPlatform iOS='0,8,0,0'}"
-                                    Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
+                            <BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1"
+                                    Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                                    VerticalOptions="Center"/>
 
                             <Label Grid.Row="2" Grid.Column="0" Text="Pin as Favourite" HorizontalOptions="Start" VerticalOptions="Center" FontFamily="Inter-Bold" Margin="10,0,10,0" />
 

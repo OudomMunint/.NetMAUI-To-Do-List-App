@@ -111,6 +111,7 @@ public partial class Settings : ContentPage
             foreach (var item in allitems)
             {
                 await database.DeleteItemAsync(item);
+                Preferences.Set("BiometricsEnabled", false);
             }
             // Navigate with main thread!!!
             MainThread.BeginInvokeOnMainThread(async () =>
