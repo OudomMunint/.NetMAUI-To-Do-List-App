@@ -189,40 +189,16 @@
                                 <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,0,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked"
                                           Unfocused="OnCheckBoxUnchecked" Scale="{OnPlatform iOS=1.2,Android=1.1}"/>
 
-                                <Border Style="{StaticResource ChipBorder}" Grid.Column="0" Grid.RowSpan="5" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}"
-                                        WidthRequest="25" HorizontalOptions="Start">
-                                    <Border.Triggers>
+                                <Border Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource ChipBorder}" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}"
+                                        WidthRequest="25" HorizontalOptions="Start" BackgroundColor="{Binding PriorityColor}" />
 
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="High">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource HighPriorityColor}" />
-                                        </DataTrigger>
-
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Medium">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource MediumPriorityColor}" />
-                                        </DataTrigger>
-
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Low">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource LowPriorityColor}" />
-                                        </DataTrigger>
-
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Critical">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource CriticalPriorityColor}" />
-                                        </DataTrigger>
-
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="">
-                                            <Setter Property="BackgroundColor" Value="Transparent" />
-                                        </DataTrigger>
-                                    </Border.Triggers>
-                                </Border>
-
-                                <Label Grid.ColumnSpan="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
-                                       Margin="5,5,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250" HeightRequest="{OnPlatform iOS=20}"
-                                       Text="{Binding Notes}" FontFamily="Inter-Regular" />
+                                <Label Grid.ColumnSpan="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" LineBreakMode="TailTruncation" Margin="5,5,0,0" VerticalOptions="Start"
+                                        FontSize="Body" WidthRequest="250" HeightRequest="{OnPlatform iOS=20}" Text="{Binding Notes}" FontFamily="Inter-Regular" />
 
                                 <Border Grid.Row="2" Grid.Column="1" WidthRequest="130" Padding="6,0,0,0" Margin="0,10,15,0" HeightRequest="25" Style="{StaticResource DateTimeChipBorder}">
                                     <HorizontalStackLayout>
                                         <Image Source="calendar.png" Aspect="AspectFit" MaximumWidthRequest="15" Margin="0,0,4,0"/>
-                                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}"
+                                        <Label HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}"
                                                FontFamily="Inter-Regular">
                                             <Label.FormattedText>
                                                 <FormattedString>
@@ -282,7 +258,7 @@
         <AbsoluteLayout IsVisible="{Binding IsPageLoading, Source={x:Reference todoListPage}}" Grid.Row="2" Margin="0" Padding="0" BackgroundColor="Black"
                         Opacity="{OnPlatform Android=0.5, iOS=0.7}">
             <StackLayout Margin="0" Padding="0" AbsoluteLayout.LayoutBounds="0.5,0.5,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional"
-                         HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                         HorizontalOptions="Center" VerticalOptions="Fill">
                 <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="White" Scale="{OnPlatform Android=1.5, iOS=1.6}"
                                    IsRunning="{Binding IsPageLoading, Source={x:Reference todoListPage}}" />
             </StackLayout>
