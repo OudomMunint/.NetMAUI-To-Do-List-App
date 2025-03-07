@@ -570,6 +570,10 @@ namespace ToDoListApp.Views
             var scrollThreshold = 70;
             var scrollThreshold2 = 1;
 
+            // await Fab.ScaleTo(0.5, 75, Easing.CubicOut);
+            // await MainThread.InvokeOnMainThreadAsync(async () =>
+            //         await Fab.ScaleTo(1.0, 75, Easing.CubicIn));
+
             if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
                 await SearchBar.HideKeyboardAsync();
