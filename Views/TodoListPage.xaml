@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ToDoListApp.Views"
+    xmlns:controls="clr-namespace:ToDoListApp.Views.Controls"
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:sk="clr-namespace:Maui.FreakyEffects.Skeleton;assembly=Maui.FreakyEffects"
     x:Class="ToDoListApp.Views.TodoListPage"
@@ -263,5 +264,8 @@
                                    IsRunning="{Binding IsPageLoading, Source={x:Reference todoListPage}}" />
             </StackLayout>
         </AbsoluteLayout>
+
+        <controls:AddBtn x:Name="Fab" Grid.Row="2" Clicked="OnItemAdded" />
+
     </Grid>
 </ContentPage>

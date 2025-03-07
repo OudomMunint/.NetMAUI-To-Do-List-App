@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Button xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        x:Class="ToDoListApp.Views.Controls.AddBtn"
+        ImageSource="icon.png" 
+        BackgroundColor="Blue" 
+        CornerRadius="30" 
+        HeightRequest="60" 
+        WidthRequest="60" 
+        VerticalOptions="End" 
+        HorizontalOptions="End"
+        Margin="30">
+
+    <Button.GestureRecognizers>
+        <DragGestureRecognizer CanDrag="True" DragStarting="DragGestureRecognizer_DragStarting" DropCompleted="DragGestureRecognizer_DropCompleted" />
+    </Button.GestureRecognizers>
+    
+    </Button>

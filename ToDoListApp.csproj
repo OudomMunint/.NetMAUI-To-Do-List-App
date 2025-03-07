@@ -109,6 +109,9 @@
 		<MauiXaml Update="Views\AppLockedPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\Controls\AddBtn.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\HeaderGrid.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
