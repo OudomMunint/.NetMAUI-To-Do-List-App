@@ -9,22 +9,20 @@
              Shell.FlyoutItemIsVisible="False">
 
     <Grid RowDefinitions="*, 40, Auto, Auto, Auto">
-
             <CarouselView Grid.Row="0" 
               HorizontalScrollBarVisibility="Never"
               IsBounceEnabled="True"
-              IndicatorView="indicator1"
-              ItemsSource="{Binding UserCollection}"
-              x:Name="CarouselZoos"
+              IndicatorView="indicator"
+              x:Name="CarouselMain"
               PositionChanged="OnPositionChanged">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding UserImage}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,25,10,10"/>
+                        <Image Source="{Binding WelcomeImage}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,25,10,10"/>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-        <IndicatorView x:Name="indicator1" IsEnabled="True" IsVisible="True" Grid.Row="1"
+        <IndicatorView x:Name="indicator" IsEnabled="True" IsVisible="True" Grid.Row="1"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        IndicatorSize="5"

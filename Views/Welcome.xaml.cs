@@ -1,29 +1,52 @@
 using System.Collections.ObjectModel;
-using ToDoListApp.Views;
 
 namespace ToDoListApp.Views;
 
 public partial class Welcome : ContentPage
 {
+    public class WelcomeCarousel
+    {
+        public ImageSource WelcomeImage { get; set; }
+    }
+
+    private ObservableCollection<WelcomeCarousel> welcomeCollection;
+
+    public ObservableCollection<WelcomeCarousel> WelcomeCollection
+    {
+        get { return welcomeCollection; }
+        set
+        {
+            welcomeCollection = value;
+            OnPropertyChanged();
+        }
+    }
+    
     public Welcome()
     {
         InitializeComponent();
-        this.Loaded += Welcome_Loaded;
+        SetCarouselImages();
         BindingContext = this;
-        UserCollection = new ObservableCollection<UserInformation>
-        {
-            new UserInformation{UserImage = "iphone1.png"},
-            new UserInformation{UserImage = "iphone2.png"},
-            new UserInformation{UserImage = "iphone3.png"},
-            new UserInformation{UserImage = "iphone4.png"},
-            new UserInformation{UserImage = "iphone5.png"},
-        };
+        this.Loaded += Welcome_Loaded;
 
-        if (CarouselZoos.Position == 0)
+        if (CarouselMain.Position == 0)
         {
             ChangingText.Text = "Managing your task made easy";
             ChangingSubText.Text = "You can view your stats with an informative dashboard";
         }
+    }
+
+    private void SetCarouselImages()
+    {
+        WelcomeCollection = new ObservableCollection<WelcomeCarousel>
+        {
+            new() {WelcomeImage = "dashboard.png"},
+            new() {WelcomeImage = "iphone2.png"},
+            new() {WelcomeImage = "iphone3.png"},
+            new() {WelcomeImage = "iphone4.png"},
+            new() {WelcomeImage = "iphone5.png"},
+        };
+
+        CarouselMain.ItemsSource = WelcomeCollection;
     }
 
     private void Welcome_Loaded(object sender, EventArgs e)
@@ -43,23 +66,6 @@ public partial class Welcome : ContentPage
     protected override bool OnBackButtonPressed()
     {
         return true;
-    }
-
-    public class UserInformation
-    {
-        public ImageSource UserImage { get; set; }
-    }
-
-    private ObservableCollection<UserInformation> userCollection;
-
-    public ObservableCollection<UserInformation> UserCollection
-    {
-        get { return userCollection; }
-        set
-        {
-            userCollection = value;
-            OnPropertyChanged();
-        }
     }
 
     protected override void OnAppearing()
