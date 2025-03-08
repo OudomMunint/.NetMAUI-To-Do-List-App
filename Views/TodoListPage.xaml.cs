@@ -8,6 +8,7 @@ using CommunityToolkit.Maui.Core;
 using static ToDoListApp.ToastService;
 using System;
 using System.ComponentModel;
+using ToDoListApp.Views.Controls;
 
 namespace ToDoListApp.Views
 {
@@ -73,6 +74,7 @@ namespace ToDoListApp.Views
                 await UpdateListView();
                 await UpdateCollectionView();
                 ApplySavedSorting();
+                TopScrollBtn.IsVisible = false;
 
 #if ANDROID
                 IsPageLoading = false;
@@ -574,6 +576,15 @@ namespace ToDoListApp.Views
             // await MainThread.InvokeOnMainThreadAsync(async () =>
             //         await Fab.ScaleTo(1.0, 75, Easing.CubicIn));
 
+            if (e.ScrollY > scrollThreshold)
+            {
+                TopScrollBtn.IsVisible = true;
+            }
+            else
+            {
+                TopScrollBtn.IsVisible = false;
+            }
+
             if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
                 await SearchBar.HideKeyboardAsync();
@@ -679,6 +690,12 @@ namespace ToDoListApp.Views
                     }
                 }
             }
+        }
+
+        private void TopScrollBtn_Clicked(object sender, EventArgs e)
+        {
+            var firstItem = listView.ItemsSource.Cast<object>().FirstOrDefault();
+            listView.ScrollTo(firstItem, ScrollToPosition.Start, animated: true);
         }
     }
 }

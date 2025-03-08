@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Button xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        x:Class="ToDoListApp.Views.Controls.ScrollToTopBtn"
+        ImageSource="arrowupwhite.png" 
+        BackgroundColor="{StaticResource Primary}" 
+        CornerRadius="{OnPlatform Android=30, iOS=23}" 
+        HeightRequest="45" 
+        WidthRequest="45" 
+        VerticalOptions="End" 
+        HorizontalOptions="End"
+        Padding="12"
+        Margin="30,30,30,85">
+    <Button.Shadow>
+        <Shadow Brush="Black"
+                Offset="2,3"
+                Radius="10"
+                Opacity="0.5"/>
+    </Button.Shadow>
+</Button>

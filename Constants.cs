@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToDoListApp
+﻿namespace ToDoListApp
 {
     public static class Constants
     {
@@ -14,7 +8,6 @@ namespace ToDoListApp
             SQLite.SQLiteOpenFlags.ReadWrite |
             SQLite.SQLiteOpenFlags.Create |
             SQLite.SQLiteOpenFlags.SharedCache |
-            SQLite.SQLiteOpenFlags.Memory |
             SQLite.SQLiteOpenFlags.Uri;
 
         public static string DatabasePath
