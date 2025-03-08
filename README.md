@@ -6,10 +6,10 @@ A cross platform `To-Do list` shell application that performs CRUD operations an
 - No Internet connection required.
 
 <h1 float="center">
+  <img src="Media/mainlist.png" style="height:350px; width:175" />
+  <img src="Media/dashboard.png" style="height:350px; width:175" />
   <img src="Media/iphone14-1.png" style="height:350px; width:175" />
   <img src="Media/iphone14-3.png" style="height:350px; width:175" />
-  <img src="Media/iphone14-4.png" style="height:350px; width:175" />
-  <img src="Media/iphone14-2.png" style="height:350px; width:175" />
 </h1>
 
 # CI/CD Status & Release
