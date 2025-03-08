@@ -16,12 +16,12 @@
                     <!--<Image Source="{AppThemeBinding Light=theme.png, Dark=themewhite.png}" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
                 <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
-                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40"
+                    <Grid Margin="0" HorizontalOptions="Fill" HeightRequest="40"
                             ColumnDefinitions="*,auto,auto">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center"
                                 Text="Dark Mode" FontAutoScalingEnabled="False" />
-                        <Switch Grid.Row="0" x:Name="DarkModeSwitch" HorizontalOptions="EndAndExpand"
-                                VerticalOptions="CenterAndExpand" Toggled="DarkMode">
+                        <Switch Grid.Row="0" x:Name="DarkModeSwitch" HorizontalOptions="End"
+                                VerticalOptions="Center" Toggled="DarkMode">
                         </Switch>
                     </Grid>
                 </Border>
@@ -34,8 +34,8 @@
 
                 <!--Reset-->
                 <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
-                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                    <Grid Margin="0" HorizontalOptions="Fill" HeightRequest="40" ColumnDefinitions="*,*">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center"
                                 Text="Reset Application" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White"
                                 Pressed="Reset_Button_Pressed" />
@@ -44,8 +44,8 @@
 
                 <!--Onboarding-->
                 <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
-                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                    <Grid Margin="0" HorizontalOptions="Fill" HeightRequest="40" ColumnDefinitions="*,*">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center"
                                 Text="Tutorial" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Show Tutorial" BackgroundColor="Gray" TextColor="White"
                                 Pressed="Go_To_Welcome_Button_Pressed" />
@@ -54,8 +54,8 @@
 
                 <!--Generate data-->
                 <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
-                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,*">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                    <Grid Margin="0" HorizontalOptions="Fill" HeightRequest="40" ColumnDefinitions="*,*">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center"
                                 Text="Dummy data" FontAutoScalingEnabled="False" />
                         <Button Grid.Column="1" Text="Generate data" BackgroundColor="Gray" TextColor="White"
                                 Pressed="GenerateData_Button_Pressed" />
@@ -64,10 +64,10 @@
 
                 <!--Biometrics-->
                 <Border x:Name="BiometricsSection" HeightRequest="70" Style="{DynamicResource SettingsBorder}">
-                    <Grid Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="40" ColumnDefinitions="*,auto,auto">
-                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Text="Biometrics Authentication"
+                    <Grid Margin="0" HorizontalOptions="Fill" HeightRequest="40" ColumnDefinitions="*,auto,auto">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Biometrics Authentication"
                                FontAutoScalingEnabled="False" />
-                        <Switch Grid.Row="0" x:Name="BiometricsSwitch" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                        <Switch Grid.Row="0" x:Name="BiometricsSwitch" HorizontalOptions="End" VerticalOptions="Center"
                                 Toggled="BiometricsSwitch_Toggled">
                         </Switch>
 

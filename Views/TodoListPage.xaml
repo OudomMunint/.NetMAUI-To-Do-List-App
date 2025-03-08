@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ToDoListApp.Views"
+    xmlns:controls="clr-namespace:ToDoListApp.Views.Controls"
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:sk="clr-namespace:Maui.FreakyEffects.Skeleton;assembly=Maui.FreakyEffects"
     x:Class="ToDoListApp.Views.TodoListPage"
@@ -17,7 +18,7 @@
         <Grid ColumnSpacing="10">
             <Grid.ColumnDefinitions>
                 <!--<ColumnDefinition Width="115" />-->
-                <ColumnDefinition Width="*" />
+                <!-- <ColumnDefinition Width="*" /> -->
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -25,11 +26,11 @@
             </Grid.ColumnDefinitions>
             <!--<Label Grid.Column="0" x:Name="labeltitle" TextColor="White" FontFamily="Inter-Regular" VerticalTextAlignment="Center"
                    FontSize="16" Margin="0,0,0,0" VerticalOptions="Center" />-->
-            <ImageButton Grid.Column="0" Source="icon.png" WidthRequest="23" HeightRequest="23" Clicked="OnItemAdded" />
-            <ImageButton Grid.Column="1" Source="donetoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemStatus" />
-            <ImageButton Grid.Column="2" Source="trash.png" WidthRequest="25" HeightRequest="25" Clicked="DeleteSelectedItems" />
-            <ImageButton Grid.Column="3" Source="prioritytoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemPriority" />
-            <ImageButton Grid.Column="4" Source="pin.png" WidthRequest="25" HeightRequest="25" Clicked="SetItemPinned" />
+            <!-- <ImageButton Grid.Column="0" Source="icon.png" WidthRequest="23" HeightRequest="23" Clicked="OnItemAdded" /> -->
+            <ImageButton Grid.Column="0" Source="donetoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemStatus" />
+            <ImageButton Grid.Column="1" Source="trash.png" WidthRequest="25" HeightRequest="25" Clicked="DeleteSelectedItems" />
+            <ImageButton Grid.Column="2" Source="prioritytoolbar.png" WidthRequest="25" HeightRequest="25" Clicked="SetSelectedItemPriority" />
+            <ImageButton Grid.Column="3" Source="pin.png" WidthRequest="25" HeightRequest="25" Clicked="SetItemPinned" />
         </Grid>
     </Shell.TitleView>
 
@@ -54,7 +55,7 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <!-- Search Bar -->
-                <SearchBar HorizontalOptions="StartAndExpand" Grid.Row="0" Grid.Column="0" Placeholder="Search" x:Name="SearchBar"
+                <SearchBar HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" Placeholder="Search" x:Name="SearchBar"
                            ios:SearchBar.SearchBarStyle="Minimal" TextChanged="SearchBar_TextChangedAsync"/>
 
                 <!-- Sort Button -->
@@ -161,7 +162,7 @@
                                     <RowDefinition Height="{OnPlatform iOS=20, Android=30}" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="{OnPlatform iOS=50, Android=35}" />
+                                    <ColumnDefinition Width="{OnPlatform iOS=50, Android=50}" />
                                     <ColumnDefinition Width="150" />
                                     <ColumnDefinition Width="{OnPlatform iOS=Auto, Android=70}" />
                                     <ColumnDefinition Width="*" />
@@ -169,7 +170,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Spacing="5">
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="3,10,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="End"
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Margin="3,10,0,0" HorizontalOptions="Start" VerticalOptions="End"
                                            Text="{Binding Name}" LineBreakMode="TailTruncation" FontSize="20" FontFamily="Inter-Bold" MaximumWidthRequest="200" />
 
                                     <Border Grid.Row="0" Grid.Column="2" WidthRequest="30" VerticalOptions="End" HorizontalOptions="Start" HeightRequest="25" Padding="0"
@@ -186,43 +187,19 @@
 
                                 </HorizontalStackLayout>
 
-                                <CheckBox Grid.Row="1" Grid.Column="4" Margin="0,0,15,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked"
+                                <CheckBox Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" x:Name="SelectedBox" IsChecked="{Binding IsSelected}" Focused="OnCheckBoxChecked"
                                           Unfocused="OnCheckBoxUnchecked" Scale="{OnPlatform iOS=1.2,Android=1.1}"/>
 
-                                <Border Style="{StaticResource ChipBorder}" Grid.Column="0" Grid.RowSpan="5" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}"
-                                        WidthRequest="25" HorizontalOptions="Start">
-                                    <Border.Triggers>
+                                <Border Grid.Column="4" Grid.RowSpan="5" Style="{StaticResource ChipBorder}" Margin="{OnPlatform Android='-10,-10,0,-20', iOS='-10,-10,0,-30'}"
+                                        WidthRequest="25" HorizontalOptions="Start" BackgroundColor="{Binding PriorityColor}" />
 
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="High">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource HighPriorityColor}" />
-                                        </DataTrigger>
-
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Medium">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource MediumPriorityColor}" />
-                                        </DataTrigger>
-
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Low">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource LowPriorityColor}" />
-                                        </DataTrigger>
-
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="Critical">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource CriticalPriorityColor}" />
-                                        </DataTrigger>
-
-                                        <DataTrigger TargetType="Border" Binding="{Binding Priority}" Value="">
-                                            <Setter Property="BackgroundColor" Value="Transparent" />
-                                        </DataTrigger>
-                                    </Border.Triggers>
-                                </Border>
-
-                                <Label Grid.ColumnSpan="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"
-                                       Margin="5,5,0,0" VerticalOptions="Start" FontSize="Body" WidthRequest="250" HeightRequest="{OnPlatform iOS=20}"
-                                       Text="{Binding Notes}" FontFamily="Inter-Regular" />
+                                <Label Grid.ColumnSpan="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" LineBreakMode="TailTruncation" Margin="5,5,0,0" VerticalOptions="Start"
+                                        FontSize="Body" WidthRequest="250" HeightRequest="{OnPlatform iOS=20}" Text="{Binding Notes}" FontFamily="Inter-Regular" />
 
                                 <Border Grid.Row="2" Grid.Column="1" WidthRequest="130" Padding="6,0,0,0" Margin="0,10,15,0" HeightRequest="25" Style="{StaticResource DateTimeChipBorder}">
                                     <HorizontalStackLayout>
                                         <Image Source="calendar.png" Aspect="AspectFit" MaximumWidthRequest="15" Margin="0,0,4,0"/>
-                                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}"
+                                        <Label HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="120" TextColor="{AppThemeBinding Dark=DarkGray, Light=Black}"
                                                FontFamily="Inter-Regular">
                                             <Label.FormattedText>
                                                 <FormattedString>
@@ -282,10 +259,13 @@
         <AbsoluteLayout IsVisible="{Binding IsPageLoading, Source={x:Reference todoListPage}}" Grid.Row="2" Margin="0" Padding="0" BackgroundColor="Black"
                         Opacity="{OnPlatform Android=0.5, iOS=0.7}">
             <StackLayout Margin="0" Padding="0" AbsoluteLayout.LayoutBounds="0.5,0.5,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional"
-                         HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                         HorizontalOptions="Center" VerticalOptions="Fill">
                 <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="White" Scale="{OnPlatform Android=1.5, iOS=1.6}"
                                    IsRunning="{Binding IsPageLoading, Source={x:Reference todoListPage}}" />
             </StackLayout>
         </AbsoluteLayout>
+        
+        <!-- Fab -->
+        <controls:AddBtn x:Name="Fab" Grid.Row="2" Clicked="OnItemAdded"/>
     </Grid>
 </ContentPage>

@@ -6,9 +6,9 @@ A cross platform `To-Do list` shell application that performs CRUD operations an
 - No Internet connection required.
 
 <h1 float="center">
+  <img src="Media/mainlist.png" style="height:350px; width:175" />
+  <img src="Media/dashboard.png" style="height:350px; width:175" />
   <img src="Media/iphone14-1.png" style="height:350px; width:175" />
-  <img src="Media/iphone14-3.png" style="height:350px; width:175" />
-  <img src="Media/iphone14-4.png" style="height:350px; width:175" />
   <img src="Media/iphone14-3.png" style="height:350px; width:175" />
 </h1>
 
@@ -18,7 +18,7 @@ A cross platform `To-Do list` shell application that performs CRUD operations an
 
 # Maintenance Status 🔹<a href="https://github.com/OudomMunint/.NetMAUI-To-Do-List-App/issues">Report Bug</a> &nbsp; &nbsp;
 
-![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
+![maintenance-status](https://img.shields.io/badge/maintenance-passively--maintained-yellowgreen.svg)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 # Supported Platforms

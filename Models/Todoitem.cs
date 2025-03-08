@@ -29,5 +29,25 @@ namespace ToDoListApp.Models
         public bool HasAttachment { get; set; }
 
         public bool IsPinned { get; set; }
+
+        public Color PriorityColor
+        {
+            get
+            {
+                switch (Priority)
+                {
+                    case "Critical":
+                        return Color.FromArgb("#555555");
+                    case "High":
+                        return Colors.Red;
+                    case "Medium":
+                        return Colors.Yellow;
+                    case "Low":
+                        return Colors.LightGreen;
+                    default:
+                        return Colors.White;
+                }
+            }
+        }
     }
 }
