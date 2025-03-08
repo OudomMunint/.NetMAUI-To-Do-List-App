@@ -267,5 +267,6 @@
         
         <!-- Fab -->
         <controls:AddBtn x:Name="Fab" Grid.Row="2" Clicked="OnItemAdded"/>
+        <controls:ScrollToTopBtn x:Name="TopScrollBtn" Grid.Row="2" Clicked="TopScrollBtn_Clicked"/>
     </Grid>
 </ContentPage>
