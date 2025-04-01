@@ -46,7 +46,7 @@ public partial class Settings : ContentPage
         UiHelpers.SetSwitchColors(switches);
         DarkModeSwitch.IsToggled = IsDarkMode;
         BiometricsSwitch.IsToggled = IsBioAuthEnabled;
-        }
+    }
 
     protected async override void OnAppearing()
     {
@@ -195,10 +195,15 @@ public partial class Settings : ContentPage
 
                 item.Attachment = attachment;
 
+                if (item.Attachment != null)
+                {
+                    item.HasAttachment = true;
+                }
+
                 if (hasErrorShown)
                 {
                     // Reset flag
-                    //hasErrorShown = false;
+                    // hasErrorShown = false;
                     break;
                 }
             }
