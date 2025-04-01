@@ -69,15 +69,14 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.40" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="9.0.30" />
-		<PackageReference Include="Plugin.Maui.Biometric" Version="0.0.4-pre" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
 		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.11-pre20241216174303" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11-pre20241216174303" />
 		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.11-pre20241216174303" />
 		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.11-pre20241216174303" />
-		<PackageReference Include="The49.Maui.BottomSheet" Version="8.0.3" />
+		<PackageReference Include="Plugin.Maui.Biometric" Version="0.0.4-pre" />
+		<PackageReference Include="FreakyEffects" Version="0.1.2" />
 		<PackageReference Include="xunit.extensibility.core" Version="2.9.3" />
 		<PackageReference Include="DotNetMeteor.HotReload.Plugin" Version="3.*" />
 	</ItemGroup>
@@ -113,9 +112,6 @@
 		</MauiXaml>
 		<MauiXaml Update="Views\HeaderGrid.xaml">
 			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\MyBottomSheet.xaml">
-		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\TestPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
