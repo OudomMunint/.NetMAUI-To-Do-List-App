@@ -65,9 +65,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FreakyEffects" Version="0.1.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.30" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.40" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="9.0.30" />
