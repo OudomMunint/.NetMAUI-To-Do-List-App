@@ -30,22 +30,16 @@
             <ColumnDefinition Width="{OnIdiom Phone=0, Tablet=*}" />
         </Grid.ColumnDefinitions>
 
-        <!-- Title -->
-        <!-- <views:HeaderGrid x:Name="HeaderGrid" Grid.Row="0" Grid.ColumnSpan="{OnIdiom Phone=3, Tablet=5}" /> -->
-
         <!-- Labels -->
         <Border Grid.Row="1" Grid.Column="0" Style="{DynamicResource ChartBorder}" Padding="10">
             <ScrollView Padding="{OnIdiom Phone='0,0,0,0', Tablet='10,10,10,10'}" VerticalScrollBarVisibility="Default">
                 <StackLayout>
-                    <!--<Label Text="👋 Hello!" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Title" FontFamily="Inter-Regular"/>-->
                     <Label x:Name="todoitems" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="todoitems2" FontAttributes="Bold" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="lowpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="mediumpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="highpriority" Style="{StaticResource PriorityLabel}" />
                     <Label x:Name="criticalpriority" Style="{StaticResource PriorityLabel}" />
-                    <!--<Label x:Name="hasattcount" FontSize="Medium" Style="{StaticResource PriorityLabel}" Text="{Binding ItemHasAttachment}"
-                           LineBreakMode="WordWrap"/>-->
                 </StackLayout>
             </ScrollView>
         </Border>
@@ -71,18 +65,5 @@
 
             <charts:ChartView x:Name="chartView2" />
         </Border>
-
-        <ListView x:Name="listView" IsVisible="False" CachingStrategy="RecycleElement"
-                  BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <VerticalStackLayout>
-                            <!--<Label Text="{Binding Name, Source={x:Reference models}}" />-->
-                        </VerticalStackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
     </Grid>
 </ContentPage>
