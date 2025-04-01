@@ -44,27 +44,9 @@ public partial class Settings : ContentPage
 
         Switch[] switches = { DarkModeSwitch, BiometricsSwitch };
         UiHelpers.SetSwitchColors(switches);
-
-        if (IsDarkMode)
-        {
-            DarkModeSwitch.IsToggled = true;
+        DarkModeSwitch.IsToggled = IsDarkMode;
+        BiometricsSwitch.IsToggled = IsBioAuthEnabled;
         }
-
-        else
-        {
-            DarkModeSwitch.IsToggled = false;
-        }
-
-        if (IsBioAuthEnabled)
-        {
-            BiometricsSwitch.IsToggled = true;
-        }
-
-        else
-        {
-            BiometricsSwitch.IsToggled = false;
-        }
-    }
 
     protected async override void OnAppearing()
     {
@@ -102,7 +84,30 @@ public partial class Settings : ContentPage
 
     async void Reset_Button_Pressed(System.Object sender, System.EventArgs e)
     {
-        var userConfirmed = await DisplayAlert("Reset Application", "This action will delete existing tasks and reset this app. Are you sure you want to continue", "Yes", "No");
+        var userConfirmed = await DisplayAlert("Reset Application", "This action will delete existing tasks and reset this app. You will be taken back to the Welcome screen. Are you sure you want to continue?", "Yes", "No");
+
+        if (userConfirmed)
+        {
+            var database = await TodoitemDatabase.Instance;
+            var allitems = await database.GetItemsAysnc();
+
+            Preferences.Set("BiometricsEnabled", false);
+            foreach (var item in allitems)
+            {
+                await database.DeleteItemAsync(item);
+            }
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await Navigation.PushAsync(new Welcome());
+                await ShowToastAsync("Application has been reset", 16, ToastDuration.Short);
+            });
+        }
+    }
+
+    private async void ResetData_Pressed(object sender, EventArgs e)
+    {
+        var userConfirmed = await DisplayAlert("Reset Data", "This action will delete all existing tasks. Are you sure you want to continue?", "Yes", "No");
 
         if (userConfirmed)
         {
@@ -111,14 +116,9 @@ public partial class Settings : ContentPage
             foreach (var item in allitems)
             {
                 await database.DeleteItemAsync(item);
-                Preferences.Set("BiometricsEnabled", false);
             }
-            // Navigate with main thread!!!
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                await Navigation.PushAsync(new Welcome());
-                await ShowToastAsync("Application has been reset", 16, ToastDuration.Short);
-            });
+
+            await ShowToastAsync("App data has been removed", 16, ToastDuration.Short);
         }
     }
 
