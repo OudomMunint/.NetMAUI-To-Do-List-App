@@ -127,7 +127,6 @@ namespace ToDoListApp.Views
                     {
                         item.HasAttachment = true;
                     });
-                    await database.SaveItemAsync(item);
                 }
 
                 else
@@ -136,8 +135,8 @@ namespace ToDoListApp.Views
                     {
                         item.HasAttachment = false;
                     });
-                    await database.SaveItemAsync(item);
                 }
+                await database.SaveItemAsync(item);
             }
         }
 
