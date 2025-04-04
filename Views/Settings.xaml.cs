@@ -82,42 +82,43 @@ public partial class Settings : ContentPage
         }
     }
 
-    async void Reset_Button_Pressed(System.Object sender, System.EventArgs e)
+    private async void Reset_Button_Pressed(System.Object sender, System.EventArgs e)
     {
-        var userConfirmed = await DisplayAlert("Reset Application", "This action will delete existing tasks and reset this app. You will be taken back to the Welcome screen. Are you sure you want to continue?", "Yes", "No");
+        string action = await DisplayActionSheet("Reset Options", "Cancel", null,  "Reset All (Data + Settings)", "Reset Data Only");
 
-        if (userConfirmed)
+        if (action == null || action == "Cancel") return;
+
+        var confirmMessage = action == "Reset All (Data + Settings)" 
+            ? "This action will delete existing tasks and reset this app. You will be taken back to the Welcome screen. Are you sure?"
+            : "This action will delete all existing tasks. Are you sure?";
+
+        var userConfirmed = await DisplayAlert("Confirm Reset", confirmMessage, "Yes", "No");
+
+        if (!userConfirmed) return;
+
+        var database = await TodoitemDatabase.Instance;
+        var allitems = await database.GetItemsAysnc();
+
+        if (action == "Reset All (Data + Settings)")
         {
-            var database = await TodoitemDatabase.Instance;
-            var allitems = await database.GetItemsAysnc();
-
             Preferences.Set("BiometricsEnabled", false);
             foreach (var item in allitems)
             {
                 await database.DeleteItemAsync(item);
             }
 
-            MainThread.BeginInvokeOnMainThread(async () =>
+            await MainThread.InvokeOnMainThreadAsync(async () =>
             {
                 await Navigation.PushAsync(new Welcome());
                 await ShowToastAsync("Application has been reset", 16, ToastDuration.Short);
             });
         }
-    }
-
-    private async void ResetData_Pressed(object sender, EventArgs e)
-    {
-        var userConfirmed = await DisplayAlert("Reset Data", "This action will delete all existing tasks. Are you sure you want to continue?", "Yes", "No");
-
-        if (userConfirmed)
+        else
         {
-            var database = await TodoitemDatabase.Instance;
-            var allitems = await database.GetItemsAysnc();
             foreach (var item in allitems)
             {
                 await database.DeleteItemAsync(item);
             }
-
             await ShowToastAsync("App data has been removed", 16, ToastDuration.Short);
         }
     }
