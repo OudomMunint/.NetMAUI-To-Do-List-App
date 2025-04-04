@@ -33,12 +33,12 @@
                 </HorizontalStackLayout>
 
                 <!--Reset-->  
-                <Border Style="{DynamicResource SettingsBorder}">
-                    <Grid Margin="0" HorizontalOptions="Fill" ColumnDefinitions="*" RowDefinitions="*,*" RowSpacing="10">
-                        <Button Grid.Column="1" Grid.Row="0" Text="Reset Application" BackgroundColor="Red" TextColor="White"
+                <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
+                    <Grid Margin="0" HorizontalOptions="Fill" HeightRequest="40" ColumnDefinitions="*,*">
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center"
+                                Text="Reset Application" FontAutoScalingEnabled="False" />
+                        <Button Grid.Column="1" Text="Reset" BackgroundColor="Red" TextColor="White"
                                 Pressed="Reset_Button_Pressed" />
-                        <Button Grid.Column="1" Grid.Row="1" Text="Reset App Data" BackgroundColor="Red" TextColor="White"
-                                Pressed="ResetData_Pressed"/>
                     </Grid>
                 </Border>
 
