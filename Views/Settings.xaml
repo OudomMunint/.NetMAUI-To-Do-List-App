@@ -32,7 +32,7 @@
                     <!--<Image Source="{AppThemeBinding Light=settings.png, Dark=settingswhite.png}" Aspect="AspectFit" HeightRequest="30"/>-->
                 </HorizontalStackLayout>
 
-                <!--Reset-->
+                <!--Reset-->  
                 <Border HeightRequest="70" Style="{DynamicResource SettingsBorder}">
                     <Grid Margin="0" HorizontalOptions="Fill" HeightRequest="40" ColumnDefinitions="*,*">
                         <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center"

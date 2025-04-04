@@ -36,9 +36,16 @@ namespace ToDoListApp.Data
         {
             return Database.Table<Todoitem>().ToListAsync();
         }
+
         public Task<List<Todoitem>> GetItemsPinnedAysnc()
         {
             return Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [IsPinned] = 1");
+        }
+
+        public async Task<int> GetPinnedCountAysnc(bool pinned)
+        {
+            var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [IsPinned] = ?", pinned);
+            return items.Count;
         }
 
         public Task<List<Todoitem>> GetItemsNotDoneAysnc()
@@ -56,6 +63,12 @@ namespace ToDoListApp.Data
             return Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [Priority] = '" + priority + "'");
         }
 
+        public async Task<int> GetItemCountByPriority(string priority)
+        {
+            var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [Priority] = '" + priority + "'");
+            return items.Count;
+        }
+
         public Task<List<Todoitem>> GetItemsByDateAsync(DateTime date)
         {
             return Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [Date] = '" + date + "'");
@@ -66,9 +79,22 @@ namespace ToDoListApp.Data
             return Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [Date] BETWEEN '" + startDate + "' AND '" + endDate + "'");
         }
 
-        public Task<int> CountItemsWithAttachmentAsync(bool hasAttachment)
+        public async Task<int> GetItemAttachmentStatus(bool hasAttachment)
         {
-            return Database.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM [TodoItem] WHERE [HasAttachment] = '" + hasAttachment + "'");
+            var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [HasAttachment] = ?", hasAttachment);
+            return items.Count;
+        }
+
+        public async Task<int> GetItemAttachmentStatus()
+        {
+            var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [Attachment] IS NOT NULL AND LENGTH([Attachment]) > 0");
+            return items.Count;
+        }
+
+        public async Task<int> GetTotalItems()
+        {
+            var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem]");
+            return items.Count();
         }
 
         public Task<Todoitem> GetAllPinnedItemsAsync()
