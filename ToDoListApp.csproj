@@ -17,7 +17,7 @@
 		<ApplicationIdGuid>14966315-2970-4b3d-9ece-fe82a9956394</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.8.3</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.8.4</ApplicationDisplayVersion>
 
 		<!-- Is = Release Tags -->
 		<ApplicationVersion>$([System.DateTime]::Now.ToString('yyyyMMddHH'))</ApplicationVersion>
