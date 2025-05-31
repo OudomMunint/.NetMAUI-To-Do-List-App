@@ -57,7 +57,7 @@ public partial class Settings : ContentPage
 
     private void VersionTracker()
     {
-        formattedVersionInfo.Text = $"Checkmate {runtimeOS} Version {VersionTracking.Default.CurrentVersion} ({VersionTracking.Default.CurrentBuild})";
+        FormattedVersionInfo.Text = $"Checkmate {runtimeOS} Version {VersionTracking.Default.CurrentVersion} ({VersionTracking.Default.CurrentBuild})";
     }
 
     // Dark Mode
@@ -330,5 +330,21 @@ public partial class Settings : ContentPage
     {
         Uri appRepo = new("https://github.com/OudomMunint/.NetMAUI-To-Do-List-App");
         await OpenLinks(appRepo);
+    }
+
+    private async void CopyToClipBoard(object sender, TappedEventArgs e)
+    {
+        await CopyToClipBoard();
+    }
+    
+    private async Task CopyToClipBoard()
+    {
+        if (Clipboard.Default.HasText)
+        {
+            await Clipboard.Default.SetTextAsync(null);
+        }
+            
+        await Clipboard.Default.SetTextAsync($"Checkmate {runtimeOS} Version {VersionTracking.Default.CurrentVersion} ({VersionTracking.Default.CurrentBuild})");
+        await ShowToastAsync("Copied to clipboard.", 16, ToastDuration.Short);
     }
 }

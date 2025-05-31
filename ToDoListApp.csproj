@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-ios;net9.0-android</TargetFrameworks>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -18,30 +17,32 @@
 		<ApplicationIdGuid>14966315-2970-4b3d-9ece-fe82a9956394</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.8.2</ApplicationDisplayVersion> <!--is = Release Tags-->
-		<ApplicationVersion>$([System.DateTime]::Now.ToString('yyyyMMddHH'))</ApplicationVersion>
+		<ApplicationDisplayVersion>1.8.4</ApplicationDisplayVersion>
 
+		<!-- Is = Release Tags -->
+		<ApplicationVersion>$([System.DateTime]::Now.ToString('yyyyMMddHH'))</ApplicationVersion>
+		
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">12.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
-	  <!--<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>-->
-	  <CreatePackage>false</CreatePackage>
-	  <RuntimeIdentifiers>ios-arm64</RuntimeIdentifiers>
-	  <!--<RuntimeIdentifiers>iossimulator-arm64</RuntimeIdentifiers>-->
-	  <!-- <RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers> -->
+		<CreatePackage>false</CreatePackage>
+		<RuntimeIdentifiers>ios-arm64</RuntimeIdentifiers>
+		<!--<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>-->
+		<!--<RuntimeIdentifiers>iossimulator-arm64</RuntimeIdentifiers>-->
+		<!-- <RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers> -->
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	  <RunAOTCompilation>False</RunAOTCompilation>
-	  <MtouchLink>None</MtouchLink>
-      <PublishTrimmed>true</PublishTrimmed>
-	  <PublishSingleFile>false</PublishSingleFile>
-	  <PublishReadyToRun>false</PublishReadyToRun>
-	  <!--<RuntimeIdentifiers>ios-arm64</RuntimeIdentifiers>-->
-          <RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
+		<CreatePackage>false</CreatePackage>
+		<RunAOTCompilation>False</RunAOTCompilation>
+		<MtouchLink>None</MtouchLink>
+		<PublishTrimmed>true</PublishTrimmed>
+		<PublishSingleFile>false</PublishSingleFile>
+		<PublishReadyToRun>false</PublishReadyToRun>
+		<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
+		<!--<RuntimeIdentifiers>ios-arm64</RuntimeIdentifiers>-->
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -65,50 +66,37 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.40" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="11.0.0" />
-		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.0.0" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.60" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.2.0" />
 		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
-		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.11-pre20241216174303" />
-		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11-pre20241216174303" />
-		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.11-pre20241216174303" />
-		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.11-pre20241216174303" />
-		<PackageReference Include="Plugin.Maui.Biometric" Version="0.0.4-pre" />
-		<PackageReference Include="FreakyEffects" Version="0.1.2" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.11" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.11" />
+		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.11" />
+		<PackageReference Include="Plugin.Maui.Biometric" Version="0.0.5" />
+		<PackageReference Include="FreakyEffects" Version="0.1.4-pre" />
 		<PackageReference Include="xunit.extensibility.core" Version="2.9.3" />
 		<PackageReference Include="DotNetMeteor.HotReload.Plugin" Version="3.*" />
 	</ItemGroup>
 
-	<!--<ItemGroup>
-	  <Compile Remove="App.xaml.cs" />
-	</ItemGroup>-->
 	<ItemGroup>
-	  <Compile Update="Views\Settings.xaml.cs">
-	    <DependentUpon>Settings.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\testpage.xaml.cs">
-	    <DependentUpon>TestPage.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="Views\Settings.xaml.cs">
+			<DependentUpon>Settings.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\testpage.xaml.cs">
+			<DependentUpon>TestPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
-
-	<!--<ItemGroup>
-    <Reference Include="Maui.Controls.BottomSheet">
-      <HintPath>..\..\Users\OudomMunintPannha\Desktop\BottomSheet2\src\Maui.Controls.BottomSheet\bin\Debug\net6.0-android\Maui.Controls.BottomSheet.dll</HintPath>
-    </Reference>
-  </ItemGroup>-->
-
-	<!--<ItemGroup>
-		<ProjectReference Include=".\.\Maui.Controls.BottomSheet\Maui.Controls.BottomSheet.csproj" />
-	</ItemGroup>-->
 
 	<ItemGroup>
 		<MauiXaml Update="Views\AppLockedPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\Controls\AddBtn.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\HeaderGrid.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -123,22 +111,18 @@
 			<Generator></Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\Welcome.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Handlers\" />
+		<Folder Include="Handlers\" />
 	</ItemGroup>
 
-	<!-- <ItemGroup>
-	  <BundleResource Include="TestProject1\obj\project.assets.json" />
-	  <BundleResource Include="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
-	</ItemGroup> -->
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
-	  <PackageReference Include="Microcharts.Maui" Version="1.0.0" />
+		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-ios'">
-	  <PackageReference Include="Microcharts.Maui" Version="1.0.0" />
+		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 	</ItemGroup>
 </Project>

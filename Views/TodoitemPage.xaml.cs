@@ -213,35 +213,42 @@ namespace ToDoListApp.Views
 
         public async void TakePhoto(object sender, EventArgs e)
         {
-            if (MediaPicker.Default.IsCaptureSupported)
+            try
             {
-                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
-
-                if (photo != null)
+                if (MediaPicker.Default.IsCaptureSupported)
                 {
-                    // save the file into local storage
-                    string localFilePath = Path.Combine(Microsoft.Maui.Storage.FileSystem.CacheDirectory, photo.FileName);
+                    FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
 
-                    using (Stream sourceStream = await photo.OpenReadAsync())
+                    if (photo != null)
                     {
-                        using (FileStream localFileStream = File.OpenWrite(localFilePath))
+                        // save the file into local storage
+                        string localFilePath = Path.Combine(Microsoft.Maui.Storage.FileSystem.CacheDirectory, photo.FileName);
+
+                        using (Stream sourceStream = await photo.OpenReadAsync())
                         {
-                            await sourceStream.CopyToAsync(localFileStream);
+                            using (FileStream localFileStream = File.OpenWrite(localFilePath))
+                            {
+                                await sourceStream.CopyToAsync(localFileStream);
+                            }
                         }
+
+                        // show the photo in the UI
+                        var todoItem = (Todoitem)BindingContext;
+                        TodoitemDatabase database = await TodoitemDatabase.Instance;
+                        todoItem.Attachment = File.ReadAllBytes(localFilePath);
+
+                        await Task.Delay(1000);
+
+                        attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
+                        var AttachmentSize = todoItem.Attachment.Length / 1000;
+                        attsize.Text = AttachmentSize.ToString() + " KB";
+                        attlabel.IsVisible = false;
                     }
-
-                    // show the photo in the UI
-                    var todoItem = (Todoitem)BindingContext;
-                    TodoitemDatabase database = await TodoitemDatabase.Instance;
-                    todoItem.Attachment = File.ReadAllBytes(localFilePath);
-
-                    await Task.Delay(1000);
-
-                    attachmentImage.Source = ImageSource.FromStream(() => new MemoryStream(todoItem.Attachment));
-                    var AttachmentSize = todoItem.Attachment.Length / 1000;
-                    attsize.Text = AttachmentSize.ToString() + " KB";
-                    attlabel.IsVisible = false;
                 }
+            }
+            catch (Exception exception)
+            {
+                await DisplayAlert("Camera Error", exception.ToString(), "OK");
             }
         }
 
