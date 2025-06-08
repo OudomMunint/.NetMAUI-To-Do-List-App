@@ -17,7 +17,7 @@
 		<ApplicationIdGuid>14966315-2970-4b3d-9ece-fe82a9956394</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.8.4</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.8.5</ApplicationDisplayVersion>
 
 		<!-- Is = Release Tags -->
 		<ApplicationVersion>$([System.DateTime]::Now.ToString('yyyyMMddHH'))</ApplicationVersion>
@@ -76,7 +76,7 @@
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
 		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.11" />
 		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.11" />
-		<PackageReference Include="Plugin.Maui.Biometric" Version="0.0.5" />
+		<PackageReference Include="Plugin.Maui.Biometric" Version="0.0.6" />
 		<PackageReference Include="FreakyEffects" Version="0.1.4-pre" />
 		<PackageReference Include="xunit.extensibility.core" Version="2.9.3" />
 		<PackageReference Include="DotNetMeteor.HotReload.Plugin" Version="3.*" />
@@ -113,10 +113,6 @@
 		<MauiXaml Update="Views\Welcome.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Handlers\" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
