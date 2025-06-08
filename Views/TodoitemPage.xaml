@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="ToDoListApp.Views.TodoitemPage"
-             HideSoftInputOnTapped="True" Title="{Binding Name}"
              xmlns:model="clr-namespace:ToDoListApp.Models"
-             x:DataType="model:Todoitem">
+             x:Class="ToDoListApp.Views.TodoitemPage"
+             x:DataType="model:Todoitem"
+             HideSoftInputOnTapped="True"
+             Title="{Binding Name}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -58,7 +59,7 @@
 
                     <Border Style="{DynamicResource InputBorder}" Padding="5" Margin="0,10,0,0" HorizontalOptions="Fill">
                         <Editor x:Name="DescField" FontFamily="Inter-Regular" Placeholder="Task Description" Text="{Binding Notes}" HeightRequest="100" HorizontalTextAlignment="Start"
-                                VerticalTextAlignment="Start" PlaceholderColor="Grey" />
+                                VerticalTextAlignment="Start" PlaceholderColor="Grey" Keyboard="Text"/>
                     </Border>
                 </StackLayout>
 
