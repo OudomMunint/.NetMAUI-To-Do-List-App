@@ -7,6 +7,7 @@ using ToDoListApp;
 using System;
 using Microcharts.Maui;
 using Plugin.Maui.Biometric;
+using ToDoListApp.Handlers;
 #if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 #endif
@@ -23,7 +24,7 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
 
-        // DI for biometricss
+        // DI for biometrics
         builder.Services.AddSingleton<IBiometric>(BiometricAuthenticationService.Default);
 
         builder
@@ -47,6 +48,9 @@ public static class MauiProgram
             {
 #if ANDROID
                 handlers.AddHandler<CustomViewCell, CustomViewCellHandler>();
+#endif
+#if IOS
+                handlers.AddHandler<Entry, IosKeyboardHandler>();
 #endif
             })
             .ConfigureEssentials(essentials =>
