@@ -100,6 +100,10 @@
                                         TextColor="{AppThemeBinding Dark=Gray, Light=Gray}" HorizontalTextAlignment="Center" Margin="15,0,15,15" />
                                 <Button Text="Delete Attachment" Clicked="DeleteAttachmentClicked" FontFamily="Inter-Regular" BackgroundColor="Red" TextColor="White"
                                         MaximumWidthRequest="{OnPlatform iOS=165, Android=200}" HorizontalOptions="Center" Margin="0,0,0,10" />
+                                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                                    <Label Text="Reduce Attachment file size" FontFamily="Inter-Regular" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Switch x:Name="DownSizeSwitch" Toggled="DownSizeSwitch_Toggled" HorizontalOptions="Center"/>
+                                </HorizontalStackLayout>
                             </StackLayout>
                         </Border>
                     </StackLayout>

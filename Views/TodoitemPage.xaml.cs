@@ -17,6 +17,8 @@ namespace ToDoListApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TodoitemPage : ContentPage
     {
+        private bool shouldProcessAttachment = false;
+
         public TodoitemPage()
         {
             InitializeComponent();
@@ -259,7 +261,16 @@ namespace ToDoListApp.Views
 
                         // subsample attached
                         byte[] originalBytes = File.ReadAllBytes(localFilePath);
-                        todoItem.Attachment = SubSampleImageToByteArray(originalBytes, 700);
+
+                        if (shouldProcessAttachment)
+                        {
+                            todoItem.Attachment = SubSampleImageToByteArray(originalBytes, 700);
+                        }
+                        else
+                        {
+                            todoItem.Attachment = originalBytes;
+                        }
+
 
                         await Task.Delay(1000);
 
@@ -301,7 +312,15 @@ namespace ToDoListApp.Views
 
                     // subsample attached
                     byte[] originalBytes = File.ReadAllBytes(localFilePath);
-                    todoItem.Attachment = SubSampleImageToByteArray(originalBytes, 700);
+
+                    if (shouldProcessAttachment)
+                    {
+                        todoItem.Attachment = SubSampleImageToByteArray(originalBytes, 700);
+                    }
+                    else
+                    {
+                        todoItem.Attachment = originalBytes;
+                    }
 
                     await Task.Delay(1000);
 
@@ -322,6 +341,7 @@ namespace ToDoListApp.Views
 
             // Get the EXIF orientation
             var orientation = codec.EncodedOrigin;
+            
             // Decode to bitmap
             using var original = SKBitmap.Decode(codec);
             if (original == null)
@@ -422,6 +442,18 @@ namespace ToDoListApp.Views
             else if (action != null && action.Equals(uploadatachment))
             {
                 UploadPhoto(sender, e);
+            }
+        }
+
+        private void DownSizeSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                shouldProcessAttachment = true;
+            }
+            else
+            {
+                shouldProcessAttachment = false;
             }
         }
     }
