@@ -336,7 +336,7 @@ namespace ToDoListApp.Views
             int newWidth = maxWidth;
             int newHeight = (int)(originalHeight * ratio);
 
-            var samplingOptions = GetSamplingOptions(SamplingQuality.Mitchell);
+            var samplingOptions = GetSamplingOptions(SamplingQuality.Medium);
             using var resized = original.Resize(new SKImageInfo(newWidth, newHeight), samplingOptions);
             if (resized == null)
                 return originalBytes;
@@ -386,7 +386,7 @@ namespace ToDoListApp.Views
             using var output = new MemoryStream();
             // 70 = compression quality (0-100), lower = smaller file size but more compression artifacts
             // Note: if using quality < 70, consider using better resampling via SamplingQuality.Mitchell or SamplingQuality.CatmullRom
-            image.Encode(SKEncodedImageFormat.Jpeg, 1).SaveTo(output);
+            image.Encode(SKEncodedImageFormat.Jpeg, 70).SaveTo(output);
 
             return output.ToArray();
         }
