@@ -256,7 +256,10 @@ namespace ToDoListApp.Views
                         // show the photo in the UI
                         var todoItem = (Todoitem)BindingContext;
                         TodoitemDatabase database = await TodoitemDatabase.Instance;
-                        todoItem.Attachment = File.ReadAllBytes(localFilePath);
+
+                        // subsample attached
+                        byte[] originalBytes = File.ReadAllBytes(localFilePath);
+                        todoItem.Attachment = SubSampleImageToByteArray(originalBytes, 700);
 
                         await Task.Delay(1000);
 
@@ -295,7 +298,10 @@ namespace ToDoListApp.Views
                     // show the photo in the UI
                     var todoItem = (Todoitem)BindingContext;
                     TodoitemDatabase database = await TodoitemDatabase.Instance;
-                    todoItem.Attachment = File.ReadAllBytes(localFilePath);
+
+                    // subsample attached
+                    byte[] originalBytes = File.ReadAllBytes(localFilePath);
+                    todoItem.Attachment = SubSampleImageToByteArray(originalBytes, 700);
 
                     await Task.Delay(1000);
 
@@ -417,6 +423,6 @@ namespace ToDoListApp.Views
             {
                 UploadPhoto(sender, e);
             }
-        }      
+        }
     }
 }
