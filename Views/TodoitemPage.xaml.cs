@@ -10,19 +10,30 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using ToDoListApp.Helpers;
 using static ToDoListApp.ToastService;
+using SkiaSharp;
 
 namespace ToDoListApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TodoitemPage : ContentPage
     {
+        private bool shouldProcessAttachment = false;
+
         public TodoitemPage()
         {
             InitializeComponent();
 
-            Switch[] switches = {DoneSwitch, PinSwitch};
+            Switch[] switches = { DoneSwitch, PinSwitch };
 
             UiHelpers.SetSwitchColors(switches);
+        }
+
+        public enum SamplingQuality
+        {
+            Low,
+            Medium,
+            Mitchell,
+            CatMullRom
         }
 
         protected override void OnAppearing()
@@ -32,6 +43,18 @@ namespace ToDoListApp.Views
             GetAttachmentCount();
             SetSelectedPriorityLabel();
             GetAttachmentSize();
+        }
+
+        public static SKSamplingOptions GetSamplingOptions(SamplingQuality quality)
+        {
+            return quality switch
+            {
+                SamplingQuality.Low => new SKSamplingOptions(SKFilterMode.Nearest, SKMipmapMode.Nearest),
+                SamplingQuality.Medium => new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear),
+                SamplingQuality.Mitchell => new SKSamplingOptions(SKCubicResampler.Mitchell),
+                SamplingQuality.CatMullRom => new SKSamplingOptions(SKCubicResampler.CatmullRom),
+                _ => throw new NotImplementedException(),
+            };
         }
 
         private void GetAttachmentSize()
@@ -235,7 +258,19 @@ namespace ToDoListApp.Views
                         // show the photo in the UI
                         var todoItem = (Todoitem)BindingContext;
                         TodoitemDatabase database = await TodoitemDatabase.Instance;
-                        todoItem.Attachment = File.ReadAllBytes(localFilePath);
+
+                        // subsample attached
+                        byte[] originalBytes = File.ReadAllBytes(localFilePath);
+
+                        if (shouldProcessAttachment)
+                        {
+                            todoItem.Attachment = SubSampleImageToByteArray(originalBytes, 700);
+                        }
+                        else
+                        {
+                            todoItem.Attachment = originalBytes;
+                        }
+
 
                         await Task.Delay(1000);
 
@@ -274,7 +309,18 @@ namespace ToDoListApp.Views
                     // show the photo in the UI
                     var todoItem = (Todoitem)BindingContext;
                     TodoitemDatabase database = await TodoitemDatabase.Instance;
-                    todoItem.Attachment = File.ReadAllBytes(localFilePath);
+
+                    // subsample attached
+                    byte[] originalBytes = File.ReadAllBytes(localFilePath);
+
+                    if (shouldProcessAttachment)
+                    {
+                        todoItem.Attachment = SubSampleImageToByteArray(originalBytes, 700);
+                    }
+                    else
+                    {
+                        todoItem.Attachment = originalBytes;
+                    }
 
                     await Task.Delay(1000);
 
@@ -284,6 +330,85 @@ namespace ToDoListApp.Views
                     attlabel.IsVisible = false;
                 }
             }
+        }
+
+        private static byte[] SubSampleImageToByteArray(byte[] originalBytes, int maxWidth)
+        {
+            using var inputStream = new MemoryStream(originalBytes);
+            using var codec = SKCodec.Create(inputStream);
+            if (codec == null)
+                return originalBytes;
+
+            // Get the EXIF orientation
+            var orientation = codec.EncodedOrigin;
+            
+            // Decode to bitmap
+            using var original = SKBitmap.Decode(codec);
+            if (original == null)
+                return originalBytes;
+
+            // OG dimensions
+            int originalWidth = original.Width;
+            int originalHeight = original.Height;
+
+            // Maintaine aspect ratio
+            float ratio = (float)maxWidth / originalWidth;
+            int newWidth = maxWidth;
+            int newHeight = (int)(originalHeight * ratio);
+
+            var samplingOptions = GetSamplingOptions(SamplingQuality.Medium);
+            using var resized = original.Resize(new SKImageInfo(newWidth, newHeight), samplingOptions);
+            if (resized == null)
+                return originalBytes;
+
+            SKBitmap rotated;
+
+            // Handle rotation
+            switch (orientation)
+            {
+                case SKEncodedOrigin.RightTop: // 90°
+                    rotated = new SKBitmap(resized.Height, resized.Width);
+                    using (var canvas = new SKCanvas(rotated))
+                    {
+                        canvas.Translate(rotated.Width, 0);
+                        canvas.RotateDegrees(90);
+                        canvas.DrawBitmap(resized, 0, 0);
+                    }
+                    break;
+
+                case SKEncodedOrigin.BottomRight: // 180°
+                    rotated = new SKBitmap(resized.Width, resized.Height);
+                    using (var canvas = new SKCanvas(rotated))
+                    {
+                        canvas.Translate(rotated.Width, rotated.Height);
+                        canvas.RotateDegrees(180);
+                        canvas.DrawBitmap(resized, 0, 0);
+                    }
+                    break;
+
+                case SKEncodedOrigin.LeftBottom: // 270°
+                    rotated = new SKBitmap(resized.Height, resized.Width);
+                    using (var canvas = new SKCanvas(rotated))
+                    {
+                        canvas.Translate(0, rotated.Height);
+                        canvas.RotateDegrees(270);
+                        canvas.DrawBitmap(resized, 0, 0);
+                    }
+                    break;
+
+                default:
+                    rotated = resized;
+                    break;
+            }
+
+            // Bitmap => image
+            using var image = SKImage.FromBitmap(rotated);
+            using var output = new MemoryStream();
+            // 70 = compression quality (0-100), lower = smaller file size but more compression artifacts
+            // Note: if using quality < 70, consider using better resampling via SamplingQuality.Mitchell or SamplingQuality.CatmullRom
+            image.Encode(SKEncodedImageFormat.Jpeg, 70).SaveTo(output);
+
+            return output.ToArray();
         }
 
         public async void OpenMenu(object sender, EventArgs e)
@@ -318,6 +443,23 @@ namespace ToDoListApp.Views
             {
                 UploadPhoto(sender, e);
             }
-        }      
+        }
+
+        private void DownSizeSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                shouldProcessAttachment = true;
+            }
+            else
+            {
+                shouldProcessAttachment = false;
+            }
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+        {
+            DisplayAlert("Reduce Attachment Size", "This will reduce the size of the attachment but will also reduce it's quality, this will be applied the next a photo is attached.", "OK");
+        }
     }
 }
