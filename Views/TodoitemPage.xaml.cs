@@ -456,5 +456,10 @@ namespace ToDoListApp.Views
                 shouldProcessAttachment = false;
             }
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+        {
+            DisplayAlert("Reduce Attachment Size", "This will reduce the size of the attachment but will also reduce it's quality, this will be applied the next a photo is attached.", "OK");
+        }
     }
 }
