@@ -216,7 +216,7 @@ public partial class Settings : ContentPage
     private async void GenerateData_Button_Pressed(System.Object sender, System.EventArgs e)
     {
         var titlestring = "Attachments require internet access.";
-        string action = await Application.Current.MainPage.DisplayActionSheet(titlestring, "Cancel", null, "With Attachments", "Without Attachments");
+        string action = await Application.Current?.Windows[0].Page.DisplayActionSheet(titlestring, "Cancel", null, "With Attachments", "Without Attachments");
 
         if (action == "With Attachments")
         {

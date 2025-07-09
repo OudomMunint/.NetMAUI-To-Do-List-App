@@ -342,7 +342,7 @@ namespace ToDoListApp.Views
             string clearsorting = "Clear Sorting";
             string sortbypinned = "Pinned";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet("Sorting", "Cancel", null, new[] { sortbydate, sortbypriority, sortbypinned, clearsorting });
+            var action = await Application.Current?.Windows[0].Page.DisplayActionSheet("Sorting", "Cancel", null, new[] { sortbydate, sortbypriority, sortbypinned, clearsorting });
 
             if (action == sortbydate)
             {
@@ -519,7 +519,7 @@ namespace ToDoListApp.Views
             }
             else
             {
-                var action = await Application.Current.MainPage.DisplayActionSheet("Set Priority", "Cancel", null, new[] { "Low", "Medium", "High", "Critical" });
+                var action = await Application.Current?.Windows[0].Page.DisplayActionSheet("Set Priority", "Cancel", null, new[] { "Low", "Medium", "High", "Critical" });
 
                 if (action != null)
                 {
