@@ -84,6 +84,17 @@ namespace ToDoListApp.Data
             var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [Attachment] IS NOT NULL AND LENGTH([Attachment]) > 0");
             return items.Sum(item => (long)(item.Attachment?.Length ?? 0));
         }
+
+        public async Task<long> GetItemAttachmentSizeById(int id)
+        {
+            var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [ID] = ?", id);
+            if (items.Count > 0 && items[0].Attachment != null)
+            {
+                return items[0].Attachment.Length;
+            }
+            return 0;
+        }
+
         public async Task<int> GetItemAttachmentStatus(bool hasAttachment)
         {
             var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [HasAttachment] = ?", hasAttachment);
