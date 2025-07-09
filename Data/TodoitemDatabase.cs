@@ -79,6 +79,11 @@ namespace ToDoListApp.Data
             return Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [Date] BETWEEN '" + startDate + "' AND '" + endDate + "'");
         }
 
+        public async Task<long> GetAttachmentsSize()
+        {
+            var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [Attachment] IS NOT NULL AND LENGTH([Attachment]) > 0");
+            return items.Sum(item => (long)(item.Attachment?.Length ?? 0));
+        }
         public async Task<int> GetItemAttachmentStatus(bool hasAttachment)
         {
             var items = await Database.QueryAsync<Todoitem>("SELECT * FROM [TodoItem] WHERE [HasAttachment] = ?", hasAttachment);
