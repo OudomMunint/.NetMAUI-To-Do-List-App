@@ -39,7 +39,7 @@ namespace ToDoListApp.Handlers
                 h.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
 
                 // Add rounded corner border
-                var stroke = new SolidColorBrush(Colors.DarkGray);
+                var stroke = new SolidColorBrush(Colors.Transparent);
                 var strokeShape = new RoundRectangle
                 {
                     CornerRadius = new CornerRadius(3, 3, 3, 3)
