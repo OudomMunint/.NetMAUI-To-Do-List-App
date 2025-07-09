@@ -93,7 +93,7 @@
                         </HorizontalStackLayout>
                         <Border Style="{DynamicResource InputBorder}" Padding="7" Margin="0,10,0,0" HorizontalOptions="Fill">
                             <StackLayout>
-                                <Label x:Name="attsize" Text="{Binding AttachmentSize}" FontFamily="Inter-Regular" FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}"
+                                <Label x:Name="attsize" FontFamily="Inter-Regular" FontSize="15" TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}"
                                         HorizontalTextAlignment="Center" />
                                 <Image x:Name="attachmentImage" Source="{Binding Attachment, Converter={StaticResource ByteArrayToImageSourceConverter}}" Margin="15" />
                                 <Label x:Name="attlabel" Text="No Attachment found. If attachment is already added, click save." FontFamily="Inter-Regular" FontSize="15"
