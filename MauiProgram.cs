@@ -8,6 +8,7 @@ using System;
 using Microcharts.Maui;
 using Plugin.Maui.Biometric;
 using ToDoListApp.Handlers;
+using Maui.PDFView;
 #if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 #endif
@@ -31,6 +32,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .UseMicrocharts()
+            .UseMauiPdfView()
 #if DEBUG
             .EnableHotReload()
             .ConfigureEffects(effects =>
