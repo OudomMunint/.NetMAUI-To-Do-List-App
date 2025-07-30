@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Maui.PDFView.DataSources;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,10 @@ namespace ToDoListApp.Models
         public string Priority { get; set; }
 
         public Byte[] Attachment { get; set; }
+
+        public string AttachmentType { get; set; } = "image"; // "image" or "pdf"
+
+        public string AttachmentFilePath { get; set; }
 
         public bool HasAttachment { get; set; }
 

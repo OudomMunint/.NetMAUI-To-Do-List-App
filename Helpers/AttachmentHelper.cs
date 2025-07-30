@@ -6,17 +6,33 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoListApp.Models;
 using ToDoListApp.Data;
+using Maui.PDFView.DataSources;
 
 namespace ToDoListApp.Helpers
 {
     public class PhotoResult
     {
         public byte[] ImageData { get; set; }
+
         public string ErrorMessage { get; set; }
+
         public bool Success { get; set; }
+
+        public string FilePath { get; set; }
+
+        public string FileType { get; set; }
     }
 
-    public static class PhotoHelper
+    public class DocumentResult
+    {
+        public byte[] DocumentData { get; set; }
+
+        public string DocumentName { get; set; }
+
+        public string ErrorMessage { get; set; }
+    }
+
+    public static class AttachmentHelper
     {
         public static async Task<PhotoResult> TakePhotoAsync(bool shouldProcessAttachment)
         {
@@ -33,7 +49,7 @@ namespace ToDoListApp.Helpers
 
                         using (Stream sourceStream = await photo.OpenReadAsync())
                         {
-                            using (FileStream localFileStream = File.OpenWrite(localFilePath))
+                            using (FileStream localFileStream = File.Create(localFilePath))
                             {
                                 await sourceStream.CopyToAsync(localFileStream);
                             }
@@ -55,11 +71,12 @@ namespace ToDoListApp.Helpers
                         return new PhotoResult
                         {
                             ImageData = processedBytes,
-                            Success = true
+                            Success = true,
+                            FileType = "image"
                         };
                     }
                 }
-                
+
                 return new PhotoResult
                 {
                     Success = false,
@@ -72,6 +89,43 @@ namespace ToDoListApp.Helpers
                 {
                     Success = false,
                     ErrorMessage = exception.Message
+                };
+            }
+        }
+
+        public static async Task<PhotoResult> UploadDocument()
+        {
+            try
+            {
+                // Let the OS show its picker; await it properly
+                var result = await FilePicker.PickAsync(new PickOptions
+                {
+                    FileTypes = FilePickerFileType.Pdf,
+                    PickerTitle = "Select a PDF document"
+                });
+
+                if (result == null)
+                {
+                    // user cancelled
+                    return new PhotoResult { Success = false, ErrorMessage = "No file selected." };
+                }
+
+                // Get the full path directly—no need for Path.Combine here
+                var fullPath = result.FullPath;
+
+                return new PhotoResult
+                {
+                    Success = true,
+                    FilePath = fullPath,
+                    FileType = "pdf"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new PhotoResult
+                {
+                    Success = false,
+                    ErrorMessage = $"Error uploading PDF: {ex.Message}"
                 };
             }
         }
@@ -89,7 +143,7 @@ namespace ToDoListApp.Helpers
 
                     using (Stream sourceStream = await uploadedFile.OpenReadAsync())
                     {
-                        using (FileStream localFileStream = File.OpenWrite(localFilePath))
+                        using (FileStream localFileStream = File.Create(localFilePath))
                         {
                             await sourceStream.CopyToAsync(localFileStream);
                         }
@@ -111,7 +165,8 @@ namespace ToDoListApp.Helpers
                     return new PhotoResult
                     {
                         ImageData = processedBytes,
-                        Success = true
+                        Success = true,
+                        FileType = "image"
                     };
                 }
 
